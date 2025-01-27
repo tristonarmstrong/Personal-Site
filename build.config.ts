@@ -1,7 +1,7 @@
 Bun.build({
   entrypoints: ["./app/index.html"],
   outdir: ".",
-  minify: true,
+  minify: false,
   target: 'browser'
 }
 )
