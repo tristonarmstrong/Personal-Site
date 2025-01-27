@@ -1,1 +1,0 @@
-t();n();function t(){let e=document.createElement("h1");e.innerText="Triston Armstrong",document.body.appendChild(e)}function n(){let e=document.createElement("p");e.innerText="Welcome to my domain. Take a look around!",document.body.appendChild(e)}
