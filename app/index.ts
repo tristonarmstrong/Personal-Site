@@ -1,14 +1,16 @@
+import { $, a, b } from "./utils"
+
 b($('header', [
   $("h1", "Triston Armstrong"),
   $('i', "Senior Software Engineer"),
 ]))
 
 b($('nav', [
-  a('[Github]', "https://github.com/tristonarmstrong"),
-  $('span', " | "),
-  a('[LinkedIn]', "https://www.linkedin.com/in/triston-armstrong-7248b229b/"),
-  $('span', " | "),
-  a('[Email]', "mailto:triston95strong@gmail.com"),
+  a('Github', "https://github.com/tristonarmstrong"),
+  $('span', " / "),
+  a('LinkedIn', "https://www.linkedin.com/in/triston-armstrong-7248b229b/"),
+  $('span', " / "),
+  a('Email', "mailto:triston95strong@gmail.com"),
 ]))
 
 b($('main', [
@@ -23,76 +25,12 @@ b($('main', [
   $('hr'),
 
   $('article', [
-    // --- ABOUT SECTION
-    $('section', [
-      $('h2', "A Little About Me About 👋"),
-      $('i', "Thanks for stopping by! Here's a bit about me."),
-      $('p', `My journey into software development started with a simple question: "How does that work?" 🤔 That curiosity led me to work on everything from IoT software ⚙️ to revenue cycle management 💰 and enterprise projects 🏢. Along the way, I’ve honed my skills in debugging 🐞, troubleshooting 🛠️, and finding creative solutions to tough problems.
-
-              I love tackling challenges with a problem-solving mindset 🚀 and a passion for building things that make a real impact ✨. Mistakes are just opportunities to grow 🌱, and that mindset has helped me become a better engineer.
-
-              When I’m not coding, I’m spending time with my family 👨‍👩‍👧‍👦 or exploring new ideas and technologies 💡.`
-      )
-    ]),
-    // --- WORK SECTION
-    $('section', [
-      $('h3', "My Work History 🛠️"),
-      $('i', "My tech toolbox is packed with goodies like TypeScript ⌨️, Rust ⚙️, and Python 🐍 – but my heart truly belongs to Open Source Software ❤️!"),
-      $("ul", [
-        $('li', [
-          $('b', "Ventra health"),
-          $("i", [
-            $('span', " - Senior Software Engineer"),
-            $('small', " <2023 - Present> 🏥")
-          ]),
-
-        ]),
-        $('li', [
-          $('b', "Randstad Technologies"),
-          $("i", [
-            $("span", " - Software Developer"),
-            $("small", " <The Past> 🏢")
-          ])
-        ]),
-        $('li', [
-          $("b", "Damiano Global Corp"),
-          $("i", [
-            $("span", " - Senior Software Architect"),
-            $("small", " <The Past> 🌐")
-          ])
-        ]),
-        $('li', [
-          $('b', "Makers Ladder LLC"),
-          $("i", [
-            $("span", " - Fullstack Software Developer"),
-            $("small", " <The Past> 🪜")
-          ])
-        ]),
-      ])
-    ]),
+    about(),
+    work(),
   ]),
-
-  $('hr'),
-
-  $('article', [
-    $('section', [
-      $('h2', "What I'm Up To Now 🌱"),
-      $('i', "Where I'm at, what I'm focused on, and what I'm not"),
-      $('p', `Lately, I’ve been deep into Rust 🦀 and TypeScript ⌨️, pushing myself with personal projects that keep me learning and growing.
-
-              I’m also contributing to open-source 🤝, but my main focus is building tools that solve real problems for me 🛠️—whether it's aggregators or just practical utilities 🧰.
-
-              Outside of coding, I spend time with my family 👨‍👩‍👧‍👦 and explore Thailand 🇹🇭. Lately, I’ve been experimenting with photography 📷, trying to capture the beauty of wildlife and the world around me 🏞️.`
-      ),
-      $('h3', "The NOT"),
-      $('ul', [
-        $("li", [$("b", "Chasing the rat race 🏃‍♂️💨"), $("span", " – I’m not grinding for promotions, climbing corporate ladders, or overworking myself for someone else’s bottom line. Instead, I focus on meaningful work that improves my life.")]),
-        $("li", [$('b', "Burning out 🔥"), $("span", " – I enjoy coding, but I’m not sacrificing my health or personal time for endless hustle. Balance matters.")]),
-        $("li", [$('b', 'Building things I don’t believe in ❌'), $('span', " – I’m not chasing trends or making things just because they’re 'hot.' If it doesn’t solve a real problem or spark my interest, I’m not doing it.")]),
-      ]),
-      $('p', "Right now, my priority is doing fulfilling work, enjoying life, and growing at my own pace. 🚀"),
-    ])
-  ])]
+  now(),
+  projects()
+]
 ))
 
 b($('footer', [
@@ -100,25 +38,94 @@ b($('footer', [
   $('small', $('i', "Crafted with ❤️ by Triston Armstrong © 2025"))
 ]))
 
-// UTILITIES ========== 
-/** create an element with text */
-function $<K extends keyof HTMLElementTagNameMap>(el: K, inner?: string | (HTMLElement | Node) | Array<HTMLElement | Node>): HTMLElementTagNameMap[K] {
-  const _el = document.createElement(el)
-  if (inner && typeof inner == 'string') { _el.innerText = inner }
-  if (inner && (inner instanceof HTMLElement || inner instanceof Node)) { _el.appendChild(inner) }
-  if (inner && inner instanceof Array) { inner.forEach(x => _el.appendChild(x)) }
-  return _el
+function projectItem(title: string, link: string, techs: string, desc: string) {
+  return (
+    $('p', [
+      $('div', [
+        a(title, link),
+        $('i', $('small', ` ${techs}`)),
+        $('div', desc),
+      ])
+    ])
+  )
 }
 
-/** append a node to body */
-function b(el: Node) {
-  document.body.appendChild(el)
+function projects() {
+  return (
+    $('article',
+      $('section', [
+        $('h2', 'My Top Projects 🚀'),
+        $('i', 'Here are a few projects I\'ve worked on, ranging from personal tools to open-source contributions:'),
+
+        // Project 1
+        projectItem("Todo", "google.com", "(rust/html)", "Something that i need to complete")
+      ])
+    )
+  )
 }
 
+function now() {
+  return (
+    $('article', [
+      $('section', [
+        $('h2', "What I'm Up To Now 🛸"),
+        $('i', "Where I'm at, what I'm focused on, and what I'm not"),
+        $('p', `Lately, I’ve been diving into Rust 🦀 and TypeScript ⌨️, working on personal projects that challenge and expand my skills.
 
-function a(name: string, href: string) {
-  const _a = $('a', name)
-  _a.href = href
-  _a.target = "__blank"
-  return _a
+              I’m also contributing to open-source 🤝, but my main focus is building tools that solve real problems for me 🛠️—whether it's aggregators or just practical utilities 🧰.
+
+              Outside of coding, I spend time with my family 👨‍👩‍👧‍👦 and explore Thailand 🇹🇭. Lately, I’ve been experimenting with photography 📷, trying to capture the beauty of wildlife and the world around me 🏞️.`
+        ),
+        $('h3', "What I’m Not Doing ❌"),
+        $('ul', [
+          $("li", [$("b", "Chasing the rat race 🏃‍♂️💨"), $("span", " – I’m not grinding for promotions, climbing corporate ladders, or overworking myself for someone else’s bottom line. Instead, I focus on meaningful work that improves my life.")]),
+          $("li", [$('b', "Burning out 🔥"), $("span", " – I enjoy coding, but I’m not sacrificing my health or personal time for endless hustle. Balance matters.")]),
+          $("li", [$('b', 'Building things I don’t believe in ❌'), $('span', " – I’m not chasing trends or making things just because they’re 'hot.' If it doesn’t solve a real problem or spark my interest, I’m not doing it.")]),
+        ]),
+        $('p', "Right now, my priority is doing fulfilling work, enjoying life, and growing at my own pace. 🚀"),
+      ])
+    ])
+  )
+}
+
+function workItem(company: string, position: string, time: string) {
+  return (
+    $('li', [
+      $('b', company),
+      $("i", [
+        $('span', ` - ${position}`),
+        $('small', ` ${time}`)
+      ]),
+    ])
+  )
+}
+
+function work() {
+  return (
+    $('section', [
+      $('h3', "Work History 🛠️"),
+      $('i', "I work with TypeScript ⌨️, Rust ⚙️, and Python 🐍, but open-source software ❤️ is where I thrive!"),
+      $("ul", [
+        workItem("Ventra health", "Senior Software Engineer", "(2023 - Present) 🏥"),
+        workItem("Randstad Technologies", "Software Developer", "(The Past) 🏢"),
+        workItem("Damiano Global Corp", "Senior Software Architect", "(The Past) 🌐"),
+        workItem("Makers Ladder LLC", "Fullstack Software Developer", "(The Past) 🪜"),
+      ])
+    ])
+  )
+}
+
+function about() {
+  return (
+    $('section', [
+      $('h2', "About Me 👽"),
+      $('i', "Thanks for stopping by! Here's a bit about me."),
+      $('p', `My journey into software development started with a simple question: "How does that work?" 🤔 That curiosity led me to work on everything from IoT software ⚙️ to revenue cycle management 💰 and enterprise projects 🏢. Along the way, I’ve honed my skills in debugging 🐞, troubleshooting 🛠️, and finding creative solutions to tough problems.
+
+              I enjoy solving tough problems 🚀 and building things that matter ✨. Every mistake is a chance to improve 🌱, and that approach has made me a stronger engineer.
+
+              When I’m not coding, I’m spending time with my family 👨‍👩‍👧‍👦 or exploring new ideas and technologies 💡.`
+      )
+    ])
+  )
 }
