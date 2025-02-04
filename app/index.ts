@@ -14,12 +14,11 @@ b($('nav', [
 b($('main', [
   // --- SUMMARY SECTION
   $('section',
-    $('p',
-      `Software engineer, slowly building innovative utility apps wherever I can. Focused on creating tools that simplify daily life.
+    $('p', `Software engineer crafting innovative utility apps 🛠️ that make everyday life easier.  I love building tools that simplify things and bring a little joy to daily routines. ✨
 
-    With expertise in TypeScript, Rust, and Python, I continuously improve skills and tackle new challenges. Passionate about gaming (go figure), family, and tech adventures.
+My toolkit includes TypeScript, Rust, and Python 🐍, and I'm always eager to learn and tackle new challenges.  Outside of coding, I'm passionate about gaming 🎮 (who isn't?!), spending time with family 👨‍👩‍👧‍👦, and exploring the ever-evolving world of tech. 🚀
 
-    Striving to deliver high-quality work and build meaningful relationships, I bring dedication, creativity, and reliability to all aspects of my life.`)
+I'm committed to delivering high-quality work and building meaningful connections.  I bring dedication, creativity, and a reliable spirit to everything I do.  🤝`)
   ),
 
   $('hr'),
@@ -27,29 +26,26 @@ b($('main', [
   $('article', [
     // --- ABOUT SECTION
     $('section', [
-      $('h2', "About"),
+      $('h2', "About 👋"),
       $('i', "Thanks for stopping by! Here's a bit about me."),
-      $('p', `Hello 👋, I'm a Software Engineer with a passion for Rust and Open-Source Software. With a knack for problem solving, I balance code with exploration and find peace in a cup of hot ☕ next to an open 🔥!
+      $('p', `My software development journey started with a simple "how does that work?" 🤔 about the web's inner workings.  This curiosity led me down a fascinating path, working with diverse companies on everything from IoT software ⚙️ to revenue cycle management 💰, and even dipping my toes into enterprise-level projects 🏢.  These experiences have given me a solid foundation in debugging 🐞, troubleshooting 🛠️, and crafting creative solutions to tricky problems.
 
-      My journey in software development began with a curiosity about how things worked "behind the scenes", on the web. This led me to working with various companies across industries from IoT software to revenue cycle management, and even dabbling in enterprise-level projects. Through these experiences, I've developed a strong foundation in debugging, troubleshooting, and finding creative solutions to complex problems.
+            I bring a unique mix of technical know-how 🤓, problem-solving enthusiasm 🚀, and top-notch debugging skills to the table. I'm passionate about building innovative solutions that truly make a difference ✨.
 
-      I bring a unique blend of technical expertise, problem-solving enthusiasm, and debugging skills to my work, with a passion for building innovative solutions that make a difference.
+            What truly sets me apart?  I approach challenges with a humble mindset 🙏, understanding that mistakes happen and are opportunities for growth 🌱. This philosophy has helped me evolve as an engineer and become even more effective in my work.
 
-      What sets me apart is my ability to approach challenges with a humble mindset, recognizing that everyone makes mistakes and learning from those experiences. This has helped me grow as an engineer and become more effective in my work.
-
-      When I'm not coding, you can find me spending time with family or exploring new ideas and technologies.`)
-
+            When I'm not coding, I love spending quality time with my family 👨‍👩‍👧‍👦 or exploring the exciting world of new ideas and technologies 💡.`)
     ]),
     // --- WORK SECTION
     $('section', [
-      $('h3', "Work"),
-      $('i', "My Tech toolbox includes anything related to Typescript, Rust, and Python - but my true love? Open Source Software!"),
+      $('h3', "Work 🛠️"),
+      $('i', "My tech toolbox is packed with goodies like TypeScript ⌨️, Rust ⚙️, and Python 🐍 – but my heart truly belongs to Open Source Software ❤️!"),
       $("ul", [
         $('li', [
           $('b', "Ventra health"),
           $("i", [
             $('span', " - Senior Software Engineer"),
-            $('small', " <2023 - Present>")
+            $('small', " <2023 - Present> 🏥")
           ]),
 
         ]),
@@ -57,21 +53,21 @@ b($('main', [
           $('b', "Randstad Technologies"),
           $("i", [
             $("span", " - Software Developer"),
-            $("small", " <The Past>")
+            $("small", " <The Past> 🏢")
           ])
         ]),
         $('li', [
           $("b", "Damiano Global Corp"),
           $("i", [
             $("span", " - Senior Software Architect"),
-            $("small", " <The Past>")
+            $("small", " <The Past> 🌐")
           ])
         ]),
         $('li', [
           $('b', "Makers Ladder LLC"),
           $("i", [
             $("span", " - Fullstack Software Developer"),
-            $("small", " <The Past>")
+            $("small", " <The Past> 🪜")
           ])
         ]),
       ])
@@ -82,20 +78,20 @@ b($('main', [
 
   $('article', [
     $('section', [
-      $('h2', "Now"),
+      $('h2', "Now 🌱"),
       $('i', "Where I'm at, what I'm focused on, and what I'm not"),
-      $('p', `Lately, I've been heavily involved with Rust and TypeScript, working on personal projects that challenge me as a developer.
+      $('p', `Lately, I've been heavily involved with Rust 🦀 and TypeScript ⌨️, working on personal projects that challenge me as a developer.
 
-        On the side, I enjoy contributing to open-source projects, but more importantly I've started a new initiative called Klectr. Klectr is a collection (klection) of aggrigator tools, or just useful tools in general.
+              On the side, I enjoy contributing to open-source projects 🤝, but more importantly, I've started a new initiative where I build useful tools for me 🛠️. It is a collection of aggregator tools, or just useful tools in general 🧰.
 
-        When I'm not coding, you can find me spending time with my family or traveling around Thailand. I've also been experimenting with photography and trying to capture the beauty of wild life.`)
+              When I'm not coding, you can find me spending time with my family 👨‍👩‍👧‍👦 or traveling around Thailand 🇹🇭. I've also been experimenting with photography 📷 and trying to capture the beauty of wildlife 🏞️.`)
     ])
   ])]
 ))
 
 b($('footer', [
   $('hr'),
-  $('p', "all rights reserved")
+  $('p', "Crafted with ❤️ by Triston Armstrong © 2025")
 ]))
 
 // UTILITIES ========== 
