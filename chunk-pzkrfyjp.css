@@ -13,5 +13,16 @@ body {
 }
 
 html {
-  background-color: #eee;
+  background-color: #fefefe;
+  font-family: DM Sans, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: #111;
+  }
+
+  body {
+    color: #ccc;
+  }
 }
