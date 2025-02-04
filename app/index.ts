@@ -14,11 +14,10 @@ b($('nav', [
 b($('main', [
   // --- SUMMARY SECTION
   $('section',
-    $('p', `Software engineer crafting innovative utility apps 🛠️ that make everyday life easier.  I love building tools that simplify things and bring a little joy to daily routines. ✨
+    $('p', `I build useful apps that make daily tasks easier 🛠️. I work with TypeScript, Rust, and Python 🐍 and enjoy learning new things.
 
-My toolkit includes TypeScript, Rust, and Python 🐍, and I'm always eager to learn and tackle new challenges.  Outside of coding, I'm passionate about gaming 🎮 (who isn't?!), spending time with family 👨‍👩‍👧‍👦, and exploring the ever-evolving world of tech. 🚀
-
-I'm committed to delivering high-quality work and building meaningful connections.  I bring dedication, creativity, and a reliable spirit to everything I do.  🤝`)
+            Outside of coding, I like gaming 🎮, spending time with family 👨‍👩‍👧‍👦, and keeping up with tech 🚀. I focus on creating good work and working well with others 🤝.`
+    )
   ),
 
   $('hr'),
@@ -26,19 +25,18 @@ I'm committed to delivering high-quality work and building meaningful connection
   $('article', [
     // --- ABOUT SECTION
     $('section', [
-      $('h2', "About 👋"),
+      $('h2', "A Little About Me About 👋"),
       $('i', "Thanks for stopping by! Here's a bit about me."),
-      $('p', `My software development journey started with a simple "how does that work?" 🤔 about the web's inner workings.  This curiosity led me down a fascinating path, working with diverse companies on everything from IoT software ⚙️ to revenue cycle management 💰, and even dipping my toes into enterprise-level projects 🏢.  These experiences have given me a solid foundation in debugging 🐞, troubleshooting 🛠️, and crafting creative solutions to tricky problems.
+      $('p', `My journey into software development started with a simple question: "How does that work?" 🤔 That curiosity led me to work on everything from IoT software ⚙️ to revenue cycle management 💰 and enterprise projects 🏢. Along the way, I’ve honed my skills in debugging 🐞, troubleshooting 🛠️, and finding creative solutions to tough problems.
 
-            I bring a unique mix of technical know-how 🤓, problem-solving enthusiasm 🚀, and top-notch debugging skills to the table. I'm passionate about building innovative solutions that truly make a difference ✨.
+              I love tackling challenges with a problem-solving mindset 🚀 and a passion for building things that make a real impact ✨. Mistakes are just opportunities to grow 🌱, and that mindset has helped me become a better engineer.
 
-            What truly sets me apart?  I approach challenges with a humble mindset 🙏, understanding that mistakes happen and are opportunities for growth 🌱. This philosophy has helped me evolve as an engineer and become even more effective in my work.
-
-            When I'm not coding, I love spending quality time with my family 👨‍👩‍👧‍👦 or exploring the exciting world of new ideas and technologies 💡.`)
+              When I’m not coding, I’m spending time with my family 👨‍👩‍👧‍👦 or exploring new ideas and technologies 💡.`
+      )
     ]),
     // --- WORK SECTION
     $('section', [
-      $('h3', "Work 🛠️"),
+      $('h3', "My Work History 🛠️"),
       $('i', "My tech toolbox is packed with goodies like TypeScript ⌨️, Rust ⚙️, and Python 🐍 – but my heart truly belongs to Open Source Software ❤️!"),
       $("ul", [
         $('li', [
@@ -78,20 +76,28 @@ I'm committed to delivering high-quality work and building meaningful connection
 
   $('article', [
     $('section', [
-      $('h2', "Now 🌱"),
+      $('h2', "What I'm Up To Now 🌱"),
       $('i', "Where I'm at, what I'm focused on, and what I'm not"),
-      $('p', `Lately, I've been heavily involved with Rust 🦀 and TypeScript ⌨️, working on personal projects that challenge me as a developer.
+      $('p', `Lately, I’ve been deep into Rust 🦀 and TypeScript ⌨️, pushing myself with personal projects that keep me learning and growing.
 
-              On the side, I enjoy contributing to open-source projects 🤝, but more importantly, I've started a new initiative where I build useful tools for me 🛠️. It is a collection of aggregator tools, or just useful tools in general 🧰.
+              I’m also contributing to open-source 🤝, but my main focus is building tools that solve real problems for me 🛠️—whether it's aggregators or just practical utilities 🧰.
 
-              When I'm not coding, you can find me spending time with my family 👨‍👩‍👧‍👦 or traveling around Thailand 🇹🇭. I've also been experimenting with photography 📷 and trying to capture the beauty of wildlife 🏞️.`)
+              Outside of coding, I spend time with my family 👨‍👩‍👧‍👦 and explore Thailand 🇹🇭. Lately, I’ve been experimenting with photography 📷, trying to capture the beauty of wildlife and the world around me 🏞️.`
+      ),
+      $('h3', "The NOT"),
+      $('ul', [
+        $("li", [$("b", "Chasing the rat race 🏃‍♂️💨"), $("span", " – I’m not grinding for promotions, climbing corporate ladders, or overworking myself for someone else’s bottom line. Instead, I focus on meaningful work that improves my life.")]),
+        $("li", [$('b', "Burning out 🔥"), $("span", " – I enjoy coding, but I’m not sacrificing my health or personal time for endless hustle. Balance matters.")]),
+        $("li", [$('b', 'Building things I don’t believe in ❌'), $('span', " – I’m not chasing trends or making things just because they’re 'hot.' If it doesn’t solve a real problem or spark my interest, I’m not doing it.")]),
+      ]),
+      $('p', "Right now, my priority is doing fulfilling work, enjoying life, and growing at my own pace. 🚀"),
     ])
   ])]
 ))
 
 b($('footer', [
   $('hr'),
-  $('p', "Crafted with ❤️ by Triston Armstrong © 2025")
+  $('small', $('i', "Crafted with ❤️ by Triston Armstrong © 2025"))
 ]))
 
 // UTILITIES ========== 
