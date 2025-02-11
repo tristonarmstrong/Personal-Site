@@ -29,7 +29,8 @@ b($('main', [
     work(),
   ]),
   now(),
-  projects()
+  projects(),
+  tools()
 ]
 ))
 
@@ -126,6 +127,19 @@ function about() {
 
               When I’m not coding, I’m spending time with my family 👨‍👩‍👧‍👦 or exploring new ideas and technologies 💡.`
       )
+    ])
+  )
+}
+
+
+function tools() {
+  return (
+    $('section', [
+      $('h2', "Fave Tools 🛠️"),
+      $('i', "Some of the tools that help when I'm in need."),
+      $('div', [
+        // todo
+      ])
     ])
   )
 }
