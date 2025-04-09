@@ -1,7 +1,68 @@
+::selection{
+  background: #E8F2FE;
+  color: black;
+}
+.codystar-light {
+  font-family: "Codystar", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.codystar-regular {
+  font-family: "Codystar", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.rubik-regular {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dashed {
+  border-style: dashed;  
+  border-width: 0.07rem;
+}
+
+.light {
+  /* font-weight: 200; */
+  color: #aaa;
+}
+
+.grid {
+ display: grid; 
+ grid-template-columns: 1fr 1fr 1fr;
+ grid-gap: 4px;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.rounded {
+  border-radius: 4px;
+}
+
+.shadow {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.text-center {
+  text-align: center;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
 h1,
 h2,
 h3 {
   line-height: 1.2;
+  color: #555;
 }
 
 body {
@@ -9,15 +70,15 @@ body {
   margin: 40px auto;
   max-width: 650px;
   font-size: 18px;
-  color: #444;
+  color: #777;
   padding: 0 10px;
 }
 
 html {
-  background-color: #fefefe;
-  font-family: 'DM Sans', sans-serif;
+  background-color: #fef4e8;
+  background-image: url('./gradient.svg');
+  text-align: justify;
 }
-
 
 @media (prefers-color-scheme: dark) {
   html {

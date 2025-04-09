@@ -1,6 +1,13 @@
 /** create an element with text */
-export function $<K extends keyof HTMLElementTagNameMap>(el: K, inner?: string | (HTMLElement | Node) | Array<HTMLElement | Node>): HTMLElementTagNameMap[K] {
+export function $<
+  K extends keyof HTMLElementTagNameMap
+>(
+  el: K,
+  inner?: string | (HTMLElement | Node) | Array<HTMLElement | Node>,
+  classList?: string
+): HTMLElementTagNameMap[K] {
   const _el = document.createElement(el)
+  if (classList) _el.classList = classList
   if (inner && typeof inner == 'string') { _el.innerText = inner }
   if (inner && (inner instanceof HTMLElement || inner instanceof Node)) { _el.appendChild(inner) }
   if (inner && inner instanceof Array) { inner.forEach(x => _el.appendChild(x)) }
