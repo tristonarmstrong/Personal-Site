@@ -1,5 +1,5 @@
 Bun.build({
-  entrypoints: ["./dist/index.html"],
+  entrypoints: ["./src/index.html"],
   outdir: "dist",
   minify: true,
   target: 'browser'
