@@ -1,4 +1,4 @@
-import homepage from "./app/index.html";
+import homepage from "./src/index.html";
 
 console.log("Serving Bun Server @ http://localhost:3000")
 Bun.serve({

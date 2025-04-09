@@ -1,5 +1,5 @@
 /** create an element with text */
-export function $<
+export function h<
   K extends keyof HTMLElementTagNameMap
 >(
   el: K,
@@ -7,6 +7,7 @@ export function $<
   classList?: string
 ): HTMLElementTagNameMap[K] {
   const _el = document.createElement(el)
+  // @ts-ignore-next-line
   if (classList) _el.classList = classList
   if (inner && typeof inner == 'string') { _el.innerText = inner }
   if (inner && (inner instanceof HTMLElement || inner instanceof Node)) { _el.appendChild(inner) }
@@ -15,20 +16,10 @@ export function $<
 }
 
 /** append a node to body */
-export function b(el: Node) {
+export function bodyAdd(el: Node | Node[]) {
+  if (Array.isArray(el)) {
+    return el.forEach(e => document.body.appendChild(e))
+  }
   document.body.appendChild(el)
 }
 
-
-export function btn(txt: string, onclick: HTMLButtonElement['onclick']): ReturnType<typeof $> {
-  const el = $('button', txt)
-  el.onclick = onclick
-  return el
-}
-
-export function a(name: string, href: string) {
-  const _a = $('a', name)
-  _a.href = href
-  _a.target = "__blank"
-  return _a
-}
