@@ -5,8 +5,8 @@ export function workItem(company: string, position: string, time: string) {
     h('li', [
       h('b', company),
       h("i", [
-        h('span', ` - h{position}`),
-        h('small', ` h{time}`)
+        h('span', ` - ${position}`),
+        h('small', ` ${time}`)
       ]),
     ])
   )

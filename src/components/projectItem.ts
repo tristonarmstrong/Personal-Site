@@ -6,7 +6,7 @@ export function projectItem(title: string, link: string, techs: string, desc: st
     h('p', [
       h('div', [
         linkTo(title, link),
-        h('i', h('small', ` h{techs}`)),
+        h('i', h('small', ` ${techs}`)),
         h('div', desc),
       ])
     ])
