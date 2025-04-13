@@ -9,7 +9,7 @@ export function h<
   const _el = document.createElement(el)
   // @ts-ignore-next-line
   if (classList) _el.classList = classList
-  if (inner && typeof inner == 'string') { _el.innerText = inner }
+  if (inner && typeof inner == 'string') { _el.innerHTML = inner }
   if (inner && (inner instanceof HTMLElement || inner instanceof Node)) { _el.appendChild(inner) }
   if (inner && inner instanceof Array) { inner.forEach(x => _el.appendChild(x)) }
   return _el
