@@ -4,11 +4,11 @@ export function h<
 >(
   el: K,
   inner?: string | (HTMLElement | Node) | Array<HTMLElement | Node>,
-  classList?: string
+  classList?: string | string[]
 ): HTMLElementTagNameMap[K] {
   const _el = document.createElement(el)
   // @ts-ignore-next-line
-  if (classList) _el.classList = classList
+  if (classList) _el.classList = Array.isArray(classList) ? classList.join(' ') : classList
   if (inner && typeof inner == 'string') { _el.innerHTML = inner }
   if (inner && (inner instanceof HTMLElement || inner instanceof Node)) { _el.appendChild(inner) }
   if (inner && inner instanceof Array) { inner.forEach(x => _el.appendChild(x)) }
