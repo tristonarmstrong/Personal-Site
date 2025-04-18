@@ -1,11 +1,23 @@
 import homepage from "./src/index.html";
 
-console.log("Serving Bun Server @ http://localhost:3000")
+const SERVER_PORT = 3000
+console.log(`==== details ====`)
+console.log(`address: http://localhost`)
+console.log(`port: ${SERVER_PORT}`)
+console.log(`mode: hot`)
+console.log(`=================`)
+
 Bun.serve({
+  port: SERVER_PORT,
   // Add HTML imports to `static`
   static: {
     // Bundle & route index.html to "/"
     "/": homepage,
+    "/image-3.jpg": new Response(await Bun.file("./src/resources/image-3.jpg").bytes(), {
+      headers: {
+        "Content-Type": "image/x-icon"
+      }
+    })
   },
 
   // Enable development mode for:
@@ -14,7 +26,7 @@ Bun.serve({
   development: true,
 
   // Handle API requests
-  async fetch(req) {
+  async fetch(_req) {
     // ...your API code
     // if (req.url.endsWith("/api/users")) {
     //   const users = await Bun.sql`SELECT * FROM users`;
@@ -22,6 +34,7 @@ Bun.serve({
     // }
 
     // Return 404 for unmatched routes
+
     return new Response("Not Found", { status: 404 });
   },
 });

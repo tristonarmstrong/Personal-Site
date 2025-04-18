@@ -1,10 +1,11 @@
+export type ClassList = string | string[]
 /** create an element with text */
 export function h<
   K extends keyof HTMLElementTagNameMap
 >(
   el: K,
   inner?: string | (HTMLElement | Node) | Array<HTMLElement | Node>,
-  classList?: string | string[]
+  classList?: ClassList
 ): HTMLElementTagNameMap[K] {
   const _el = document.createElement(el)
   // @ts-ignore-next-line
@@ -16,10 +17,9 @@ export function h<
 }
 
 /** append a node to body */
-export function bodyAdd(el: Node | Node[]) {
-  if (Array.isArray(el)) {
-    return el.forEach(e => document.body.appendChild(e))
-  }
-  document.body.appendChild(el)
+export function bodyAdd(el: Node | Node[], classList?: string | string[]) {
+  Array.isArray(el) ? el.forEach(e => document.body.appendChild(e)) : document.body.appendChild(el)
+  // @ts-ignore-next-line
+  if (classList) document.body.classList = Array.isArray(classList) ? classList.join(' ') : classList
 }
 
