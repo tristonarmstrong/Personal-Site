@@ -1,4 +1,4 @@
-import { Link, Route, Router, useCallback, useMemo, useSignal, watch } from "kaioken"
+import { Link, Route, Router, useSignal } from "kaioken"
 import { Avatar } from "./components/Avatar"
 import { Mail } from "./components/icons/Mail"
 import Home from './pages/home'
