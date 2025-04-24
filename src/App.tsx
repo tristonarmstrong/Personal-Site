@@ -12,7 +12,7 @@ export function App() {
   return (
     <div className="max-w-[500px] mx-auto mt-10 flex flex-col gap-4">
       <nav className="flex justify-between items-center">
-        <Link to="/"><Avatar /></Link>
+        <Link to="/" onclick={() => activeLink.value = "/"}><Avatar /></Link>
         <div className="flex gap-3 [&>*]:hover:text-yellow-500">
           <Link to="/" onclick={() => activeLink.value = "/"} className={activeLink.value == "/" ? activeStyle : ''}> Home</Link>
           <Link to="/experience" onclick={() => activeLink.value = "/experience"} className={activeLink.value == "/experience" ? activeStyle : ''}> Experience</Link>
