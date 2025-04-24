@@ -35,7 +35,7 @@ export function App() {
 
       <footer className="text-center">
         <hr className="opacity-50" />
-        <small className="opacity-50">All rights reserved Triston</small>
+        <small className="opacity-50">© 2019 - 2025 Triston Armstrong - All Rights Reserved.</small>
       </footer>
     </div>
   )
