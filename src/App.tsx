@@ -29,8 +29,8 @@ export function App() {
 
       <Router>
         <Route path="/" element={<Home />} />
-        <Route path="/experience" element={<Now />} />
-        <Route path="/now" element={<Experience />} />
+        <Route path="/experience" element={<Experience />} />
+        <Route path="/now" element={<Now />} />
       </Router>
 
       <footer className="text-center">
