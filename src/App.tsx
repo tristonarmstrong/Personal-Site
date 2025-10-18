@@ -33,9 +33,10 @@ export function App() {
         <Route path="/now" element={<Now />} />
       </Router>
 
-      <footer className="text-center">
+      <footer className="text-center flex flex-col">
         <hr className="opacity-50" />
         <small className="opacity-50">© 2026 Triston Armstrong - All Rights Reserved.</small>
+        <small className="opacity-50">Made with ❤️ & 🍵</small>
       </footer>
     </div>
   )
