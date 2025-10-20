@@ -26,3 +26,13 @@
   font-family: "-apple-system", sans-serif;
   line-height: 1.5;
 }
+
+::view-transition-old(link-h-buildingcicd),
+::view-transition-new(link-h-buildingcicd) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(foot),
+::view-transition-new(foot) {
+  mix-blend-mode: normal;
+}
