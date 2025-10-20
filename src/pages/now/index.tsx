@@ -72,11 +72,9 @@ function Item({ label, href, transitionId }: { label: string, href: string, tran
 }
 
 function LinkBody({ label, transitionId }: { label: string, transitionId?: string }) {
-  const linkLabelTransitionId = useMemo(() => {
-    if (!transitionId) return String(Math.random() * 1000)
-    return `link-h-${transitionId}`
-  }, [transitionId])
   return useMemo(() => {
+    const linkLabelTransitionId = (!transitionId) ? String(Math.random() * 1000) : `link-h-${transitionId}`
+
     return (
       <li className={"flex w-full items-center gap-1"}>
         <span style={`view-transition-name: ${linkLabelTransitionId}`}>{label}</span>
@@ -86,5 +84,5 @@ function LinkBody({ label, transitionId }: { label: string, transitionId?: strin
         </span>
       </li>
     )
-  }, [label, linkLabelTransitionId])
+  }, [label, transitionId])
 }
