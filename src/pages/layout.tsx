@@ -1,10 +1,9 @@
-import { Link, useFileRouter } from "kiru/router"
+import { Link } from "kiru/router"
 import { Mail } from "../components/icons/Mail"
 import { useSignal, useViewTransition } from "kiru"
 import { Avatar } from "../components/Avatar"
 
 export default function RootLayout({ children }: { children: JSX.Children }) {
-  const { state } = useFileRouter()
   const transition = useViewTransition()
   const activeLink = useSignal(window.location.pathname)
   const activeStyle = "border-b-1 border-yellow-500"
