@@ -41,7 +41,7 @@ code {
   color: var(--color-yellow-700);
 }
 
-a {
+article a {
   text-decoration: underline;
   text-decoration-color: var(--color-yellow-700);
 }
