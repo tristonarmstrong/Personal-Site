@@ -32,11 +32,15 @@ export default function Now() {
         <div className={"flex flex-col gap-1"}>
           <ul className={"mx-4"}>
             <p className={"text-yellow-600"}>Successful</p>
-            <Item label="BinCode" href="https://github.com/asadbek064/bincode" />
+            <Item label="BinCode" href="https://github.com/asadbek064/bincode/pull/1" />
             <Item label="Kiru" href="https://github.com/CrimsonChi/kiru" />
+            <Item label="ChaiLauncher (Window Control)" href="https://github.com/Chai-Foundation/ChaiLauncher/pull/13" />
+            <Item label="ChaiLauncher (Mod Loader)" href="https://github.com/Chai-Foundation/ChaiLauncher/pull/18" />
+            <Item label="Chai-MCVM (Correct Java Paths)" href="https://github.com/tristanpoland/Chai-MCVM/pull/1" />
             <p className={"text-yellow-600 mt-2"}>UnSuccessful</p>
-            <Item label="Omarchy" href="https://github.com/CrimsonChi/kiru" />
-            <Item label="Typescript" href="https://github.com/microsoft/TypeScript" />
+            <Item label="Omarchy (Flatpak Support)" href="https://github.com/basecamp/omarchy/issues/1881" />
+            <Item label="Omarchy (Auto Fetch Icons)" href="https://github.com/basecamp/omarchy/pull/1905" />
+            <Item label="Typescript" href="https://github.com/microsoft/TypeScript/pull/60269" />
           </ul>
         </div>
       </div>
