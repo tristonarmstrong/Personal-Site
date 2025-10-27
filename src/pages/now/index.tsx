@@ -15,12 +15,12 @@ export default function Now() {
         </div>
         <ul className={"mx-4"}>
           <p className={"text-yellow-600"}>Web</p>
-          <Item label="Web-Window-Manager" href="/project/web-window-manager" />
-          <Item label="Homeschool Calendar" href="/project/homeschool-calendar" />
+          <Item label="Web-Window-Manager" href="/project/web-window-manager" transitionId="webwindowmanager" />
+          <Item label="Homeschool Calendar" href="/project/homeschool-calendar" transitionId="homeschoolcalendar" />
           <p className={"text-yellow-600 mt-2"}>Tool</p>
-          <Item label="Zlorb" href="/project/zlorb" />
-          <Item label="Ferro" href="/project/ferro" />
-          <Item label="Rage" href="/project/rage" />
+          <Item label="Zlorb" href="/project/zlorb" transitionId="zlorb" />
+          <Item label="Ferro" href="/project/ferro" transitionId="ferro" />
+          <Item label="Rage" href="/project/rage" transitionId="rage" />
         </ul>
       </div>
 
