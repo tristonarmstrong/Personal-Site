@@ -36,3 +36,19 @@
 ::view-transition-new(foot) {
   mix-blend-mode: normal;
 }
+
+code {
+  color: var(--color-yellow-700);
+}
+
+a {
+  text-decoration: underline;
+  text-decoration-color: var(--color-yellow-700);
+}
+
+blockquote {
+  margin: var(--spacing) 0;
+  color: var(--color-gray-500);
+  border-left: 2px solid var(--color-gray-500);
+  padding-left: var(--spacing);
+}

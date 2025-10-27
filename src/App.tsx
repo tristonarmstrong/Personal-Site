@@ -18,7 +18,7 @@ export function App() {
   }
 
   return (
-    <div className="max-w-[500px] mx-auto mt-10 flex flex-col gap-4">
+    <div className="max-w-[500px] mx-auto mt-10 flex flex-col gap-4 px-2">
       <nav className="flex justify-between items-center">
         <Link style={"view-transition-name: nav"} to="/" onclick={handleNavigate("/")}><Avatar /></Link>
         <div className="flex gap-3 [&>*]:hover:text-yellow-500">
