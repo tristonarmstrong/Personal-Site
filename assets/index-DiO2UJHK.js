@@ -1,0 +1,1 @@
+import{c as e}from"./index-IoIlMeRV.js";function o(){return e("div",{className:"text-center"},e("h1",{className:"text-[4rem] font-bold"},"404"),e("h2",{className:"text-lg"},"Where do you think you're going?"),e("a",{href:"/",className:"text-yellow-500 underline"},"Go Home"))}export{o as default};
