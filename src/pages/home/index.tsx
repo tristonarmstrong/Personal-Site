@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className="text-sm mt-10 flex flex-col gap-4">
+    <main className="text-sm mt-10 flex flex-col gap-4" style={"view-transition-name: homepage"}>
       <section>
         <h1 className="text-lg text-yellow-500">Triston Armstrong</h1>
         <p className="text-sm text-gray-400 italic">Senior Software Engineer</p>

@@ -1,6 +1,7 @@
 export default function Experience() {
   return (
-    <main className="text-sm mt-10 flex flex-col gap-4">
+    <main className="text-sm mt-10 flex flex-col gap-4" style={"view-transition-name: homepage"}>
+      <p>Companies I've worked at and maybe where I'm currently working if I can convince someone to give me money in exchange for code.</p>
       <ul>
         <Work href="https://ventrahealth.com/" comp="Ventra Health" time="2023 - Pres" />
         <Work href="https://www.randstadusa.com/" comp="Randstad Technologies" time="2021 - 2023" />

@@ -1,6 +1,11 @@
 import { defineConfig } from "vite"
-import kaioken from "vite-plugin-kaioken"
+import kiru from "vite-plugin-kiru"
 
 export default defineConfig({
-  plugins: [kaioken()],
+  plugins: [kiru()],
+  server: {
+    watch: {
+      usePolling: true
+    }
+  }
 })

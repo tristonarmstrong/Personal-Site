@@ -26,3 +26,29 @@
   font-family: "-apple-system", sans-serif;
   line-height: 1.5;
 }
+
+::view-transition-old(link-h-buildingcicd),
+::view-transition-new(link-h-buildingcicd) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(foot),
+::view-transition-new(foot) {
+  mix-blend-mode: normal;
+}
+
+code {
+  color: var(--color-yellow-700);
+}
+
+article a {
+  text-decoration: underline;
+  text-decoration-color: var(--color-yellow-700);
+}
+
+blockquote {
+  margin: var(--spacing) 0;
+  color: var(--color-gray-500);
+  border-left: 2px solid var(--color-gray-500);
+  padding-left: var(--spacing);
+}
