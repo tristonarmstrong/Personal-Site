@@ -1,14 +1,9 @@
+import { Link } from "kiru/router"
+import { Mail } from "../components/icons/Mail"
 import { useSignal, useViewTransition } from "kiru"
-import { Avatar } from "./components/Avatar"
-import { Mail } from "./components/icons/Mail"
-import Home from './pages/home'
-import Now from "./pages/now"
-import Experience from "./pages/experience"
-import { Link, Route, Router } from "kiru/router"
-import { Blogs } from "./pages/blogs/"
-import { Projects } from "./pages/projects/"
+import { Avatar } from "../components/Avatar"
 
-export function App() {
+export default function RootLayout({ children }: { children: JSX.Children }) {
   const transition = useViewTransition()
   const activeLink = useSignal(window.location.pathname)
   const activeStyle = "border-b-1 border-yellow-500"
@@ -16,6 +11,7 @@ export function App() {
   const handleNavigate = (route: string) => () => {
     transition(() => activeLink.value = route)
   }
+
 
   return (
     <div className="max-w-[500px] mx-auto mt-10 flex flex-col gap-4 px-2">
@@ -35,6 +31,8 @@ export function App() {
         }}><Mail /></a>
       </nav>
 
+      {children}
+      {/*
       <Router transition>
         <Route path="/" element={<Home />} />
         <Route path="/experience" element={<Experience />} />
@@ -44,6 +42,8 @@ export function App() {
         <Route path="*" element={<h1>Oopsie! That page doesnt exist</h1>} />
       </Router>
 
+    */}
+
       <footer className="text-center flex flex-col" style={"view-transition-name: foot"}>
         <hr className="opacity-50" />
         <small className="opacity-50">© 2026 Triston Armstrong - All Rights Reserved.</small>
@@ -52,4 +52,3 @@ export function App() {
     </div>
   )
 }
-
