@@ -1,16 +1,15 @@
 import { Link } from "kiru/router";
 
-export function BuildingCiCd() {
-
+export default function BuildingCiCd() {
   return (
     <article className="text-sm mt-10 flex flex-col gap-6 [&_p]:text-justify">
       <header>
-        <nav className={"mb-2"}>
+        <nav className={"mb-4"}>
           <Link to="/now">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="hover:text-yellow-500 hover:scale-80 transition"><path d="M13 9a1 1 0 0 1-1-1V5.061a1 1 0 0 0-1.811-.75l-6.835 6.836a1.207 1.207 0 0 0 0 1.707l6.835 6.835a1 1 0 0 0 1.811-.75V16a1 1 0 0 1 1-1h6a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z" /></svg>
           </Link>
         </nav>
-        <h1 style={`view-transition-name: link-h-buildingcicd`} className={"text-yellow-500 text-2xl font-bold"}>Building Zlorb: A Lightweight CI Daemon in Rust</h1>
+        <h1 style={`view-transition-name: link-h-buildingcicd`} className={"text-2xl font-bold"}>Building Zlorb: A Lightweight CI Daemon in Rust</h1>
       </header>
       <main style={`view-transition-name: buildingcicd-main`}>
         <p>
