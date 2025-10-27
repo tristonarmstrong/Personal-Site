@@ -41,6 +41,7 @@ export default function Now() {
             <Item label="Omarchy (Flatpak Support)" href="https://github.com/basecamp/omarchy/issues/1881" />
             <Item label="Omarchy (Auto Fetch Icons)" href="https://github.com/basecamp/omarchy/pull/1905" />
             <Item label="Typescript" href="https://github.com/microsoft/TypeScript/pull/60269" />
+            <Item label="NX (AI Instruct)" href="https://github.com/nrwl/nx/pull/31846" />
           </ul>
         </div>
       </div>
