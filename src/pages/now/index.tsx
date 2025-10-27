@@ -36,12 +36,12 @@ export default function Now() {
             <Item label="Kiru" href="https://github.com/CrimsonChi/kiru" />
             <Item label="ChaiLauncher (Window Control)" href="https://github.com/Chai-Foundation/ChaiLauncher/pull/13" />
             <Item label="ChaiLauncher (Mod Loader)" href="https://github.com/Chai-Foundation/ChaiLauncher/pull/18" />
-            <Item label="Chai-MCVM (Correct Java Paths)" href="https://github.com/tristanpoland/Chai-MCVM/pull/1" />
+            <Item label="Chai-MCVM" href="https://github.com/tristanpoland/Chai-MCVM/pull/1" />
             <p className={"text-yellow-600 mt-2"}>UnSuccessful</p>
             <Item label="Omarchy (Flatpak Support)" href="https://github.com/basecamp/omarchy/issues/1881" />
             <Item label="Omarchy (Auto Fetch Icons)" href="https://github.com/basecamp/omarchy/pull/1905" />
             <Item label="Typescript" href="https://github.com/microsoft/TypeScript/pull/60269" />
-            <Item label="NX (AI Instruct)" href="https://github.com/nrwl/nx/pull/31846" />
+            <Item label="NX" href="https://github.com/nrwl/nx/pull/31846" />
           </ul>
         </div>
       </div>
