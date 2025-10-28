@@ -16,7 +16,11 @@ const posts = defineCollection({
     author: z.string()
   }),
   transform: async (document, context) => {
-    const mdx = await compileMDX(context, document);
+    const mdx = await compileMDX(context, document, {
+      files(appender) {
+        appender.file("@components/Avatar", "./src/components/Avatar.tsx")
+      },
+    });
     return {
       ...document,
       slug: document.title.toLowerCase().replace(/ /g, '-'),
