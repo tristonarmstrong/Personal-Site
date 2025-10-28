@@ -1,0 +1,1 @@
+import{c as a}from"./index-Lmutc_n-.js";const t="/assets/avatar-M8tgCDMv.jpg";function r(){return a("div",{style:`view-transition-name: avatar; background-image: url(${t})`,className:"w-10 h-10 rounded-full bg-center bg-cover"})}export{r as A};
