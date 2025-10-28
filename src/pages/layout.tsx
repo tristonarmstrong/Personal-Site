@@ -5,7 +5,7 @@ import { Avatar } from "../components/Avatar"
 
 export default function RootLayout({ children }: { children: JSX.Children }) {
   return (
-    <div className="max-w-[500px] mx-auto mt-10 flex flex-col gap-4 px-2">
+    <div className="max-w-[70ch] mx-auto mt-10 flex flex-col gap-4 px-2">
       <Navigation />
 
       {children}
@@ -25,7 +25,9 @@ function Navigation() {
   const activeStyle = "border-b-1 border-yellow-500"
 
   const handleNavigate = (route: string) => () => {
-    transition(() => state.path = route)
+    transition(() => {
+      state.path = route
+    })
   }
 
   return (
@@ -36,10 +38,10 @@ function Navigation() {
         <Link style={"view-transition-name: experience"} to="/experience" onclick={handleNavigate("/experience")} className={state.path == "/experience" ? activeStyle : ''}> Experience</Link>
         <Link style={"view-transition-name: now"} to="/now" onclick={handleNavigate("/now")} className={state.path == "/now" ? activeStyle : ''}> Now</Link>
       </div>
-      <a href="#" onclick={(e) => {
+      <a href="_" onclick={(e) => {
         e.preventDefault()
         e.stopPropagation()
-        let a = document.createElement('a')
+        const a = document.createElement('a')
         a.href = "mailto:triston95strong@gmail.com?subject=Reaching Out&body=Hey Triston, ...Put message here..."
         a.click()
       }}><Mail /></a>
