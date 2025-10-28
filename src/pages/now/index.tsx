@@ -1,3 +1,4 @@
+import { allPosts } from 'content-collections'
 import { useMemo } from "kiru"
 import { Link } from "kiru/router"
 
@@ -52,7 +53,9 @@ export default function Now() {
           <p className={"text-gray-300"}>Sometimes I have knowledge I find worth sharing, and thus I write up a little something something from time to time</p>
         </div>
         <ul className={"mx-4"}>
-          <Item label="Building CI/CD" href="/blog/building-ci-cd" transitionId="buildingcicd" />
+          {allPosts.map(x => (
+            <Item label={x.title} href={`/blog/${x.slug}`} transitionId={`${x.slug}`} />
+          ))}
         </ul>
       </div>
     </main>
