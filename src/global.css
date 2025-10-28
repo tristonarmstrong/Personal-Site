@@ -52,3 +52,83 @@ blockquote {
   border-left: 2px solid var(--color-gray-500);
   padding-left: var(--spacing);
 }
+
+article.blogpost {
+  pre {
+    padding: 0.5rem;
+    border: 1px solid #888888;
+    border-radius: 2px;
+    margin-block: 1rem;
+    background-color: #f6f8fa !important;
+  }
+
+  code {
+    font-family: monospace;
+    color: #333333;
+  }
+
+  hr {
+    margin-block: 1rem;
+  }
+
+  table {
+    margin-block: 1rem;
+  }
+
+  table th {
+    font-weight: 600;
+  }
+
+  table th,
+  table td {
+    padding: 6px 13px;
+    border: 1px solid #d1d9e0;
+  }
+
+  table td > :last-child {
+    margin-bottom: 0;
+  }
+
+  table tr {
+    background-color: #ffffff;
+    border-top: 1px solid #d1d9e0b3;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+
+  table img {
+    background-color: transparent;
+  }
+
+  ul {
+    margin-block: 1rem;
+  }
+
+  h1 {
+    /* margin-block-end: 2rem; */
+    text-align: center;
+  }
+
+  p {
+    margin-block-end: 1rem;
+    /* text-align: justify; */
+    /* text-indent: 4ch; */
+    word-wrap: break-word;
+  }
+
+  blockquote {
+    padding-inline: 1ch;
+    border-left: 2px solid #ccc;
+    margin-inline: 3ch;
+    font-style: italic;
+  }
+
+  ul {
+    margin-inline: 4ch;
+    list-style: disc outside none;
+  }
+
+}
+
