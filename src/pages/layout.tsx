@@ -1,7 +1,7 @@
-import { Link, useFileRouter } from "kiru/router"
-import { Mail } from "../components/icons/Mail"
 import { useViewTransition } from "kiru"
+import { Link, useFileRouter } from "kiru/router"
 import { Avatar } from "../components/Avatar"
+import { Mail } from "../components/icons/Mail"
 
 export default function RootLayout({ children }: { children: JSX.Children }) {
   return (
