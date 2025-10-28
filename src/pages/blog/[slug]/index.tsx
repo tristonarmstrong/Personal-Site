@@ -4,7 +4,6 @@ import { jsx } from "kiru/jsx-runtime";
 
 import { useFileRouter } from "kiru/router"
 import { allPosts } from 'content-collections'
-import { Avatar } from "../../../components/Avatar";
 
 export default function Page() {
   const { state: { params } } = useFileRouter()
@@ -14,7 +13,7 @@ export default function Page() {
   return (
     <article className={"blogpost markdown-body"}>
       {!post?.mdx && <div>Oops something went wrong rendering the page</div>}
-      {post?.mdx && <MDXContent code={post!.mdx} components={{ Avatar }} />}
+      {post?.mdx && <MDXContent code={post!.mdx} />}
     </article>
   )
 }
