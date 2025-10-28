@@ -17,7 +17,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc && vite build",
+		"build": "bun run cleanup-content-cache && tsc && vite build",
+		"cleanup-content-cache": "rm -rf .content-collections/cache",
 		"preview": "vite preview"
 	},
 	"type": "module",
