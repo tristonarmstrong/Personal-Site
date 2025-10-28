@@ -1,5 +1,6 @@
 import { useMemo } from "kiru"
 import { Link } from "kiru/router"
+import { allPosts } from 'content-collections'
 
 export default function Now() {
   return (
@@ -53,6 +54,9 @@ export default function Now() {
         </div>
         <ul className={"mx-4"}>
           <Item label="Building CI/CD" href="/blog/building-ci-cd" transitionId="buildingcicd" />
+          {allPosts.map(x => (
+            <Item label={x.title} href={`/blog/${x.slug}`} transitionId={x.slug} />
+          ))}
         </ul>
       </div>
     </main>
