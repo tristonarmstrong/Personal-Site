@@ -1,5 +1,5 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
-import { compileMarkdown } from "@content-collections/markdown";
+import { compileMDX } from '@content-collections/mdx'
 import { z } from "zod";
 
 // for more information on configuration, visit:
@@ -8,7 +8,7 @@ import { z } from "zod";
 const posts = defineCollection({
   name: "posts",
   directory: "content/posts",
-  include: "*.md",
+  include: "*.mdx",
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -16,31 +16,16 @@ const posts = defineCollection({
     author: z.string()
   }),
   transform: async (document, context) => {
-    const html = await compileMarkdown(context, document);
+    const mdx = await compileMDX(context, document);
     return {
       ...document,
       slug: document.title.toLowerCase().replace(/ /g, '-'),
-      html,
+      mdx,
     };
   },
 });
 
-const notes = defineCollection({
-  name: "notes",
-  directory: "content/notes",
-  include: "**/*.md",
-  schema: z.object({
-    title: z.string(),
-  }),
-  transform: async (document, context) => {
-    const html = await compileMarkdown(context, document);
-    return {
-      ...document,
-      html,
-    };
-  },
-});
 
 export default defineConfig({
-  collections: [posts, notes],
+  collections: [posts],
 });
