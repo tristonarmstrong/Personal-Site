@@ -12,8 +12,7 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
-    date: z.coerce.date(),
-    author: z.string()
+    date: z.coerce.date()
   }),
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document, {
