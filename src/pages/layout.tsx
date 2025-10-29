@@ -22,7 +22,6 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 function Navigation() {
   const { state } = useFileRouter()
   const transition = useViewTransition()
-  const activeStyle = "border-b-1 border-yellow-500"
 
   const handleNavigate = (route: string) => () => {
     transition(() => {
@@ -34,9 +33,18 @@ function Navigation() {
     <nav className="flex justify-between items-center">
       <AutoHiddenAvatar handleNavigate={handleNavigate} />
       <div className="flex gap-3 [&>*]:hover:text-yellow-500">
-        <Link style={"view-transition-name: home"} to="/" onclick={handleNavigate("/")} className={state.path == "/" ? activeStyle : ''}> Home</Link>
-        <Link style={"view-transition-name: experience"} to="/experience" onclick={handleNavigate("/experience")} className={state.path == "/experience" ? activeStyle : ''}> Experience</Link>
-        <Link style={"view-transition-name: now"} to="/now" onclick={handleNavigate("/now")} className={state.path == "/now" ? activeStyle : ''}> Now</Link>
+        <Link style={"view-transition-name: home"} to="/" onclick={handleNavigate("/")}>
+          Home
+          {state.path === '/' && <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />}
+        </Link>
+        <Link style={"view-transition-name: experience"} to="/experience" onclick={handleNavigate("/experience")}>
+          Experience
+          {state.path === '/experience' && <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />}
+        </Link>
+        <Link style={"view-transition-name: now"} to="/now" onclick={handleNavigate("/now")}>
+          Now
+          {state.path === '/now' && <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />}
+        </Link>
       </div>
       <a href="_" onclick={(e) => {
         e.preventDefault()
