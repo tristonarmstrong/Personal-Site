@@ -1,20 +1,8 @@
 ---
-title: "Building CI CD"
-summary: "a lightweight Rust-based CI daemon that polls Git repos, auto-merges changes, and triggers Bun builds with systemd integration and a simple CLI."
+title: "Building Zlorb: A Lightweight CI Daemon in Rust"
+summary: ""
 date: 2024-09-25
-author: "Triston Armstrong"
 ---
-import {Avatar} from '@components/Avatar'
-
-<h1 style={`view-transition-name: link-h-building-ci-cd`} className="text-2xl font-bold">Building Zlorb: A Lightweight CI Daemon in Rust</h1>
-
-<div className="flex gap-2">
-  <Avatar/>
-  <div className="mb-4">
-    Triston Armstrong
-    <p className="text-gray-400 text-sm">2024-09-25 - 10 year read</p>
-  </div>
-</div>
 
 Hey folks, I recently wrapped up a fun side project called **zlorbrs**—a simple, systemd-managed continuous integration tool designed for Git-based projects. Inspired by the need for a no-fuss way to monitor repos and auto-trigger builds, it focuses on efficiency without the bloat of enterprise CI systems. Here's a quick recap of what I accomplished, key architectural choices, and the tradeoffs involved.
 
