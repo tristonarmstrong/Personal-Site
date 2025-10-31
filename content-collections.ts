@@ -28,7 +28,24 @@ const posts = defineCollection({
   },
 });
 
-
+const projects = defineCollection({
+  name: "projects",
+  directory: "content/projects",
+  include: "*.mdx",
+  schema: z.object({
+    title: z.string("You must provide a title"),
+    repo: z.string("You must provide a repo link"),
+    type: z.string("You must provide a type of Web or Tool").regex(/Web|Tool/)
+  }),
+  transform: async (document, context) => {
+    const mdx = await compileMDX(context, document);
+    return {
+      ...document,
+      slug: document.title.toLowerCase().replace(/ /g, '-'),
+      mdx,
+    };
+  },
+});
 export default defineConfig({
-  collections: [posts],
+  collections: [posts, projects],
 });

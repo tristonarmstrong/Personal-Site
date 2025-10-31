@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -27,35 +27,35 @@
   line-height: 1.5;
 }
 
-::view-transition-old(link-h-buildingcicd),
-::view-transition-new(link-h-buildingcicd) {
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(foot),
-::view-transition-new(foot) {
-  mix-blend-mode: normal;
-}
-
 article {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
 
-  h2,h3,h4,h5,h6 {
-    color: var(--color-yellow-600);  
-    margin-bottom: 1rem;
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-yellow-600);
     margin-top: 1.5rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   h1 {
     font-size: var(--text-3xl);
-    margin-bottom: 2rem;
   }
 
   h2 {
     font-size: var(--text-2xl);
-    margin-bottom: 1.6rem;
   }
   h3 {
     font-size: var(--text-xl);
@@ -66,7 +66,9 @@ article {
   h5 {
     font-size: var(--text-md);
   }
-  h6, p, code {
+  h6,
+  p,
+  code {
     font-size: var(--text-sm);
   }
 
@@ -93,11 +95,11 @@ article {
     margin-bottom: 1rem;
 
     code {
-      color:unset;
-      font-family:unset;
-      background-color:unset;
-      padding:unset;
-      border-radius:unset;
+      color: unset;
+      font-family: unset;
+      background-color: unset;
+      padding: unset;
+      border-radius: unset;
     }
   }
 
@@ -107,10 +109,13 @@ article {
   }
 
   blockquote {
-    margin: var(--spacing) 0;
+    margin: var(--spacing) 0 1rem;
     color: var(--color-gray-500);
     border-left: 2px solid var(--color-gray-500);
     padding-left: var(--spacing);
+    p {
+      margin-bottom: 0;
+    }
   }
 
   ul {
@@ -121,8 +126,7 @@ article {
 
   hr {
     border-color: var(--color-gray-700);
-    margin-bottom: .5rem;
-    margin-top: .5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
   }
 }
-

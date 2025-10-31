@@ -1,0 +1,35 @@
+---
+title: Rage
+repo: https://github.com/tristonarmstrong/rage.git
+type: Tool
+---
+
+Rage is a self-hosted Git repository manager that looks a bit like Gogs or CGit. It lets you create repositories, manage users,
+track issues, and collaborate with teams—basically, it's CGit but not CGit.
+
+<div className="flex justify-start gap-2 ">
+  <a title="Click here to go to the Github page" href="https://github.com/tristonarmstrong/rage" target="_blank" rel="noopener">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github-icon lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+  </a>
+</div>
+
+## Features
+🚀 **Repository Management**: Create, clone, and manage your Git repos.<br/>
+🪞 **Mirror Push**: Push to other git hosting sites, like github.<br/>
+🖥️ **Web Interface**: Simple web interface for viewing everything git.<br/>
+
+## ❓ What Problem Did This Solve?
+I dont really like the idea of pushing all of my code to github, and github only. I dont
+really like the idea of github technically owning my code and practically giving me permission
+to edit and pull it. I wanted to self host my own, but all of the alternatives are either
+overly complicating to setup or just have far too many features that i just dont really care about.
+
+Im building my own, in rust ofcourse, thats similar to cgit, but rust. The problem that itll solve
+for me is that i get to host my own code, but it also wont force me to isolate myself
+from the rest of tech (github), by allowing me to mirror push to other git providers out there.
+
+My git host, will be my source of truth, and github will essentially be the backup.
+
+> Note: This is an unfinished project. I need to rewrite it as i didnt realize
+> there was a git2 crate at the time of writing this, and i was trying to
+> work with the git folder directly haha

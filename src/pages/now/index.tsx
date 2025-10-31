@@ -1,4 +1,4 @@
-import { allPosts } from 'content-collections'
+import { allPosts, allProjects } from 'content-collections'
 import { useMemo } from "kiru"
 import { Link } from "kiru/router"
 
@@ -16,12 +16,20 @@ export default function Now() {
         </div>
         <ul className={"mx-4"}>
           <p className={"text-yellow-600"}>Web</p>
-          <Item label="Web-Window-Manager" href="/project/web-window-manager" transitionId="webwindowmanager" />
+          {allProjects.filter(x => x.type === 'Web').map(x => {
+            return (
+              <Item label={x.title} href={`/project/${x.slug}`} transitionId={x.slug} />
+            )
+          })}
+          {/*
           <Item label="Homeschool Calendar" href="/project/homeschool-calendar" transitionId="homeschoolcalendar" />
+          */}
           <p className={"text-yellow-600 mt-2"}>Tool</p>
-          <Item label="Zlorb" href="/project/zlorb" transitionId="zlorb" />
-          <Item label="Ferro" href="/project/ferro" transitionId="ferro" />
-          <Item label="Rage" href="/project/rage" transitionId="rage" />
+          {allProjects.filter(x => x.type === 'Tool').map(x => {
+            return (
+              <Item label={x.title} href={`/project/${x.slug}`} transitionId={x.slug} />
+            )
+          })}
         </ul>
       </div>
 
@@ -85,7 +93,7 @@ function LinkBody({ label, transitionId }: { label: string, transitionId?: strin
 
     return (
       <li className={"flex w-full items-center gap-1"}>
-        <span style={`view-transition-name: ${linkLabelTransitionId}`}>{label}</span>
+        <span className={"w-fit"} style={`view-transition-name: ${linkLabelTransitionId}`}>{label}</span>
         <span className={"h-full border border-dashed flex-1 border-gray-400"}></span>
         <span className={"text-sm italic"}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-square-arrow-out-up-right-icon lucide-square-arrow-out-up-right"><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" /><path d="m21 3-9 9" /><path d="M15 3h6v6" /></svg>
