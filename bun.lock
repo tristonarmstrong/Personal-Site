@@ -4,7 +4,7 @@
     "": {
       "name": "Triston Portfolio",
       "dependencies": {
-        "kiru": "^0.50.5",
+        "kiru": "^0.50.7",
       },
       "devDependencies": {
         "@biomejs/biome": "2.2.6",
@@ -336,7 +336,7 @@
 
     "kind-of": ["kind-of@6.0.3", "", {}, "sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw=="],
 
-    "kiru": ["kiru@0.50.5", "", {}, "sha512-SxHAZOY0ALeTJ31Je1sM4Fjs65Bc84+X+kRHcYUfZlN7VmiGL60BdeNWkk47wsF/MkHXgl00ehGgoPy122AqPA=="],
+    "kiru": ["kiru@0.50.7", "", {}, "sha512-wn1HB7SVI/1QHcjm0fNBJIHGIMkZRMoXNu713BGJaMWhzQcOjJdC61PCDsPmva2Nefnou23QXgrt929I4sVRwQ=="],
 
     "lightningcss": ["lightningcss@1.30.1", "", { "dependencies": { "detect-libc": "^2.0.3" }, "optionalDependencies": { "lightningcss-darwin-arm64": "1.30.1", "lightningcss-darwin-x64": "1.30.1", "lightningcss-freebsd-x64": "1.30.1", "lightningcss-linux-arm-gnueabihf": "1.30.1", "lightningcss-linux-arm64-gnu": "1.30.1", "lightningcss-linux-arm64-musl": "1.30.1", "lightningcss-linux-x64-gnu": "1.30.1", "lightningcss-linux-x64-musl": "1.30.1", "lightningcss-win32-arm64-msvc": "1.30.1", "lightningcss-win32-x64-msvc": "1.30.1" } }, "sha512-xi6IyHML+c9+Q3W0S4fCQJOym42pyurFiJUHEcEyHS0CeKzia4yZDEsLlqOFykxOdHpNy0NmvVO31vcSqAxJCg=="],
 

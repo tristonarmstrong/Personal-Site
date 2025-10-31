@@ -23,6 +23,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"kiru": "^0.50.5"
+		"kiru": "^0.50.7"
 	}
 }
