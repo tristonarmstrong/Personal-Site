@@ -17,8 +17,8 @@ export default function Page() {
 
   return (
     <article className={"blogpost markdown-body"}>
+      <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />
       <h1 style={`view-transition-name: link-h-building-ci-cd`} className="text-2xl font-bold">{post.title}</h1>
-
       <div className="flex gap-2">
         <Avatar />
         <div className="mb-4">
