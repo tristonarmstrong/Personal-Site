@@ -12,7 +12,6 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 
       <footer className="text-center flex flex-col" style={"view-transition-name: foot"}>
         <hr className="opacity-50" />
-        <small className="opacity-50">© 2026 Triston Armstrong - <a className={"text-yellow-200 underline"} href="https://www.copyright.gov/title17/92chap1.html" target={"_blank"} rel={'noopener'}>All Rights Reserved</a></small>
         <small className="opacity-50">Made with ❤️ & 🍵</small>
       </footer>
     </div>
