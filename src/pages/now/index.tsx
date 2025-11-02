@@ -42,6 +42,7 @@ export default function Now() {
           <ul className={"mx-4"}>
             <p className={"text-yellow-600"}>Successful</p>
             <Item label="BinCode" href="https://github.com/asadbek064/bincode/pull/1" />
+            <Item label="Dissent" href="https://github.com/diamondburned/dissent/pull/371" />
             <Item label="Kiru" href="https://github.com/CrimsonChi/kiru" />
             <Item label="ChaiLauncher (Window Control)" href="https://github.com/Chai-Foundation/ChaiLauncher/pull/13" />
             <Item label="ChaiLauncher (Mod Loader)" href="https://github.com/Chai-Foundation/ChaiLauncher/pull/18" />
