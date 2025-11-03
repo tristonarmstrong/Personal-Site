@@ -27,11 +27,47 @@
 
 :root {
   background-color: black;
-  color: #e5e5e5;
+  color: var(--color-gray-200);
   color-scheme: dark;
   min-height: 100vh;
-  font-family: "-apple-system", sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
+  @media (prefers-color-scheme: light){
+    color-scheme: light;
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-700);
+  }
+}
+
+p {
+  color: var(--color-gray-300);
+  @media (prefers-color-scheme: light){
+    color: var(--color-gray-600);
+  }
+}
+
+ul {
+  a {
+    color: var(--color-gray-400);
+    @media (prefers-color-scheme: light){
+      color: var(--color-gray-500);
+    }
+  }
+  a:hover {
+    color: var(--color-yellow-500);
+  }
+}
+
+h3 {
+  color: var(--color-yellow-600);
+  font-weight: 600;
+  @media (prefers-color-scheme: light){
+    color: var(--color-yellow-500);
+  }
+}
+
+.yearthing {
+  color: var(--color-yellow-600);
 }
 
 article {
@@ -46,6 +82,9 @@ article {
   h6 {
     color: var(--color-yellow-600);
     margin-top: 1.5rem;
+    @media (prefers-color-scheme: light){
+      color: var(--color-yellow-500);
+    }
   }
 
   h1,
@@ -122,6 +161,10 @@ article {
     padding-left: var(--spacing);
     p {
       margin-bottom: 0;
+      color: var(--color-gray-600);
+      @media (prefers-color-scheme: light){
+        color: var(--color-gray-400);
+      }
     }
   }
 
