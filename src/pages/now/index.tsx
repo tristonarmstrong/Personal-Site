@@ -76,7 +76,7 @@ function Item({ label, href, transitionId }: { label: string, href: string, tran
   if (href.includes("http")) {
     return (
       <a href={href}>
-        <LinkBody {...{ label, transitionId }} />
+        <LinkBody {...{ label, transitionId }} external />
       </a>
     )
   }
@@ -88,7 +88,7 @@ function Item({ label, href, transitionId }: { label: string, href: string, tran
   )
 }
 
-function LinkBody({ label, transitionId }: { label: string, transitionId?: string }) {
+function LinkBody({ label, transitionId, external = false }: { label: string, transitionId?: string, external?: boolean }) {
   return useMemo(() => {
     const linkLabelTransitionId = (!transitionId) ? String(Math.random() * 1000) : `link-h-${transitionId}`
 
@@ -97,7 +97,10 @@ function LinkBody({ label, transitionId }: { label: string, transitionId?: strin
         <span className={"w-fit"} style={`view-transition-name: ${linkLabelTransitionId}`}>{label}</span>
         <span className={"h-full border border-dashed flex-1 border-gray-400"}></span>
         <span className={"text-sm italic"}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-square-arrow-out-up-right-icon lucide-square-arrow-out-up-right"><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" /><path d="m21 3-9 9" /><path d="M15 3h6v6" /></svg>
+          {external ?
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className=""><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" /><path d="m21 3-9 9" /><path d="M15 3h6v6" /></svg> :
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className=""><path d="M3 5v14" /><path d="M21 12H7" /><path d="m15 18 6-6-6-6" /></svg>
+          }
         </span>
       </li>
     )

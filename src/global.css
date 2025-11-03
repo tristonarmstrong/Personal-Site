@@ -15,6 +15,9 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+    @media (prefers-color-scheme: light){
+      border-color: var(--color-gray-500, currentColor);
+    }
   }
 }
 
@@ -37,6 +40,10 @@
     background-color: var(--color-gray-200);
     color: var(--color-gray-700);
   }
+}
+
+footer {
+  margin-bottom: 2rem;
 }
 
 p {
