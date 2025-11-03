@@ -7,7 +7,7 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col gap-4">
-        <p>Senior Software engineer, building internal applications for my employer by day, and building utility apps for myself by night!</p>
+        <p>Software Developer with <span className={"text-yellow-200"} title={"I started programming professionally in year 2020"}>{Math.abs(new Date().getFullYear() - 2020)} years</span> of experience, currently building internal applications for my employer by day, and building utility apps for myself by night!</p>
         <ul className="flex gap-2 [&>*]:hover:text-yellow-500 [&>*]:transition-color [&>*]:duration-200">
           <a className="hover:scale-90" href="https://github.com/tristonarmstrong" rel='noopener' target="_blank">
             <GithubIcon />
