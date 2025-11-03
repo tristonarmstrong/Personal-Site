@@ -18,6 +18,13 @@
   }
 }
 
+::selection {
+  background-color: #ffef5c;
+  color: #000;
+  -webkit-box-decoration-break: clone; /* For WebKit browsers */
+  box-decoration-break: clone; /* Standard property */ 
+}
+
 :root {
   background-color: black;
   color: #e5e5e5;
