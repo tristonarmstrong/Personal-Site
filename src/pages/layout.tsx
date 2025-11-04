@@ -1,11 +1,21 @@
+import { allThangs } from "content-collections"
 import { useViewTransition } from "kiru"
 import { Link, useFileRouter } from "kiru/router"
 import { Avatar } from "../components/Avatar"
 import { Mail } from "../components/icons/Mail"
 
 export default function RootLayout({ children }: { children: JSX.Children }) {
+  function _generateViewTransitionNamesFromContent() {
+    return allThangs.map(thang => (`
+        ::view-transition-old(image-${thang.slug}),
+        ::view-transition-new(image-${thang.slug}) {
+          height: 100%;
+        }
+      `)).join("\n")
+  }
   return (
     <div className="max-w-[70ch] mx-auto mt-10 flex flex-col gap-4 px-2">
+      <style innerHTML={_generateViewTransitionNamesFromContent()} />
       <Navigation />
 
       {children}
@@ -53,8 +63,12 @@ function Navigation() {
           Now
           {state.path === '/now' && <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />}
         </Link>
+        <Link style={"view-transition-name: thangs"} to="/thangs" onclick={handleNavigate("/thangs")}>
+          Thangs
+          {state.path === '/thangs' && <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />}
+        </Link>
       </div>
-      <a href="_" onclick={(e) => {
+      <a style={"view-transition-name: mail"} href="_" onclick={(e) => {
         e.preventDefault()
         e.stopPropagation()
         const a = document.createElement('a')
