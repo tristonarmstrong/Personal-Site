@@ -21,6 +21,10 @@
   }
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 img {
   overflow-clip-margin: content-box;
   overflow: clip;
@@ -65,8 +69,11 @@ ul {
       color: var(--color-gray-500);
     }
   }
-  a:hover {
-    color: var(--color-yellow-500);
+
+  @media screen and (min-width: var(--breakpoint-sm)){
+    a:hover {
+      color: var(--color-yellow-500);
+    }
   }
 }
 

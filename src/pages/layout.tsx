@@ -1,8 +1,5 @@
 import { allThangs } from "content-collections"
-import { useViewTransition } from "kiru"
-import { Link, useFileRouter } from "kiru/router"
-import { Avatar } from "../components/Avatar"
-import { Mail } from "../components/icons/Mail"
+import { Navigation } from "../components/Navigation"
 
 export default function RootLayout({ children }: { children: JSX.Children }) {
   function _generateViewTransitionNamesFromContent() {
@@ -14,7 +11,7 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
       `)).join("\n")
   }
   return (
-    <div className="max-w-[70ch] mx-auto mt-10 flex flex-col gap-4 px-2">
+    <div className="max-w-[70ch] mx-auto mt-10 flex flex-col gap-4 px-2 sm:overflow-hidden">
       <style innerHTML={_generateViewTransitionNamesFromContent()} />
       <Navigation />
 
@@ -34,58 +31,5 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
         </div>
       </footer>
     </div>
-  )
-}
-
-function Navigation() {
-  const { state } = useFileRouter()
-  const transition = useViewTransition()
-
-  const handleNavigate = (route: string) => () => {
-    transition(() => {
-      state.path = route
-    })
-  }
-
-  return (
-    <nav className="flex justify-between items-center">
-      <AutoHiddenAvatar handleNavigate={handleNavigate} />
-      <div className="flex gap-3 [&>*]:hover:text-yellow-500">
-        <Link style={"view-transition-name: home"} to="/" onclick={handleNavigate("/")}>
-          Home
-          {state.path === '/' && <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />}
-        </Link>
-        <Link style={"view-transition-name: experience"} to="/experience" onclick={handleNavigate("/experience")}>
-          Experience
-          {state.path === '/experience' && <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />}
-        </Link>
-        <Link style={"view-transition-name: now"} to="/now" onclick={handleNavigate("/now")}>
-          Now
-          {state.path === '/now' && <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />}
-        </Link>
-        <Link style={"view-transition-name: thangs"} to="/thangs" onclick={handleNavigate("/thangs")}>
-          Thangs
-          {state.path === '/thangs' && <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />}
-        </Link>
-      </div>
-      <a style={"view-transition-name: mail"} href="_" onclick={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        const a = document.createElement('a')
-        a.href = "mailto:triston95strong@gmail.com?subject=Reaching Out&body=Hey Triston, ...Put message here..."
-        a.click()
-      }}><Mail /></a>
-    </nav>
-
-  )
-}
-
-function AutoHiddenAvatar({ handleNavigate }: { handleNavigate: any }) {
-  const { state } = useFileRouter()
-
-  if (state.path.includes('blog')) return null
-
-  return (
-    <Link style={"view-transition-name: nav"} to="/" onclick={handleNavigate("/")}><Avatar /></Link>
   )
 }
