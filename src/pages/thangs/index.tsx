@@ -35,7 +35,6 @@ export default function Now() {
 }
 
 function FilteredThangsList({ group }: { group: (typeof allThangs)[number]['type'] }) {
-
   const filteredThangs = useMemo(() => {
     return allThangs.filter(x => x.type === group)
   }, [group])
@@ -44,10 +43,13 @@ function FilteredThangsList({ group }: { group: (typeof allThangs)[number]['type
     <div className={"grid grid-cols-3 gap-4"}>
       {filteredThangs.map(thang => {
         return (
-          <Link to={`/thangs/${thang.slug}`} className={"bg-white bg-opacity-20 rounded-lg shadow hover:shadow-xl hover:scale-105 cursor-pointer"}>
-            <div className={"border border-red-500 h-40"} style={`
+          <Link to={`/thangs/${thang.slug}`} className={"transition bg-white bg-opacity-20 rounded-lg shadow hover:shadow-xl hover:scale-105 cursor-pointer"}>
+            <div className={"h-40 rounded-t-lg"} style={`
               view-transition-name: image-${thang.slug};
-              `} ></div>
+              background-image: url(${thang.img});
+              background-size: cover;
+              background-position: center;
+            `} ></div>
             <div className={"p-2"}>
               <h2 style={`view-transition-name: link-h-${thang.slug}`} className={"text-md font-bold w-fit"}>{thang.item}</h2>
               <p>{thang.type}</p>
