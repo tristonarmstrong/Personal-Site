@@ -15,7 +15,7 @@ export default function Home() {
           <a className="hover:scale-90" href="https://x.com/triston_armstr" rel='noopener' target="_blank">
             <XIcon />
           </a>
-          <a className="hover:scale-90" href="https://www.linkedin.com/in/%F0%9F%87%B9%F0%9F%87%AD-triston-armstrong-7248b229b/" rel='noopener' target="_blank">
+          <a className="hover:scale-90" href="www.linkedin.com/in/triston-armstrong-7248b229b" rel='noopener' target="_blank">
             <LinkedinIcon />
           </a>
         </ul>
