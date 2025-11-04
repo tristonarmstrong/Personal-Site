@@ -1,0 +1,61 @@
+import { allThangs } from "content-collections"
+import { useMemo } from "kiru"
+import { Link } from "kiru/router"
+
+export default function Now() {
+  allThangs.forEach(x => { console.log(x.slug) })
+  return (
+    <main className="text-sm mt-10 flex flex-col gap-6">
+      <h1 className={"text-2xl"}>Heres some things I like and use</h1>
+
+      <h2 className={"text-xl font-bold"}>Tech</h2>
+      <FilteredThangsList group={"Tech"} />
+      <br />
+      <h2 className={"text-xl font-bold"}>Kitchen2</h2>
+      <FilteredThangsList group={"Kitchen"} />
+      <br />
+      <h2 className={"text-xl font-bold"}>Day</h2>
+      <FilteredThangsList group={"Day"} />
+      <br />
+      <h2 className={"text-xl font-bold"}>Furniture</h2>
+      <FilteredThangsList group={"Furniture"} />
+      <br />
+      <h2 className={"text-xl font-bold"}>Travel</h2>
+      <div className={"text-gray-500"}>who travels these days?</div>
+      {/*      <FilteredThangsList group={"Travel"} />*/}
+      <br />
+      <h2 className={"text-xl font-bold"}>Languages</h2>
+      <FilteredThangsList group={"Lang"} />
+
+      <br />
+      <i>Idea for this page completely stolen from <a className={"text-yellow-500 underline"} href={"https://emnudge.dev"} target={"_blank"} rel={"noopener"}>Emnudge.dev</a></i>
+      <br />
+    </main>
+  )
+}
+
+function FilteredThangsList({ group }: { group: (typeof allThangs)[number]['type'] }) {
+
+  const filteredThangs = useMemo(() => {
+    return allThangs.filter(x => x.type === group)
+  }, [group])
+
+  return (
+    <div className={"grid grid-cols-3 gap-4"}>
+      {filteredThangs.map(thang => {
+        return (
+          <Link to={`/thangs/${thang.slug}`} className={"bg-white bg-opacity-20 rounded-lg shadow hover:shadow-xl hover:scale-105 cursor-pointer"}>
+            <div className={"border border-red-500 h-40"} style={`
+              view-transition-name: image-${thang.slug};
+              `} ></div>
+            <div className={"p-2"}>
+              <h2 style={`view-transition-name: link-h-${thang.slug}`} className={"text-md font-bold w-fit"}>{thang.item}</h2>
+              <p>{thang.type}</p>
+            </div>
+          </Link>
+        )
+      })}
+    </div>
+
+  )
+}
