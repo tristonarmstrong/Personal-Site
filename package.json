@@ -17,12 +17,12 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite",
-		"build": "bun run cleanup-content-cache && tsc && vite build",
-		"cleanup-content-cache": "rm -rf .content-collections/cache",
+		"build": "content-collections build && tsc && vite build",
 		"preview": "vite preview"
 	},
 	"type": "module",
 	"dependencies": {
+		"@content-collections/cli": "^0.1.7",
 		"kiru": "^0.50.7"
 	}
 }
