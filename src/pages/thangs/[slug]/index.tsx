@@ -19,8 +19,7 @@ export default function Page() {
     <article className={"blogpost markdown-body"}>
       <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />
       <h1 style={`view-transition-name: link-h-${thang.slug}`} className="text-2xl font-bold w-fit">{thang.item}</h1>
-
-      <div className={"h-100 rounded-lg"} style={`
+      <div className={"h-100 rounded-lg mb-8"} style={`
         view-transition-name: image-${thang.slug};
         background-image: url(${thang.img});
         background-repeat: no-repeat;

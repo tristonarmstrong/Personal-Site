@@ -43,7 +43,7 @@ function FilteredThangsList({ group }: { group: (typeof allThangs)[number]['type
     <div className={"grid grid-cols-3 gap-4"}>
       {filteredThangs.map(thang => {
         return (
-          <Link to={`/thangs/${thang.slug}`} className={"transition bg-white bg-opacity-20 rounded-lg shadow hover:shadow-xl hover:scale-105 cursor-pointer"}>
+          <Link to={`/thangs/${thang.slug}`} className={"transition dark:bg-[#fff1] bg-gray-100 bg-opacity-20 rounded-lg shadow hover:shadow-xl hover:scale-105 cursor-pointer"}>
             <div className={"h-40 rounded-t-lg"} style={`
               view-transition-name: image-${thang.slug};
               background-image: url(${thang.img});
