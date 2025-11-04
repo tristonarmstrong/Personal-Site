@@ -46,6 +46,27 @@ const projects = defineCollection({
     };
   },
 });
+
+
+const thangs = defineCollection({
+  name: "thangs",
+  directory: "content/thangs",
+  include: "*.mdx",
+  schema: z.object({
+    item: z.string("You must provide a item name"),
+    img: z.string("You must provide a img link"),
+    type: z.enum(["Tech", "Day", "Furniture", "Travel", "Kitchen", "Lang"])
+  }),
+  transform: async (document, context) => {
+    const mdx = await compileMDX(context, document);
+    return {
+      ...document,
+      slug: document.item.toLowerCase().replace(/\s|:|&/g, '-').replace(/-/g, ''),
+      mdx,
+    };
+  },
+});
+
 export default defineConfig({
-  collections: [posts, projects],
+  collections: [posts, projects, thangs],
 });
