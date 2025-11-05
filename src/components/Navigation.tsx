@@ -4,10 +4,11 @@ import { AutoHiddenAvatar } from "./AutoHiddenAvatar"
 import { Avatar } from "./Avatar"
 import { Mail } from "./icons/Mail"
 import { mobileNavOpen, VerticalNavBar } from "./VerticalNavBar"
+import { windowSize } from "../pages/layout"
 
 
 export function Navigation() {
-  if (window.innerWidth < 500) return <MobileNavigation />
+  if (windowSize.value < 500) return <MobileNavigation />
   return <DesktopNavigation />
 }
 

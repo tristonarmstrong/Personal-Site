@@ -1,5 +1,15 @@
 import { allThangs } from "content-collections"
 import { Navigation } from "../components/Navigation"
+import { signal } from "kiru"
+
+export const windowSize = signal(0)
+if ("window" in globalThis) {
+  window.__kiru.on("mount", () => {
+    window.addEventListener("resize", (_) => {
+      windowSize.value = window.innerWidth
+    })
+  })
+}
 
 export default function RootLayout({ children }: { children: JSX.Children }) {
   function _generateViewTransitionNamesFromContent() {
