@@ -7,6 +7,7 @@ export default function Now() {
   return (
     <main className="text-sm mt-10 flex flex-col gap-6">
       <h1 className={"text-2xl"}>Heres some things I like and use</h1>
+      <i className={'text-yellow-500 underline opacity-50'}>NOTE: Im still working on filling these in</i>
 
       <h2 className={"text-xl font-bold"}>Tech</h2>
       <FilteredThangsList group={"Tech"} />
@@ -40,7 +41,7 @@ function FilteredThangsList({ group }: { group: (typeof allThangs)[number]['type
   }, [group])
 
   return (
-    <div className={"grid grid-cols-3 gap-4"}>
+    <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"}>
       {filteredThangs.map(thang => {
         return (
           <Link to={`/thangs/${thang.slug}`} className={"transition dark:bg-[#fff1] bg-gray-100 bg-opacity-20 rounded-lg shadow hover:shadow-xl hover:scale-105 cursor-pointer"}>
