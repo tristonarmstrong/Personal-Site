@@ -7,7 +7,8 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col gap-4">
-        <p>Software Developer with <span className={"yearthing"} title={"I started programming professionally in year 2020"}>{Math.abs(new Date().getFullYear() - 2020)} years</span> of experience, currently building internal applications for my employer by day, and building utility apps for myself by night!</p>
+        <p>Software Developer with <span className={"yearthing"} title={"I started programming professionally in year 2020"}>{Math.abs(new Date().getFullYear() - 2020)} years</span> of experience, father to 3, and husband to 1 (not in that order) with a passion for building utility apps for myself to make my dev day-to-day easier. I also greatly enjoy,
+          {' '}<a className="text-yellow-500 underline" href={"https://automatetheboringstuff.com/"} target="_blank" rel="no-opener">automating the boring stuff</a> when the opertunity presents itself.</p>
       </section>
 
     
