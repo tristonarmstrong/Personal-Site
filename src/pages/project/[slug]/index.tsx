@@ -3,7 +3,7 @@ import * as Kiru from "kiru";
 import * as _jsx_runtime from "kiru/jsx-runtime";
 import { jsx } from "kiru/jsx-runtime";
 
-import { useFileRouter } from "kiru/router"
+import { definePageConfig, useFileRouter } from "kiru/router"
 import { allProjects } from 'content-collections'
 
 export default function Page() {
@@ -35,3 +35,9 @@ function MDXContent({ code, ...props }: { code: string }) {
   const Component = useMDXComponent(code);
   return /* @__PURE__ */ jsx(Component, { ...props });
 }
+
+export const config = definePageConfig({
+  generateStaticParams: () => {
+    return allProjects.map(p => ({ slug: p.slug }))
+  }
+})
