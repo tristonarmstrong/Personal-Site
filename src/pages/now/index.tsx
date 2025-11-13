@@ -1,5 +1,5 @@
 import { allPosts, allProjects } from 'content-collections'
-import { useMemo } from "kiru"
+import { useId } from "kiru"
 import { Link } from "kiru/router"
 
 export default function Now() {
@@ -89,8 +89,8 @@ function Item({ label, href, transitionId }: { label: string, href: string, tran
 }
 
 function LinkBody({ label, transitionId, external = false }: { label: string, transitionId?: string, external?: boolean }) {
-  return useMemo(() => {
-    const linkLabelTransitionId = (!transitionId) ? String(Math.random() * 1000) : `link-h-${transitionId}`
+    const id = useId()
+    const linkLabelTransitionId = `link-h-${transitionId??id}`
 
     return (
       <li className={"flex w-full items-center gap-1"}>
@@ -104,5 +104,4 @@ function LinkBody({ label, transitionId, external = false }: { label: string, tr
         </span>
       </li>
     )
-  }, [label, transitionId])
 }
