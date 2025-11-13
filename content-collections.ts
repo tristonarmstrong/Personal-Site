@@ -22,7 +22,7 @@ const posts = defineCollection({
     });
     return {
       ...document,
-      slug: document.title.toLowerCase().replace(/\s|:/g, '-'),
+      slug: document.title.toLowerCase().replace(/\s/g, '-').replace(/'|"|:/, ''),
       mdx,
     };
   },
