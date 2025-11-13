@@ -2,7 +2,7 @@ import * as Kiru from "kiru";
 import * as _jsx_runtime from "kiru/jsx-runtime";
 import { jsx } from "kiru/jsx-runtime";
 
-import { useFileRouter } from "kiru/router"
+import { definePageConfig, useFileRouter } from "kiru/router"
 import { allPosts } from 'content-collections'
 import { Avatar } from "../../../components/Avatar";
 
@@ -42,3 +42,9 @@ function MDXContent({ code, ...props }: { code: string }) {
   const Component = useMDXComponent(code);
   return /* @__PURE__ */ jsx(Component, { ...props });
 }
+
+export const config = definePageConfig({
+  generateStaticParams: () => {
+    return allPosts.map(p => ({ slug: p.slug }))
+  }
+})
