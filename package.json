@@ -23,6 +23,6 @@
 	"type": "module",
 	"dependencies": {
 		"@content-collections/cli": "^0.1.7",
-		"kiru": "^0.51.9"
+		"kiru": "^0.52.2"
 	}
 }
