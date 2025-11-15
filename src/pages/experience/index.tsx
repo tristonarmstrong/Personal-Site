@@ -9,7 +9,7 @@ export default function Experience() {
         <Work href="" comp="Makers Ladder LLC" time="2020" />
       </ul>
       <div>
-        <h2 className={"font-bold"}>Freelance Work</h2>
+        <h2 className={"font-bold text-gray-400"}>Freelance Work</h2>
         <p className={"text-gray-400"}>My experience freelancing was cool! 10/10 would do again.</p>
       </div>
       <ul>
@@ -21,7 +21,7 @@ export default function Experience() {
 
 function Work({ comp, time, href }: { comp: string, time: string, href: string }) {
   return (
-    <a href={href} target={"_blank"} className={href ? "text-gray-400 hover:text-yellow-500" : "text-gray-700"}>
+    <a href={href} target={"_blank"} className={`${href ? "text-gray-400" : "text-gray-700"}`}>
       <li className={"flex w-full items-center gap-1"}>
         <span className={""}>{comp}</span>
         <span className={"h-full border border-dashed flex-1 border-gray-400"}></span>
