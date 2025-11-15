@@ -9,5 +9,6 @@ mount(<FileRouter
     transition: true
   }}
 />,
+  // biome-ignore lint/style/noNonNullAssertion: this is needed
   document.getElementById("app")!
 )
