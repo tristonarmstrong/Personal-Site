@@ -67,7 +67,8 @@ a {
   @media (prefers-color-scheme: light){
     color: var(--color-gray-500);
   }
-  :hover {
+
+  &:hover {
     color: var(--color-yellow-500);
   }
 }
