@@ -38,7 +38,7 @@ export default function Now() {
         Idea for this page completely stolen from{" "}
         <a
           className={"text-yellow-500 underline"}
-          href={"https://emnudge.dev"}
+          href={"https://favorite.emnudge.dev/"}
           target={"_blank"}
           rel={"noopener"}
         >
