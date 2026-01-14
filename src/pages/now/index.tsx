@@ -45,7 +45,7 @@ export default function Now() {
           <div className={"mx-4"}>
             <Item label="BinCode" href="https://github.com/asadbek064/bincode/pull/1" />
             <Item label="Dissent" href="https://github.com/diamondburned/dissent/pull/371" />
-            <Item label="Kiru" href="https://github.com/CrimsonChi/kiru" />
+            <Item label="Kiru" href="https://github.com/kirujs/kiru" />
             <Item label="ChaiLauncher (Window Control)" href="https://github.com/Chai-Foundation/ChaiLauncher/pull/13" />
             <Item label="ChaiLauncher (Mod Loader)" href="https://github.com/Chai-Foundation/ChaiLauncher/pull/18" />
             <Item label="Chai-MCVM" href="https://github.com/tristanpoland/Chai-MCVM/pull/1" />
