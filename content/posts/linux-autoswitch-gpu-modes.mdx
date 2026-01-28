@@ -30,100 +30,75 @@ You can install these through the GNOME extensions website or using the GNOME Tw
 
 ## Step 2: Install supergfxctl
 
-The `supergfxctl` utility allows you to switch between integrated and discrete graphics modes. Install it via your package manager. For example, on Debian-based systems, use:
+The `supergfxctl` utility allows you to switch between integrated and discrete graphics modes. Install it via your package manager, if there is one, otherwise you need to build from source @ [asus-linux](https://gitlab.com/asus-linux/supergfxctl) 
 
-```bash
-sudo apt install supergfxctl
-```
+## Step 3: The "Mode Switcher" Script
 
-## Step 3: Create the Dynamic Configuration Script
+We need a script that checks if a monitor is connected and then toggles your extensions and GPU mode.
 
-Create a script to automate the switch between modes based on connected displays. Open a terminal and create a new file:
-
-```bash
-vi ~/switch_gnome_mode.sh
-```
-
-Copy and paste the following script into the file:
+Create the file: `vi ~/scripts/toggle_modes.sh`
 
 ```bash
 #!/bin/bash
 
-# Function to switch graphics mode
-switch_graphics_mode() {
-    if [[ $1 == "on" ]]; then
-        supergfxctl -s discrete  # Switch to discrete graphics
-        echo "Switched to discrete graphics. Logging out..."
-    else
-        supergfxctl -s integrated  # Switch to integrated graphics
-        echo "Switched to integrated graphics. Logging out..."
-    fi
-    gnome-session-quit --logout --no-prompt  # Logout
-}
+# Configuration
+USER_NAME="your_username" # Change this!
+USER_ID=$(id -u $USER_NAME)
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$USER_ID/bus"
 
-# Check for connected monitors
-if xrandr | grep "HDMI-1 connected"; then
-    # Enable extensions for desktop mode
-    gnome-extensions enable dash-to-panel@j bảng-dashtop-panel.
-    gnome-extensions enable applications-menu@gnome-shell-extensions.gcampax.github.com
+# Check if an external monitor is connected via sysfs (more reliable for udev)
+MONITOR_STATUS=$(cat /sys/class/drm/card0/*HDMI*/status 2>/dev/null || cat /sys/class/drm/card0/*DP*/status 2>/dev/null)
 
-    # Switch graphics mode
-    switch_graphics_mode "on"
+if [ "$MONITOR_STATUS" = "connected" ]; then
+    echo "Monitor detected: Switching to Desktop Mode"
+    
+    # Enable Desktop Extensions
+    gnome-extensions enable dash-to-panel@jderose9.github.com
+    gnome-extensions enable apps-menu@gnome-shell-extensions.gcampax.github.com
+    
+    # Switch to Discrete Graphics and Logout
+    supergfxctl -m Hybrid # Or 'Dedicated' if your hardware supports it
+    gnome-session-quit --logout --no-prompt
 else
-    # Disable extensions for laptop mode
-    gnome-extensions disable dash-to-panel@j bảng-dashtop-panel.
-    gnome-extensions disable applications-menu@gnome-shell-extensions.gcampax.github.com
-
-    # Switch graphics mode
-    switch_graphics_mode "off"
+    echo "No monitor: Switching to Laptop Mode"
+    
+    # Disable Desktop Extensions
+    gnome-extensions disable dash-to-panel@jderose9.github.com
+    gnome-extensions disable apps-menu@gnome-shell-extensions.gcampax.github.com
+    
+    # Switch to Integrated Graphics and Logout
+    supergfxctl -m Integrated
+    gnome-session-quit --logout --no-prompt
 fi
+
 ```
 
-### Make the Script Executable
+**Don't forget to make it executable:**
+`chmod +x ~/scripts/toggle_modes.sh`
 
-Run the following command to ensure your script can be executed:
+## Step 4: Triggering with udev
 
-```bash
-chmod +x ~/switch_gnome_mode.sh
+Now, we’ll tell the kernel to run this script whenever the "Direct Rendering Manager" (DRM) notices a change (i.e., a cable being plugged in).
+
+1. Create a new udev rule:
+`sudo vi /etc/udev/rules.d/99-monitor-hotplug.rules`
+2. Add this line:
+```text
+ACTION=="change", SUBSYSTEM=="drm", RUN+="/home/your_username/scripts/toggle_modes.sh"
 ```
 
-## Step 4: Automate the Script Execution
+3. Reload your rules:
+`sudo udevadm control --reload-rules`
 
-To make your setup responsive, you'll want to trigger the script when you connect or disconnect a monitor. Here’s how you can do it using ACPI.
+## Step 5: Handling the Logout
 
-### Create an ACPI Rule
+Since `supergfxctl` requires a logout to swap the graphics drivers effectively, the script includes a `gnome-session-quit` command.
 
-1. Navigate to the ACPI events directory:
-
-   ```bash
-   cd /etc/acpi/events/
-   ```
-
-2. Create a new file named `display-change`:
-
-   ```bash
-   sudo vi display-change
-   ```
-
-3. Add the following content to this file:
-
-   ```plaintext
-   event=video/brightness up
-   action=/path/to/your/switch_gnome_mode.sh
-   ```
-
-Remember to replace `/path/to/your` with the actual path where your script is located.
-
-### Restart the ACPI Daemon
-
-After configuring the ACPI rule, restart the daemon to apply the changes:
-
-```bash
-sudo systemctl restart acpid
-```
+* **Desktop Mode**: Activates a bottom-panel layout with a traditional app menu.
+* **Laptop Mode**: Reverts to the clean, gesture-heavy GNOME default.
 
 ## Conclusion
-
 By following these steps, you’ll have a dynamic GNOME environment that adapts automatically to your hardware setup. Now, when you connect an external monitor, your environment will seamlessly transition into a desktop mode, utilizing the right graphics settings and extensions tailored for your productivity needs.
 
 Whether you’re coding on the go or setting up a workstation at home, this configuration will help you streamline your workflow. If you have any questions or further customization ideas, feel free to leave a comment below! Happy computing!
