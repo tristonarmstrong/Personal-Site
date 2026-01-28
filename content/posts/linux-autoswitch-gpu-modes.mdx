@@ -1,0 +1,129 @@
+---
+title: "Linux Auto Switch Gpu Modes"
+summary: "This is primarily for asus linux laptops but im sure it can work for others with slight mods"
+date: 2026-01-28
+---
+
+# Dynamic GNOME Configurations: Switching Environments with External Monitors
+
+## Introduction
+
+In today’s fast-paced computing world, a seamless transition between laptop mode and desktop mode can dramatically enhance productivity. If you’re a GNOME user who often connects and disconnects an external monitor, you can configure your environment to automatically adjust to your needs. In this blog post, we’ll walk through the steps to set up GNOME with the right extensions and automations, allowing for dynamic adjustments based on your hardware.
+
+## Prerequisites
+
+Before diving in, ensure you have the following:
+
+- A system running GNOME
+- Access to install GNOME extensions
+- Basic understanding of scripts and terminal commands
+- The `supergfxctl` utility for managing graphics modes on hybrid systems
+
+## Step 1: Install Necessary Extensions
+
+To create a more desktop-friendly experience, consider the following extensions:
+
+1. **Dash to Panel**: Combines the top bar and application launcher into one integrated panel.
+2. **Applications Menu**: Adds a classic applications menu, similar to what's found in KDE.
+
+You can install these through the GNOME extensions website or using the GNOME Tweaks tool.
+
+## Step 2: Install supergfxctl
+
+The `supergfxctl` utility allows you to switch between integrated and discrete graphics modes. Install it via your package manager. For example, on Debian-based systems, use:
+
+```bash
+sudo apt install supergfxctl
+```
+
+## Step 3: Create the Dynamic Configuration Script
+
+Create a script to automate the switch between modes based on connected displays. Open a terminal and create a new file:
+
+```bash
+vi ~/switch_gnome_mode.sh
+```
+
+Copy and paste the following script into the file:
+
+```bash
+#!/bin/bash
+
+# Function to switch graphics mode
+switch_graphics_mode() {
+    if [[ $1 == "on" ]]; then
+        supergfxctl -s discrete  # Switch to discrete graphics
+        echo "Switched to discrete graphics. Logging out..."
+    else
+        supergfxctl -s integrated  # Switch to integrated graphics
+        echo "Switched to integrated graphics. Logging out..."
+    fi
+    gnome-session-quit --logout --no-prompt  # Logout
+}
+
+# Check for connected monitors
+if xrandr | grep "HDMI-1 connected"; then
+    # Enable extensions for desktop mode
+    gnome-extensions enable dash-to-panel@j bảng-dashtop-panel.
+    gnome-extensions enable applications-menu@gnome-shell-extensions.gcampax.github.com
+
+    # Switch graphics mode
+    switch_graphics_mode "on"
+else
+    # Disable extensions for laptop mode
+    gnome-extensions disable dash-to-panel@j bảng-dashtop-panel.
+    gnome-extensions disable applications-menu@gnome-shell-extensions.gcampax.github.com
+
+    # Switch graphics mode
+    switch_graphics_mode "off"
+fi
+```
+
+### Make the Script Executable
+
+Run the following command to ensure your script can be executed:
+
+```bash
+chmod +x ~/switch_gnome_mode.sh
+```
+
+## Step 4: Automate the Script Execution
+
+To make your setup responsive, you'll want to trigger the script when you connect or disconnect a monitor. Here’s how you can do it using ACPI.
+
+### Create an ACPI Rule
+
+1. Navigate to the ACPI events directory:
+
+   ```bash
+   cd /etc/acpi/events/
+   ```
+
+2. Create a new file named `display-change`:
+
+   ```bash
+   sudo vi display-change
+   ```
+
+3. Add the following content to this file:
+
+   ```plaintext
+   event=video/brightness up
+   action=/path/to/your/switch_gnome_mode.sh
+   ```
+
+Remember to replace `/path/to/your` with the actual path where your script is located.
+
+### Restart the ACPI Daemon
+
+After configuring the ACPI rule, restart the daemon to apply the changes:
+
+```bash
+sudo systemctl restart acpid
+```
+
+## Conclusion
+
+By following these steps, you’ll have a dynamic GNOME environment that adapts automatically to your hardware setup. Now, when you connect an external monitor, your environment will seamlessly transition into a desktop mode, utilizing the right graphics settings and extensions tailored for your productivity needs.
+
+Whether you’re coding on the go or setting up a workstation at home, this configuration will help you streamline your workflow. If you have any questions or further customization ideas, feel free to leave a comment below! Happy computing!
