@@ -1,0 +1,93 @@
+---
+title: "Auto Fetch Webapp Icons On Omarchy"
+summary: "The why and how I added some auto fetch logic when installing webapps"
+date: 2025-09-23
+---
+
+# Streamlining Web Apps: Automating Icon Discovery in Omarchy
+
+If you use Linux and love turning your favorite websites into standalone desktop applications, you've likely used some variation of a webapp installer. Recently, I’ve been contributing to **Omarchy**, and one friction point that always bugged me was the manual icon setup.
+
+In my latest [Pull Request (#1905)](https://github.com/basecamp/omarchy/pull/1905), I decided to fix that by introducing automatic icon discovery and some robust helper utilities.
+
+### The Problem: The "Blank Icon" Syndrome
+
+Previously, if you didn't provide a direct path or URL for an icon, the installer would often leave you with a generic placeholder. In a minimalist setup, having a "broken" icon on your dock or app launcher is a dealbreaker. I wanted a solution where the script would "just find it", similar to how a browser grabs a high quality favicon when you save a bookmark.
+
+### The Solution: Under the Hood
+
+To make this work, I rewrote a chunk of the `bin/omarchy-webapp-install` script to include smart scraping and image processing. Here are the highlights of the code I added:
+
+#### 1. Smart URL & Origin Resolution
+
+Websites use relative paths for icons all the time (e.g., `/favicon.ico`). To handle this, I added helpers to normalize URLs and identify the "origin" so the script knows exactly where to look.
+
+```bash
+normalize_fetch_url() {
+  local url="$1"
+  [[ $url != http* ]] && url="https://$url"
+  echo "$url"
+}
+
+get_origin() {
+  echo "$1" | grep -oE '^https?://[^/]+'
+}
+
+```
+
+#### 2. Scraping HTML for High-Quality Icons
+
+Instead of just guessing, the script now actively reads the target page's HTML to find `apple-touch-icon` or standard `link rel="icon"` tags. I used some regex to pull these out and resolve them against the site's origin.
+
+```bash
+extract_icon_from_html() {
+  local html_content="$1"
+  local origin="$2"
+  
+  # Search for icon links and prioritize the first match
+  local icon_url=$(echo "$html_content" | \
+    grep -oEi '<link[^>]+rel=["'\''](apple-touch-icon|icon|shortcut icon)["'\''][^>]*>' | \
+    grep -oEi 'href=["'\''][^"'\'']+' | sed -E 's/href=["'\'']//i' | head -n 1)
+
+  if [[ -n "$icon_url" ]]; then
+    resolve_icon_url "$icon_url" "$origin"
+  fi
+}
+
+```
+
+#### 3. Automatic Conversion with ImageMagick
+
+Finding the icon is only half the battle. Websites often use `.ico` or `.svg` files, which Omarchy doesnt support. I implemented a `download_and_convert` function that uses ImageMagick to standardize everything to PNG.
+
+```bash
+download_and_convert() {
+  local url="$1"
+  local dest="$2"
+  local tmp_file="/tmp/omarchy_icon_download"
+
+  if curl -sL "$url" -o "$tmp_file"; then
+    # Convert to PNG, ensuring we grab the best quality frame from an ICO
+    if convert "$tmp_file[0]" "$dest" 2>/dev/null; then
+      rm -f "$tmp_file"
+      return 0
+    fi
+  fi
+  return 1
+}
+
+```
+
+### Why This Matters
+
+For me, minimalism is about reducing cognitive load. By automating the icon discovery:
+
+* **No more hunting for PNGs:** Just paste the URL and let the script do the work.
+* **Better Resolution:** The script specifically looks for `apple-touch-icon`, in some cases, which usually provides a higher resolution than a standard 16x16 favicon.
+* **Consistent UI:** Your app launcher stays clean, professional, and consistent.
+
+### Testing it Out
+
+I’ve tested this across multiple displays, from my 3440x1440 ultrawide to high-DPI laptop screens, ensuring the scaling and clarity remain sharp.
+
+If you’re using Omarchy, you can check out the full changes in the [pull request here](https://github.com/basecamp/omarchy/pull/1905). Feel free to grab the code and start auto fetching those icons!
