@@ -1,0 +1,134 @@
+---
+title: "Omarchy flatpak support"
+summary: "I go over why I added flatpak support and how"
+date: 2025-09-22
+---
+
+# Why & How I Added Flatpak Support to My Omarchy Setup
+
+If you’ve been following the **Omarchy** world, you know it’s beautifully opinionated. It’s built on the "Arch way"; lean, fast, and heavily reliant on the AUR. For a long time, I stayed within those lanes. But recently, I hit a wall that every Linux user eventually faces: a specific app that just works better as a Flatpak.
+
+For me, it was Microsoft Edge (I know, I know). I needed account syncing for work, and while the AUR version is great, the sync features were stuck in "coming soon" limbo land. The Flatpak version? It worked instantly.
+
+I realized that while Omarchy is perfect for purists, sometimes we just need stuff to *work* without fighting dependency hell. So, I decided to roll my own Flatpak integration for the Omarchy menu. I submitted it as [Issue #1881](https://github.com/basecamp/omarchy/issues/1881), and even though it won't become a "default" feature (because the team is against flatpaks), I wanted to share the scripts so anyone can add it.
+
+## The "Why": Reliability and Sandboxing
+
+The AUR is amazing, but it's maintained by the community. Flatpaks are often maintained by the actual authors (except in the case of Microslop). Plus, as Omarchy gets more popular, we're seeing more "non-tech" users jump on Arch. For them, a sandboxed Flatpak is a lot safer than blindly trusting a build script from a random person on the internet.
+
+## How to Set It Up
+
+If you want to add Flatpak management to your runner like I did, here’s the breakdown.
+
+### 1. The Tools
+
+First, make sure you have `flatpak` installed via the omarchy menu at `install > package > flatpak`. Then, we’re going to use `fzf` to make the search process look and feel like the rest of the system.
+
+### 2. The Mods
+To get this showing up in your Omarchy runner, you just need to tweak your `omarchy-menu` file. I added a "Flatpak" option to the `show_install_menu` and `show_remove_menu` cases.
+
+before updating the function, copy the file from the `~/.local/share/omarchy/bin` and place it in `~/.local/bin`
+
+`file: /omarchy-menu`
+```bash
+show_install_menu() {
+  case $(menu "...others \n Flatpak") in
+  ... others
+  *Flatpak*) terminal omarchy-flatpak-install ;;
+  esac
+}
+
+show_remove_menu() {
+  case $(menu "...others \n Flatpak") in
+  ...others 
+  *Flatpak*) terminal omarchy-flatpak-remove ;;
+  esac
+}
+```
+### 3. The Scripts
+
+I wrote two bash scripts to handle installing and removing apps. Drop these into `~/.local/bin` and run `chmod +x` on them.
+
+**To Install/Remove Apps:**
+This gives you a nice TUI with a preview window so you can actually see what the app does before you hit enter.
+
+`file: /omarchy-flatpak-remove`
+```bash
+#!/bin/bash
+
+# some flatpak app names are space seperated and thus we need to traverse until we find
+# the id of the flatpak which must contain a minimum of 2 dots
+extract_dotted() {
+    awk '{
+        for (i = 1; i <= NF; i++) {
+            if (gsub(/\./, "&", $i) >= 2) {
+                print $i
+            }
+        }
+    }'
+}
+
+fzf_args=(
+  --multi
+  --preview 'flatpak info $(echo {} | awk "{for (i = 1; i <= NF; i++) { if (gsub(/\\./, \"&\", \$i) >= 2) { print \$i; exit } }}")' # redudant reuse of extract_dotted func. Could abstract to util bin
+  --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select, F11: maximize'
+  --preview-label-pos='bottom'
+  --preview-window 'down:65%:wrap'
+  --bind 'alt-p:toggle-preview'
+  --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
+  --bind 'alt-k:preview-up,alt-j:preview-down'
+  --color 'pointer:red,marker:red'
+)
+
+pkg_names=$(flatpak list --app | fzf "${fzf_args[@]}")
+
+if [[ -n "$pkg_names" ]]; then
+  val=$(echo "$pkg_names" | extract_dotted)
+  echo "$pkg_names" | extract_dotted | xargs flatpak remove -y
+  omarchy-show-done
+fi
+```
+
+`file: /omarchy-flatpak-install`
+```bash
+#!/bin/bash
+
+fzf_args=(
+  --multi
+  --preview 'flatpak remote-info flathub {2}'
+  --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select, F11: maximize'
+  --preview-label-pos='bottom'
+  --preview-window 'down:65%:wrap'
+  --bind 'alt-p:toggle-preview'
+  --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
+  --bind 'alt-k:preview-up,alt-j:preview-down'
+  --color 'pointer:green,marker:green'
+)
+
+pkg_names=$(flatpak remote-ls | fzf "${fzf_args[@]}")
+
+if [[ -n "$pkg_names" ]]; then
+  echo "$pkg_names"
+  echo "$pkg_names" | awk '{print $2}'
+  # Convert newline-separated selections to space-separated for yay
+  echo "$pkg_names" | awk '{print $2}' | xargs flatpak install -y
+  omarchy-show-done
+fi
+```
+
+### 3. Hooking it into the Menu
+
+
+Lastly, make sure your Super+Alt+Space (or whatever your runner key is) points to your new custom menu in your Hyprland config:
+
+`file: ~/.config/hypr/bindings.conf`
+```conf
+...others
+unbind = SUPER ALT, SPACE
+bindd = SUPER ALT, SPACE, Omarchy menu, exec, ~/.local/bin/omarchy-menu
+
+```
+
+## Wrapping Up
+
+At the end of the day, Linux is about choice. Whether you’re an AUR purist or a Flatpak fan, Omarchy gives us the foundation to build exactly what we need.
