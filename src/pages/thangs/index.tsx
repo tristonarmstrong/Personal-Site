@@ -1,12 +1,8 @@
 import { allThangs } from "content-collections"
-import { useMemo } from "kiru"
 import { Link } from "kiru/router"
 import generateLowResImagePath from "../../utils/generateLowResImagePath"
 
-export default function Now() {
-  allThangs.forEach((x) => {
-    console.log(x.slug)
-  })
+export default function Thangs() {
   return (
     <main className="text-sm mt-10 flex flex-col gap-6">
       <h1 className={"text-2xl"}>Heres some things I like and use</h1>
@@ -55,9 +51,7 @@ function FilteredThangsList({
 }: {
   group: (typeof allThangs)[number]["type"]
 }) {
-  const filteredThangs = useMemo(() => {
-    return allThangs.filter((x) => x.type === group)
-  }, [group])
+  const filteredThangs = allThangs.filter((x) => x.type === group)
 
   return (
     <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"}>

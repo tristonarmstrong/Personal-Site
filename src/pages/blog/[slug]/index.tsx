@@ -9,7 +9,7 @@ import { Avatar } from "../../../components/Avatar";
 export default function Page() {
   const { state: { params } } = useFileRouter()
 
-  const postId = allPosts.findIndex(x => x.slug == params.slug)
+  const postId = allPosts.findIndex(x => x.slug == params.value.slug)
   const post = allPosts[postId]
   const nextPost = postId !== allPosts.length - 1 ? allPosts[postId + 1] : allPosts[0]
 

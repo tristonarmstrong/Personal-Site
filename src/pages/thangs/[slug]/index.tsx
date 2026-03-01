@@ -11,7 +11,7 @@ export default function Page() {
     state: { params },
   } = useFileRouter()
 
-  const thang = allThangs.find((x) => x.slug == params.slug)
+  const thang = allThangs.find((x) => x.slug == params.value.slug)
 
   if (!thang?.mdx) {
     return <div>Oops something went wrong rendering the page</div>
