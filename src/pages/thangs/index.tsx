@@ -62,6 +62,7 @@ function FilteredThangsList({
             className={
               "transition dark:bg-[#fff1] bg-gray-100 bg-opacity-20 rounded-lg shadow hover:shadow-xl hover:scale-105 cursor-pointer"
             }
+            transition
           >
             <div
               className={"h-40 rounded-t-lg"}

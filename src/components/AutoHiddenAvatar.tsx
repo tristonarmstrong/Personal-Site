@@ -1,13 +1,12 @@
-import { Link, /*useFileRouter */ } from "kiru/router"
+import { Link, useFileRouter } from "kiru/router"
 import { Avatar } from "./Avatar"
 
 export function AutoHiddenAvatar() {
-  // const { state } = useFileRouter()
+  const { state } = useFileRouter()
 
-  //TODO state pathname includes does not exist in new kiru
-  // if (state.pathname.includes('blog')) return <this-element-takes-up-space />
+  if (state.pathname.value.includes('blog')) return <this-element-takes-up-space />
 
   return (
-    <Link style={"view-transition-name: nav"} to="/" ><Avatar /></Link>
+    <Link style={"view-transition-name: nav"} to="/" transition><Avatar /></Link>
   )
 }
