@@ -20,7 +20,7 @@ export default function Experience() {
   )
 }
 
-function Work({ comp, time, href, focus=false }: { comp: string, time: string, href: string, focus: boolean }) {
+function Work({ comp, time, href, focus=false }: { comp: string, time: string, href: string, focus?: boolean }) {
   const unmutedLink = "text-gray-700", mutedLink = "text-gray-400"
   const isMutedLink = href ? unmutedLink : mutedLink
   const isFocused = focus ? "animate-pulse" : ""
