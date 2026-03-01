@@ -1,5 +1,5 @@
 import { allPosts, allProjects } from 'content-collections'
-import { useId } from "kiru"
+// import { useId } from "kiru"
 import { Link } from "kiru/router"
 
 export default function Now() {
@@ -93,7 +93,8 @@ function Item({ label, href, transitionId }: { label: string, href: string, tran
 }
 
 function LinkBody({ label, transitionId, external = false }: { label: string, transitionId?: string, external?: boolean }) {
-  const id = useId()
+  // TODO look into new kiru impl of useId
+  const id = Math.floor(Math.random()*100)
   const linkLabelTransitionId = `link-h-${transitionId ?? id}`
 
   return (
