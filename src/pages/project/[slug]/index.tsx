@@ -9,7 +9,7 @@ import { allProjects } from 'content-collections'
 export default function Page() {
   const { state: { params } } = useFileRouter()
 
-  const post = allProjects.find(x => x.slug == params.slug)
+  const post = allProjects.find(x => x.slug == params.value.slug)
 
   if (!post?.mdx) {
     return <div>Oops something went wrong rendering the page</div>

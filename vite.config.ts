@@ -5,17 +5,7 @@ import kiru from "vite-plugin-kiru"
 export default defineConfig({
   plugins: [
     contentCollections(),
-    // @ts-ignore
-    kiru({
-      loggingEnabled: true,
-      ssg: {
-        transition: true
-      },
-    })
-  ],
-  server: {
-    watch: {
-      usePolling: true
-    }
-  }
+    //@ts-expect-error
+    kiru({ devtools: true })
+  ]
 })

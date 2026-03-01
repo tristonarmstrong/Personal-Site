@@ -1,0 +1,104 @@
+---
+title: "Linux Auto Switch Gpu Modes"
+summary: "This is primarily for asus linux laptops but im sure it can work for others with slight mods"
+date: 2026-01-28
+---
+
+# Dynamic GNOME Configurations: Switching Environments with External Monitors
+
+## Introduction
+
+In today’s fast-paced computing world, a seamless transition between laptop mode and desktop mode can dramatically enhance productivity. If you’re a GNOME user who often connects and disconnects an external monitor, you can configure your environment to automatically adjust to your needs. In this blog post, we’ll walk through the steps to set up GNOME with the right extensions and automations, allowing for dynamic adjustments based on your hardware.
+
+## Prerequisites
+
+Before diving in, ensure you have the following:
+
+- A system running GNOME
+- Access to install GNOME extensions
+- Basic understanding of scripts and terminal commands
+- The `supergfxctl` utility for managing graphics modes on hybrid systems
+
+## Step 1: Install Necessary Extensions
+
+To create a more desktop-friendly experience, consider the following extensions:
+
+1. **Dash to Panel**: Combines the top bar and application launcher into one integrated panel.
+2. **Applications Menu**: Adds a classic applications menu, similar to what's found in KDE.
+
+You can install these through the GNOME extensions website or using the GNOME Tweaks tool.
+
+## Step 2: Install supergfxctl
+
+The `supergfxctl` utility allows you to switch between integrated and discrete graphics modes. Install it via your package manager, if there is one, otherwise you need to build from source @ [asus-linux](https://gitlab.com/asus-linux/supergfxctl) 
+
+## Step 3: The "Mode Switcher" Script
+
+We need a script that checks if a monitor is connected and then toggles your extensions and GPU mode.
+
+Create the file: `vi ~/scripts/toggle_modes.sh`
+
+```bash
+#!/bin/bash
+
+# Configuration
+USER_NAME="your_username" # Change this!
+USER_ID=$(id -u $USER_NAME)
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$USER_ID/bus"
+
+# Check if an external monitor is connected via sysfs (more reliable for udev)
+MONITOR_STATUS=$(cat /sys/class/drm/card0/*HDMI*/status 2>/dev/null || cat /sys/class/drm/card0/*DP*/status 2>/dev/null)
+
+if [ "$MONITOR_STATUS" = "connected" ]; then
+    echo "Monitor detected: Switching to Desktop Mode"
+    
+    # Enable Desktop Extensions
+    gnome-extensions enable dash-to-panel@jderose9.github.com
+    gnome-extensions enable apps-menu@gnome-shell-extensions.gcampax.github.com
+    
+    # Switch to Discrete Graphics and Logout
+    supergfxctl -m Hybrid # Or 'Dedicated' if your hardware supports it
+    gnome-session-quit --logout --no-prompt
+else
+    echo "No monitor: Switching to Laptop Mode"
+    
+    # Disable Desktop Extensions
+    gnome-extensions disable dash-to-panel@jderose9.github.com
+    gnome-extensions disable apps-menu@gnome-shell-extensions.gcampax.github.com
+    
+    # Switch to Integrated Graphics and Logout
+    supergfxctl -m Integrated
+    gnome-session-quit --logout --no-prompt
+fi
+
+```
+
+**Don't forget to make it executable:**
+`chmod +x ~/scripts/toggle_modes.sh`
+
+## Step 4: Triggering with udev
+
+Now, we’ll tell the kernel to run this script whenever the "Direct Rendering Manager" (DRM) notices a change (i.e., a cable being plugged in).
+
+1. Create a new udev rule:
+`sudo vi /etc/udev/rules.d/99-monitor-hotplug.rules`
+2. Add this line:
+```text
+ACTION=="change", SUBSYSTEM=="drm", RUN+="/home/your_username/scripts/toggle_modes.sh"
+```
+
+3. Reload your rules:
+`sudo udevadm control --reload-rules`
+
+## Step 5: Handling the Logout
+
+Since `supergfxctl` requires a logout to swap the graphics drivers effectively, the script includes a `gnome-session-quit` command.
+
+* **Desktop Mode**: Activates a bottom-panel layout with a traditional app menu.
+* **Laptop Mode**: Reverts to the clean, gesture-heavy GNOME default.
+
+## Conclusion
+By following these steps, you’ll have a dynamic GNOME environment that adapts automatically to your hardware setup. Now, when you connect an external monitor, your environment will seamlessly transition into a desktop mode, utilizing the right graphics settings and extensions tailored for your productivity needs.
+
+Whether you’re coding on the go or setting up a workstation at home, this configuration will help you streamline your workflow. If you have any questions or further customization ideas, feel free to leave a comment below! Happy computing!
