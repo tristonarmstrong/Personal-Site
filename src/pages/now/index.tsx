@@ -77,25 +77,25 @@ export default function Now() {
 
 
 function Item({ label, href, transitionId }: { label: string, href: string, transitionId?: string }) {
+  const ID = Math.floor(Math.random() * 10000)
+
   if (href.includes("http")) {
     return (
       <a href={href}>
-        <LinkBody {...{ label, transitionId }} external />
+        <LinkBody {...{ label, transitionId: transitionId ?? String(ID) }} external />
       </a>
     )
   }
 
-  return (
-    <Link to={href}>
-      <LinkBody {...{ label, transitionId }} />
+  return () => (
+    <Link to={href} transition>
+      <LinkBody {...{ label, transitionId: transitionId ?? String(ID) }} />
     </Link>
   )
 }
 
 function LinkBody({ label, transitionId, external = false }: { label: string, transitionId?: string, external?: boolean }) {
-  // TODO look into new kiru impl of useId
-  const id = Math.floor(Math.random()*100)
-  const linkLabelTransitionId = `link-h-${transitionId ?? id}`
+  const linkLabelTransitionId = `link-h-${transitionId}`
 
   return (
     <li className={"flex w-full items-center gap-1 transition"}>

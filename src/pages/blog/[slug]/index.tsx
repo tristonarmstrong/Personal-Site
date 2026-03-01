@@ -37,7 +37,7 @@ export default function Page() {
 
       <footer>
         <h3>Check out my next thang!</h3>
-        <Link to={`/blog/${nextPost.slug}`} className={"border border-dashed rounded-lg px-2 py-2 opacity-40 hover:opacity-70 cursor-pointer block transition"} style={"text-decoration: unset;"}>
+        <Link to={`/blog/${nextPost.slug}`} className={"border border-dashed rounded-lg px-2 py-2 opacity-40 hover:opacity-70 cursor-pointer block transition"} style={"text-decoration: unset;"} transition>
           <div className={"text-md font-bold text-white"}>{nextPost.title}</div>
           <div className={"text-sm"}>{nextPost.summary}</div>
         </Link>
