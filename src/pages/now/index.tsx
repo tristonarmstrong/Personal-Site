@@ -98,7 +98,7 @@ function Item({ label, href, transitionId }: { label: string, href: string, tran
 function LinkBody({ label, transitionId, external = false }: { label: string, transitionId?: string, external?: boolean }) {
   const linkLabelTransitionId = `link-h-${transitionId}`
 
-  return (
+  return () => (
     <li className={"flex w-full items-center gap-1 transition"}>
       <span className={"w-fit"} style={`view-transition-name: ${linkLabelTransitionId}`}>{label}</span>
       <span className={"h-full border border-dashed flex-1 border-gray-400"}></span>
