@@ -1,5 +1,4 @@
 import { allPosts, allProjects } from 'content-collections'
-// import { useId } from "kiru"
 import { Link } from "kiru/router"
 
 export default function Now() {
@@ -77,27 +76,29 @@ export default function Now() {
 
 
 function Item({ label, href, transitionId }: { label: string, href: string, transitionId?: string }) {
-  const ID = Math.floor(Math.random() * 10000)
+  const FALLBACK_ID = String(Math.floor(Math.random() * 10000))
 
-  if (href.includes("http")) {
+  return () => {
+    if (href.includes("http")) {
+      return (
+        <a href={href}>
+          <LinkBody {...{ label, transitionId: transitionId ?? FALLBACK_ID }} external />
+        </a>
+      )
+    }
+
     return (
-      <a href={href}>
-        <LinkBody {...{ label, transitionId: transitionId ?? String(ID) }} external />
-      </a>
+      <Link to={href} transition>
+        <LinkBody {...{ label, transitionId: transitionId ?? FALLBACK_ID }} />
+      </Link>
     )
   }
-
-  return () => (
-    <Link to={href} transition>
-      <LinkBody {...{ label, transitionId: transitionId ?? String(ID) }} />
-    </Link>
-  )
 }
 
 function LinkBody({ label, transitionId, external = false }: { label: string, transitionId?: string, external?: boolean }) {
   const linkLabelTransitionId = `link-h-${transitionId}`
 
-  return (
+  return () => (
     <li className={"flex w-full items-center gap-1 transition"}>
       <span className={"w-fit"} style={`view-transition-name: ${linkLabelTransitionId}`}>{label}</span>
       <span className={"h-full border border-dashed flex-1 border-gray-400"}></span>
