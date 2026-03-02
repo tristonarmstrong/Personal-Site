@@ -5,7 +5,6 @@ import kiru from "vite-plugin-kiru"
 export default defineConfig({
   plugins: [
     contentCollections(),
-    //@ts-expect-error
     kiru({ devtools: true })
   ]
 })
