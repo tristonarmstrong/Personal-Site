@@ -1,0 +1,76 @@
+---
+title: "Upgrading to Kiru v1: A New Reactive Paradigm"
+summary: "A look into the process of updating my personal site to Kiru v1, exploring the new reactive primitives, and adopting the new routing interface."
+date: 2026-03-02
+---
+
+Recently, I went through the process of upgrading this portfolio site to use the brand new **Kiru v1** (alongside `vite-plugin-kiru` v1). 
+While the update brought some much-needed simplifications to the setup, the star of the show for me was the shift to closure-based components and signals. 
+
+Here is a breakdown of what changed and what I had to do to migrate safely.
+
+## Revamped Devtools
+
+First up, bumping my dependencies from the `0.52.x` line to `^1.0.1` gave me immediate access to the revamped Kiru devtools plugin. It's been completely overhauled in this release—offering a dedicated **signals watcher** and a **profiler** directly out of the box! This means a lot more visibility into reactive state when debugging without needing extra browser extensions.
+
+## The New Path Parameters Interface
+
+One of the architectural changes under the hood in Kiru v1's routing is how path parameters are exposed in dynamic files (like my blog slugs `[slug]/index.tsx`). 
+
+In the pre-v1 days, `useFileRouter()`'s state would yield the parameters directly as a static object:
+
+```tsx
+// Pre-v1
+const { state: { params } } = useFileRouter()
+const post = allPosts.find(x => x.slug == params.slug)
+```
+
+In v1, to align with the new reactive paradigm, the `params` object is now fully reactive. Because it is a Signal, you access its underlying properties using `.value`. The fix was easy enough—I just had to drop in `.value`:
+
+```tsx
+// Kiru v1
+const { state: { params } } = useFileRouter()
+const post = allPosts.find(x => x.slug == params.value.slug)
+```
+
+I rolled this change out across my `projects`, `thangs`, and `blog` pages simultaneously. 
+
+## A Paradigm Shift: Signals and Closures
+
+The most massive change dropping in Kiru v1 is an entirely new reactive paradigm. Gone are the days of the React-like hooks API. The maintainers have wiped out `useState`, `useEffect`, and `useMemo`. 
+
+Instead, state and reactivity are exclusively built on [**signals**](https://kirujs.dev/docs/api/signal), **computed** values, and **effects**. While signals have always existed in Kiru, they are now the unwavering, primary focus of the framework. If you need local state in a component, that component now returns a **render function**. The component body essentially acts as a closure that runs exactly once, preserving the state variables without the need to recreate them on every render.
+
+Here's an example the maintainers provided to showcase how clean the new model is:
+
+```tsx
+const createTicker = () => {
+  const intervalId = setInterval(...)
+  return () => clearInterval(...)
+}
+
+const Counter = () => {
+  // State lives in a closure
+  const count = signal(0),
+    increment = () => count.value++
+
+  // Runs once, variables won't disappear!
+  const stopTicker = createTicker(count)
+
+  // Use the remaining lifecycle hooks
+  onCleanup(() => stopTicker()) 
+  
+  // Return the render function
+  return () => <button onclick={increment}>{count}</button>
+}
+```
+
+The only [hooks](https://kirujs.dev/docs/api/lifecycles) that survived the purge were `useContext`, `onMount`, `onBeforeMount`, and `onCleanup`. 
+
+This fundamental shift was visible in my codebase right away. For example, in my `src/pages/now/index.tsx` file, I had to update components to properly return a function when relying on this new closure-based rendering behavior. It initially threw me for a bit of a loop, but the performance and conceptual simplicity of separating the setup logic from the render logic is undeniable.
+
+## Wrapping Up
+
+Overall, the migration to Kiru v1 felt more like shedding weight than taking on a heavy upgrade burden. The removal of the React-like hooks API and transition to closures makes the codebase feel significantly cleaner. 
+
+If you are using Kiru and haven't upgraded yet: jump on it. The new reactivity paradigm alone is worth the 15 minutes it takes to migrate your interfaces. You can read more about the V1 changes in their [updated documentation](https://kirujs.dev/).
