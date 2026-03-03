@@ -11,7 +11,7 @@ Here is a breakdown of what changed and what I had to do to migrate safely.
 
 ## Revamped Devtools
 
-First up, bumping my dependencies from the `0.52.x` line to `^1.0.1` gave me immediate access to the revamped Kiru devtools plugin. It's been completely overhauled in this release—offering a dedicated **signals watcher** and a **profiler** directly out of the box! This means a lot more visibility into reactive state when debugging without needing extra browser extensions.
+First up, bumping my dependencies from the `0.52.x` line to `^1.0.1` gave me immediate access to the revamped Kiru devtools plugin. It's been completely overhauled in this release; Offering a dedicated **signals watcher** and a **profiler** directly out of the box! This means a lot more visibility into reactive state when debugging without needing extra browser extensions.
 
 ## The New Path Parameters Interface
 
@@ -25,7 +25,7 @@ const { state: { params } } = useFileRouter()
 const post = allPosts.find(x => x.slug == params.slug)
 ```
 
-In v1, to align with the new reactive paradigm, the `params` object is now fully reactive. Because it is a Signal, you access its underlying properties using `.value`. The fix was easy enough—I just had to drop in `.value`:
+In v1, to align with the new reactive paradigm, the `params` object is now fully reactive. Because it is a Signal, you access its underlying properties using `.value`. The fix was easy enough; I just had to drop in `.value`:
 
 ```tsx
 // Kiru v1
