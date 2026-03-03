@@ -1,13 +1,5 @@
 @import "tailwindcss";
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -15,9 +7,6 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
-    @media (prefers-color-scheme: light){
-      border-color: var(--color-gray-500, currentColor);
-    }
   }
 }
 
@@ -44,11 +33,6 @@ img {
   min-height: 100vh;
   font-family: var(--font-sans);
   line-height: 1.5;
-  @media (prefers-color-scheme: light){
-    color-scheme: light;
-    background-color: var(--color-gray-200);
-    color: var(--color-gray-700);
-  }
 }
 
 footer {
@@ -57,16 +41,10 @@ footer {
 
 p {
   color: var(--color-gray-300);
-  @media (prefers-color-scheme: light){
-    color: var(--color-gray-600);
-  }
 }
 
 a {
   color: var(--color-gray-400);
-  @media (prefers-color-scheme: light){
-    color: var(--color-gray-500);
-  }
 
   &:hover {
     color: var(--color-yellow-500);
@@ -77,9 +55,6 @@ a {
 h3 {
   color: var(--color-yellow-600);
   font-weight: 600;
-  @media (prefers-color-scheme: light){
-    color: var(--color-yellow-500);
-  }
 }
 
 .yearthing {
@@ -98,9 +73,6 @@ article {
   h6 {
     color: var(--color-yellow-600);
     margin-top: 1.5rem;
-    @media (prefers-color-scheme: light){
-      color: var(--color-yellow-500);
-    }
   }
 
   h1,
@@ -178,9 +150,6 @@ article {
     p {
       margin-bottom: 0;
       color: var(--color-gray-600);
-      @media (prefers-color-scheme: light){
-        color: var(--color-gray-400);
-      }
     }
   }
 

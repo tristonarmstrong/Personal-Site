@@ -19,7 +19,7 @@ One of the architectural changes under the hood in Kiru v1's routing is how path
 
 In the pre-v1 days, `useFileRouter()`'s state would yield the parameters directly as a static object:
 
-```tsx
+```ts
 // Pre-v1
 const { state: { params } } = useFileRouter()
 const post = allPosts.find(x => x.slug == params.slug)
@@ -27,7 +27,7 @@ const post = allPosts.find(x => x.slug == params.slug)
 
 In v1, to align with the new reactive paradigm, the `params` object is now fully reactive. Because it is a Signal, you access its underlying properties using `.value`. The fix was easy enough; I just had to drop in `.value`:
 
-```tsx
+```ts
 // Kiru v1
 const { state: { params } } = useFileRouter()
 const post = allPosts.find(x => x.slug == params.value.slug)
@@ -37,13 +37,13 @@ I rolled this change out across my `projects`, `thangs`, and `blog` pages simult
 
 ## A Paradigm Shift: Signals and Closures
 
-The most massive change dropping in Kiru v1 is an entirely new reactive paradigm. Gone are the days of the React-like hooks API. The maintainers have wiped out `useState`, `useEffect`, and `useMemo`. 
+The most massive change dropping in Kiru v1 is an entirely new reactive paradigm. Gone are the days of the React-like hooks API. The maintainers have wiped out `useState`, `useEffect`, `useMemo`, `useCallback`, and more! 
 
 Instead, state and reactivity are exclusively built on [**signals**](https://kirujs.dev/docs/api/signal), **computed** values, and **effects**. While signals have always existed in Kiru, they are now the unwavering, primary focus of the framework. If you need local state in a component, that component now returns a **render function**. The component body essentially acts as a closure that runs exactly once, preserving the state variables without the need to recreate them on every render.
 
 Here's an example the maintainers provided to showcase how clean the new model is:
 
-```tsx
+```ts
 const createTicker = () => {
   const intervalId = setInterval(...)
   return () => clearInterval(...)
