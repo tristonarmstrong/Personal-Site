@@ -2,7 +2,11 @@ import { allPosts, allProjects } from 'content-collections'
 import { Link } from "kiru/router"
 
 export default function Now() {
-  return (
+  const allWebProjects = allProjects.filter(x => x.type === 'Web')
+  const allToolProjects = allProjects.filter(x => x.type === 'Tool')
+  const allPostsRearranged = allPosts.sort((a, b) => b.date.getTime() - a.date.getTime())
+
+  return () => (
     <main className="text-sm mt-10 flex flex-col gap-6">
       <h1 className={"text-2xl"}>What am I up to?</h1>
       <p>
@@ -17,20 +21,16 @@ export default function Now() {
         </div>
         <span className={"font-bold text-gray-400"}>Web</span>
         <div className={"mx-4"}>
-          {allProjects.filter(x => x.type === 'Web').map(x => {
-            return (
-              <Item label={x.title} href={`/project/${x.slug}`} transitionId={x.slug} />
-            )
-          })}
+          {allWebProjects.map(x =>
+            <Item label={x.title} href={`/project/${x.slug}`} transitionId={x.slug} />
+          )}
         </div>
 
         <span className={"font-bold text-gray-400"}>Tool</span>
         <div className={"mx-4"}>
-          {allProjects.filter(x => x.type === 'Tool').map(x => {
-            return (
-              <Item label={x.title} href={`/project/${x.slug}`} transitionId={x.slug} />
-            )
-          })}
+          {allToolProjects.map(x =>
+            <Item label={x.title} href={`/project/${x.slug}`} transitionId={x.slug} />
+          )}
         </div>
       </div>
 
@@ -65,7 +65,7 @@ export default function Now() {
           <p>Sometimes I have knowledge I find worth sharing, and thus I write up a little something something from time to time</p>
         </div>
         <ul className={"mx-4"}>
-          {allPosts.map(x => (
+          {allPostsRearranged.map(x => (
             <Item label={x.title} href={`/blog/${x.slug}`} transitionId={`${x.slug}`} />
           ))}
         </ul>
