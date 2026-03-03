@@ -3,12 +3,11 @@ import { Mail } from "../components/icons/Mail"
 import { Navigation } from "../components/Navigation"
 import { signal } from "kiru"
 
-export const windowSize = signal(0)
+
+export const windowSize = signal(window.innerWidth)
 if ("window" in globalThis) {
-  window.__kiru.on("mount", () => {
-    window.addEventListener("resize", (_) => {
-      windowSize.value = window.innerWidth
-    })
+  window.addEventListener("resize", (_) => {
+    windowSize.value = window.innerWidth
   })
 }
 
