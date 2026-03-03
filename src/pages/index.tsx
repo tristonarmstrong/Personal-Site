@@ -12,7 +12,7 @@ export default function Home() {
       </section>
 
 
-      <section className="flex flex-col gap-4 dark:bg-[#fff2] rounded-lg p-2 dark:opacity-50 border border-dashed border-[#0003] dark:border-[#fff3]">
+      <section className="flex flex-col gap-4 bg-[#fff2] rounded-lg p-2 opacity-50 border border-dashed border-[#fff3]">
         <small style={"color: var(--color-gray-400);"}>This is a "living site". I push half-baked chunks of UI to showcase its development in realtime, just... cause.. i find it interesting</small>
       </section>
     </main>
