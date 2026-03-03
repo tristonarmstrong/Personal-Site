@@ -6,7 +6,7 @@
       "name": "Triston Portfolio",
       "dependencies": {
         "@content-collections/cli": "^0.1.7",
-        "kiru": "^1.0.1",
+        "kiru": "^1.1.2",
       },
       "devDependencies": {
         "@biomejs/biome": "2.2.6",
@@ -20,7 +20,7 @@
         "tailwindcss": "^4.1.14",
         "typescript": "^5.9.3",
         "vite": "^7.3.1",
-        "vite-plugin-kiru": "^1.0.0",
+        "vite-plugin-kiru": "^1.1.0",
         "zod": "^4.1.12",
       },
     },
@@ -386,7 +386,7 @@
 
     "kind-of": ["kind-of@6.0.3", "", {}, "sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw=="],
 
-    "kiru": ["kiru@1.0.1", "", {}, "sha512-O2RrsmBI3dNnfrfKYd81/QTvsOa583f2DYyP73UcXgA4YgqgAcedP7tYAVErcVtK5ZVrNn7bdwakrPt4r+RT3g=="],
+    "kiru": ["kiru@1.1.2", "", {}, "sha512-GS9RV3Y+gGcXl9LFpMbysUaTjiKH3PuPaj+CcT2L2hKQNM2ZQdupvnNVpuW+2CvycKxzMCX2WCpZBRSPe3YWKw=="],
 
     "lightningcss": ["lightningcss@1.31.1", "", { "dependencies": { "detect-libc": "^2.0.3" }, "optionalDependencies": { "lightningcss-android-arm64": "1.31.1", "lightningcss-darwin-arm64": "1.31.1", "lightningcss-darwin-x64": "1.31.1", "lightningcss-freebsd-x64": "1.31.1", "lightningcss-linux-arm-gnueabihf": "1.31.1", "lightningcss-linux-arm64-gnu": "1.31.1", "lightningcss-linux-arm64-musl": "1.31.1", "lightningcss-linux-x64-gnu": "1.31.1", "lightningcss-linux-x64-musl": "1.31.1", "lightningcss-win32-arm64-msvc": "1.31.1", "lightningcss-win32-x64-msvc": "1.31.1" } }, "sha512-l51N2r93WmGUye3WuFoN5k10zyvrVs0qfKBhyC5ogUQ6Ew6JUSswh78mbSO+IU3nTWsyOArqPCcShdQSadghBQ=="],
 
@@ -630,7 +630,7 @@
 
     "vite": ["vite@7.3.1", "", { "dependencies": { "esbuild": "^0.27.0", "fdir": "^6.5.0", "picomatch": "^4.0.3", "postcss": "^8.5.6", "rollup": "^4.43.0", "tinyglobby": "^0.2.15" }, "optionalDependencies": { "fsevents": "~2.3.3" }, "peerDependencies": { "@types/node": "^20.19.0 || >=22.12.0", "jiti": ">=1.21.0", "less": "^4.0.0", "lightningcss": "^1.21.0", "sass": "^1.70.0", "sass-embedded": "^1.70.0", "stylus": ">=0.54.8", "sugarss": "^5.0.0", "terser": "^5.16.0", "tsx": "^4.8.1", "yaml": "^2.4.2" }, "optionalPeers": ["@types/node", "jiti", "less", "lightningcss", "sass", "sass-embedded", "stylus", "sugarss", "terser", "tsx", "yaml"], "bin": { "vite": "bin/vite.js" } }, "sha512-w+N7Hifpc3gRjZ63vYBXA56dvvRlNWRczTdmCBBa+CotUzAPf5b7YMdMR/8CQoeYE5LX3W4wj6RYTgonm1b9DA=="],
 
-    "vite-plugin-kiru": ["vite-plugin-kiru@1.0.0", "", { "dependencies": { "magic-string": "0.30.21", "mime": "4.1.0", "tinyglobby": "0.2.15", "vite": "7.3.1" }, "peerDependencies": { "kiru": ">=1.0.1" } }, "sha512-tr6aP4882gmf2WUvupF9/Ya9rJFQhLh3Rt+ioZOBYKN8wpYW9HG62o4rilvca9azpV1bqYL1b0x2NqQ6BicJlg=="],
+    "vite-plugin-kiru": ["vite-plugin-kiru@1.1.0", "", { "dependencies": { "magic-string": "0.30.21", "mime": "4.1.0", "tinyglobby": "0.2.15", "vite": "7.3.1" }, "peerDependencies": { "kiru": ">=1.1.0" } }, "sha512-b73Dy8GFXVp0SuzoPthfR5kLujq587werVLGRmcWczDd6J5rTOatIg1rPo+DXAaRXYRQ2Uytxm8tAEveyhraoQ=="],
 
     "yaml": ["yaml@2.8.2", "", { "bin": { "yaml": "bin.mjs" } }, "sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A=="],
 

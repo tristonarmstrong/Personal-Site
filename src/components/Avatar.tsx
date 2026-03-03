@@ -1,8 +1,26 @@
-export function Avatar() {
-  return (
-    <div
-      style={`view-transition-name: avatar; background-image: url(/avatar.webp)`}
-      className="w-10 h-10 rounded-full bg-center bg-cover">
-    </div>
-  )
+
+export function Avatar({ size }: { size?: 'sm' | 'lg' }) {
+  let lg = 'w-20 h-20'
+  let sm = 'w-10 h-10'
+  let sizing = '';
+  switch (size) {
+    case "sm":
+      sizing = sm
+      break;
+    case "lg":
+      sizing = lg
+      break;
+    default:
+      sizing = sm
+      break;
+  }
+
+  return () => {
+    return (
+      <div
+        style={`view-transition-name: avatar; background-image: url(/avatar.webp)`}
+        className={`${sizing} rounded-full bg-center bg-cover`}>
+      </div>
+    )
+  }
 }

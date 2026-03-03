@@ -5,6 +5,7 @@ import { jsx } from "kiru/jsx-runtime";
 import { definePageConfig, Link, useFileRouter } from "kiru/router"
 import { allPosts } from 'content-collections'
 import { Avatar } from "../../../components/Avatar";
+// import { Avatar } from "../../../components/Avatar";
 
 export default function Page() {
   const { state: { params } } = useFileRouter()
@@ -20,14 +21,13 @@ export default function Page() {
   return (
     <article className={"blogpost markdown-body"}>
       <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />
-      <header>
-        <h1 style={`view-transition-name: link-h-${params.value.slug}`} className="text-2xl font-bold">{post.title}</h1>
-        <div className="flex gap-2">
-          <Avatar />
-          <div className="mb-4">
-            Triston Armstrong
-            <p className="text-gray-400 text-sm">{post.date.toDateString()}</p>
-          </div>
+      <header className={"my-5 flex items-start gap-4"}>
+        <span className={"mt-8"}>
+          <Avatar size='lg' />
+        </span>
+        <div className={'flex flex-col items-start justify-center'}>
+          <h1 style={`view-transition-name: link-h-${params.value.slug}; margin-bottom: 0;`} className="text-2xl font-bold">{post.title}</h1>
+          <span className="text-gray-500 text-sm">{post.date.toDateString()}</span>
         </div>
       </header>
 
