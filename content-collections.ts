@@ -85,39 +85,45 @@ function customShikiThemeDark() {
     name: 'deepin-os-soft',
     type: 'dark',
     colors: {
-      'editor.background': '#0d0d0d', // Slightly off-black to reduce contrast
-      'editor.foreground': '#00a300', // Softer Green
+      'editor.background': '#0d0d0d', // Site Charcoal
+      'editor.foreground': '#586e75', // Muted Slate for punctuation
     },
     tokenColors: [
       {
-        // "const", "return", "==", "=>"
-        scope: ['keyword', 'storage.type', 'keyword.operator', 'punctuation.separator'],
-        settings: { foreground: '#b34d82' } // Softer Magenta (less neon)
+        // KEYWORDS (const, return, import)
+        // Your primary Gold
+        scope: ['keyword', 'storage.type', 'keyword.operator'],
+        settings: { foreground: '#b59a4d' }
       },
       {
-        // "post", "x" (Variable names and Arrow function parameters)
-        scope: ['variable.other', 'variable.parameter', 'meta.definition.variable'],
-        settings: { foreground: '#a32a2a' } // Softer Red
+        // REPLACING GREEN (Object keys, Tags, Properties)
+        // The Complementary Slate Blue (#4d68b5)
+        scope: ['meta.object-literal.key', 'support.type.property-name', 'entity.name.tag'],
+        settings: { foreground: '#4d68b5' }
       },
       {
-        // "{ state: { params } }" (Object keys stay green)
-        scope: ['meta.object-literal.key', 'support.type.property-name', 'variable.other.property'],
-        settings: { foreground: '#00a300' } // Softer Green
+        // FUNCTIONS (signal, mount, useEffect)
+        // A lighter "Champagne" version of your gold to keep the theme
+        scope: ['entity.name.function', 'support.function'],
+        settings: { foreground: '#d4af37' }
       },
       {
-        // "useFileRouter", "find"
-        scope: ['entity.name.function', 'support.function', 'meta.function-call'],
-        settings: { foreground: '#4a7bb5' } // Softer Muted Blue
-      },
-      {
-        // "// Kiru v1"
-        scope: ['comment', 'punctuation.definition.comment'],
-        settings: { foreground: '#586e75' } // Muted Slate Gray (easier to read)
-      },
-      {
-        // " 'my string' "
+        // STRINGS
+        // A desaturated Tan/Gold
         scope: ['string', 'punctuation.definition.string'],
-        settings: { foreground: '#b59a4d' } // Muted Gold
+        settings: { foreground: '#a3905d' }
+      },
+      {
+        // VARIABLES
+        // Soft Gray so they don't compete with the Gold/Blue
+        scope: ['variable', 'variable.other', 'variable.parameter'],
+        settings: { foreground: '#9ea3a0' }
+      },
+      {
+        // COMMENTS
+        // Darker Slate to recede into the charcoal background
+        scope: ['comment'],
+        settings: { foreground: '#465357', fontStyle: 'italic' }
       }
     ]
 
