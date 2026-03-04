@@ -86,7 +86,7 @@ function customShikiThemeDark() {
     type: 'dark',
     colors: {
       'editor.background': '#0d0d0d', // Site Charcoal
-      'editor.foreground': '#586e75', // Muted Slate for punctuation
+      'editor.foreground': '#83A5AE', // Muted Slate for punctuation
     },
     tokenColors: [
       {
@@ -123,7 +123,7 @@ function customShikiThemeDark() {
         // COMMENTS
         // Darker Slate to recede into the charcoal background
         scope: ['comment'],
-        settings: { foreground: '#465357', fontStyle: 'italic' }
+        settings: { foreground: '#72868D', fontStyle: 'italic' }
       }
     ]
 
