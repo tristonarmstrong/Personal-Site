@@ -5,7 +5,6 @@ import { jsx } from "kiru/jsx-runtime";
 import { definePageConfig, Link, useFileRouter } from "kiru/router"
 import { allPosts } from 'content-collections'
 import { Avatar } from "../../../components/Avatar";
-// import { Avatar } from "../../../components/Avatar";
 
 export default function Page() {
   const { state: { params } } = useFileRouter()

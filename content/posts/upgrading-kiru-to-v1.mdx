@@ -44,15 +44,15 @@ Instead, state and reactivity are exclusively built on [**signals**](https://kir
 Here's an example the maintainers provided to showcase how clean the new model is:
 
 ```ts
-const createTicker = () => {
+function createTicker() {
   const intervalId = setInterval(...)
   return () => clearInterval(...)
 }
 
-const Counter = () => {
+function Counter() {
   // State lives in a closure
-  const count = signal(0),
-    increment = () => count.value++
+  const count = signal(0)
+  const increment = () => count.value++
 
   // Runs once, variables won't disappear!
   const stopTicker = createTicker(count)
