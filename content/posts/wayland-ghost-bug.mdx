@@ -8,7 +8,7 @@ date: 2026-03-15
 
 # The "Wayland Ghost" Bug: Fixing Flatpak Crashes on Linux Mint
 
-If you've been tinkering with the new Wayland support in Linux Mint and decided to switch back to the reliability of X11, you might find that some Flatpak apps suddenly refuse to launch. This isn't specific to any single app — I first ran into it with **Sober** (the Roblox runtime), but it can hit any Flatpak that depends on a display server connection.
+If you've been tinkering with the new Wayland support in Linux Mint and decided to switch back to the reliability of X11, you might find that some Flatpak apps suddenly refuse to launch. This isn't specific to any single app; I first ran into it with **Sober** (the Roblox runtime), but it can hit any Flatpak that depends on a display server connection.
 
 ## The Symptom
 You try to run a Flatpak app and get a fatal crash that looks something like this:
@@ -40,4 +40,4 @@ Once those files are gone, launch your Flatpak app again:
 flatpak run org.vinegarhq.Sober  # or whatever app was crashing
 ```
 
-The app should now correctly identify the X11 display and boot right up. This applies to any Flatpak that was failing — Sober, Firefox, OBS, you name it. Happy computing!
+The app should now correctly identify the X11 display and boot right up. This applies to any Flatpak that was failing; Sober, Firefox, OBS, you name it. Happy computing!
