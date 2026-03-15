@@ -5,6 +5,7 @@ import { jsx } from "kiru/jsx-runtime";
 import { definePageConfig, Link, useFileRouter } from "kiru/router"
 import { allPosts } from 'content-collections'
 import { Avatar } from "../../../components/Avatar";
+import { SEO } from "../../../components/SEO";
 
 export default function Page() {
   const { state: { params } } = useFileRouter()
@@ -19,6 +20,13 @@ export default function Page() {
 
   return (
     <article className={"blogpost markdown-body"}>
+      <SEO 
+        title={post.title} 
+        description={post.summary} 
+        type="article" 
+        publishedTime={post.date.toISOString()}
+        url={`/blog/${post.slug}`}
+      />
       <div style={"view-transition-name: navborder"} className={"border-b border-yellow-500"} />
       <header className={"my-5 flex items-start gap-4"}>
         <span className={"mt-8"}>

@@ -5,6 +5,6 @@ import kiru from "vite-plugin-kiru"
 export default defineConfig({
   plugins: [
     contentCollections(),
-    kiru({ devtools: true })
+    kiru({ devtools: true, ssg: true })
   ]
 })

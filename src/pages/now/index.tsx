@@ -1,5 +1,6 @@
 import { allPosts, allProjects } from 'content-collections'
 import { Link } from "kiru/router"
+import { SEO } from "../../components/SEO"
 
 export default function Now() {
   const allWebProjects = allProjects.filter(x => x.type === 'Web')
@@ -8,6 +9,7 @@ export default function Now() {
 
   return () => (
     <main className="text-sm mt-10 flex flex-col gap-6">
+      <SEO title="Now" description="What Triston Armstrong is currently up to, including projects, open source contributions, and latest blogs." url="/now" />
       <h1 className={"text-2xl"}>What am I up to?</h1>
       <p>
         I greatly enjoy building utility apps/tools for myself. I build these tools
