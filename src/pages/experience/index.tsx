@@ -1,7 +1,7 @@
 import { SEO } from "../../components/SEO"
 
 export default function Experience() {
-  return (
+  return () => (
     <main className="text-sm mt-10 flex flex-col gap-4" style={"view-transition-name: homepage"}>
       <SEO title="Experience" description="Companies Triston Armstrong has worked at and his professional focus." url="/experience" />
       <p>Companies I've worked at and maybe where I'm currently working if I can convince someone to give me money in exchange for some code.</p>

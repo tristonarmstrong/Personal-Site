@@ -1,3 +1,4 @@
+import * as Kiru from "kiru"
 import { Head } from "kiru/router"
 
 interface SEOProps {
@@ -26,33 +27,36 @@ export function SEO({
   const defaultImage = `${siteUrl}/avatar.webp`
   const metaImage = image ? (image.startsWith("http") ? image : `${siteUrl}${image}`) : defaultImage
 
-  return (
-    <Head>
-      <title>{fullTitle}</title>
-      <meta name="description" content={metaDescription} />
+  const tags = [
+    <title>{fullTitle}</title>,
+    <meta name="description" content={metaDescription} />,
 
-      {/* Open Graph */}
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={metaDescription} />
-      <meta property="og:image" content={metaImage} />
-      <meta property="og:url" content={fullUrl} />
-      <meta property="og:type" content={type} />
-      <meta property="og:site_name" content={siteName} />
+    // Open Graph
+    <meta property="og:title" content={fullTitle} />,
+    <meta property="og:description" content={metaDescription} />,
+    <meta property="og:image" content={metaImage} />,
+    <meta property="og:url" content={fullUrl} />,
+    <meta property="og:type" content={type || "website"} />,
+    <meta property="og:site_name" content={siteName} />,
 
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@triston_armstr" />
-      <meta name="twitter:creator" content="@triston_armstr" />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={metaDescription} />
-      <meta name="twitter:image" content={metaImage} />
+    // Twitter
+    <meta name="twitter:card" content="summary_large_image" />,
+    <meta name="twitter:site" content="@triston_armstr" />,
+    <meta name="twitter:creator" content="@triston_armstr" />,
+    <meta name="twitter:title" content={fullTitle} />,
+    <meta name="twitter:description" content={metaDescription} />,
+    <meta name="twitter:image" content={metaImage} />,
+  ]
 
-      {/* Article specific metadata */}
-      {type === "article" && publishedTime && (
-        <meta property="article:published_time" content={publishedTime} />
-      )}
+  // Article specific metadata
+  if (type === "article" && publishedTime) {
+    tags.push(<meta property="article:published_time" content={publishedTime} />)
+  }
 
-      <link rel="canonical" href={fullUrl} />
-    </Head>
-  )
+  tags.push(<link rel="canonical" href={fullUrl} />)
+
+  // Filter out any potential invalid children just in case
+  const cleanTags = tags.filter(t => t !== null && typeof t === 'object' && 'type' in t)
+
+  return Kiru.createElement(Head.Content, {}, ...cleanTags)
 }

@@ -11,7 +11,8 @@ export default function Page() {
   const { state: { params } } = useFileRouter()
 
   return () => {
-    const post = allProjects.find(x => x.slug == params.value.slug)
+    const slug = params.value?.slug;
+    const post = allProjects.find(x => x.slug == slug)
 
     if (!post?.mdx) {
       return <div>Oops something went wrong rendering the page</div>

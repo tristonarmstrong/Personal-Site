@@ -4,7 +4,7 @@ import generateLowResImagePath from "../../utils/generateLowResImagePath"
 import { SEO } from "../../components/SEO"
 
 export default function Thangs() {
-  return (
+  return () => (
     <main className="text-sm mt-10 flex flex-col gap-6">
       <SEO title="Thangs" description="A collection of things Triston Armstrong likes and uses, including tech, kitchen gear, and more." url="/thangs" />
       <h1 className={"text-2xl"}>Heres some things I like and use</h1>

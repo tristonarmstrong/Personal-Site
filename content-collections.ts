@@ -29,7 +29,7 @@ const posts = defineCollection({
 
     return {
       ...document,
-      slug: document.title.toLowerCase().replace(/\s/g, '-').replace(/'|"|:/, ''),
+      slug: document.title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, ''),
       mdx,
     };
   },
@@ -50,7 +50,7 @@ const projects = defineCollection({
     });
     return {
       ...document,
-      slug: document.title.toLowerCase().replace(/ /g, '-'),
+      slug: document.title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, ''),
       mdx,
     };
   },
@@ -70,7 +70,7 @@ const thangs = defineCollection({
     const mdx = await compileMDX(context, document);
     return {
       ...document,
-      slug: document.item.toLowerCase().replace(/\s|:|&/g, '-').replace(/-/g, ''),
+      slug: document.item.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, ''),
       mdx,
     };
   },
