@@ -1,0 +1,84 @@
+---
+title: "The macOS mDNS Ghost Bug: Why Raspberry Pi SSH Suddenly Stops Working"
+summary: "ssh pi@raspberrypi worked fine until I typed the wrong password a few times. Then one MacBook completely lost the hostname while the other was fine. I was convinced it was fail2ban on the Pi (even though it wasn't installed). Here's the weird macOS cache ghost, the fix, and why Linux just doesn't do this nonsense."
+date: 2026-03-25
+---
+
+![The macOS mDNS Ghost](/mDNS-ghost.png)
+
+# The "macOS mDNS Ghost" Bug: Why Your Raspberry Pi SSH Suddenly Stops Working
+
+If you've got a Raspberry Pi and you've been happily SSHing in with the short hostname (`ssh pi@raspberrypi`), you probably assume it will just keep working. It did for me — right up until I forgot the password and hammered in the wrong one a bunch of times. Ten minutes later, one of my MacBooks started throwing:
+
+```text
+ssh: Could not resolve hostname raspberrypi: nodename nor servname provided, or not known
+```
+
+The exact same command still worked perfectly on my brand-new Mac. `raspberrypi.local` worked instantly on the broken one. I was completely lost.
+
+## The Symptom (and the Confusion Spiral)
+
+I spent way too long convinced something serious had happened on the Pi. No SSH with the short name. `ping raspberrypi` failed the same way. But `ssh pi@raspberrypi.local` connected immediately. My other Mac (fresh setup, zero custom config) had zero issues. I double-checked: no fail2ban, no IP ban, nothing changed on the Pi.
+
+I was in full confusion mode. “Did the failed logins somehow lock me out? Is the hostname not broadcasting anymore? Did I break something without realizing?” Even though I knew fail2ban wasn’t installed, my brain kept circling back to “it must be some security thing on the Pi that kicked in after wrong passwords.”
+
+I had **no idea** this class of problem even existed. The short name had always just worked… until it didn’t. That uncertainty — not knowing whether the issue was on the Pi, the network, or my Mac — was the most frustrating part.
+
+## The Cause: A Stale mDNS Cache Ghost
+
+The real culprit was macOS itself. When you use the plain short name `raspberrypi` (no dots), macOS doesn’t treat it as pure mDNS. It goes through a messy combination of local cache, search domains, unicast DNS fallbacks, and occasional mDNS.
+
+Every failed SSH attempt left a **negative cache entry** in `mDNSResponder` (the daemon behind Apple’s [Bonjour](https://developer.apple.com/bonjour/) / mDNS system). After enough wrong passwords, the resolver basically said “yeah, that hostname doesn’t exist” and stopped asking the network. The Pi was still happily advertising itself via [Avahi](https://www.avahi.org) (on Raspberry Pi OS), but my Mac had decided to ignore the short name.
+
+The fresh Mac had a clean cache, so it kept working. My other MacBook had just enough accumulated cruft from the failed attempts to break. Classic macOS mDNS ghost.
+
+For deeper reading:
+- [RFC 6762: Multicast DNS](https://datatracker.ietf.org/doc/html/rfc6762) – the official standard that defines how .local works.
+- [Apple Bonjour FAQ](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/NetServices/Articles/faq.html) – explains mDNSResponder’s role.
+- Similar real-world reports: [Raspberry Pi hostname not visible on macOS](https://superuser.com/questions/1478929/raspberry-pi-hostname-not-visible-on-macos) and [Why .local fixes SSH issues on macOS](https://apple.stackexchange.com/questions/475787/why-does-using-local-version-of-a-machine-name-fix-ssh-which-seems-to-have).
+
+## The Fix
+
+Three ways to exorcise the ghost, from quick to permanent:
+
+```bash
+# 1. The one-liner that actually fixed it for me
+sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+```
+
+```bash
+# 2. Wake up the resolver
+ping -c 3 raspberrypi.local
+# Then try the short name again
+```
+
+```bash
+# 3. Make it reliable forever (do this on every Mac)
+mkdir -p ~/.ssh
+echo -e "Host raspberrypi\n    HostName raspberrypi.local" >> ~/.ssh/config
+```
+
+After adding the SSH config alias, I can keep typing `ssh pi@raspberrypi` and it silently uses the bulletproof `.local` version.
+
+This flush command is a well-known workaround for mDNSResponder cache issues:
+- [How to Flush DNS Cache on macOS](https://www.freecodecamp.org/news/how-to-flush-dns-on-mac-macos-clear-dns-cache/)
+- [Apple Discussions on flushing mDNSResponder](https://discussions.apple.com/thread/255094690)
+
+## Why Linux Is Superior (Yet Again)
+
+This entire headache basically doesn’t exist on Linux. Linux uses **Avahi** (its open mDNS implementation) with a straightforward resolver setup via `nsswitch.conf` and `libnss-mdns`. Short hostnames either just work or `.local` is rock-solid with **zero** mysterious cache poisoning after a few wrong passwords. No hidden stateful quirks in the resolver, no “it worked ten minutes ago, now it doesn’t” drama, and no spending an hour convinced you’ve been banned from your own Pi.
+
+Once you install `avahi-daemon` and `libnss-mdns` on a Linux client, the Raspberry Pi is reachable consistently from every machine. No per-computer ghosts, no killing system daemons because you fat-fingered a password.
+
+Avahi and Apple’s Bonjour are both compatible implementations of the same standards ([mDNS](https://en.wikipedia.org/wiki/Multicast_DNS) + DNS-SD), but Linux’s approach is simpler and far less prone to these transient failures.
+
+For more:
+- [Are Avahi and Bonjour compatible?](https://unix.stackexchange.com/questions/573997/are-avahi-and-bonjour-compatible)
+- [Differences between Bonjour/Avahi](https://stackoverflow.com/questions/6160647/differences-between-bonjour-avahi-people-nearby-protocols)
+- [How to Configure mDNS with Avahi on Linux](https://oneuptime.com/blog/post/2026-01-15-configure-mdns-avahi-ubuntu/view)
+
+It’s the same pattern we keep seeing: macOS tries to be clever with Bonjour and ends up fragile and inconsistent. Linux keeps it simple, predictable, and reliable.
+
+Now that the ghost is gone and I have the SSH alias in place, everything is smooth again. But man, that hour of total confusion — thinking the Pi had somehow locked me out when the problem was entirely on my Mac — was a perfect reminder of why I love Linux.
+
+Happy (and reliable) SSHing!
