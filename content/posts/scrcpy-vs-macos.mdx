@@ -24,7 +24,7 @@ Meanwhile, the experience is slow, restricted, and constantly fighting Apple’s
 
 ## The Linux Reality: scrcpy Just Works
 
-Developed by [Genymobile](https://github.com/genymobile/scrcpy), **scrcpy** is an open-source tool that lets you display and control your Android device from your computer with incredibly low latency (often 35–70ms), support for high resolutions and refresh rates (up to 120fps), audio forwarding, and even screen recording — all without installing anything on your phone.
+Developed by [Genymobile](https://github.com/Genymobile), **scrcpy** is an open-source tool that lets you display and control your Android device from your computer with incredibly low latency (often 35–70ms), support for high resolutions and refresh rates (up to 120fps), audio forwarding, and even screen recording — all without installing anything on your phone.
 
 It works over USB or Wi-Fi, requires no root, and has been rock-solid on Linux for years.
 
@@ -45,7 +45,7 @@ scrcpy
 
 Done. Your phone screen appears instantly on your Linux desktop with full mouse and keyboard control. Copy-paste works seamlessly in both directions.
 
-**Want it wireless?** Just run:
+**Want it wireless?** First, make sure to [prepare your device for ADB over Wi-Fi](https://developer.android.com/tools/adb#connect-to-a-device-over-wi-fi), then just run:
 ```bash
 adb tcpip 5555
 adb connect YOUR_PHONE_IP:5555
