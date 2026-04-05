@@ -1,0 +1,87 @@
+---
+title: "อัปเกรดเป็น Kiru v1: พาราไดม์ใหม่แห่งความ Reactive"
+summary: "มาดูกระบวนการอัปเดตเว็บไซต์ส่วนตัวของผมเป็น Kiru v1 การสำรวจ primitive reactive ใหม่ๆ และการนำ routing interface ใหม่มาใช้"
+date: 2026-03-02
+---
+
+เมื่อเร็ว ๆ นี้ ผมได้อัปเกรดเว็บไซต์พอร์ตโฟลิโอนี้ให้ใช้ **Kiru v1** ตัวใหม่ล่าสุด (พร้อมกับ `vite-plugin-kiru` v1)
+แม้ว่าการอัปเดตจะทำให้การตั้งค่าง่ายขึ้นมาก แต่สิ่งที่โดดเด่นที่สุดสำหรับผมคือการเปลี่ยนไปใช้ closure-based components และ signals
+
+นี่คือสรุปสิ่งที่เปลี่ยนแปลงและสิ่งที่ผมต้องทำเพื่อย้ายข้อมูลอย่างปลอดภัย
+
+## Devtools ที่ปรับปรุงใหม่
+
+ประการแรก การอัปเดต dependencies จากเวอร์ชัน `0.52.x` เป็น `^1.0.1` ทำให้ผมสามารถเข้าถึงปลั๊กอิน Kiru devtools ที่ปรับปรุงใหม่ได้ทันที
+มันได้รับการปรับปรุงใหม่ทั้งหมดในรีลีสนี้ มี **signals watcher** และ **profiler** ที่ออกมาพร้อมกันเลย!
+นี่หมายถึงการมองเห็น reactive state ได้ชัดเจนมากขึ้นเมื่อต้องดีบัก โดยไม่ต้องใช้ browser extensions เพิ่มเติม
+
+## Path Parameters Interface แบบใหม่
+
+หนึ่งในการเปลี่ยนแปลงเชิงสถาปัตยกรรมภายใน Kiru v1 คือวิธีที่ path parameters ถูกเปิดเผยในไฟล์แบบ dynamic (เช่น blog slugs `[slug]/index.tsx`)
+
+ในยุคก่อน v1 state ของ `useFileRouter()` จะส่ง parameters ออกมาเป็น static object โดยตรง:
+
+```ts
+// Pre-v1
+const { state: { params } } = useFileRouter()
+const post = allPosts.find(x => x.slug == params.slug)
+```
+
+ใน v1 เพื่อให้สอดคล้องกับพาราไดม์ reactive ใหม่ object `params` เป็นแบบ reactive เต็มรูปแบบ
+เนื่องจากมันเป็น Signal คุณจึงเข้าถึง properties ได้โดยใช้ `.value` การแก้ไขก็ง่ายมาก แค่เติม `.value` เข้าไป:
+
+```ts
+// Kiru v1
+const { state: { params } } = useFileRouter()
+const post = allPosts.find(x => x.slug == params.value.slug)
+```
+
+ผมนำการเปลี่ยนแปลงนี้ไปใช้กับหน้า `projects`, `thangs` และ `blog` พร้อมกัน
+
+## การเปลี่ยนผ่านครั้งใหญ่: Signals และ Closures
+
+การเปลี่ยนแปลงที่ยิ่งใหญ่ที่สุดใน Kiru v1 คือพาราไดม์ reactive แบบใหม่ทั้งหมด
+วันของ React-like hooks API สิ้นสุดลงแล้ว ผู้ดูแลได้ลบ `useState`, `useEffect`, `useMemo`, `useCallback` และอื่น ๆ ออกไป!
+
+แทนที่จะเป็นเช่นนั้น state และ reactivity ถูกสร้างขึ้นบน [**signals**](https://kirujs.dev/docs/api/signal), ค่า **computed** และ **effects**
+แม้ว่า signals จะมีอยู่ใน Kiru มาตลอด แต่ตอนนี้กลายเป็นจุดโฟกัสหลักของ framework
+หากคุณต้องการ local state ใน component ตอนนี้ component จะ return **render function**
+component body ทำหน้าที่เป็น closure ที่ทำงานครั้งเดียว เก็บ state variables ไว้โดยไม่ต้องสร้างใหม่ทุกครั้งที่ render
+
+นี่คือตัวอย่างที่ผู้ดูแลให้มาเพื่อแสดงให้เห็นว่าโมเดลใหม่นี้สะอาดแค่ไหน:
+
+```ts
+function createTicker() {
+  const intervalId = setInterval(...)
+  return () => clearInterval(...)
+}
+
+function Counter() {
+  // State อยู่ใน closure
+  const count = signal(0)
+  const increment = () => count.value++
+
+  // ทำงานครั้งเดียว ตัวแปรจะไม่หายไป!
+  const stopTicker = createTicker(count)
+
+  // ใช้ lifecycle hooks ที่เหลือ
+  onCleanup(() => stopTicker()) 
+  
+  // Return render function
+  return () => <button onclick={increment}>{count}</button>
+}
+```
+
+[hooks](https://kirujs.dev/docs/api/lifecycles) ที่รอดชีวิตจากการลบมีเพียง `useContext`, `onMount`, `onBeforeMount` และ `onCleanup`
+
+การเปลี่ยนแปลงพื้นฐานนี้มองเห็นได้ชัดใน codebase ของผมทันที ตัวอย่างเช่น ในไฟล์ `src/pages/now/index.tsx` 
+ผมต้องอัปเดต components เพื่อ return function อย่างถูกต้องเมื่อพึ่งพา closure-based rendering behavior ใหม่นี้
+ตอนแรกมันทำให้ผมงงเล็กน้อย แต่ประสิทธิภาพและความเรียบง่ายในการแยก setup logic จาก render logic นั้นหนีไม่พ้น
+
+## สรุป
+
+โดยรวมแล้ว การย้ายไปยัง Kiru v1 รู้สึกเหมือนกำจัดของที่ไม่จำเป็นออกมากกว่าการรับภาระการอัปเกรดที่หนักหน่วง
+การลบ React-like hooks API และเปลี่ยนไปใช้ closures ทำให้ codebase รู้สึกสะอาดขึ้นอย่างมีนัยสำคัญ
+
+หากคุณกำลังใช้ Kiru และยังไม่ได้อัปเกรด: รีบทำเลย พาราไดม์ reactivity ใหม่นั้นคุ้มค่ากับเวลา 15 นาทีที่ใช้ในการย้าย interfaces
+คุณสามารถอ่านเพิ่มเติมเกี่ยวกับการเปลี่ยนแปลง V1 ได้ใน [เอกสารที่อัปเดต](https://kirujs.dev/)

@@ -1,0 +1,41 @@
+---
+title: "สร้าง Zlorb: CI Daemon เบาสบายใน Rust"
+summary: "สิ่งที่ต้องทำเพื่อสร้าง CI-CD ของตัวเอง และทำไมผมถึงทำ"
+date: 2024-09-25
+---
+
+สวัสดีครับ ผมเพิ่งเสร็จโปรเจกต์สนุก ๆ ชื่อ **zlorbrs**—เครื่องมือ continuous integration ที่จัดการโดย systemd ออกแบบมาสำหรับโปรเจกต์ที่ใช้ Git
+ได้รับแรงบันดาลใจจากความต้องการวิธีที่ไม่ยุ่งยากในการ monitor repos และ trigger builds อัตโนมัติ มันเน้นประสิทธิภาพโดยไม่มีความยุ่งยากของระบบ CI แบบ enterprise นี่คือสรุปสั้น ๆ ว่าผมทำอะไรสำเร็จบ้าง การตัดสินใจเชิงสถาปัตยกรรมที่สำคัญ และข้อเสียที่เกี่ยวข้อง
+
+### สิ่งที่เราทำสำเร็จ
+
+ในเวลาไม่กี่ชั่วโมง ผมสร้าง daemon ที่ใช้งานได้เต็มรูปแบบซึ่ง
+- Monitor Git repositories หลายตัวเพื่อหา changes โดยใช้ crate [`git2`](https://docs.rs/git2/latest/git2/)
+- ทำ fast-forward merges อย่างปลอดภัย และ trigger Bun builds เมื่อ detect updates หรือ artifacts หายไป (เช่นโฟลเดอร์ `dist/`)
+- มี CLI (`zlorbrs-ctl`) สำหรับ add, list และ remove repos โดยไม่ต้อง restart service
+- ผสานเข้ากับ systemd อย่างลื่นไหลเพื่อการ operation ที่เชื่อถือได้และ restart อัตโนมัติ
+
+ผลลัพธ์สุดท้าย? เครื่องมือที่รักษาโปรเจกต์ให้ build และ up-to-date ด้วย overhead น้อยที่สุด — _เหมาะอย่างยิ่งสำหรับ personal workflows หรือทีมเล็ก_
+
+### การตัดสินใจเชิงสถาปัตยกรรม
+
+ผมเลือก Rust เพราะ memory safety และ performance โครงสร้างโปรเจกต์เป็น Cargo workspace มีสาม crate: `zlorbrs-service` (_daemon หลักพร้อม infinite monitoring loop_), `zlorbrs-ctl` (CLI ที่ใช้ `Clap`) และ `zlorbrs-lib` (_utils ที่ใช้ร่วมกันสำหรับจัดการ config_)
+Configs ถูกเก็บเป็น JSON files ใน `~/.config/zlorbrs/` ทำให้ setup ใช้งานง่ายและไม่ต้องใช้ database
+การ deploy ใช้ `justfile` สำหรับ build/install binaries และ systemd units ทำให้ integrate กับ Linux ได้ง่าย
+เลือกใช้ Polling (_พร้อม sleep intervals ที่ปรับได้_) แทน webhooks เพื่อความเรียบง่าย—ไม่ต้องใช้ external servers หรือ auth setups
+
+_นั่นคือคำตอบที่เหล่าเนิร์ดอยากได้ยิน ในความเป็นจริง ผมแค่ชอบ Rust และชอบวิธีที่มัน build และ deploy ได้ง่าย_
+
+### ข้อเสีย
+
+การไป lightweight หมายถึงการสละ features ขั้นสูงอย่าง complex pipelines หรือ parallel builds ซึ่งทำให้เร็วแต่จำกัด scalability สำหรับทีมใหญ่
+Polling นั้นเชื่อถือได้และ implement ง่ายแต่มีประสิทธิภาพน้อยกว่าระบบ event-driven อาจจะ waste CPU ในการ check แบบ idle
+การผูก builds กับ Bun target JS/TS devs แต่ไม่รองรับ ecosystems อื่น— _เป็นการตัดสินใจที่เน้น focus มากกว่าความทั่วไป_
+
+โดยรวมแล้วมันเป็นชัยชนะสำหรับการ setup อย่างรวดเร็ว แม้ว่าอาจจะต้องมี extensions สำหรับ production heavy-lifting
+
+ตื่นเต้นที่จะพัฒนาต่อ—ยินดีรับ feedback! ดู repo สำหรับรายละเอียดเพิ่มเติม 🚀
+
+
+> ผมต้องบอกเลยว่า ผม FUCKING LOVE การ push code ตอนนี้และดูเจ้าตัวเล็กคนนี้ทำงาน! มันน่าพอใจมาก!
+> นี่คือสิ่งที่ผมทำเพื่อมัน!!!!
