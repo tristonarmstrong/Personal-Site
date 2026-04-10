@@ -24,8 +24,8 @@ export default function Home() {
 		>
 			<SEO />
 
-			{/* Bio Section */}
-			<section className="flex flex-col gap-4">
+			{/* Bio Section - Material 3 Card */}
+			<section className="flex flex-col gap-4 p-5 rounded-2xl bg-[#141414] shadow-[0_1px_3px_rgba(0,0,0,0.3)]">
 				<div>
 					<h1 className="text-lg text-yellow-500">Triston Armstrong</h1>
 					<p className="text-sm text-gray-400 italic">
@@ -33,26 +33,19 @@ export default function Home() {
 					</p>
 				</div>
 
-				<p>
-					Software Developer with{" "}
-					<span
-						className={"yearthing"}
-						title={"I started programming professionally in year 2020"}
-					>
-						{yearsExperience.value} years
-					</span>{" "}
-					of experience, father to 3, and husband to 1 (not in that order) with
-					a passion for building utility apps for myself to make my dev
-					day-to-day easier. I also greatly enjoy,{" "}
+				<p className="text-gray-300">
+					Software Developer with {yearsExperience.value} years of experience,
+					father to 3, and husband to 1 (not in that order) with a passion for
+					building utility apps. I also greatly enjoy{" "}
 					<a
-						className="text-yellow-500 underline"
+						className="text-yellow-500 hover:underline"
 						href={"https://automatetheboringstuff.com/"}
 						target="_blank"
 						rel="noopener"
 					>
 						automating the boring stuff
-					</a>{" "}
-					when the opertunity presents itself.
+					</a>
+					.
 				</p>
 
 				{/* Social Links */}
