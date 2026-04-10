@@ -304,12 +304,16 @@ function Work({
 			href={href || undefined}
 			target={href ? "_blank" : undefined}
 			rel={href ? "noopener" : undefined}
-			className={`${isMutedLink} ${isFocused} block py-1.5 px-2 -mx-2 rounded-lg hover:bg-[#1a1a1a] transition-colors`}
+			className={`${isMutedLink} ${isFocused} block py-1.5`}
 		>
-			<li className="flex w-full items-center gap-2">
-				<span className="text-gray-300">{comp}</span>
+			<li className="flex w-full items-center gap-2 group">
+				<span className="text-gray-300 group-hover:text-white transition-colors">
+					{comp}
+				</span>
 				<span className="h-px flex-1 bg-[#2a2a2a]"></span>
-				<span className="text-xs text-gray-500 tabular-nums">{time}</span>
+				<span className="text-xs text-gray-500 tabular-nums group-hover:text-gray-300 transition-colors">
+					{time}
+				</span>
 			</li>
 		</a>
 	);
@@ -360,15 +364,17 @@ function LinkBody({
 	const linkLabelTransitionId = `link-h-${transitionId}`;
 
 	return () => (
-		<li className="flex w-full items-center gap-2 py-1.5 px-2 -mx-2 rounded-lg hover:bg-[#1a1a1a] transition-colors">
+		<li className="flex w-full items-center gap-2 py-1.5 group cursor-pointer">
 			<span
-				className="w-fit text-gray-300"
+				className="w-fit text-gray-300 group-hover:text-white transition-colors"
 				style={`view-transition-name: ${linkLabelTransitionId}`}
 			>
 				{label}
 			</span>
 			<span className="h-px flex-1 bg-[#2a2a2a]"></span>
-			<span className="text-xs text-gray-500">{external ? "↗" : "→"}</span>
+			<span className="text-xs text-gray-500 group-hover:text-gray-300 transition-colors">
+				{external ? "↗" : "→"}
+			</span>
 		</li>
 	);
 }
