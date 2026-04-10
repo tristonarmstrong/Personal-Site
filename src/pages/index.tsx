@@ -227,9 +227,9 @@ export default function Home() {
 							These are pojects that i actively work on. I have a graveyard too
 						</p>
 					</div>
-					<span className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+					<h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider">
 						Web
-					</span>
+					</h4>
 					<div className={"mx-4"}>
 						{allWebProjects.map((x) => (
 							<Item
@@ -240,9 +240,9 @@ export default function Home() {
 						))}
 					</div>
 
-					<span className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+					<h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider">
 						Tool
-					</span>
+					</h4>
 					<div className={"mx-4"}>
 						{allToolProjects.map((x) => (
 							<Item
@@ -264,9 +264,9 @@ export default function Home() {
 						</p>
 					</div>
 					<div className={"flex flex-col gap-1"}>
-						<span className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+						<h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider">
 							Successful
-						</span>
+						</h4>
 						<div className={"mx-4"}>
 							<Item
 								label="BinCode"
@@ -290,9 +290,9 @@ export default function Home() {
 								href="https://github.com/tristanpoland/Chai-MCVM/pull/1"
 							/>
 						</div>
-						<span className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+						<h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider">
 							UnSuccessful
-						</span>
+						</h4>
 						<div className={"mx-4"}>
 							<Item
 								label="Omarchy (Flatpak Support)"
