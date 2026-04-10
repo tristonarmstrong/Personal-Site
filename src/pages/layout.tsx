@@ -27,100 +27,131 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 			.join("\n");
 	}
 	return (
-		<div className="max-w-[70ch] mx-auto mt-10 flex flex-col gap-4 px-10 xs:px-6 sm:px-4 sm:overflow-hidden">
+		<div className="max-w-[70ch] mx-auto mt-20 flex flex-col gap-4 px-10 xs:px-6 sm:px-4 sm:overflow-hidden relative">
+			{/* Background Glow Orbs */}
+			<div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+				{/* Yellow orb - slow pulse (8s) */}
+				<div
+					className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-[120px]"
+					style="animation: pulse-glow 8s ease-in-out infinite"
+				/>
+				{/* Blue orb - medium pulse (6s) with delay */}
+				<div
+					className="absolute top-[40%] right-[5%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"
+					style="animation: pulse-glow 6s ease-in-out infinite; animation-delay: 1s"
+				/>
+				{/* Purple orb - fast pulse (4s) with delay */}
+				<div
+					className="absolute bottom-[20%] left-[20%] w-[300px] h-[300px] bg-purple-500/5 rounded-full blur-[80px]"
+					style="animation: pulse-glow 4s ease-in-out infinite; animation-delay: 2s"
+				/>
+			</div>
+
+			{/* Custom pulse animation */}
+			<style>
+				{`
+					@keyframes pulse-glow {
+						0%, 100% { opacity: 0.3; transform: scale(1); }
+						50% { opacity: 0.6; transform: scale(1.1); }
+					}
+				`}
+			</style>
+
 			<style innerHTML={_generateViewTransitionNamesFromContent()} />
-			<Navigation />
+			<div className="relative z-10">
+				<Navigation />
 
-			{children}
+				{children}
 
-			<footer
-				className="text-center flex flex-col gap-1"
-				style={"view-transition-name: foot"}
-			>
-				<hr className="opacity-50" />
-				<div className={"flex flex-col [&_*]:transition gap-2"}>
-					<div className={"flex justify-between"}>
-						<small className="opacity-50 hover:opacity-100">
-							Made with ❤️ & 🍵
-						</small>
-						<a
-							className="opacity-50 hover:opacity-100 flex items-end gap-1"
-							href="https://kirujs.dev"
-							target={"_blank"}
-							rel={"noopener"}
-						>
-							<small>Powered by</small>
-							<div className="flex items-end justify-center">
-								<svg
-									className={"w-4"}
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="crimson"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
-								</svg>
-								<small className="text-primary font-bold flex items-center">
-									Kiru
-								</small>
-							</div>
-						</a>
+				<footer
+					className="text-center flex flex-col gap-1"
+					style={"view-transition-name: foot"}
+				>
+					<hr className="opacity-50" />
+					<div className={"flex flex-col [&_*]:transition gap-2"}>
+						<div className={"flex justify-between"}>
+							<small className="opacity-50 hover:opacity-100">
+								Made with ❤️ & 🍵
+							</small>
+							<a
+								className="opacity-50 hover:opacity-100 flex items-end gap-1"
+								href="https://kirujs.dev"
+								target={"_blank"}
+								rel={"noopener"}
+							>
+								<small>Powered by</small>
+								<div className="flex items-end justify-center">
+									<svg
+										className={"w-4"}
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="crimson"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									>
+										<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+									</svg>
+									<small className="text-primary font-bold flex items-center">
+										Kiru
+									</small>
+								</div>
+							</a>
+						</div>
+
+						<ul className="flex gap-3 [&>*>*]:opacity-50 [&>*>*]:hover:opacity-100 [&>*>*]:hover:text-yellow-500 [&>*]:transition-color [&>*]:duration-200 items-end">
+							<a
+								className="hover:scale-90"
+								href="https://github.com/tristonarmstrong"
+								rel="noopener"
+								target="_blank"
+								title="GitHub"
+							>
+								<GithubIcon />
+							</a>
+							<a
+								className="hover:scale-90"
+								href="https://x.com/triston_armstr"
+								rel="noopener"
+								target="_blank"
+								title="X (Twitter)"
+							>
+								<XIcon />
+							</a>
+							<a
+								className="hover:scale-90"
+								href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
+								rel="noopener"
+								target="_blank"
+								title="LinkedIn"
+							>
+								<LinkedinIcon />
+							</a>
+							<a className="hover:scale-90" href="/feed.xml" title="RSS Feed">
+								<RssIcon />
+							</a>
+							<a
+								className="hover:scale-90"
+								href="_"
+								onclick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									const a = document.createElement("a");
+									a.href =
+										"mailto:triston95strong@gmail.com?subject=Reaching Out&body=Hey Triston, ...Put message here...";
+									a.click();
+								}}
+								title="Email"
+							>
+								<Mail />
+							</a>
+						</ul>
 					</div>
-
-					<ul className="flex gap-3 [&>*>*]:opacity-50 [&>*>*]:hover:opacity-100 [&>*>*]:hover:text-yellow-500 [&>*]:transition-color [&>*]:duration-200 items-end">
-						<a
-							className="hover:scale-90"
-							href="https://github.com/tristonarmstrong"
-							rel="noopener"
-							target="_blank"
-							title="GitHub"
-						>
-							<GithubIcon />
-						</a>
-						<a
-							className="hover:scale-90"
-							href="https://x.com/triston_armstr"
-							rel="noopener"
-							target="_blank"
-							title="X (Twitter)"
-						>
-							<XIcon />
-						</a>
-						<a
-							className="hover:scale-90"
-							href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
-							rel="noopener"
-							target="_blank"
-							title="LinkedIn"
-						>
-							<LinkedinIcon />
-						</a>
-						<a className="hover:scale-90" href="/feed.xml" title="RSS Feed">
-							<RssIcon />
-						</a>
-						<a
-							className="hover:scale-90"
-							href="_"
-							onclick={(e) => {
-								e.preventDefault();
-								e.stopPropagation();
-								const a = document.createElement("a");
-								a.href =
-									"mailto:triston95strong@gmail.com?subject=Reaching Out&body=Hey Triston, ...Put message here...";
-								a.click();
-							}}
-							title="Email"
-						>
-							<Mail />
-						</a>
-					</ul>
-				</div>
-			</footer>
+				</footer>
+			</div>
 		</div>
 	);
 }

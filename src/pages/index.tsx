@@ -1,46 +1,47 @@
 import { allPosts, allProjects } from "content-collections";
 import { Link } from "kiru/router";
-import { signal } from "kiru";
+import { signal, onMount } from "kiru";
 import { SEO } from "../components/SEO";
 import { RssIcon } from "../components/icons/Rss";
 import { Avatar } from "../components/Avatar";
-
-const yearsExperience = signal(5);
-
-if (typeof window !== "undefined") {
-	yearsExperience.value = Math.abs(new Date().getFullYear() - 2020);
-}
+import { GitHubActivity } from "../components/GitHubActivity";
 
 export default function Home() {
-	const allWebProjects = allProjects.filter((x) => x.type === "Web");
-	const allToolProjects = allProjects.filter((x) => x.type === "Tool");
+	const yearsExperience = signal(5);
 	const allPostsRearranged = allPosts.sort(
 		(a, b) => b.date.getTime() - a.date.getTime(),
 	);
 
+	onMount(() => {
+		yearsExperience.value = Math.abs(new Date().getFullYear() - 2020);
+	});
+
 	return () => (
 		<main
-			className="text-sm mt-10 flex flex-col gap-8"
+			className="text-sm mt-10 flex flex-col gap-10 max-w-2xl"
 			style={"view-transition-name: homepage"}
 		>
 			<SEO />
 
-			{/* Bio - Elevated Surface Container */}
-			<section className="p-4 rounded-2xl bg-[#141414]">
+			{/* Header */}
+			<section className="p-4 rounded-2xl bg-[#141414] flex flex-col gap-2">
 				<div className="flex items-start gap-3">
-					<Avatar />
+					<Avatar size="lg" />
 					<div>
-						<h1 className="text-xl font-normal text-yellow-500">
+						<h1 className="text-2xl font-bold tracking-tight text-yellow-500">
 							Triston Armstrong
 						</h1>
-						<p className="text-sm text-gray-400">Senior Software Engineer</p>
+						<div className="flex gap-2 text-gray-500">
+							<span>Senior Software Engineer</span>
+							<span>·</span>
+							<span>Utah, USA</span>
+						</div>
 					</div>
 				</div>
-
-				<p className="text-gray-300 mt-3">
+				<p className="text-gray-300 mt-2 max-w-lg">
 					Software Developer with{" "}
 					<span
-						className="yearthing cursor-help"
+						className="yearthing text-yellow-500 cursor-help"
 						title="I started programming professionally in year 2020"
 					>
 						{yearsExperience.value} years
@@ -58,8 +59,8 @@ export default function Home() {
 					.
 				</p>
 
-				{/* Social Links - Minimal spacing */}
-				<div className="flex items-center gap-1 mt-4">
+				{/* Social Links */}
+				<div className="flex items-center gap-1 mt-3">
 					<SocialIcon
 						href="https://github.com/tristonarmstrong"
 						icon={<GithubIcon />}
@@ -84,184 +85,331 @@ export default function Home() {
 				</div>
 			</section>
 
+			<div className="w-full border-t border-dashed border-white/10" />
+
+			{/* GitHub Activity */}
+			<section>
+				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+					Activity
+				</h2>
+				<GitHubActivity />
+			</section>
+
+			<div className="w-full border-t border-dashed border-white/10" />
+
+			{/* OSS Contributions */}
+			<section>
+				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+					OSS
+				</h2>
+				<div className="flex flex-col gap-3">
+					<DashedLink
+						label="asadbek064/bincode"
+						meta="merged"
+						status="merged"
+						href="https://github.com/asadbek064/bincode/pull/1"
+					/>
+					<DashedLink
+						label="diamondburned/dissent"
+						meta="merged"
+						status="merged"
+						href="https://github.com/diamondburned/dissent/pull/371"
+					/>
+					<DashedLink
+						label="kirujs/kiru"
+						meta="merged"
+						status="merged"
+						href="https://github.com/kirujs/kiru"
+					/>
+					<DashedLink
+						label="Chai-Foundation/ChaiLauncher"
+						meta="2 PRs"
+						status="merged"
+						href="https://github.com/Chai-Foundation/ChaiLauncher/pull/13"
+					/>
+					<DashedLink
+						label="tristanpoland/Chai-MCVM"
+						meta="merged"
+						status="merged"
+						href="https://github.com/tristanpoland/Chai-MCVM/pull/1"
+					/>
+					<DashedLink
+						label="basecamp/omarchy"
+						meta="rejected"
+						status="rejected"
+						href="https://github.com/basecamp/omarchy/issues/1881"
+					/>
+					<DashedLink
+						label="microsoft/TypeScript"
+						meta="rejected"
+						status="rejected"
+						href="https://github.com/microsoft/TypeScript/pull/60269"
+					/>
+					<DashedLink
+						label="nrwl/nx"
+						meta="closed"
+						status="closed"
+						href="https://github.com/nrwl/nx/pull/31846"
+					/>
+				</div>
+			</section>
+
+			{/* Projects */}
+			<section>
+				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+					Projects
+				</h2>
+				<div className="flex flex-col gap-3">
+					{allProjects.map((x) => (
+						<ProjectCard
+							key={x.slug}
+							title={x.title}
+							href={`/project/${x.slug}`}
+							type={x.type}
+							summary={x.summary}
+						/>
+					))}
+				</div>
+			</section>
+
+			{/* Blog */}
+			<section>
+				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+					Blog
+				</h2>
+				<div className="flex flex-col gap-3">
+					{allPostsRearranged.slice(0, 3).map((x) => (
+						<DashedItem
+							key={x.slug}
+							label={x.title}
+							meta={x.date.toLocaleDateString("en-US", {
+								month: "short",
+								year: "numeric",
+							})}
+							href={`/blog/${x.slug}`}
+							internal
+						/>
+					))}
+				</div>
+				<div className="mt-3">
+					<Link
+						to="/blog"
+						className="text-xs text-gray-500 hover:text-gray-300 transition underline"
+						transition
+					>
+						View all posts
+					</Link>
+				</div>
+			</section>
+
 			{/* Experience */}
 			<section>
-				<h2 className="text-xl font-medium text-yellow-500 mb-2">Experience</h2>
-				<p className="text-gray-400 text-sm">
-					Companies I've worked at and maybe where I'm currently working if I
-					can convince someone to give me money in exchange for some code.
-				</p>
-				<ul className="mt-3 space-y-1">
-					<Work href="" comp="Your Company Here" time="Immediately" focus />
-					<Work
+				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+					Experience
+				</h2>
+				<div className="flex flex-col gap-3">
+					<DashedItem label="Your Company Here" meta="Now" href="" highlight />
+					<DashedItem
+						label="Ventra Health"
+						meta="2023 — 2025"
 						href="https://ventrahealth.com/"
-						comp="Ventra Health"
-						time="2023 - 2025"
 					/>
-					<Work
+					<DashedItem
+						label="Randstad Technologies"
+						meta="2021 — 2023"
 						href="https://www.randstadusa.com/"
-						comp="Randstad Technologies"
-						time="2021 - 2023"
 					/>
-					<Work
+					<DashedItem
+						label="Damiano Global Corp."
+						meta="2021"
 						href="https://damianoglobal.com/"
-						comp="Damiano Global Corp."
-						time="2021"
 					/>
-					<Work href="" comp="Makers Ladder LLC" time="2020" />
-				</ul>
+					<DashedItem label="Makers Ladder LLC" meta="2020" href="" />
+				</div>
 
 				<div className="mt-4">
-					<h3 className="font-medium text-gray-300">Freelance Work</h3>
-					<p className="text-gray-400 text-sm mt-1">
-						My experience freelancing was cool! 10/10 would do again.
-					</p>
-				</div>
-				<ul className="mt-2">
-					<Work
+					<DashedItem
+						label="Freelance (Upwork)"
+						meta="$40k+"
 						href="https://www.upwork.com/freelancers/~018467e8cbe2f71382"
-						comp="Upwork"
-						time="$40,000+"
 					/>
-				</ul>
-			</section>
-
-			{/* Projects & OSS */}
-			<section>
-				<div className="mb-3">
-					<h2 className="text-xl font-medium text-yellow-500">
-						What am I up to?
-					</h2>
-					<p className="text-gray-400 text-sm mt-1">
-						I greatly enjoy building utility apps/tools for myself.
-					</p>
-				</div>
-
-				<div className="mb-3">
-					<h3 className="text-sm font-medium text-gray-400 mb-1">Projects</h3>
-					<p className="text-gray-500 text-xs mb-2">
-						These are projects that i actively work on. I have a graveyard too
-					</p>
-
-					<h4 className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
-						Web
-					</h4>
-					<div className="ml-3 space-y-1">
-						{allWebProjects.map((x) => (
-							<Item
-								label={x.title}
-								href={`/project/${x.slug}`}
-								transitionId={x.slug}
-							/>
-						))}
-					</div>
-
-					<h4 className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1 mt-2">
-						Tool
-					</h4>
-					<div className="ml-3 space-y-1">
-						{allToolProjects.map((x) => (
-							<Item
-								label={x.title}
-								href={`/project/${x.slug}`}
-								transitionId={x.slug}
-							/>
-						))}
-					</div>
-				</div>
-
-				<div>
-					<h3 className="text-sm font-medium text-gray-400 mb-1">
-						OSS Contribs
-					</h3>
-					<p className="text-gray-500 text-xs mb-2">
-						I've contributed to some, and a few that never made it through.
-					</p>
-
-					<h4 className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
-						Successful
-					</h4>
-					<div className="ml-3 space-y-1">
-						<Item
-							label="BinCode"
-							href="https://github.com/asadbek064/bincode/pull/1"
-						/>
-						<Item
-							label="Dissent"
-							href="https://github.com/diamondburned/dissent/pull/371"
-						/>
-						<Item label="Kiru" href="https://github.com/kirujs/kiru" />
-						<Item
-							label="ChaiLauncher (Window Control)"
-							href="https://github.com/Chai-Foundation/ChaiLauncher/pull/13"
-						/>
-						<Item
-							label="ChaiLauncher (Mod Loader)"
-							href="https://github.com/Chai-Foundation/ChaiLauncher/pull/18"
-						/>
-						<Item
-							label="Chai-MCVM"
-							href="https://github.com/tristanpoland/Chai-MCVM/pull/1"
-						/>
-					</div>
-
-					<h4 className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1 mt-2">
-						UnSuccessful
-					</h4>
-					<div className="ml-3 space-y-1">
-						<Item
-							label="Omarchy (Flatpak Support)"
-							href="https://github.com/basecamp/omarchy/issues/1881"
-						/>
-						<Item
-							label="Omarchy (Auto Fetch Icons)"
-							href="https://github.com/basecamp/omarchy/pull/1905"
-						/>
-						<Item
-							label="Typescript"
-							href="https://github.com/microsoft/TypeScript/pull/60269"
-						/>
-						<Item label="NX" href="https://github.com/nrwl/nx/pull/31846" />
-					</div>
-				</div>
-
-				<div className="mt-4">
-					<div className="flex items-baseline justify-between mb-2">
-						<h3 className="text-sm font-medium text-gray-400">Blogs</h3>
-						<Link
-							to="/blog"
-							className="text-xs text-gray-500 hover:text-yellow-500 transition"
-							transition
-						>
-							View all →
-						</Link>
-					</div>
-					<p className="text-gray-500 text-xs mb-2">
-						Sometimes I have knowledge I find worth sharing.
-					</p>
-					<ul className="ml-3 space-y-1">
-						{allPostsRearranged.slice(0, 3).map((x) => (
-							<Item
-								label={x.title}
-								href={`/blog/${x.slug}`}
-								transitionId={`${x.slug}`}
-							/>
-						))}
-					</ul>
 				</div>
 			</section>
 
-			{/* Living Site Note */}
-			<section className="pt-4 border-t border-[#2a2a2a]">
-				<p className="text-xs text-gray-500">
+			{/* Footer */}
+			<section className="pt-4 border-t border-dashed border-white/10">
+				<div className="flex items-center gap-4">
+					<SocialLink href="https://github.com/tristonarmstrong" label="GitHub">
+						<GithubIcon />
+					</SocialLink>
+					<SocialLink href="https://x.com/triston_armstr" label="X">
+						<XIcon />
+					</SocialLink>
+					<SocialLink
+						href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
+						label="LinkedIn"
+					>
+						<LinkedinIcon />
+					</SocialLink>
+					<SocialLink href="mailto:triston95strong@gmail.com" label="Email">
+						<EmailIcon />
+					</SocialLink>
+				</div>
+				<p className="text-xs text-gray-600 mt-4">
 					This is a "living site". I push half-baked chunks of UI to showcase
-					its development in realtime, just... cause.. i find it interesting
+					its development in realtime.
 				</p>
 			</section>
 		</main>
 	);
 }
 
+// Dashed line item (Experience, Blog)
+function DashedItem({
+	label,
+	meta,
+	href,
+	internal = false,
+	highlight = false,
+}: {
+	label: string;
+	meta: string;
+	href: string;
+	internal?: boolean;
+	highlight?: boolean;
+}) {
+	const labelClasses = highlight
+		? "text-gray-200 animate-pulse"
+		: "text-gray-300 group-hover:text-gray-100";
+
+	const content = (
+		<div className="flex items-center justify-between gap-4 group cursor-pointer">
+			<span className={`text-sm ${labelClasses} transition-colors`}>
+				{label}
+			</span>
+			<div className="border-t border-dashed border-white/10 flex-1 min-w-[2rem]" />
+			<span className="text-xs text-gray-500 whitespace-nowrap">{meta}</span>
+		</div>
+	);
+
+	if (!href) {
+		return <div className="py-1">{content}</div>;
+	}
+
+	if (internal) {
+		return (
+			<Link to={href} className="block py-1" transition>
+				{content}
+			</Link>
+		);
+	}
+
+	return (
+		<a href={href} target="_blank" rel="noopener" className="block py-1">
+			{content}
+		</a>
+	);
+}
+
+// External link with underline (OSS style)
+function DashedLink({
+	label,
+	meta,
+	href,
+	status = "default",
+}: {
+	label: string;
+	meta: string;
+	href: string;
+	status?: "merged" | "rejected" | "closed" | "open" | "default";
+}) {
+	const statusStyles = {
+		merged: "bg-green-500/20 text-green-400 border-green-500/30",
+		rejected: "bg-red-500/20 text-red-400 border-red-500/30",
+		closed: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+		open: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+		default: "bg-gray-500/20 text-gray-400 border-gray-500/30",
+	};
+
+	return (
+		<div className="flex items-center justify-between gap-4 py-1">
+			<a
+				href={href}
+				target="_blank"
+				rel="noopener"
+				className="text-xs underline text-blue-400 hover:text-blue-500 transition-colors whitespace-nowrap"
+			>
+				{label}
+			</a>
+			<div className="border-t border-dashed border-white/10 flex-1 min-w-[2rem]" />
+			<span
+				className={`text-[10px] px-2 py-0.5 rounded-full border whitespace-nowrap ${statusStyles[status]}`}
+			>
+				{meta}
+			</span>
+		</div>
+	);
+}
+
+// Project card with icon/border
+function ProjectCard({
+	title,
+	href,
+	type,
+	summary,
+}: {
+	title: string;
+	href: string;
+	type: string;
+	summary?: string;
+}) {
+	return (
+		<Link
+			to={href}
+			className="flex items-start gap-3 p-3 border border-white/10 rounded-md bg-white/5 hover:bg-white/10 transition group"
+			transition
+		>
+			<div className="w-10 h-10 rounded bg-[#1a1a1a] flex items-center justify-center text-gray-500 text-xs font-medium shrink-0 mt-0.5">
+				{type.charAt(0)}
+			</div>
+			<div className="flex-1 min-w-0">
+				<h3 className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight">
+					{title}
+				</h3>
+				{summary && (
+					<p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+						{summary}
+					</p>
+				)}
+			</div>
+		</Link>
+	);
+}
+
+// Social link (footer style)
+function SocialLink({
+	href,
+	label,
+	children,
+}: {
+	href: string;
+	label: string;
+	children: JSX.Element;
+}) {
+	return (
+		<a
+			href={href}
+			target={href.startsWith("http") ? "_blank" : undefined}
+			rel={href.startsWith("http") ? "noopener" : undefined}
+			className="text-gray-500 hover:text-gray-300 transition"
+			aria-label={label}
+		>
+			{children}
+		</a>
+	);
+}
+
+// Social icon (header style with circular background)
 function SocialIcon({
 	href,
 	icon,
@@ -285,107 +433,13 @@ function SocialIcon({
 	);
 }
 
-function Work({
-	comp,
-	time,
-	href,
-	focus = false,
-}: {
-	comp: string;
-	time: string;
-	href: string;
-	focus?: boolean;
-}) {
-	const isMutedLink = href ? "text-gray-400" : "text-gray-600";
-	const isFocused = focus ? "animate-pulse" : "";
-
-	return (
-		<a
-			href={href || undefined}
-			target={href ? "_blank" : undefined}
-			rel={href ? "noopener" : undefined}
-			className={`${isMutedLink} ${isFocused} block py-0.5`}
-		>
-			<li className="flex w-full items-center gap-2 group">
-				<span className="text-gray-300 group-hover:text-white transition-colors">
-					{comp}
-				</span>
-				<span className="h-px flex-1 bg-[#2a2a2a]"></span>
-				<span className="text-xs text-gray-500 tabular-nums group-hover:text-gray-300 transition-colors">
-					{time}
-				</span>
-			</li>
-		</a>
-	);
-}
-
-let fallbackIdCounter = 0;
-
-function Item({
-	label,
-	href,
-	transitionId,
-}: {
-	label: string;
-	href: string;
-	transitionId?: string;
-}) {
-	const FALLBACK_ID = transitionId ?? String(++fallbackIdCounter);
-
-	return () => {
-		if (href.includes("http")) {
-			return (
-				<a href={href}>
-					<LinkBody
-						{...{ label, transitionId: transitionId ?? FALLBACK_ID }}
-						external
-					/>
-				</a>
-			);
-		}
-
-		return (
-			<Link to={href} transition>
-				<LinkBody {...{ label, transitionId: transitionId ?? FALLBACK_ID }} />
-			</Link>
-		);
-	};
-}
-
-function LinkBody({
-	label,
-	transitionId,
-	external = false,
-}: {
-	label: string;
-	transitionId?: string;
-	external?: boolean;
-}) {
-	const linkLabelTransitionId = `link-h-${transitionId}`;
-
-	return () => (
-		<li className="flex w-full items-center gap-2 py-0.5 group cursor-pointer">
-			<span
-				className="w-fit text-gray-300 group-hover:text-white transition-colors"
-				style={`view-transition-name: ${linkLabelTransitionId}`}
-			>
-				{label}
-			</span>
-			<span className="h-px flex-1 bg-[#2a2a2a]"></span>
-			<span className="text-xs text-gray-500 group-hover:text-gray-300 transition-colors">
-				{external ? "↗" : "→"}
-			</span>
-		</li>
-	);
-}
-
 // Icons
 function GithubIcon() {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width="18"
-			height="18"
+			width="16"
+			height="16"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
@@ -401,8 +455,8 @@ function XIcon() {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width="18"
-			height="18"
+			width="16"
+			height="16"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
@@ -417,8 +471,8 @@ function LinkedinIcon() {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width="18"
-			height="18"
+			width="16"
+			height="16"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
@@ -435,8 +489,8 @@ function EmailIcon() {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width="18"
-			height="18"
+			width="16"
+			height="16"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
