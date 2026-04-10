@@ -79,10 +79,8 @@ export default function Page() {
 				<div className="w-full border-t border-dashed border-white/10" />
 
 				{/* Content */}
-				<main className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] backdrop-blur-md border border-white/10">
-					<article className="blogpost markdown-body">
-						<MDXContent code={post!.mdx} />
-					</article>
+				<main className="blogpost markdown-body">
+					<MDXContent code={post!.mdx} />
 				</main>
 
 				<div className="w-full border-t border-dashed border-white/10" />
