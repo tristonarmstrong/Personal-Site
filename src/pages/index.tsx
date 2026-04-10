@@ -30,7 +30,7 @@ export default function Home() {
 				<div className="flex items-start gap-4">
 					<Avatar />
 					<div>
-						<h1 className="text-xl font-normal text-gray-100">
+						<h1 className="text-xl font-normal text-yellow-500">
 							Triston Armstrong
 						</h1>
 						<p className="text-sm text-gray-400">Senior Software Engineer</p>
@@ -167,7 +167,7 @@ export default function Home() {
 
 			{/* Experience Section */}
 			<section className="flex flex-col gap-4">
-				<h2 className="text-xl font-medium text-gray-200">Experience</h2>
+				<h2 className="text-xl font-medium text-yellow-500">Experience</h2>
 				<p className="text-gray-400">
 					Companies I've worked at and maybe where I'm currently working if I
 					can convince someone to give me money in exchange for some code.
@@ -209,7 +209,7 @@ export default function Home() {
 			{/* Now Section - Projects & OSS */}
 			<section className="flex flex-col gap-6">
 				<div>
-					<h2 className="text-xl font-medium text-gray-200">
+					<h2 className="text-xl font-medium text-yellow-500">
 						What am I up to?
 					</h2>
 					<p className="text-gray-400 mt-2">
@@ -256,7 +256,9 @@ export default function Home() {
 
 				<div>
 					<div className={"mb-2"}>
-						<h3 className="text-lg font-medium text-gray-200">OSS Contribs</h3>
+						<h3 className="text-lg font-medium text-yellow-500">
+							OSS Contribs
+						</h3>
 						<p className="text-gray-500">
 							I also enjoy contributing to open source projects when the
 							opportunity presents itself! I've contributed to some, and a few
@@ -314,7 +316,7 @@ export default function Home() {
 				<div>
 					<div className={"mb-2 flex items-center justify-between"}>
 						<div>
-							<h3 className="text-lg font-medium text-gray-200">Blogs</h3>
+							<h3 className="text-lg font-medium text-yellow-500">Blogs</h3>
 							<p className="text-gray-500">
 								Sometimes I have knowledge I find worth sharing, and thus I
 								write up a little something something from time to time
