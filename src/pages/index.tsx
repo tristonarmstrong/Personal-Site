@@ -38,25 +38,19 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
-				<p className="text-gray-300 mt-2 max-w-lg">
-					Software Developer with{" "}
+				<p className="text-gray-300 mt-2 max-w-lg leading-relaxed">
+					Building software for{" "}
 					<span
 						className="yearthing text-yellow-500 cursor-help"
 						title="I started programming professionally in year 2020"
 					>
 						{yearsExperience.value} years
-					</span>{" "}
-					of experience, father to 3, and husband to 1 (not in that order) with
-					a passion for building utility apps. I also greatly enjoy{" "}
-					<a
-						className="text-yellow-500 hover:underline"
-						href={"https://automatetheboringstuff.com/"}
-						target="_blank"
-						rel="noopener"
-					>
-						automating the boring stuff
-					</a>
-					.
+					</span>
+					. I specialize in full-stack development with a focus on developer
+					tools, automation, and polished user experiences. Currently based in
+					Utah, balancing code with family life (husband + father of 3). Always
+					exploring new ways to make computers work harder so people don't have
+					to.
 				</p>
 
 				{/* Social Links */}
@@ -206,7 +200,23 @@ export default function Home() {
 					Experience
 				</h2>
 				<div className="flex flex-col gap-3">
-					<DashedItem label="Your Company Here" meta="Now" href="" highlight />
+					{/* Open for opportunities - highlighted */}
+					<div className="py-2 px-3 -mx-3 rounded-xl bg-yellow-500/5 border border-yellow-500/20 border-dashed">
+						<div className="flex items-center justify-between gap-4">
+							<div className="flex items-center gap-2">
+								<span className="relative flex h-2 w-2">
+									<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+									<span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+								</span>
+								<span className="text-sm font-medium text-yellow-500">
+									Your Company Here
+								</span>
+							</div>
+							<span className="text-xs text-green-400/80 whitespace-nowrap font-medium">
+								Available Now
+							</span>
+						</div>
+					</div>
 					<DashedItem
 						label="Ventra Health"
 						meta="2023 — 2025"

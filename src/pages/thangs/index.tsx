@@ -15,75 +15,74 @@ export default function Thangs() {
 			{/* Header */}
 			<section className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10 flex flex-col gap-2">
 				<h1 className="text-2xl font-bold tracking-tight text-gray-100">
-					Thangs
+					/uses
 				</h1>
-				<p className="text-gray-400">Some things I like and use</p>
-				<i className="text-yellow-500/70 text-xs">
-					Still working on filling these in
-				</i>
+				<p className="text-gray-400 leading-relaxed">
+					The gear, tools, and random stuff that powers my day-to-day. From the
+					desk setup to kitchen gadgets, these are things I actually use and
+					recommend.
+				</p>
 			</section>
-
-			<div className="w-full border-t border-dashed border-white/10" />
 
 			{/* Tech */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Tech
-				</h2>
+				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+						Tech
+					</h2>
+				</div>
 				<FilteredThangsList group={"Tech"} />
 			</section>
 
-			<div className="w-full border-t border-dashed border-white/10" />
-
 			{/* Kitchen */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Kitchen
-				</h2>
+				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+						Kitchen
+					</h2>
+				</div>
 				<FilteredThangsList group={"Kitchen"} />
 			</section>
 
-			<div className="w-full border-t border-dashed border-white/10" />
-
 			{/* Day */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Day
-				</h2>
+				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+						Day
+					</h2>
+				</div>
 				<FilteredThangsList group={"Day"} />
 			</section>
 
-			<div className="w-full border-t border-dashed border-white/10" />
-
 			{/* Furniture */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Furniture
-				</h2>
+				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+						Furniture
+					</h2>
+				</div>
 				<FilteredThangsList group={"Furniture"} />
 			</section>
 
-			<div className="w-full border-t border-dashed border-white/10" />
-
 			{/* Travel */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Travel
-				</h2>
-				<p className="text-gray-500 text-sm">who travels these days?</p>
+				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+						Travel
+					</h2>
+				</div>
+				<p className="text-gray-500 text-sm pl-1">who travels these days?</p>
 			</section>
-
-			<div className="w-full border-t border-dashed border-white/10" />
 
 			{/* Languages */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Languages
-				</h2>
+				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+						Languages
+					</h2>
+				</div>
 				<FilteredThangsList group={"Lang"} />
 			</section>
-
-			<div className="w-full border-t border-dashed border-white/10" />
 
 			{/* Footer credit */}
 			<p className="text-gray-500 text-xs">
@@ -111,7 +110,7 @@ function FilteredThangsList({
 	const filteredThangs = allThangs.filter((x) => x.type === group);
 
 	if (filteredThangs.length === 0) {
-		return <p className="text-gray-500 text-sm">Nothing here yet</p>;
+		return <p className="text-gray-500 text-sm pl-1">Nothing here yet</p>;
 	}
 
 	return (

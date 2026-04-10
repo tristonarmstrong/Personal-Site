@@ -10,6 +10,7 @@ import {
 	calculateReadingTime,
 	formatReadingTime,
 } from "../../../utils/readingTime";
+import { ArrowLeftIcon } from "../../../components/icons/ArrowLeft";
 
 export default function Page() {
 	const {
@@ -28,7 +29,7 @@ export default function Page() {
 		}
 
 		return (
-			<article className={"blogpost markdown-body"}>
+			<article className="text-sm mt-10 flex flex-col gap-10 max-w-2xl">
 				<SEO
 					title={post.title}
 					description={post.summary}
@@ -36,48 +37,84 @@ export default function Page() {
 					publishedTime={post.date.toISOString()}
 					url={`/blog/${post.slug}`}
 				/>
-				<div
-					style={"view-transition-name: navborder"}
-					className={"border-b border-yellow-500"}
-				/>
-				<header className={"my-5 flex items-start gap-4"}>
-					<span className={"mt-8"}>
+
+				{/* Back to all posts */}
+				<div>
+					<Link
+						to="/blog"
+						className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/[0.03] border border-white/10 text-gray-400 hover:text-gray-200 hover:bg-white/[0.06] hover:border-white/20 transition text-xs font-medium backdrop-blur-sm no-underline"
+						style="text-decoration: none;"
+						transition
+					>
+						<ArrowLeftIcon size={14} />
+						<span>All Posts</span>
+						<span className="text-gray-600">·</span>
+						<span className="text-gray-500">{allPosts.length}</span>
+					</Link>
+				</div>
+
+				{/* Header */}
+				<header className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10">
+					<div className="flex items-start gap-3">
 						<Avatar size="lg" />
-					</span>
-					<div className={"flex flex-col items-start justify-center"}>
-						<h1
-							style={`view-transition-name: link-h-${params.value.slug}; margin-bottom: 0;`}
-							className="text-2xl font-bold"
-						>
-							{post.title}
-						</h1>
-						<span className="text-gray-500 text-sm">
-							{post.date.toDateString()} ·{" "}
-							{formatReadingTime(calculateReadingTime(post.mdx))}
-						</span>
+						<div className="flex-1 min-w-0">
+							<h1 className="text-xl font-bold tracking-tight text-gray-100 leading-tight">
+								{post.title}
+							</h1>
+							<div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+								<span>
+									{post.date.toLocaleDateString("en-US", {
+										month: "long",
+										day: "numeric",
+										year: "numeric",
+									})}
+								</span>
+								<span>·</span>
+								<span>{formatReadingTime(calculateReadingTime(post.mdx))}</span>
+							</div>
+						</div>
 					</div>
 				</header>
 
-				<main>
+				<div className="w-full border-t border-dashed border-white/10" />
+
+				{/* Content */}
+				<main className="blogpost markdown-body">
 					<MDXContent code={post!.mdx} />
 				</main>
 
+				<div className="w-full border-t border-dashed border-white/10" />
+
+				{/* Next post */}
 				<footer>
-					<h3>Check out my next thang!</h3>
+					<h2 className="text-xs font-medium tracking-wider text-gray-500 uppercase mb-4">
+						Next Post
+					</h2>
 					<Link
 						to={`/blog/${nextPost.slug}`}
-						className={
-							"border border-dashed rounded-lg px-2 py-2 opacity-40 hover:opacity-70 cursor-pointer block transition"
-						}
-						style={"text-decoration: unset;"}
+						className="flex flex-col p-4 border border-white/10 rounded-xl bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group no-underline"
+						style="text-decoration: none;"
 						transition
 					>
-						<div className={"text-md font-bold text-white"}>
-							{nextPost.title}
+						<div className="flex items-center justify-between gap-4 mb-1">
+							<h3 className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight">
+								{nextPost.title}
+							</h3>
+							<span className="text-xs text-gray-500 whitespace-nowrap">
+								{nextPost.date.toLocaleDateString("en-US", {
+									month: "short",
+									day: "numeric",
+								})}
+							</span>
 						</div>
-						<div className={"text-sm"}>{nextPost.summary}</div>
+						<p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
+							{nextPost.summary}
+						</p>
 					</Link>
 				</footer>
+
+				{/* Footer spacer */}
+				<div className="h-20" />
 			</article>
 		);
 	};
