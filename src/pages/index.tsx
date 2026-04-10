@@ -192,7 +192,7 @@ export default function Home() {
 					<Work href="" comp="Makers Ladder LLC" time="2020" />
 				</ul>
 				<div>
-					<h3 className="font-semibold text-gray-200">Freelance Work</h3>
+					<h3 className="font-semibold text-gray-400">Freelance Work</h3>
 					<p className="text-gray-400 text-sm mt-1">
 						My experience freelancing was cool! 10/10 would do again.
 					</p>
@@ -256,9 +256,7 @@ export default function Home() {
 
 				<div>
 					<div className={"mb-2"}>
-						<h3 className="text-lg font-medium text-yellow-500">
-							OSS Contribs
-						</h3>
+						<h3 className="text-lg font-medium text-gray-400">OSS Contribs</h3>
 						<p className="text-gray-500">
 							I also enjoy contributing to open source projects when the
 							opportunity presents itself! I've contributed to some, and a few
@@ -316,7 +314,7 @@ export default function Home() {
 				<div>
 					<div className={"mb-2 flex items-center justify-between"}>
 						<div>
-							<h3 className="text-lg font-medium text-yellow-500">Blogs</h3>
+							<h3 className="text-lg font-medium text-gray-400">Blogs</h3>
 							<p className="text-gray-500">
 								Sometimes I have knowledge I find worth sharing, and thus I
 								write up a little something something from time to time
