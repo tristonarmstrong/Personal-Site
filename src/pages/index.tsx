@@ -192,7 +192,7 @@ export default function Home() {
 					<Work href="" comp="Makers Ladder LLC" time="2020" />
 				</ul>
 				<div>
-					<h3 className={"font-bold text-gray-400"}>Freelance Work</h3>
+					<h3 className={"font-bold text-yellow-600"}>Freelance Work</h3>
 					<p className={"text-gray-400"}>
 						My experience freelancing was cool! 10/10 would do again.
 					</p>
@@ -202,6 +202,7 @@ export default function Home() {
 						href="https://www.upwork.com/freelancers/~018467e8cbe2f71382"
 						comp="Upwork"
 						time="$40,000+"
+						highlight
 					/>
 				</ul>
 			</section>
@@ -348,16 +349,21 @@ function Work({
 	time,
 	href,
 	focus = false,
+	highlight = false,
 }: {
 	comp: string;
 	time: string;
 	href: string;
 	focus?: boolean;
+	highlight?: boolean;
 }) {
 	const unmutedLink = "text-gray-700",
 		mutedLink = "text-gray-400";
 	const isMutedLink = href ? unmutedLink : mutedLink;
 	const isFocused = focus ? "animate-pulse" : "";
+	const isHighlight = highlight
+		? "text-yellow-500 font-medium"
+		: "text-sm italic";
 
 	return (
 		<a href={href} target={"_blank"} className={`${isMutedLink} ${isFocused}`}>
@@ -366,7 +372,7 @@ function Work({
 				<span
 					className={"h-full border border-dashed flex-1 border-gray-400"}
 				></span>
-				<span className={"text-sm italic"}>{time}</span>
+				<span className={isHighlight}>{time}</span>
 			</li>
 		</a>
 	);
