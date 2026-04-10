@@ -304,31 +304,9 @@ export default function Home() {
 								write up a little something something from time to time
 							</p>
 						</div>
-						<a
-							href="/feed.xml"
-							className="text-yellow-500 hover:opacity-80 transition text-sm flex items-center gap-1"
-							title="Subscribe to RSS feed"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="14"
-								height="14"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<path d="M4 11a9 9 0 0 1 9 9" />
-								<path d="M4 4a16 16 0 0 1 16 16" />
-								<circle cx="5" cy="19" r="1" />
-							</svg>
-							RSS
-						</a>
 					</div>
 					<ul className={"mx-4"}>
-						{allPostsRearranged.map((x) => (
+						{allPostsRearranged.slice(0, 3).map((x) => (
 							<Item
 								label={x.title}
 								href={`/blog/${x.slug}`}
@@ -336,6 +314,15 @@ export default function Home() {
 							/>
 						))}
 					</ul>
+					<div className="mx-4 mt-2">
+						<Link
+							to="/blog"
+							className="text-sm text-gray-500 hover:text-yellow-500 transition"
+							transition
+						>
+							View all posts →
+						</Link>
+					</div>
 				</div>
 			</section>
 
