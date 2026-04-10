@@ -2,9 +2,11 @@ import * as Kiru from "kiru";
 import * as _jsx_runtime from "kiru/jsx-runtime";
 import { jsx } from "kiru/jsx-runtime";
 
-import { definePageConfig, useFileRouter } from "kiru/router";
+import { definePageConfig, Link, useFileRouter } from "kiru/router";
 import { allProjects } from "content-collections";
+import { Avatar } from "../../../components/Avatar";
 import { SEO } from "../../../components/SEO";
+import { ArrowLeftIcon } from "../../../components/icons/ArrowLeft";
 
 export default function Page() {
 	const {
@@ -13,30 +15,113 @@ export default function Page() {
 
 	return () => {
 		const slug = params.value?.slug;
-		const post = allProjects.find((x) => x.slug === slug);
+		const projectId = allProjects.findIndex((x) => x.slug === slug);
+		const project = allProjects[projectId];
+		const nextProject =
+			projectId !== allProjects.length - 1
+				? allProjects[projectId + 1]
+				: allProjects[0];
 
-		if (!post?.mdx) {
+		if (!project?.mdx) {
 			return <div>Oops something went wrong rendering the page</div>;
 		}
 
 		return (
-			<article className={"blogpost markdown-body"}>
+			<article className="text-sm mt-10 flex flex-col gap-10 max-w-2xl">
 				<SEO
-					title={post.title}
-					description={`${post.title} - A ${post.type} project by Triston Armstrong.`}
-					url={`/project/${post.slug}`}
+					title={project.title}
+					description={`${project.title} - A ${project.type} project by Triston Armstrong.`}
+					url={`/project/${project.slug}`}
 				/>
-				<div
-					style={"view-transition-name: navborder"}
-					className={"border-b border-yellow-500"}
-				/>
-				<h1
-					style={`view-transition-name: link-h-${post.slug}`}
-					className="text-2xl font-bold w-fit"
-				>
-					{post.title}
-				</h1>
-				<MDXContent code={post!.mdx} />
+
+				{/* Back to all projects */}
+				<div>
+					<Link
+						to="/"
+						className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/[0.03] border border-white/10 text-gray-400 hover:text-gray-200 hover:bg-white/[0.06] hover:border-white/20 transition text-xs font-medium backdrop-blur-sm no-underline"
+						style="text-decoration: none;"
+						transition
+					>
+						<ArrowLeftIcon size={14} />
+						<span>All Projects</span>
+						<span className="text-gray-600">·</span>
+						<span className="text-gray-500">{allProjects.length}</span>
+					</Link>
+				</div>
+
+				{/* Header */}
+				<header className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10">
+					<div className="flex items-start gap-3">
+						<Avatar size="lg" />
+						<div className="flex-1 min-w-0">
+							<h1
+								style={`view-transition-name: link-h-${project.slug}`}
+								className="text-xl font-bold tracking-tight text-yellow-500 leading-tight"
+							>
+								{project.title}
+							</h1>
+							<div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+								<span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/10 text-gray-400">
+									{project.type}
+								</span>
+								<span>·</span>
+								<a
+									href={project.repo}
+									target="_blank"
+									rel="noopener"
+									className="text-gray-500 hover:text-yellow-500 transition no-underline"
+									style="text-decoration: none;"
+								>
+									View on GitHub
+								</a>
+							</div>
+						</div>
+					</div>
+				</header>
+
+				<div className="w-full border-t border-dashed border-white/10" />
+
+				{/* Content */}
+				<main className="blogpost markdown-body">
+					<MDXContent code={project!.mdx} />
+				</main>
+
+				<div className="w-full border-t border-dashed border-white/10" />
+
+				{/* Next project */}
+				<footer>
+					<h2 className="text-xs font-medium tracking-wider text-gray-500 uppercase mb-4">
+						Next Project
+					</h2>
+					<Link
+						to={`/project/${nextProject.slug}`}
+						className="flex items-start gap-3 p-4 border border-white/10 rounded-xl bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group no-underline"
+						style="text-decoration: none;"
+						transition
+					>
+						<div className="w-10 h-10 rounded bg-[#1a1a1a] flex items-center justify-center text-gray-500 text-xs font-medium shrink-0 mt-0.5">
+							{nextProject.type.charAt(0)}
+						</div>
+						<div className="flex-1 min-w-0">
+							<div className="flex items-center justify-between gap-4 mb-1">
+								<h3 className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight">
+									{nextProject.title}
+								</h3>
+								<span className="text-xs text-gray-500 whitespace-nowrap px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/10">
+									{nextProject.type}
+								</span>
+							</div>
+							{nextProject.summary && (
+								<p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
+									{nextProject.summary}
+								</p>
+							)}
+						</div>
+					</Link>
+				</footer>
+
+				{/* Footer spacer */}
+				<div className="h-20" />
 			</article>
 		);
 	};
