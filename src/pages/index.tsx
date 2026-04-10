@@ -236,30 +236,8 @@ export default function Home() {
 				</div>
 			</section>
 
-			{/* Footer */}
-			<section className="pt-4 border-t border-dashed border-white/10">
-				<div className="flex items-center gap-4">
-					<SocialLink href="https://github.com/tristonarmstrong" label="GitHub">
-						<GithubIcon />
-					</SocialLink>
-					<SocialLink href="https://x.com/triston_armstr" label="X">
-						<XIcon />
-					</SocialLink>
-					<SocialLink
-						href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
-						label="LinkedIn"
-					>
-						<LinkedinIcon />
-					</SocialLink>
-					<SocialLink href="mailto:triston95strong@gmail.com" label="Email">
-						<EmailIcon />
-					</SocialLink>
-				</div>
-				<p className="text-xs text-gray-600 mt-4">
-					This is a "living site". I push half-baked chunks of UI to showcase
-					its development in realtime.
-				</p>
-			</section>
+			{/* Footer spacer */}
+			<div className="h-20" />
 		</main>
 	);
 }
@@ -383,29 +361,6 @@ function ProjectCard({
 				)}
 			</div>
 		</Link>
-	);
-}
-
-// Social link (footer style)
-function SocialLink({
-	href,
-	label,
-	children,
-}: {
-	href: string;
-	label: string;
-	children: JSX.Element;
-}) {
-	return (
-		<a
-			href={href}
-			target={href.startsWith("http") ? "_blank" : undefined}
-			rel={href.startsWith("http") ? "noopener" : undefined}
-			className="text-gray-500 hover:text-gray-300 transition"
-			aria-label={label}
-		>
-			{children}
-		</a>
 	);
 }
 
