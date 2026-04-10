@@ -192,12 +192,12 @@ export default function Home() {
 					<Work href="" comp="Makers Ladder LLC" time="2020" />
 				</ul>
 				<div>
-					<h3 className={"font-bold text-yellow-600"}>Freelance Work</h3>
-					<p className={"text-gray-400"}>
+					<h3 className="font-semibold text-gray-200">Freelance Work</h3>
+					<p className="text-gray-400 text-sm mt-1">
 						My experience freelancing was cool! 10/10 would do again.
 					</p>
 				</div>
-				<ul>
+				<ul className="mt-2">
 					<Work
 						href="https://www.upwork.com/freelancers/~018467e8cbe2f71382"
 						comp="Upwork"
