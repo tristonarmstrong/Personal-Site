@@ -304,7 +304,7 @@ function Work({
 			href={href || undefined}
 			target={href ? "_blank" : undefined}
 			rel={href ? "noopener" : undefined}
-			className={`${isMutedLink} ${isFocused} block py-1.5`}
+			className={`${isMutedLink} ${isFocused} block py-0.5`}
 		>
 			<li className="flex w-full items-center gap-2 group">
 				<span className="text-gray-300 group-hover:text-white transition-colors">
@@ -364,7 +364,7 @@ function LinkBody({
 	const linkLabelTransitionId = `link-h-${transitionId}`;
 
 	return () => (
-		<li className="flex w-full items-center gap-2 py-1.5 group cursor-pointer">
+		<li className="flex w-full items-center gap-2 py-0.5 group cursor-pointer">
 			<span
 				className="w-fit text-gray-300 group-hover:text-white transition-colors"
 				style={`view-transition-name: ${linkLabelTransitionId}`}
