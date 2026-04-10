@@ -192,7 +192,7 @@ export default function Home() {
 					<Work href="" comp="Makers Ladder LLC" time="2020" />
 				</ul>
 				<div>
-					<h3 className="font-semibold text-gray-400">Freelance Work</h3>
+					<h3 className="font-semibold !text-gray-400">Freelance Work</h3>
 					<p className="text-gray-400 text-sm mt-1">
 						My experience freelancing was cool! 10/10 would do again.
 					</p>
