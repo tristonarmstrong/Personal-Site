@@ -38,9 +38,15 @@ export default function Home() {
 				</div>
 
 				<p className="text-gray-300">
-					Software Developer with {yearsExperience.value} years of experience,
-					father to 3, and husband to 1 (not in that order) with a passion for
-					building utility apps. I also greatly enjoy{" "}
+					Software Developer with{" "}
+					<span
+						className="yearthing cursor-help"
+						title="I started programming professionally in year 2020"
+					>
+						{yearsExperience.value} years
+					</span>{" "}
+					of experience, father to 3, and husband to 1 (not in that order) with
+					a passion for building utility apps. I also greatly enjoy{" "}
 					<a
 						className="text-yellow-500 hover:underline"
 						href={"https://automatetheboringstuff.com/"}
