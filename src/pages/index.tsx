@@ -244,6 +244,51 @@ export default function Home() {
 				</div>
 			</section>
 
+			{/* Get in Touch CTA */}
+			<section className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10">
+				<div className="flex items-start gap-3">
+					<div className="w-10 h-10 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							className="text-yellow-500"
+						>
+							<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+						</svg>
+					</div>
+					<div className="flex-1 min-w-0">
+						<h2 className="text-lg font-bold tracking-tight text-gray-100 mb-1">
+							Let's work together
+						</h2>
+						<p className="text-sm text-gray-400 leading-relaxed mb-3">
+							Have a project in mind or just want to chat? I'm always open to
+							discussing new opportunities, creative ideas, or potential
+							collaborations.
+						</p>
+						<button
+							type="button"
+							onclick={() => {
+								const a = document.createElement("a");
+								a.href =
+									"mailto:triston95strong@gmail.com?subject=Reaching Out&body=Hey Triston, ...Put message here...";
+								a.click();
+							}}
+							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 hover:bg-yellow-500/20 hover:border-yellow-500/50 transition text-sm font-medium cursor-pointer"
+						>
+							<EmailIcon />
+							<span>Send me an email</span>
+						</button>
+					</div>
+				</div>
+			</section>
+
 			{/* Footer spacer */}
 			<div className="h-20" />
 		</main>
