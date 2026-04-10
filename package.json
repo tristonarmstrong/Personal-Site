@@ -20,7 +20,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "content-collections build && tsc && vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"postbuild": "node scripts/copy-robots.mjs"
 	},
 	"type": "module",
 	"dependencies": {
