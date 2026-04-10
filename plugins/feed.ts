@@ -2,7 +2,7 @@ import { type Plugin } from "vite";
 import { writeFileSync, readFileSync, readdirSync, statSync } from "fs";
 import { join, parse } from "path";
 
-const SITE_URL = "https://triston.dev";
+const SITE_URL = "https://tristonarmstrong.com";
 const SITE_TITLE = "Triston Armstrong";
 const SITE_DESCRIPTION =
 	"Senior Software Engineer, father, and husband with a passion for building utility apps and automating the boring stuff.";
