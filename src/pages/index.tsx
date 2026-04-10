@@ -3,6 +3,7 @@ import { Link } from "kiru/router";
 import { signal } from "kiru";
 import { SEO } from "../components/SEO";
 import { RssIcon } from "../components/icons/Rss";
+import { Avatar } from "../components/Avatar";
 
 const yearsExperience = signal(5);
 
@@ -24,13 +25,16 @@ export default function Home() {
 		>
 			<SEO />
 
-			{/* Bio Section - Material 3 Card */}
+			{/* Bio Section - Material 3 Card with Avatar */}
 			<section className="flex flex-col gap-4 p-5 rounded-2xl bg-[#141414] shadow-[0_1px_3px_rgba(0,0,0,0.3)]">
-				<div>
-					<h1 className="text-lg text-yellow-500">Triston Armstrong</h1>
-					<p className="text-sm text-gray-400 italic">
-						Senior Software Engineer
-					</p>
+				<div className="flex items-start gap-4">
+					<Avatar />
+					<div>
+						<h1 className="text-lg text-yellow-500">Triston Armstrong</h1>
+						<p className="text-sm text-gray-400 italic">
+							Senior Software Engineer
+						</p>
+					</div>
 				</div>
 
 				<p className="text-gray-300">
