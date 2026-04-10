@@ -24,7 +24,7 @@ export default function Home() {
 			<SEO />
 
 			{/* Header */}
-			<section className="p-4 rounded-2xl bg-[#141414] flex flex-col gap-2">
+			<section className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10 flex flex-col gap-2">
 				<div className="flex items-start gap-3">
 					<Avatar size="lg" />
 					<div>
@@ -94,8 +94,6 @@ export default function Home() {
 				</h2>
 				<GitHubActivity />
 			</section>
-
-			<div className="w-full border-t border-dashed border-white/10" />
 
 			{/* OSS Contributions */}
 			<section>
@@ -344,7 +342,7 @@ function ProjectCard({
 	return (
 		<Link
 			to={href}
-			className="flex items-start gap-3 p-3 border border-white/10 rounded-md bg-white/5 hover:bg-white/10 transition group"
+			className="flex items-start gap-3 p-3 border border-white/10 rounded-md bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group"
 			transition
 		>
 			<div className="w-10 h-10 rounded bg-[#1a1a1a] flex items-center justify-center text-gray-500 text-xs font-medium shrink-0 mt-0.5">

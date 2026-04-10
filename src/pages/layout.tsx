@@ -28,6 +28,35 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 	}
 	return (
 		<div className="max-w-[70ch] mx-auto mt-20 flex flex-col gap-4 px-10 xs:px-6 sm:px-4 sm:overflow-hidden relative">
+			{/* Background Glow Orbs */}
+			<div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+				{/* Yellow orb - slow pulse (8s) */}
+				<div
+					className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-[120px]"
+					style="opacity: 0.3; animation: pulse-glow 8s ease-in-out infinite"
+				/>
+				{/* Blue orb - medium pulse (6s) with delay */}
+				<div
+					className="absolute top-[40%] right-[5%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"
+					style="opacity: 0.3; animation: pulse-glow 6s ease-in-out infinite; animation-delay: 1s"
+				/>
+				{/* Purple orb - fast pulse (4s) with delay */}
+				<div
+					className="absolute bottom-[20%] left-[20%] w-[300px] h-[300px] bg-purple-500/5 rounded-full blur-[80px]"
+					style="opacity: 0.3; animation: pulse-glow 4s ease-in-out infinite; animation-delay: 2s"
+				/>
+			</div>
+
+			{/* Custom pulse animation */}
+			<style>
+				{`
+					@keyframes pulse-glow {
+						0%, 100% { opacity: 0.3; transform: scale(1); }
+						50% { opacity: 0.6; transform: scale(1.1); }
+					}
+				`}
+			</style>
+
 			<style innerHTML={_generateViewTransitionNamesFromContent()} />
 			<div className="relative z-10">
 				<Navigation />
@@ -38,7 +67,7 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 					className="text-center flex flex-col gap-1"
 					style={"view-transition-name: foot"}
 				>
-					<hr className="opacity-50" />
+					<div className="w-full border-t border-dashed border-white/10" />
 					<div className={"flex flex-col [&_*]:transition gap-2"}>
 						<div className={"flex justify-between"}>
 							<small className="opacity-50 hover:opacity-100">
