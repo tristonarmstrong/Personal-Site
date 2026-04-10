@@ -1,171 +1,166 @@
 @import "tailwindcss";
 
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
 }
 
-html, body {
-  overflow-x: hidden;
+html,
+body {
+	overflow-x: hidden;
 }
 
 img {
-  overflow-clip-margin: content-box;
-  overflow: clip;
+	overflow-clip-margin: content-box;
+	overflow: clip;
 }
 
 ::selection {
-  background-color: #ffef5c;
-  color: #000;
-  -webkit-box-decoration-break: clone; /* For WebKit browsers */
-  box-decoration-break: clone; /* Standard property */ 
+	background-color: #ffef5c;
+	color: #000;
+	-webkit-box-decoration-break: clone; /* For WebKit browsers */
+	box-decoration-break: clone; /* Standard property */
 }
 
 :root {
-  background-color: black;
-  color: var(--color-gray-200);
-  color-scheme: dark;
-  min-height: 100vh;
-  font-family: var(--font-sans);
-  line-height: 1.5;
+	background-color: black;
+	color: var(--color-gray-200);
+	color-scheme: dark;
+	min-height: 100vh;
+	font-family: var(--font-sans);
+	line-height: 1.5;
 }
 
 footer {
-  margin-bottom: 2rem;
+	margin-bottom: 2rem;
 }
 
 p {
-  color: var(--color-gray-300);
+	color: var(--color-gray-300);
 }
 
 a {
-  color: var(--color-gray-400);
+	color: var(--color-gray-400);
 
-  &:hover {
-    color: var(--color-yellow-500);
-  }
-}
-
-
-h3 {
-  color: var(--color-yellow-600);
-  font-weight: 600;
+	&:hover {
+		color: var(--color-yellow-500);
+	}
 }
 
 .yearthing {
-  color: var(--color-yellow-600);
+	color: var(--color-yellow-600);
 }
 
 article {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
+	margin-top: 2rem;
+	display: flex;
+	flex-direction: column;
 
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: var(--color-yellow-600);
-    margin-top: 1.5rem;
-  }
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: var(--color-yellow-600);
+		margin-top: 1.5rem;
+	}
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-  }
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+		margin-top: 1.5rem;
+		margin-bottom: 1rem;
+	}
 
-  h1 {
-    font-size: var(--text-3xl);
-  }
+	h1 {
+		font-size: var(--text-3xl);
+	}
 
-  h2 {
-    font-size: var(--text-2xl);
-  }
-  h3 {
-    font-size: var(--text-xl);
-  }
-  h4 {
-    font-size: var(--text-lg);
-  }
-  h5 {
-    font-size: var(--text-md);
-  }
-  h6,
-  p,
-  code {
-    font-size: var(--text-sm);
-  }
+	h2 {
+		font-size: var(--text-2xl);
+	}
+	h3 {
+		font-size: var(--text-xl);
+	}
+	h4 {
+		font-size: var(--text-lg);
+	}
+	h5 {
+		font-size: var(--text-md);
+	}
+	h6,
+	p,
+	code {
+		font-size: var(--text-sm);
+	}
 
-  p {
-    margin-bottom: 1rem;
-  }
+	p {
+		margin-bottom: 1rem;
+	}
 
-  code {
-    color: var(--color-yellow-700);
-    font-family: monospace;
-    background-color: #ffffff0f;
-    padding: 2px 4px;
-    border-radius: var(--radius-sm);
-  }
+	code {
+		color: var(--color-yellow-700);
+		font-family: monospace;
+		background-color: #ffffff0f;
+		padding: 2px 4px;
+		border-radius: var(--radius-sm);
+	}
 
-  pre {
-    padding: 1rem;
-    overflow: auto;
-    font-size: 85%;
-    line-height: 1.45;
-    background-color: #ffffff0f;
-    border-radius: var(--radius-sm);
-    font-family: monospace;
-    margin-bottom: 1rem;
+	pre {
+		padding: 1rem;
+		overflow: auto;
+		font-size: 85%;
+		line-height: 1.45;
+		background-color: #ffffff0f;
+		border-radius: var(--radius-sm);
+		font-family: monospace;
+		margin-bottom: 1rem;
 
-    code {
-      color: unset;
-      font-family: unset;
-      background-color: unset;
-      padding: unset;
-      border-radius: unset;
-    }
-  }
+		code {
+			color: unset;
+			font-family: unset;
+			background-color: unset;
+			padding: unset;
+			border-radius: unset;
+		}
+	}
 
-  a {
-    text-decoration: underline;
-    text-decoration-color: var(--color-yellow-700);
-  }
+	a {
+		text-decoration: underline;
+		text-decoration-color: var(--color-yellow-700);
+	}
 
-  blockquote {
-    margin: var(--spacing) 0 1rem;
-    color: var(--color-gray-500);
-    border-left: 2px solid var(--color-gray-500);
-    padding-left: var(--spacing);
-    p {
-      margin-bottom: 0;
-      color: var(--color-gray-600);
-    }
-  }
+	blockquote {
+		margin: var(--spacing) 0 1rem;
+		color: var(--color-gray-500);
+		border-left: 2px solid var(--color-gray-500);
+		padding-left: var(--spacing);
+		p {
+			margin-bottom: 0;
+			color: var(--color-gray-600);
+		}
+	}
 
-  ul {
-    list-style: thai;
-    padding-left: 2rem;
-    margin-bottom: 1rem;
-  }
+	ul {
+		list-style: thai;
+		padding-left: 2rem;
+		margin-bottom: 1rem;
+	}
 
-  hr {
-    border-color: var(--color-gray-700);
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-  }
+	hr {
+		border-color: var(--color-gray-700);
+		margin-bottom: 0.5rem;
+		margin-top: 0.5rem;
+	}
 
-  img {
-    border-radius: 12px;
-  }
+	img {
+		border-radius: 12px;
+	}
 }
