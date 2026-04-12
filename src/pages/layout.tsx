@@ -32,17 +32,17 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 			<div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
 				{/* Yellow orb - slow pulse (8s) */}
 				<div
-					className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-[120px]"
+					className="absolute top-[10%] left-[calc(50%-700px)] w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-[120px]"
 					style="opacity: 0.3; animation: pulse-glow 8s ease-in-out infinite"
 				/>
 				{/* Blue orb - medium pulse (6s) with delay */}
 				<div
-					className="absolute top-[40%] right-[5%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"
+					className="absolute top-[40%] right-[calc(50%-600px)] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"
 					style="opacity: 0.3; animation: pulse-glow 6s ease-in-out infinite; animation-delay: 1s"
 				/>
 				{/* Purple orb - fast pulse (4s) with delay */}
 				<div
-					className="absolute bottom-[20%] left-[20%] w-[300px] h-[300px] bg-purple-500/5 rounded-full blur-[80px]"
+					className="absolute bottom-[10%] left-[calc(50%-500px)] w-[300px] h-[300px] bg-purple-500/5 rounded-full blur-[80px]"
 					style="opacity: 0.3; animation: pulse-glow 4s ease-in-out infinite; animation-delay: 2s"
 				/>
 			</div>
