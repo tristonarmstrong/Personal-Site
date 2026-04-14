@@ -64,21 +64,19 @@ function getEventIcon(type: string): string {
 
 function getEventDescription(event: GitHubEvent): string {
 	const repoName = event.repo.name.replace("tristonarmstrong/", "");
+	console.log(event)
 
 	switch (event.type) {
 		case "PushEvent": {
-			const commits = event.payload.commits?.length || 0;
-			return `pushed ${commits} commit${commits !== 1 ? "s" : ""} to ${repoName}`;
+			return `pushed commits to ${repoName}`;
 		}
 		case "PullRequestEvent": {
 			const action = event.payload.action || "";
-			const title = event.payload.pull_request?.title || "";
-			return `${action} PR "${title.slice(0, 30)}${title.length > 30 ? "..." : ""}" in ${repoName}`;
+			return `${action} PR in ${repoName}`;
 		}
 		case "IssuesEvent": {
 			const action = event.payload.action || "";
-			const title = event.payload.issue?.title || "";
-			return `${action} issue "${title.slice(0, 30)}${title.length > 30 ? "..." : ""}" in ${repoName}`;
+			return `${action} issue in ${repoName}`;
 		}
 		case "CreateEvent": {
 			const refType = event.payload.ref_type || "";
