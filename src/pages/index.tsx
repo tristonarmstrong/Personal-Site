@@ -49,10 +49,15 @@ export default function Home() {
 						<span className="yearthing text-yellow-500 cursor-help" title="I started programming professionally in year 2020">
 							{yearsExperience.value} years
 						</span>
-						{" "} of experience building modern, scalable web applications. I bring strong expertise in React, TypeScript, JavaScript, and full-stack development, with significant experience modernizing legacy systems and delivering enterprise solutions.
-					</p>
-					<p className="text-gray-300 mt-2 max-w-lg leading-relaxed text-justify">
-						Throughout my career, I’ve led frontend development efforts, migrated large codebases to TypeScript, optimized CI/CD pipelines, and worked closely with stakeholders to turn complex business requirements into clean, maintainable software. I’m known as a collaborative team player who enjoys mentoring junior developers and fostering a culture of constructive feedback.
+						{" "} of experience building applications in React, TypeScript, and Rust with
+						significant experience modernizing legacy systems and delivering enterprise solutions.
+						I’ve led frontend development efforts, migrated large codebases to TypeScript,
+						optimized CI/CD pipelines, and worked closely with stakeholders to turn complex business
+						requirements into clean, maintainable software.
+						<br />
+						<br />
+						I’m known as a collaborative team player who enjoys mentoring junior developers and fostering
+						a culture of constructive feedback.
 					</p>
 
 					{/* Social Links */}
