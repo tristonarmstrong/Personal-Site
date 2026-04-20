@@ -1,10 +1,10 @@
 import { allPosts, allProjects } from "content-collections";
+import { onMount, signal } from "kiru";
 import { Link } from "kiru/router";
-import { signal, onMount } from "kiru";
-import { SEO } from "../components/SEO";
-import { RssIcon } from "../components/icons/Rss";
 import { Avatar } from "../components/Avatar";
 import { GitHubActivity } from "../components/GitHubActivity";
+import { RssIcon } from "../components/icons/Rss";
+import { SEO } from "../components/SEO";
 
 export default function Home() {
 	const yearsExperience = signal(5);
@@ -24,58 +24,61 @@ export default function Home() {
 			<SEO />
 
 			{/* Header */}
-			<section className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10 flex flex-col gap-2">
-				<div className="flex items-start gap-3">
-					<Avatar size="lg" />
-					<div>
-						<h1 className="text-2xl font-bold tracking-tight text-yellow-500">
-							Triston Armstrong
-						</h1>
-						<div className="flex gap-2 text-gray-500">
-							<span>Senior Software Engineer</span>
-							<span>·</span>
-							<span>Utah, USA</span>
+			<section className={"relative"}>
+				<img
+					className="rounded-xl z-0 hidden sm:block absolute"
+					src="https://pbs.twimg.com/profile_banners/1087178748456325121/1772570468/1500x500" alt="me in cyber style thai tech cafe"
+					style={"mask-image: linear-gradient(to top, transparent 5%, black 100%); -webkit-mask-image: linear-gradient(to top, transparent 5%, black 100%);"}
+				/>
+				<div className="p-4 rounded-2xl bg-[#212121] flex flex-col gap-2 z-10 relative max-w-150 mx-auto sm:mt-40">
+					<div className="flex items-start gap-3 z-10">
+						<Avatar size="lg" />
+						<div className={"z-10"}>
+							<h1 className="text-2xl font-bold tracking-tight text-yellow-500 z-10">
+								Triston Armstrong
+							</h1>
+							<div className="flex gap-2 text-gray-500 z-10">
+								<span>Senior Software Engineer</span>
+								<span>·</span>
+								<span>Utah, USA</span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<p className="text-gray-300 mt-2 max-w-lg leading-relaxed">
-					Building software for{" "}
-					<span
-						className="yearthing text-yellow-500 cursor-help"
-						title="I started programming professionally in year 2020"
-					>
-						{yearsExperience.value} years
-					</span>
-					. I specialize in full-stack development with a focus on developer
-					tools, automation, and polished user experiences. Currently based in
-					Utah, balancing code with family life (husband + father of 3). Always
-					exploring new ways to make computers work harder so people don't have
-					to.
-				</p>
+					<p className="text-gray-300 mt-2 max-w-lg leading-relaxed text-justify">
+						I am a Senior Software Engineer with over{" "}
+						<span className="yearthing text-yellow-500 cursor-help" title="I started programming professionally in year 2020">
+							{yearsExperience.value} years
+						</span>
+						{" "} of experience building modern, scalable web applications. I bring strong expertise in React, TypeScript, JavaScript, and full-stack development, with significant experience modernizing legacy systems and delivering enterprise solutions.
+					</p>
+					<p className="text-gray-300 mt-2 max-w-lg leading-relaxed text-justify">
+						Throughout my career, I’ve led frontend development efforts, migrated large codebases to TypeScript, optimized CI/CD pipelines, and worked closely with stakeholders to turn complex business requirements into clean, maintainable software. I’m known as a collaborative team player who enjoys mentoring junior developers and fostering a culture of constructive feedback.
+					</p>
 
-				{/* Social Links */}
-				<div className="flex items-center gap-1 mt-3">
-					<SocialIcon
-						href="https://github.com/tristonarmstrong"
-						icon={<GithubIcon />}
-						label="GitHub"
-					/>
-					<SocialIcon
-						href="https://x.com/triston_armstr"
-						icon={<XIcon />}
-						label="X"
-					/>
-					<SocialIcon
-						href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
-						icon={<LinkedinIcon />}
-						label="LinkedIn"
-					/>
-					<SocialIcon
-						href="mailto:triston95strong@gmail.com"
-						icon={<EmailIcon />}
-						label="Email"
-					/>
-					<SocialIcon href="/feed.xml" icon={<RssIcon />} label="RSS" />
+					{/* Social Links */}
+					<div className="flex items-center gap-1 mt-3 [&>a]:bg-white/[0.1]">
+						<SocialIcon
+							href="https://github.com/tristonarmstrong"
+							icon={<GithubIcon />}
+							label="GitHub"
+						/>
+						<SocialIcon
+							href="https://x.com/triston_armstr"
+							icon={<XIcon />}
+							label="X"
+						/>
+						<SocialIcon
+							href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
+							icon={<LinkedinIcon />}
+							label="LinkedIn"
+						/>
+						<SocialIcon
+							href="mailto:triston95strong@gmail.com"
+							icon={<EmailIcon />}
+							label="Email"
+						/>
+						<SocialIcon href="/feed.xml" icon={<RssIcon />} label="RSS" />
+					</div>
 				</div>
 			</section>
 
@@ -169,18 +172,14 @@ export default function Home() {
 				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
 					Blog
 				</h2>
-				<div className="flex flex-col gap-3">
+				<div className="flex flex-col sm:flex-row gap-3">
 					{allPostsRearranged.slice(0, 3).map((x) => (
-						<DashedItem
-							key={x.slug}
-							label={x.title}
-							meta={x.date.toLocaleDateString("en-US", {
-								month: "short",
-								year: "numeric",
-							})}
-							href={`/blog/${x.slug}`}
-							internal
-						/>
+						<div className={"px-4 py-3 bg-white/[0.03] rounded-xl flex-1 flex flex-col justify-between gap-2"}>
+							<time className={"text-[#fff9] text-xs font-thin"}>{x.date.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" })}</time>
+							<h2 className={"text-gray-400 font-bold"}>{x.title}</h2>
+							<p className="text-[#fff9] font-thin text-xs">{x.summary.slice(0, 100)}...</p>
+							<Link className={"text-xs ml-auto sm:ml-0"} to={`/blog/${x.slug}`}>Read More</Link>
+						</div>
 					))}
 				</div>
 				<div className="mt-3">
@@ -245,7 +244,7 @@ export default function Home() {
 			</section>
 
 			{/* Get in Touch CTA */}
-			<section className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10">
+			<section className="p-4 rounded-2xl bg-white/[0.03]">
 				<div className="flex items-start gap-3">
 					<div className="w-10 h-10 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0">
 						<svg
@@ -311,7 +310,7 @@ function DashedItem({
 }) {
 	const labelClasses = highlight
 		? "text-gray-200 animate-pulse"
-		: "text-gray-300 group-hover:text-gray-100";
+		: "text-gray-400 group-hover:text-gray-100";
 
 	const content = (
 		<div className="flex items-center justify-between gap-4 group cursor-pointer">
@@ -397,7 +396,7 @@ function ProjectCard({
 	return (
 		<Link
 			to={href}
-			className="flex items-start gap-3 p-3 border border-white/10 rounded-md bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group"
+			className="flex items-start gap-3 p-3 rounded-md bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group"
 			transition
 		>
 			<div className="w-10 h-10 rounded bg-[#1a1a1a] flex items-center justify-center text-gray-500 text-xs font-medium shrink-0 mt-0.5">

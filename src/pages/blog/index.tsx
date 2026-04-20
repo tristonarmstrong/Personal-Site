@@ -1,8 +1,8 @@
 import { allPosts } from "content-collections";
 import { Link } from "kiru/router";
-import { SEO } from "../../components/SEO";
-import { RssIcon } from "../../components/icons/Rss";
 import { Avatar } from "../../components/Avatar";
+import { RssIcon } from "../../components/icons/Rss";
+import { SEO } from "../../components/SEO";
 import {
 	calculateReadingTime,
 	formatReadingTime,
@@ -17,7 +17,7 @@ function detectCategory(
 	color: string;
 	icon: JSX.Element;
 } {
-	const text = (title + " " + summary).toLowerCase();
+	const text = (`${title} ${summary}`).toLowerCase();
 
 	if (
 		text.includes("interview") ||
@@ -73,21 +73,6 @@ function detectCategory(
 	};
 }
 
-// Get accent color for left border
-function getAccentColor(category: string): string {
-	switch (category) {
-		case "Personal":
-			return "border-l-purple-500/50";
-		case "Rust":
-			return "border-l-orange-500/50";
-		case "Tutorial":
-			return "border-l-green-500/50";
-		case "Systems":
-			return "border-l-blue-500/50";
-		default:
-			return "border-l-yellow-500/50";
-	}
-}
 
 // Format last update time
 function getLastUpdateText(date?: Date): string {
@@ -120,7 +105,7 @@ export default function BlogIndex() {
 			/>
 
 			{/* Header */}
-			<section className="p-5 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10">
+			<section className="p-5 rounded-2xl bg-white/[0.03] backdrop-blur-md ">
 				<div className="flex items-start gap-4">
 					<Avatar size="lg" />
 					<div className="flex-1 min-w-0">
@@ -138,7 +123,7 @@ export default function BlogIndex() {
 							</a>
 						</div>
 
-						<p className="text-gray-300 leading-relaxed">
+						<p className="text-gray-300 leading-relaxed text-justify">
 							A collection of technical deep-dives, debugging war stories, and
 							lessons learned from shipping software. I write about systems
 							programming, Rust, developer tooling, and the occasional career
@@ -201,13 +186,12 @@ export default function BlogIndex() {
 // Featured post - larger, more prominent
 function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 	const category = detectCategory(post.title, post.summary);
-	const accentBorder = getAccentColor(category.name);
 	const readingTime = formatReadingTime(calculateReadingTime(post.mdx || ""));
 
 	return (
 		<Link
 			to={`/blog/${post.slug}`}
-			className={`flex flex-col p-5 border border-white/10 border-l-4 ${accentBorder} rounded-xl bg-white/[0.05] backdrop-blur-md hover:bg-white/[0.08] transition group`}
+			className={`flex flex-col p-5 rounded-xl bg-white/[0.05] backdrop-blur-md hover:bg-white/[0.08] transition group`}
 			transition
 		>
 			<div className="flex items-center justify-between gap-4 mb-3">
@@ -232,7 +216,7 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 				{post.title}
 			</h3>
 
-			<p className="text-sm text-gray-400 leading-relaxed mb-4">
+			<p className="text-sm text-gray-400 leading-relaxed mb-4 text-justify">
 				{post.summary}
 			</p>
 
@@ -247,13 +231,12 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 // Regular post card
 function PostCard({ post }: { post: (typeof allPosts)[0] }) {
 	const category = detectCategory(post.title, post.summary);
-	const accentBorder = getAccentColor(category.name);
 	const readingTime = formatReadingTime(calculateReadingTime(post.mdx || ""));
 
 	return (
 		<Link
 			to={`/blog/${post.slug}`}
-			className={`flex items-start gap-3 p-4 border border-white/10 border-l-2 ${accentBorder} rounded-lg bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group`}
+			className={`flex items-start gap-3 p-4 rounded-lg bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group`}
 			transition
 		>
 			{/* Icon avatar */}

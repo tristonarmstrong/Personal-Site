@@ -13,7 +13,7 @@ export default function Thangs() {
 			/>
 
 			{/* Header */}
-			<section className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10 flex flex-col gap-2">
+			<section className="p-4 rounded-2xl bg-white/[0.03]  flex flex-col gap-2">
 				<h1 className="text-2xl font-bold tracking-tight text-gray-100">
 					/uses
 				</h1>
@@ -26,7 +26,7 @@ export default function Thangs() {
 
 			{/* Tech */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+				<div className="p-3 rounded-xl bg-white/[0.03]  mb-4">
 					<h2 className="text-sm font-bold tracking-tight text-gray-100">
 						Tech
 					</h2>
@@ -36,7 +36,7 @@ export default function Thangs() {
 
 			{/* Kitchen */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+				<div className="p-3 rounded-xl bg-white/[0.03]  mb-4">
 					<h2 className="text-sm font-bold tracking-tight text-gray-100">
 						Kitchen
 					</h2>
@@ -46,7 +46,7 @@ export default function Thangs() {
 
 			{/* Day */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+				<div className="p-3 rounded-xl bg-white/[0.03]  mb-4">
 					<h2 className="text-sm font-bold tracking-tight text-gray-100">
 						Day
 					</h2>
@@ -56,7 +56,7 @@ export default function Thangs() {
 
 			{/* Furniture */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+				<div className="p-3 rounded-xl bg-white/[0.03]  mb-4">
 					<h2 className="text-sm font-bold tracking-tight text-gray-100">
 						Furniture
 					</h2>
@@ -66,7 +66,7 @@ export default function Thangs() {
 
 			{/* Travel */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+				<div className="p-3 rounded-xl bg-white/[0.03]  mb-4">
 					<h2 className="text-sm font-bold tracking-tight text-gray-100">
 						Travel
 					</h2>
@@ -76,7 +76,7 @@ export default function Thangs() {
 
 			{/* Languages */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 mb-4">
+				<div className="p-3 rounded-xl bg-white/[0.03]  mb-4">
 					<h2 className="text-sm font-bold tracking-tight text-gray-100">
 						Languages
 					</h2>
@@ -119,7 +119,7 @@ function FilteredThangsList({
 				return (
 					<Link
 						to={`/thangs/${thang.slug}`}
-						className="transition bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-lg hover:bg-white/[0.06] cursor-pointer overflow-hidden group"
+						className="transition bg-white/[0.03] rounded-lg hover:bg-white/[0.06] cursor-pointer overflow-hidden group"
 						transition
 					>
 						<div

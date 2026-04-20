@@ -42,7 +42,7 @@ export default function Page() {
 				<div>
 					<Link
 						to="/blog"
-						className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/[0.03] border border-white/10 text-gray-400 hover:text-gray-200 hover:bg-white/[0.06] hover:border-white/20 transition text-xs font-medium backdrop-blur-sm no-underline"
+						className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/[0.03]  text-gray-400 hover:text-gray-200 hover:bg-white/[0.06] hover:border-white/20 transition text-xs font-medium backdrop-blur-sm no-underline"
 						style="text-decoration: none;"
 						transition
 					>
@@ -54,7 +54,7 @@ export default function Page() {
 				</div>
 
 				{/* Header */}
-				<header className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10">
+				<header className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md ">
 					<div className="flex items-start gap-3">
 						<Avatar size="lg" />
 						<div className="flex-1 min-w-0">
@@ -92,7 +92,7 @@ export default function Page() {
 					</h2>
 					<Link
 						to={`/blog/${nextPost.slug}`}
-						className="flex flex-col p-4 border border-white/10 rounded-xl bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group no-underline"
+						className="flex flex-col p-4  rounded-xl bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group no-underline"
 						style="text-decoration: none;"
 						transition
 					>

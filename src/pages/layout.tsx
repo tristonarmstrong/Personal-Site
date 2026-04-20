@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 			.join("\n");
 	}
 	return (
-		<div className="max-w-[70ch] mx-auto mt-20 flex flex-col gap-4 px-10 xs:px-6 sm:px-4 sm:overflow-hidden relative">
+		<div className="max-w-[70ch] mx-auto mt-20 flex flex-col gap-4 px-4 sm:overflow-hidden relative">
 			{/* Background Glow Orbs */}
 			<div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
 				{/* Yellow orb - slow pulse (8s) */}

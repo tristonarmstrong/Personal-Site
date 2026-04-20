@@ -17,13 +17,13 @@ interface JsonLdSchema {
 	"@context": string;
 	"@type": string;
 	[key: string]:
-		| string
-		| string[]
-		| number
-		| boolean
-		| object
-		| object[]
-		| undefined;
+	| string
+	| string[]
+	| number
+	| boolean
+	| object
+	| object[]
+	| undefined;
 }
 
 export function SEO({
@@ -42,7 +42,7 @@ export function SEO({
 	const defaultDescription =
 		"Senior Software Engineer, father, and husband with a passion for building utility apps and automating the boring stuff.";
 	const metaDescription = description || defaultDescription;
-	const siteUrl = "https://triston.dev";
+	const siteUrl = "https://tristonarmstrong.com";
 	const fullUrl = url ? `${siteUrl}${url}` : siteUrl;
 	const defaultImage = `${siteUrl}/avatar.webp`;
 	const metaImage = image
