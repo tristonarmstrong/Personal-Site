@@ -13,7 +13,7 @@
 		"tailwindcss": "^4.1.14",
 		"typescript": "^5.9.3",
 		"vite": "^7.3.1",
-		"vite-plugin-kiru": "^1.1.0",
+		"vite-plugin-kiru": "^1.2.3",
 		"zod": "^4.1.12"
 	},
 	"private": true,
@@ -26,6 +26,6 @@
 	"type": "module",
 	"dependencies": {
 		"@content-collections/cli": "^0.1.7",
-		"kiru": "^1.1.2"
+		"kiru": "^1.5.2"
 	}
 }

@@ -1,4 +1,139 @@
-import { signal, onMount, For } from "kiru";
+import { Derive, ErrorBoundary, For, onCleanup, resource } from "kiru";
+
+const GITHUB_URL = "https://api.github.com/users/tristonarmstrong/events/public?per_page=6"
+
+export function GitHubActivity() {
+	const data = resource(async ({ signal }) => {
+		const res = await fetch(GITHUB_URL, { signal });
+		if (!res.ok) throw new Error("Failed to fetch github data")
+		const events = (await res.json()) as GitHubEvent[]
+		return { events, lastUpdated: new Date() }
+	})
+
+	const intervalId = setInterval(data.refetch, 60000)
+	onCleanup(() => clearInterval(intervalId))
+
+	return () => {
+		return (
+			<ErrorBoundary fallback={<ViewGithubLink />}>
+				<Derive from={data} fallback={<LoadingGithubFallback />}>
+					{({ events, lastUpdated }, _isStale) => {
+						return (
+							<div className="flex flex-col gap-1">
+								<For each={events} fallback={<NoGithubActivity />}>
+									{(event) => (
+										<a
+											href={`https://github.com/${event.repo.name}`}
+											target="_blank"
+											rel="noopener"
+											className="flex items-start gap-2 py-1.5 px-2 -mx-2 rounded-lg hover:bg-white/5 transition-colors group"
+										>
+											<span className="text-yellow-500 text-xs mt-0.5 font-mono shrink-0">
+												{getEventIcon(event.type)}
+											</span>
+											<div className="flex-1 min-w-0">
+												<p className="text-gray-300 text-xs leading-snug group-hover:text-gray-100 transition-colors">
+													{getEventDescription(event)}
+												</p>
+											</div>
+											<span className="text-gray-600 text-[10px] shrink-0">
+												{formatTimeAgo(event.created_at)}
+											</span>
+										</a>
+									)}
+								</For>
+								<div className="pt-2 mt-1 border-t border-dashed border-white/10">
+									<a
+										href="https://github.com/tristonarmstrong"
+										target="_blank"
+										rel="noopener"
+										className="text-gray-500 text-xs hover:text-yellow-500 transition-colors flex items-center justify-between"
+									>
+										<span>github.com/tristonarmstrong</span>
+										<span>↗</span>
+									</a>
+									{lastUpdated && (
+										<span className="text-gray-600 text-[10px] block mt-1">
+											Updated {formatTimeAgo(lastUpdated.toISOString())}
+										</span>
+									)}
+								</div>
+							</div>)
+					}}
+				</Derive>
+			</ErrorBoundary>
+		)
+	};
+}
+
+function ViewGithubLink() {
+	return (
+		<div className="text-gray-500 text-xs py-2">
+			<a
+				href="https://github.com/tristonarmstrong"
+				target="_blank"
+				rel="noopener"
+				className="hover:text-yellow-500 transition-colors"
+			>
+				View GitHub →
+			</a>
+		</div>
+	)
+}
+
+function LoadingGithubFallback() {
+	return (
+		<div className="flex items-center gap-2 text-gray-500 text-xs py-2">
+			<span className="animate-pulse">Loading activity...</span>
+		</div>
+	)
+}
+
+function NoGithubActivity() {
+	return <div className="text-gray-500 text-xs py-2">No recent activity</div>
+}
+
+function getEventIcon(type: string): string {
+	const map: Record<string, string> = {
+		"PushEvent": "→",
+		"PullRequestEvent": "◈",
+		"IssuesEvent": "◎",
+		"CreateEvent": "+",
+		"DeleteEvent": "×",
+		"WatchEvent": "★",
+		"ForkEvent": "⑂"
+	}
+	return map?.[type] ?? "•"
+}
+
+function getEventDescription(event: GitHubEvent): string {
+	const repoName = event.repo.name.replace("tristonarmstrong/", "");
+	const map: Record<string, string> = {
+		"PushEvent": `pushed commits to ${repoName}`,
+		"PullRequestEvent": `${event.payload.action || ""} PR in ${repoName}`,
+		"IssuesEvent": `${event.payload.action || ""} issue in ${repoName}`,
+		"CreateEvent": `created ${event.payload.ref_type || ""} in ${repoName}`,
+		"DeleteEvent": `deleted ${event.payload.ref_type || ""} in ${repoName}`,
+		"WatchEvent": `starred ${repoName}`,
+		"ForkEvent": `forked ${repoName}`
+	}
+	return map?.[event.type] ?? `${event.type.replace("Event", "").toLowerCase()} in ${repoName}`
+}
+
+function formatTimeAgo(dateStr: string): string {
+	const date = new Date(dateStr);
+	const now = new Date();
+	const diffMs = now.getTime() - date.getTime();
+	const diffMins = Math.floor(diffMs / 60000);
+	const diffHours = Math.floor(diffMs / 3600000);
+	const diffDays = Math.floor(diffMs / 86400000);
+
+	if (diffMins < 1) return "just now";
+	if (diffMins < 60) return `${diffMins}m ago`;
+	if (diffHours < 24) return `${diffHours}h ago`;
+	if (diffDays < 7) return `${diffDays}d ago`;
+	return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
 
 interface GitHubEvent {
 	id: string;
@@ -23,184 +158,5 @@ interface GitHubEvent {
 			title: string;
 			state: string;
 		};
-	};
-}
-
-function formatTimeAgo(dateStr: string): string {
-	const date = new Date(dateStr);
-	const now = new Date();
-	const diffMs = now.getTime() - date.getTime();
-	const diffMins = Math.floor(diffMs / 60000);
-	const diffHours = Math.floor(diffMs / 3600000);
-	const diffDays = Math.floor(diffMs / 86400000);
-
-	if (diffMins < 1) return "just now";
-	if (diffMins < 60) return `${diffMins}m ago`;
-	if (diffHours < 24) return `${diffHours}h ago`;
-	if (diffDays < 7) return `${diffDays}d ago`;
-	return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-}
-
-function getEventIcon(type: string): string {
-	switch (type) {
-		case "PushEvent":
-			return "→";
-		case "PullRequestEvent":
-			return "◈";
-		case "IssuesEvent":
-			return "◎";
-		case "CreateEvent":
-			return "+";
-		case "DeleteEvent":
-			return "×";
-		case "WatchEvent":
-			return "★";
-		case "ForkEvent":
-			return "⑂";
-		default:
-			return "•";
-	}
-}
-
-function getEventDescription(event: GitHubEvent): string {
-	const repoName = event.repo.name.replace("tristonarmstrong/", "");
-	console.log(event)
-
-	switch (event.type) {
-		case "PushEvent": {
-			return `pushed commits to ${repoName}`;
-		}
-		case "PullRequestEvent": {
-			const action = event.payload.action || "";
-			return `${action} PR in ${repoName}`;
-		}
-		case "IssuesEvent": {
-			const action = event.payload.action || "";
-			return `${action} issue in ${repoName}`;
-		}
-		case "CreateEvent": {
-			const refType = event.payload.ref_type || "";
-			return `created ${refType} in ${repoName}`;
-		}
-		case "DeleteEvent": {
-			const refType = event.payload.ref_type || "";
-			return `deleted ${refType} in ${repoName}`;
-		}
-		case "WatchEvent": {
-			return `starred ${repoName}`;
-		}
-		case "ForkEvent": {
-			return `forked ${repoName}`;
-		}
-		default:
-			return `${event.type.replace("Event", "").toLowerCase()} in ${repoName}`;
-	}
-}
-
-export function GitHubActivity() {
-	const events = signal<GitHubEvent[]>([]);
-	const loading = signal(true);
-	const error = signal<string | null>(null);
-	const lastUpdated = signal<Date | null>(null);
-
-	async function fetchGitHubActivity() {
-		try {
-			const response = await fetch(
-				"https://api.github.com/users/tristonarmstrong/events/public?per_page=6",
-			);
-			if (!response.ok) throw new Error("Failed to fetch");
-			const data = await response.json();
-			events.value = data;
-			lastUpdated.value = new Date();
-			loading.value = false;
-		} catch (err) {
-			error.value = err instanceof Error ? err.message : "Unknown error";
-			loading.value = false;
-		}
-	}
-
-	onMount(() => {
-		fetchGitHubActivity();
-
-		// Poll every 60 seconds for real-time updates
-		const intervalId = setInterval(() => {
-			fetchGitHubActivity();
-		}, 60000);
-
-		return () => clearInterval(intervalId);
-	});
-
-	return () => {
-		if (loading.value) {
-			return (
-				<div className="flex items-center gap-2 text-gray-500 text-xs py-2">
-					<span className="animate-pulse">Loading activity...</span>
-				</div>
-			);
-		}
-
-		if (error.value) {
-			return (
-				<div className="text-gray-500 text-xs py-2">
-					<a
-						href="https://github.com/tristonarmstrong"
-						target="_blank"
-						rel="noopener"
-						className="hover:text-yellow-500 transition-colors"
-					>
-						View GitHub →
-					</a>
-				</div>
-			);
-		}
-
-		if (events.value.length === 0) {
-			return (
-				<div className="text-gray-500 text-xs py-2">No recent activity</div>
-			);
-		}
-
-		return (
-			<div className="flex flex-col gap-1">
-				<For each={events}>
-					{(event) => (
-						<a
-							href={`https://github.com/${event.repo.name}`}
-							target="_blank"
-							rel="noopener"
-							className="flex items-start gap-2 py-1.5 px-2 -mx-2 rounded-lg hover:bg-white/5 transition-colors group"
-						>
-							<span className="text-yellow-500 text-xs mt-0.5 font-mono shrink-0">
-								{getEventIcon(event.type)}
-							</span>
-							<div className="flex-1 min-w-0">
-								<p className="text-gray-300 text-xs leading-snug group-hover:text-gray-100 transition-colors">
-									{getEventDescription(event)}
-								</p>
-							</div>
-							<span className="text-gray-600 text-[10px] shrink-0">
-								{formatTimeAgo(event.created_at)}
-							</span>
-						</a>
-					)}
-				</For>
-				<div className="pt-2 mt-1 border-t border-dashed border-white/10">
-					<a
-						href="https://github.com/tristonarmstrong"
-						target="_blank"
-						rel="noopener"
-						className="text-gray-500 text-xs hover:text-yellow-500 transition-colors flex items-center justify-between"
-					>
-						<span>github.com/tristonarmstrong</span>
-						<span>↗</span>
-					</a>
-					{lastUpdated.value && (
-						<span className="text-gray-600 text-[10px] block mt-1">
-							Updated {formatTimeAgo(lastUpdated.value.toISOString())}
-						</span>
-					)}
-				</div>
-			</div>
-		);
 	};
 }
