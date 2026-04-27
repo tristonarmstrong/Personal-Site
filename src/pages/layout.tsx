@@ -2,16 +2,6 @@ import { allThangs } from "content-collections";
 import { Mail } from "../components/icons/Mail";
 import { RssIcon } from "../components/icons/Rss";
 import { Navigation } from "../components/Navigation";
-import { signal } from "kiru";
-
-export const windowSize = signal(
-	typeof window !== "undefined" ? window.innerWidth : 1024,
-);
-if (typeof window !== "undefined") {
-	window.addEventListener("resize", (_) => {
-		windowSize.value = window.innerWidth;
-	});
-}
 
 export default function RootLayout({ children }: { children: JSX.Children }) {
 	function _generateViewTransitionNamesFromContent() {
