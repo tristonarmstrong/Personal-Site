@@ -168,7 +168,7 @@ function generateJsonLd({
 			author: {
 				"@type": "Person",
 				name: author,
-				url: "https://triston.dev",
+				url: "https://tristonarmstrong.com",
 				sameAs: [
 					"https://github.com/tristonarmstrong",
 					"https://x.com/triston_armstr",
@@ -180,7 +180,7 @@ function generateJsonLd({
 				name: siteName,
 				logo: {
 					"@type": "ImageObject",
-					url: "https://triston.dev/avatar.webp",
+					url: "https://tristonarmstrong.com/avatar.webp",
 				},
 			},
 			datePublished: publishedTime,
@@ -196,18 +196,18 @@ function generateJsonLd({
 	}
 
 	// For website/homepage, add Person schema for the site owner
-	if (url === "https://triston.dev" || url === "https://triston.dev/") {
+	if (url === "https://tristonarmstrong.com" || url === "https://tristonarmstrong.com/") {
 		return {
 			...baseSchema,
 			"@graph": [
 				baseSchema,
 				{
 					"@type": "Person",
-					"@id": "https://triston.dev/#person",
+					"@id": "https://tristonarmstrong.com/#person",
 					name: siteName,
 					jobTitle: "Senior Software Engineer",
-					url: "https://triston.dev",
-					image: "https://triston.dev/avatar.webp",
+					url: "https://tristonarmstrong.com",
+					image: "https://tristonarmstrong.com/avatar.webp",
 					sameAs: [
 						"https://github.com/tristonarmstrong",
 						"https://x.com/triston_armstr",
