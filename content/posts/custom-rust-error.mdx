@@ -39,7 +39,8 @@ This mechanism is about establishing the _first point of failure inspection_ wit
 
 The core technique here is leveraging the `Result::map_err` method.
 
-Suppose an external API call returns `ApiError`. If we merely use `?`, the error propagates immediately.
+Suppose an external API call returns `ForeignError`. If we merely use `?`, the error propagates immediately, but
+doing this can result in a function having a bunch of different possible error returns _(depending on how poorly you code)_.
 However, sometimes we need to log the exact nature of the failure and perhaps inject a more useful, high-level
 error message into our system before conversion.
 
@@ -65,5 +66,8 @@ fn process_data() -> Result<u32, CustomError> {
 }
 ```
 
+> This, in my opinion, is __FAR__ better than relying on some 3rd party crate and learning their ways of doing things.
 
-
+## ⚙️ Architectural Refinement: Manual From Implementation
+The transition from using `map_err` to relying on `impl From` marks the difference between
+manually controlling failure flow and structrurally enforcing type conversion.
