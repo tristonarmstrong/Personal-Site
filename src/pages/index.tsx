@@ -261,7 +261,7 @@ export default function Home() {
 			</section>
 
 			{/* Get in Touch CTA */}
-			<section className="p-4 rounded-2xl bg-white/[0.03]">
+			<section className="p-4 rounded-2xl bg-white/[0.1]">
 				<div className="flex items-start gap-3">
 					<div className="w-10 h-10 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0">
 						<svg

@@ -105,7 +105,7 @@ export default function BlogIndex() {
 			/>
 
 			{/* Header */}
-			<section className="p-5 rounded-2xl bg-white/[0.03] backdrop-blur-md ">
+			<section className="p-5 rounded-2xl bg-white/[0.1] backdrop-blur-md ">
 				<div className="flex items-start gap-4">
 					<Avatar size="lg" />
 					<div className="flex-1 min-w-0">
@@ -191,7 +191,7 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 	return (
 		<Link
 			to={`/blog/${post.slug}`}
-			className={`flex flex-col p-5 rounded-xl bg-white/[0.05] backdrop-blur-md hover:bg-white/[0.08] transition group`}
+			className={`flex flex-col p-5 rounded-xl bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.05] transition group`}
 			transition
 		>
 			<div className="flex items-center justify-between gap-4 mb-3">
@@ -236,7 +236,7 @@ function PostCard({ post }: { post: (typeof allPosts)[0] }) {
 	return (
 		<Link
 			to={`/blog/${post.slug}`}
-			className={`flex items-start gap-3 p-4 rounded-lg bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group`}
+			className={`flex items-start gap-3 p-4 rounded-lg bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.05] transition group`}
 			transition
 		>
 			{/* Icon avatar */}
