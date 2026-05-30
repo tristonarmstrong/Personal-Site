@@ -189,10 +189,13 @@ export default function Home() {
 								<div className={
 									`
 									bg-white/[0.1] flex-1 rounded-bl-lg rounded-br-lg
-									after:block after:w-[30px] after:h-[30px] after:relative after:left-[calc(100%-0px)] after:bg-[radial-gradient(circle_at_bottom_right,transparent_0.75rem,oklab(1_0_0_/_0.1)_0.75rem,oklab(1_0_0_/_0.1))] after:[background-position:-18px_-18px] after:bg-no-repeat
+									after:pointer-events-none after:block after:w-[30px] after:h-[30px] after:relative after:left-[calc(100%-0px)] after:bg-[radial-gradient(circle_at_bottom_right,transparent_0.75rem,oklab(1_0_0_/_0.1)_0.75rem,oklab(1_0_0_/_0.1))] after:[background-position:-18px_-18px] after:bg-no-repeat
 									`
 								}></div>
-								<Link style={"color: var(--color-yellow-800)"} className={"text-xs ml-auto sm:ml-0 px-2 py-1 bg-yellow-600 hover:bg-yellow-500 rounded-xl mt-1 transition"} to={`/blog/${x.slug}`}>
+								<Link
+									style={"color: var(--color-yellow-500)"}
+									className={"text-xs ml-auto sm:ml-0 px-2 py-1 bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 hover:bg-yellow-500/20 hover:border-yellow-500/50 rounded-xl mt-1 transition"}
+									to={`/blog/${x.slug}`}>
 									Read More
 								</Link>
 							</div>
