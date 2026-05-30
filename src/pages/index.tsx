@@ -179,11 +179,23 @@ export default function Home() {
 				</h2>
 				<div className="flex flex-col sm:flex-row gap-3">
 					{allPostsRearranged.slice(0, 3).map((x) => (
-						<div className={"px-4 py-3 bg-white/[0.03] rounded-xl flex-1 flex flex-col justify-between gap-2"}>
-							<time className={"text-[#fff9] text-xs font-thin"}>{x.date.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" })}</time>
-							<h2 className={"text-gray-400 font-bold"}>{x.title}</h2>
-							<p className="text-[#fff9] font-thin text-xs">{x.summary.slice(0, 100)}...</p>
-							<Link className={"text-xs ml-auto sm:ml-0"} to={`/blog/${x.slug}`}>Read More</Link>
+						<div className={"flex flex-col"}>
+							<div className={"px-4 py-3 bg-white/[0.1] rounded-lg rounded-bl-none flex-1 flex flex-col justify-between gap-2"}>
+								<time className={"text-[#fff9] text-xs font-thin"}>{x.date.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" })}</time>
+								<h2 className={"text-gray-400 font-bold"}>{x.title}</h2>
+								<p className="text-[#fff9] font-thin text-xs">{x.summary.slice(0, 100)}...</p>
+							</div>
+							<div className={"flex flex-row gap-1"}>
+								<div className={
+									`
+									bg-white/[0.1] flex-1 rounded-bl-lg rounded-br-lg
+									after:block after:w-[30px] after:h-[30px] after:relative after:left-[calc(100%-0px)] after:bg-[radial-gradient(circle_at_bottom_right,transparent_0.75rem,oklab(1_0_0_/_0.1)_0.75rem,oklab(1_0_0_/_0.1))] after:[background-position:-18px_-18px] after:bg-no-repeat
+									`
+								}></div>
+								<Link style={"color: var(--color-yellow-800)"} className={"text-xs ml-auto sm:ml-0 px-2 py-1 bg-yellow-600 hover:bg-yellow-500 rounded-xl mt-1 transition"} to={`/blog/${x.slug}`}>
+									Read More
+								</Link>
+							</div>
 						</div>
 					))}
 				</div>
@@ -401,7 +413,7 @@ function ProjectCard({
 	return (
 		<Link
 			to={href}
-			className="flex items-start gap-3 p-3 rounded-md bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group"
+			className="flex items-start gap-3 p-3 rounded-md bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.06] transition group"
 			transition
 		>
 			<div className="w-10 h-10 rounded bg-[#1a1a1a] flex items-center justify-center text-gray-500 text-xs font-medium shrink-0 mt-0.5">
