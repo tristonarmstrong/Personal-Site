@@ -1,6 +1,6 @@
 export function Avatar({ size }: { size?: "sm" | "lg" }) {
-	let lg = "w-20 h-20";
-	let sm = "w-10 h-10";
+	const lg = "w-20 h-20";
+	const sm = "w-10 h-10";
 	let sizing = "";
 	switch (size) {
 		case "sm":

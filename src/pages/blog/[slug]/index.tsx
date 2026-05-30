@@ -58,7 +58,7 @@ export default function Page() {
 					<div className="flex items-start gap-3">
 						<Avatar size="lg" />
 						<div className="flex-1 min-w-0">
-							<h1 className="text-xl font-bold tracking-tight text-gray-100 leading-tight">
+							<h1 className="text-xl font-bold tracking-tight text-gray-100 leading-tight" style={"margin-top: 0px;"}>
 								{post.title}
 							</h1>
 							<div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
