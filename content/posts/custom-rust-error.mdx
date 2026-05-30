@@ -6,12 +6,13 @@ date: 2026-05-28
 
 # Custom Errors Are Non-Negotiable in My Rust Applications
 Centralizing error management using a custom `AppError` enum, combined with `map_err` and `From` traits,
-solves the type chaos of Rust services, establishing a clean, single-source contract across the whole codebase.
+solves the type chaos of Rust services, establishing a clean, single-source contract across the whole codebase, WITHOUT
+the need for janky 3rd party crates.
 
 ## 😤 From `?` Nightmare to Cohesive Design
 
 When you first start dipping your toes into Rust;
-especially when your service starts interacting with three different things _(a database, an external API, and a file system)_;
+especially when your service starts interacting with three different things _(database, external API, file system)_;
 you quickly realize something infuriating.
 
 Error handling is profoundly powerful, but the boilerplate is genuinely painful.
@@ -20,8 +21,11 @@ Seriously, your function signature becomes a monstrous cocktail of disparate err
 ```rs
 Result<T, sqlx::Error> + Result<T, reqwest::Error> + Result<T, config::ConfigError>
 ```
+Which is essentially how you must articulate your errors when using `?`. Otherwise, you have to
+match, or use some other pattern to extract the error and handle it specifically, leading to
+monstrous code.
 
-It’s ugly. It screams that the system's architecture is flawed.
+It’s ugly. It screams that the system's architecture is flawed from an _error control flow_ perspective.
 
 Rust’s type system is its greatest gift, no question. But when dealing with errors, that rigorous adherence to
 type boundaries becomes a huge operational liability. We absolutely need type safety, but we cannot sacrifice
@@ -31,7 +35,7 @@ My personal solution? Building a single, custom application error enum. It's the
 
 ## 🏗️ The Single Source of Truth: Establishing an `AppError` enum
 
-In any medium-to-large application, the single most critical step is defining system boundaries. When you write the
+In any medium-to-large applications, the single most critical step is defining system boundaries. When you write the
 core business logic, you must enforce one single, unified contract.
 
 That contract, for the errors, is the `AppError` enum _(or whatever you wanna call it)_.
@@ -40,6 +44,13 @@ Instead of letting failure types float around like a chaotic mess;
 `std::io::Error`, `serde_json::Error`, `tokio::io::Error`, etc.
 we map them all to one canonical type. This is sanity.
 Every consuming module only needs to worry about `Result<T, AppError>`. Period.
+```rust
+pub enum AppError {
+    Io(std::io::Error),
+    Serialization(serde_json::Error),
+    Other(String),
+}
+```
 
 ## 🎣 Layer 1: Error Interception with `map_err` (The Interrogation Layer)
 
@@ -47,9 +58,13 @@ Before we even touch the `From` trait, we have to deal with the immediate pain o
 This is where `Result::map_err` steps in, and honestly, it’s magic.
 
 If an external API call fails, and we just use the `?` operator, that error propagates immediately.
-That doesn't work because we want to control the returned error, so, we *must* intercept it.
+That doesn't work because we want to control the returned error, so, we *must* intercept it - which looks
+like this in its simplist form.
+```rust
+let result = SomeErrorResult().map_err(|e| AppError::Io(e))?;
+```
 
-We need to log the exact stack trace, we need to check the error details, and we need to maybe wrap
+But, maybe we need to log the exact stack trace, we need to check the error details, and we need to maybe wrap
 it in a higher-level, more business-centric error message; all before the error is allowed to flow into our system.
 
 This is where `map_err` lives. It hands us a closure. This closure is the interception point.
@@ -76,7 +91,7 @@ fn process_data() -> Result<u32, AppError> {
     // perform business logic (logging), and *manually* wrap it.
     let final_result = result.map_err(|e| {
         // 🧠 This closure is where our custom, critical logic runs.
-        eprintln!("[LOG]: Authentication failure detected. Time to warn the user.");
+        println!("[LOG]: Authentication failure detected. Time to warn the user.");
         
         // Return the canonical type, enforcing our custom message.
         AppError::Other(format!("Authentication failure: {}. Needs refresh.", e.message))
@@ -115,5 +130,15 @@ fn read_data_file(path: &str) -> Result<(), AppError> {
     Ok(())
 }
 ```
-**The takeaway:** We use `impl From` to let the compiler handle the boilerplate conversion;
+### The takeaway
+We use `impl From` to let the compiler handle the boilerplate conversion;
 it’s powerful, clean, and keeps the function body almost entirely clean of error-checking logic.
+
+## Final Comments
+This article is meant for newer people. This has been game changing for me in writing rust and dealing
+with the onslaught of error types and not having a clean way to handle them. Atleast, not known to me
+at the time. 
+
+I couldnt have made this if it werent for a peer of mine, [Joban](https://dhillon.dev), showing me his
+implimentation. It was gamechanging to me with writing rust, and all of my credit goes out to him.
+Thank yuh buddy!
