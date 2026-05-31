@@ -7,9 +7,8 @@ date: 2026-05-28
 ![custom-rust-error](/custom_rust_error.png)
 
 # Custom Errors Are Non-Negotiable in My Rust Applications
-Centralizing error management using a custom `AppError` enum, combined with `map_err` and `From` traits,
-solves the type chaos of Rust services, establishing a clean, single-source contract across the whole codebase, WITHOUT
-the need for janky 3rd party crates.
+Centralizing error management using a custom error enum per domain (e.g. `ApiError`, `AuthError`, `ParserError`), combined with `map_err` and `From` traits,
+solves the type chaos of Rust services. This gives each domain its own clean, focused contract.
 
 ## 😤 From `?` Nightmare to Cohesive Design
 
@@ -50,22 +49,23 @@ To someone new to rust, handling Result errors is a HUGE painpoint, and you can 
 overly simplistic view into that pattern, but you can see immediately how easily it can escalate to
 some nastiness.
 
-## 🏗️ The Single Source of Truth: Establishing an `AppError` enum
+## 🏗️ The Single Source of Truth: Establishing a `DomainError` enum
 
 In any medium-to-large applications, the single most critical step is defining system boundaries. When you write the
-core business logic, you must enforce one single, unified contract.
+core business logic, you should enforce one unified contract per domain.
 
-That contract, for the errors, is the `AppError` enum _(or whatever you wanna call it)_.
+That contract, for the errors, is the domain-specific error enum (`ApiError`, ...etc).
 
 Instead of letting failure types float around like a chaotic mess;
 `std::io::Error`, `serde_json::Error`, `tokio::io::Error`, etc.
-we map them all to one canonical type. This is sanity.
-Every consuming module only needs to worry about `Result<T, AppError>`. Period.
+we map the relevant errors to one canonical type for that domain. This is sanity.
+Within a given domain, every consuming module only needs to worry about `Result<T, DomainError>`. Period.
 ```rust
-pub enum AppError {
+pub enum DomainError {
     Io(std::io::Error),
     Serialization(serde_json::Error),
     Other(String),
+    // you can put anything relevant here, these are just examples
 }
 ```
 
@@ -78,7 +78,7 @@ If an external API call fails, and we just use the `?` operator, that error prop
 That doesn't work because we want to control the returned error, so, we *must* intercept it - which looks
 like this in its simplist form.
 ```rust
-let result = SomeErrorResult().map_err(|e| AppError::Io(e))?;
+let result = SomeErrorResult().map_err(|e| DomainError::Io(e))?;
 ```
 
 But, maybe we need to log the exact stack trace, we need to check the error details, and we need to maybe wrap
@@ -101,17 +101,19 @@ fn call_external_api() -> Result<u32, ExternalApiError> {
     })
 }
 
-fn process_data() -> Result<u32, AppError> {
+fn process_data() -> Result<u32, DomainError> {
     let result = call_external_api();
 
     // 🛑 INTERCEPTION POINT: We use map_err to grab the error,
     // perform business logic (logging), and *manually* wrap it.
     let final_result = result.map_err(|e| {
         // 🧠 This closure is where our custom, critical logic runs.
+        // we're printing here just for demonstration of whats possible
+        // but id recommend you log where the errors handled, and not here
         println!("[LOG]: Authentication failure detected. Time to warn the user.");
         
         // Return the canonical type, enforcing our custom message.
-        AppError::Other(format!("Authentication failure: {}. Needs refresh.", e.message))
+        DomainError::Other(format!("Authentication failure: {}. Needs refresh.", e.message))
     })?; 
     
     Ok(final_result)
@@ -126,21 +128,21 @@ The ultimate goal is to make the compiler handle the error promotion so we don't
 everywhere. That's where the `impl From` trait comes in.
 
 If `map_err` is active manual intervention, `impl From` is passive, structural adherence. It is the declaration
-of trust: "If I see an `io::Error`, I *guarantee* I know how to convert it to `AppError::Io`."
+of trust: "If I see an `io::Error`, I *guarantee* I know how to convert it to `DomainError::Io`."
 
 This is how we make the `?` operator magic.
 
 ```rust
-// Assume AppError and AppError::Io(io::Error) are defined
-impl From<io::Error> for AppError {
+// Assume DomainError and DomainError::Io(io::Error) are defined
+impl From<io::Error> for DomainError {
     fn from(err: io::Error) -> Self {
-        // Direct mapping: External IO error becomes AppError::Io
-        AppError::Io(err)
+        // Direct mapping: External IO error becomes DomainError::Io
+        DomainError::Io(err)
     }
 }
 
 // Function using the automatic conversion
-fn read_data_file(path: &str) -> Result<(), AppError> {
+fn read_data_file(path: &str) -> Result<(), DomainError> {
     // The '?' sees io::Error, checks for 'From' trait, finds it, 
     // and executes the block above, cleaning up the error type instantly.
     std::fs::read_to_string(path)?; 
