@@ -161,3 +161,14 @@ at the time.
 I couldnt have made this if it werent for a peer of mine, [Joban](https://dhillon.dev), showing me his
 implimentation. It was gamechanging to me with writing rust, and all of my credit goes out to him.
 Thank yuh buddy!
+
+## Notes
+
+You'll hear people say:
+> "Errors should be handled where they occur (no error propagation)".
+
+In which
+I strongly disagree. Unless you’re writing 200-line functions that do more than they should,
+it’s usually unlikely you'll be able to handle errors exactly where they occur. They almost always need to
+propagate up a few layers before they can be dealt with in full context. Otherwise, I’d argue you’re
+probably a pretty messy programmer and need to get your life together!
