@@ -1,4 +1,4 @@
-import { Derive, ErrorBoundary, For, onCleanup, resource } from "kiru";
+import { Derive, ErrorBoundary, For, resource } from "kiru";
 
 const GITHUB_URL = "https://api.github.com/users/tristonarmstrong/events/public?per_page=6"
 
@@ -9,9 +9,6 @@ export function GitHubActivity() {
 		const events = (await res.json()) as GitHubEvent[]
 		return { events, lastUpdated: new Date() }
 	})
-
-	const intervalId = setInterval(data.refetch, 60000)
-	onCleanup(() => clearInterval(intervalId))
 
 	return () => {
 		return (
