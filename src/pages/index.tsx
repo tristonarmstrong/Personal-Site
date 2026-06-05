@@ -16,6 +16,13 @@ export default function Home() {
 		yearsExperience.value = Math.abs(new Date().getFullYear() - 2020);
 	});
 
+	function _handleEmailClick() {
+		const a = document.createElement("a");
+		a.href =
+			"mailto:triston95strong@gmail.com?subject=Reaching Out&body=Hey Triston, ...Put message here...";
+		a.click();
+	}
+
 	return () => (
 		<main
 			className="text-sm mt-10 flex flex-col gap-10 max-w-2xl"
@@ -61,7 +68,7 @@ export default function Home() {
 					</p>
 
 					{/* Social Links */}
-					<div className="flex items-center gap-1 mt-3 [&>a]:bg-white/[0.1]">
+					<div className="flex items-center gap-1 mt-3 [&>a]:bg-black/30">
 						<SocialIcon
 							href="https://github.com/tristonarmstrong"
 							icon={<GithubIcon />}
@@ -194,7 +201,7 @@ export default function Home() {
 								}></div>
 								<Link
 									style={"color: var(--color-yellow-500)"}
-									className={"text-xs ml-auto sm:ml-0 px-2 py-1 bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 hover:bg-yellow-500/20 hover:border-yellow-500/50 rounded-xl mt-1 transition"}
+									className={"text-xs ml-auto sm:ml-0 px-2 py-1 bg-yellow-500/20 hover:bg-yellow-500/30 rounded-xl mt-1 transition"}
 									to={`/blog/${x.slug}`}>
 									Read More
 								</Link>
@@ -223,16 +230,12 @@ export default function Home() {
 					<div className="py-2 px-3 -mx-3 rounded-xl bg-yellow-500/5 border border-yellow-500/20 border-dashed">
 						<div className="flex items-center justify-between gap-4">
 							<div className="flex items-center gap-2">
-								<span className="relative flex h-2 w-2">
-									<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-									<span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-								</span>
 								<span className="text-sm font-medium text-yellow-500">
 									Your Company Here
 								</span>
 							</div>
 							<span className="text-xs text-green-400/80 whitespace-nowrap font-medium">
-								Available Now
+								Available
 							</span>
 						</div>
 					</div>
@@ -266,7 +269,7 @@ export default function Home() {
 			{/* Get in Touch CTA */}
 			<section className="p-4 rounded-2xl bg-white/[0.1]">
 				<div className="flex items-start gap-3">
-					<div className="w-10 h-10 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0">
+					<div className="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center shrink-0">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="20"
@@ -293,13 +296,8 @@ export default function Home() {
 						</p>
 						<button
 							type="button"
-							onclick={() => {
-								const a = document.createElement("a");
-								a.href =
-									"mailto:triston95strong@gmail.com?subject=Reaching Out&body=Hey Triston, ...Put message here...";
-								a.click();
-							}}
-							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 hover:bg-yellow-500/20 hover:border-yellow-500/50 transition text-sm font-medium cursor-pointer"
+							onclick={_handleEmailClick}
+							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500/20 text-yellow-500 hover:bg-yellow-500/30 transition text-sm font-medium cursor-pointer"
 						>
 							<EmailIcon />
 							<span>Send me an email</span>
@@ -374,11 +372,11 @@ function DashedLink({
 	status?: "merged" | "rejected" | "closed" | "open" | "default";
 }) {
 	const statusStyles = {
-		merged: "bg-green-500/20 text-green-400 border-green-500/30",
-		rejected: "bg-red-500/20 text-red-400 border-red-500/30",
-		closed: "bg-orange-500/20 text-orange-400 border-orange-500/30",
-		open: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-		default: "bg-gray-500/20 text-gray-400 border-gray-500/30",
+		merged: "rounded-md bg-green-500/20 text-green-400 border-none",
+		rejected: "rounded-md bg-red-500/20 text-red-400 border-none",
+		closed: "rounded-md bg-orange-500/20 text-orange-400 border-none",
+		open: "rounded-md bg-yellow-500/20 text-yellow-400 border-none",
+		default: "rounded-md bg-gray-500/20 text-gray-400 border-none",
 	};
 
 	return (
@@ -451,7 +449,7 @@ function SocialIcon({
 			href={href}
 			target={href.startsWith("http") ? "_blank" : undefined}
 			rel={href.startsWith("http") ? "noopener" : undefined}
-			className="p-2 rounded-full text-gray-400 hover:text-yellow-500 hover:bg-[#1a1a1a] transition"
+			className="p-2 rounded-full text-gray-400 hover:text-yellow-500 hover:bg-black/40 transition"
 			aria-label={label}
 			title={label}
 		>
