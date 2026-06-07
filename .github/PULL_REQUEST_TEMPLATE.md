@@ -1,22 +1,25 @@
-## Pull Request (PR)
+---
+name: '🚀 Pull Request'
+about: 'Submit feature or fix implementation.'
+title: '[feat/fix] Brief summary of change and purpose'
+ref: 'main'
+labels:
+  - chore
+  - review
+---
+**Summary**
 
-### Summary
-- Problem statement.
-- Change impact (if any).
+What changes? How does this solve issue [linked ticket number]? Explain motivation.
 
-### Steps Performed
-1. Add new function/module.
-2. Update tests.
-3. Run `cargo test` and `cargo fmt --check`.
+**Changes Made (Diff)**
 
-### Issues Noted
-- None.
+*   [Module]: Added feature X. Details: Y logic implemented.
+*   [File path]: Updated state management for Z. 
+*   (Include reference to specific commits/PRs if complex).
 
-### Next steps
-- Awaiting main‑branch confirmation.
+**Verification / Testing**
 
---- 
+1. Run `cargo test`. Must pass all tests. (Test outputs attached).
+2. Manual verification: Test edge cases A, B, C. Verify system handles [specific condition].
 
-**Template placeholders: Summary, Steps, Issues, Next**.```
-
-*Pattern applied.*
+Changes work. Review required. Push PR when ready.
