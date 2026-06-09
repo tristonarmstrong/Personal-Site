@@ -1,5 +1,5 @@
 import { allPosts, allProjects } from "content-collections";
-import { onMount, signal } from "kiru";
+import { For, onMount, signal } from "kiru";
 import { Link } from "kiru/router";
 import { Avatar } from "../components/Avatar";
 import { GitHubActivity } from "../components/GitHubActivity";
@@ -22,6 +22,8 @@ export default function Home() {
 			"mailto:triston95strong@gmail.com?subject=Reaching Out&body=Hey Triston, ...Put message here...";
 		a.click();
 	}
+
+	const openSourceContribsData = openSourceData()
 
 	return () => (
 		<main
@@ -110,54 +112,16 @@ export default function Home() {
 					OSS
 				</h2>
 				<div className="flex flex-col gap-3">
-					<DashedLink
-						label="asadbek064/bincode"
-						meta="merged"
-						status="merged"
-						href="https://github.com/asadbek064/bincode/pull/1"
-					/>
-					<DashedLink
-						label="diamondburned/dissent"
-						meta="merged"
-						status="merged"
-						href="https://github.com/diamondburned/dissent/pull/371"
-					/>
-					<DashedLink
-						label="kirujs/kiru"
-						meta="merged"
-						status="merged"
-						href="https://github.com/kirujs/kiru"
-					/>
-					<DashedLink
-						label="Chai-Foundation/ChaiLauncher"
-						meta="2 PRs"
-						status="merged"
-						href="https://github.com/Chai-Foundation/ChaiLauncher/pull/13"
-					/>
-					<DashedLink
-						label="tristanpoland/Chai-MCVM"
-						meta="merged"
-						status="merged"
-						href="https://github.com/tristanpoland/Chai-MCVM/pull/1"
-					/>
-					<DashedLink
-						label="basecamp/omarchy"
-						meta="rejected"
-						status="rejected"
-						href="https://github.com/basecamp/omarchy/issues/1881"
-					/>
-					<DashedLink
-						label="microsoft/TypeScript"
-						meta="rejected"
-						status="rejected"
-						href="https://github.com/microsoft/TypeScript/pull/60269"
-					/>
-					<DashedLink
-						label="nrwl/nx"
-						meta="closed"
-						status="closed"
-						href="https://github.com/nrwl/nx/pull/31846"
-					/>
+					<For each={openSourceContribsData} fallback={<div>No Open Source Contributions Yet</div>}>
+						{(item) => (
+							<DashedLink
+								label={item.label}
+								meta={item.meta}
+								status={item.status}
+								href={item.href}
+							/>
+						)}
+					</For>
 				</div>
 			</section>
 
@@ -360,6 +324,7 @@ function DashedItem({
 }
 
 // External link with underline (OSS style)
+type OssStatus = "merged" | "rejected" | "closed" | "open" | "default"
 function DashedLink({
 	label,
 	meta,
@@ -369,7 +334,7 @@ function DashedLink({
 	label: string;
 	meta: string;
 	href: string;
-	status?: "merged" | "rejected" | "closed" | "open" | "default";
+	status?: OssStatus;
 }) {
 	const statusStyles = {
 		merged: "rounded-md bg-green-500/20 text-green-400 border-none",
@@ -525,4 +490,63 @@ function EmailIcon() {
 			<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
 		</svg>
 	);
+}
+
+function openSourceData(): Array<{
+	label: string,
+	meta: string,
+	status: OssStatus,
+	href: string,
+}> {
+	return [
+		{
+			label: "Far-Beyond-Pulsar/Plugin_Blueprints",
+			meta: "merged",
+			status: "merged",
+			href: "https://github.com/Far-Beyond-Pulsar/Plugin_Blueprints/pull/7",
+		}, {
+			label: "asadbek064/bincode",
+			meta: "merged",
+			status: "merged",
+			href: "https://github.com/asadbek064/bincode/pull/1",
+		}, {
+			label: "diamondburned/dissent",
+			meta: "merged",
+			status: "merged",
+			href: "https://github.com/diamondburned/dissent/pull/371",
+
+		}, {
+			label: "kirujs/kiru",
+			meta: "merged",
+			status: "merged",
+			href: "https://github.com/kirujs/kiru",
+		}, {
+			label: "Chai-Foundation/ChaiLauncher",
+			meta: "2 PRs",
+			status: "merged",
+			href: "https://github.com/Chai-Foundation/ChaiLauncher/pull/13",
+		}, {
+			label: "tristanpoland/Chai-MCVM",
+			meta: "merged",
+			status: "merged",
+			href: "https://github.com/tristanpoland/Chai-MCVM/pull/1",
+		}, {
+			label: "basecamp/omarchy",
+			meta: "rejected",
+			status: "rejected",
+			href: "https://github.com/basecamp/omarchy/issues/1881",
+		}, {
+			label: "microsoft/TypeScript",
+			meta: "rejected",
+			status: "rejected",
+			href: "https://github.com/microsoft/TypeScript/pull/60269",
+		}, {
+			label: "nrwl/nx",
+			meta: "closed",
+			status: "closed",
+			href: "https://github.com/nrwl/nx/pull/31846",
+		}
+
+
+	]
 }
