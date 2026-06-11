@@ -1,0 +1,9 @@
+{
+ "short_name": "TristonArmstrongPortfolio",
+ "name": "Triston Armstrong Portfolio",
+ "start_url": "/index.html",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#000000",
+ "description": "Triston Armstrongs portfolio installed as a pwa for your offline pleasures"
+}
