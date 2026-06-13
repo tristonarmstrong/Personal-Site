@@ -1,0 +1,68 @@
+---
+title: "Fixing Windows Error 0xc000000f After Installing Linux"
+summary: "This guide details how to resolve the common dual-boot 0xc000000f BCD error that occurs when a Linux installation alters the EFI System Partition (ESP) layout or UUID. It provides a step-by-step walkthrough using a Windows installation USB, diskpart, and the bcdboot command to safely recreate the missing or broken boot files without risking your Linux setup."
+date: 2026-06-12
+---
+
+![Fixing Windows](/fixing-windows.png)
+
+# When Dual-Booting Breaks: How to Fix Windows Error `0xc000000f` After Installing Linux
+
+Setting up a dual-boot system often feels like a rite of passage. You carve out partition space, install your favorite Linux distribution, configuration goes smoothly, and you're greeted by a shiny new bootloader. But then you try to chainload back into Windows, only to be stopped dead in your tracks by a glaring recovery screen:
+
+```text
+File: \EFI\Microsoft\Boot\BCD
+Status: 0xc000000f
+Info: The Boot Configuration Data for your PC is missing or contains errors.
+```
+
+This exact scenario occurred during a recent recovery reference case handled under log **7f82344d-88bb-4380-a256-5b9cc47ca4ea**. The issue typically arises when a Linux installation alters the layout, formatting, or disk signatures of the EFI System Partition (ESP), rendering the existing Windows Boot Manager configuration obsolete.
+
+## Why Does This Happen?
+
+When you use modern alternative bootloaders like Limine, systemd-boot, or GRUB, they pass execution control over to Microsoft's `bootmgfw.efi` application. However, once Windows Boot Manager takes over, it reads its own internal database - the Boot Configuration Data (BCD) - to locate the operating system files. If the UUID of your EFI partition changed or the BCD points to old partition indexes, the handoff fails immediately with error code `0xc000000f`.
+
+## The Fix: Rebuilding BCD from Windows Setup Media
+
+While tweaking configurations from inside a Linux chroot or using open-source utilities like `ms-sys` can resolve clean-room edge cases, the absolute cleanest way to rebuild a broken BCD store without guessing partition tables is utilizing a standard Windows installation USB.
+
+> **Note:** Before proceeding, ensure you have a standard Windows 10 or 11 installation media USB ready and plugged into your machine.
+
+### 1. Access the Command Line
+Boot into your Windows installation media. On the initial setup screen where you select your language and keyboard layout, click **Next**. On the subsequent screen, do not hit install; look to the lower-left corner and select **Repair your computer**. Navigate through **Troubleshoot** &rarr; **Advanced Options** &rarr; **Command Prompt**.
+
+### 2. Identify Your Exact Drive Letters
+Windows PE environments often map drive configurations differently than a live OS. Open the disk utility tool by typing:
+
+```cmd
+diskpart
+```
+
+Inside the diskpart utility, list all available volumes to locate your files:
+
+```cmd
+list volume
+```
+
+Scan the resulting table for two critical items: your large main Windows OS partition (formatted as NTFS) and your tiny EFI System Partition (formatted as FAT32, usually 100MB–500MB, tagged as System). Note their letters. If your EFI partition lacks an assigned letter, select it and force-assign one:
+
+```cmd
+select volume <num>
+assign letter=S
+exit
+```
+
+### 3. Regenerate the Boot Records
+With your drive layouts mapped out cleanly, invoke the target deployment tool to completely rewrite your broken BCD using your solid Windows path as the foundation (assuming `C:` is Windows and `S:` is EFI):
+
+```cmd
+bcdboot C:\Windows /s S: /f UEFI
+```
+
+Upon executing, the tool will analyze your environment and output a confirmation stating `Boot files successfully created.`
+
+## Restoring Your Linux Bootloader
+
+Once you close the console and reboot, Windows should load up flawlessly. Because Windows aggressively updates the motherboard NVRAM variables during a BCD rebuild, it will likely bypass your Linux bootloader (like Limine or GRUB) on the first cycle. 
+
+Do not panic - your Linux installation is completely untouched. Simply hit your hardware boot menu interrupt key (typically `F11`, `F12`, or `F2`), boot back into your Linux partition, and use the `efibootmgr` utility to re-sequence your preferred boot loader back to top priority.
