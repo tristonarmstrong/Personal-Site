@@ -23,7 +23,7 @@ export default function Home() {
 		a.click();
 	}
 
-	const openSourceContribsData = openSourceData()
+	const openSourceContribsData = openSourceData();
 
 	return () => (
 		<main
@@ -34,12 +34,7 @@ export default function Home() {
 
 			{/* Header */}
 			<section className={"relative"}>
-				<img
-					className="rounded-xl z-0 hidden sm:block absolute"
-					src="https://pbs.twimg.com/profile_banners/1087178748456325121/1772570468/1500x500" alt="me in cyber style thai tech cafe"
-					style={"mask-image: linear-gradient(to top, transparent 5%, black 100%); -webkit-mask-image: linear-gradient(to top, transparent 5%, black 100%);"}
-				/>
-				<div className="p-4 rounded-2xl bg-[#212121] flex flex-col gap-2 z-10 relative max-w-150 mx-auto sm:mt-40">
+				<div className="p-4 rounded-2xl bg-[#212121] flex flex-col gap-2 z-10 relative max-w-150 mx-auto">
 					<div className="flex items-start gap-3 z-10">
 						<Avatar size="lg" />
 						<div className={"z-10"}>
@@ -55,18 +50,22 @@ export default function Home() {
 					</div>
 					<p className="text-gray-300 mt-2 max-w-lg leading-relaxed text-justify">
 						I am a Senior Software Engineer with over{" "}
-						<span className="yearthing text-yellow-500 cursor-help" title="I started programming professionally in year 2020">
+						<span
+							className="yearthing text-yellow-500 cursor-help"
+							title="I started programming professionally in year 2020"
+						>
 							{yearsExperience.value} years
-						</span>
-						{" "} of experience building applications in React, TypeScript, and Rust with
-						significant experience modernizing legacy systems and delivering enterprise solutions.
-						I’ve led frontend development efforts, migrated large codebases to TypeScript,
-						optimized CI/CD pipelines, and worked closely with stakeholders to turn complex business
-						requirements into clean, maintainable software.
+						</span>{" "}
+						of experience building applications in React, TypeScript, and Rust
+						with significant experience modernizing legacy systems and
+						delivering enterprise solutions. I’ve led frontend development
+						efforts, migrated large codebases to TypeScript, optimized CI/CD
+						pipelines, and worked closely with stakeholders to turn complex
+						business requirements into clean, maintainable software.
 						<br />
 						<br />
-						I’m known as a collaborative team player who enjoys mentoring junior developers and fostering
-						a culture of constructive feedback.
+						I’m known as a collaborative team player who enjoys mentoring junior
+						developers and fostering a culture of constructive feedback.
 					</p>
 
 					{/* Social Links */}
@@ -112,7 +111,10 @@ export default function Home() {
 					OSS
 				</h2>
 				<div className="flex flex-col gap-3">
-					<For each={openSourceContribsData} fallback={<div>No Open Source Contributions Yet</div>}>
+					<For
+						each={openSourceContribsData}
+						fallback={<div>No Open Source Contributions Yet</div>}
+					>
 						{(item) => (
 							<DashedLink
 								label={item.label}
@@ -151,22 +153,37 @@ export default function Home() {
 				<div className="flex flex-col sm:flex-row gap-3">
 					{allPostsRearranged.slice(0, 3).map((x) => (
 						<div className={"flex flex-col"}>
-							<div className={"px-4 py-3 bg-white/[0.1] rounded-lg rounded-bl-none flex-1 flex flex-col justify-between gap-2"}>
-								<time className={"text-[#fff9] text-xs font-thin"}>{x.date.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" })}</time>
+							<div
+								className={
+									"px-4 py-3 bg-white/[0.1] rounded-lg rounded-bl-none flex-1 flex flex-col justify-between gap-2"
+								}
+							>
+								<time className={"text-[#fff9] text-xs font-thin"}>
+									{x.date.toLocaleDateString("en-US", {
+										month: "short",
+										day: "2-digit",
+										year: "numeric",
+									})}
+								</time>
 								<h2 className={"text-gray-400 font-bold"}>{x.title}</h2>
-								<p className="text-[#fff9] font-thin text-xs">{x.summary.slice(0, 100)}...</p>
+								<p className="text-[#fff9] font-thin text-xs">
+									{x.summary.slice(0, 100)}...
+								</p>
 							</div>
 							<div className={"flex flex-row gap-1"}>
-								<div className={
-									`
+								<div
+									className={`
 									bg-white/[0.1] flex-1 rounded-bl-lg rounded-br-lg
 									after:pointer-events-none after:block after:w-[30px] after:h-[30px] after:relative after:left-[calc(100%-0px)] after:bg-[radial-gradient(circle_at_bottom_right,transparent_0.75rem,oklab(1_0_0_/_0.1)_0.75rem,oklab(1_0_0_/_0.1))] after:[background-position:-18px_-18px] after:bg-no-repeat
-									`
-								}></div>
+									`}
+								></div>
 								<Link
 									style={"color: var(--color-yellow-500)"}
-									className={"text-xs ml-auto sm:ml-0 px-2 py-1 bg-yellow-500/20 hover:bg-yellow-500/30 rounded-xl mt-1 transition"}
-									to={`/blog/${x.slug}`}>
+									className={
+										"text-xs ml-auto sm:ml-0 px-2 py-1 bg-yellow-500/20 hover:bg-yellow-500/30 rounded-xl mt-1 transition"
+									}
+									to={`/blog/${x.slug}`}
+								>
 									Read More
 								</Link>
 							</div>
@@ -324,7 +341,7 @@ function DashedItem({
 }
 
 // External link with underline (OSS style)
-type OssStatus = "merged" | "rejected" | "closed" | "open" | "default"
+type OssStatus = "merged" | "rejected" | "closed" | "open" | "default";
 function DashedLink({
 	label,
 	meta,
@@ -493,10 +510,10 @@ function EmailIcon() {
 }
 
 function openSourceData(): Array<{
-	label: string,
-	meta: string,
-	status: OssStatus,
-	href: string,
+	label: string;
+	meta: string;
+	status: OssStatus;
+	href: string;
 }> {
 	return [
 		{
@@ -504,49 +521,54 @@ function openSourceData(): Array<{
 			meta: "merged",
 			status: "merged",
 			href: "https://github.com/Far-Beyond-Pulsar/Plugin_Blueprints/pull/7",
-		}, {
+		},
+		{
 			label: "asadbek064/bincode",
 			meta: "merged",
 			status: "merged",
 			href: "https://github.com/asadbek064/bincode/pull/1",
-		}, {
+		},
+		{
 			label: "diamondburned/dissent",
 			meta: "merged",
 			status: "merged",
 			href: "https://github.com/diamondburned/dissent/pull/371",
-
-		}, {
+		},
+		{
 			label: "kirujs/kiru",
 			meta: "merged",
 			status: "merged",
 			href: "https://github.com/kirujs/kiru",
-		}, {
+		},
+		{
 			label: "Chai-Foundation/ChaiLauncher",
 			meta: "2 PRs",
 			status: "merged",
 			href: "https://github.com/Chai-Foundation/ChaiLauncher/pull/13",
-		}, {
+		},
+		{
 			label: "tristanpoland/Chai-MCVM",
 			meta: "merged",
 			status: "merged",
 			href: "https://github.com/tristanpoland/Chai-MCVM/pull/1",
-		}, {
+		},
+		{
 			label: "basecamp/omarchy",
 			meta: "rejected",
 			status: "rejected",
 			href: "https://github.com/basecamp/omarchy/issues/1881",
-		}, {
+		},
+		{
 			label: "microsoft/TypeScript",
 			meta: "rejected",
 			status: "rejected",
 			href: "https://github.com/microsoft/TypeScript/pull/60269",
-		}, {
+		},
+		{
 			label: "nrwl/nx",
 			meta: "closed",
 			status: "closed",
 			href: "https://github.com/nrwl/nx/pull/31846",
-		}
-
-
-	]
+		},
+	];
 }
