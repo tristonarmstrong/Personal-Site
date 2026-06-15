@@ -197,7 +197,7 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 			<div className="flex items-center justify-between gap-4 mb-3">
 				<div className="flex items-center gap-2">
 					<span
-						className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-full border text-xs ${category.color}`}
+						className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs ${category.color}`}
 					>
 						{category.icon}
 						{category.name}
@@ -241,7 +241,7 @@ function PostCard({ post }: { post: (typeof allPosts)[0] }) {
 		>
 			{/* Icon avatar */}
 			<div
-				className={`shrink-0 w-9 h-9 rounded-lg flex items-center justify-center border ${category.color}`}
+				className={`shrink-0 w-9 h-9 rounded-lg flex items-center justify-center ${category.color}`}
 			>
 				{category.icon}
 			</div>
