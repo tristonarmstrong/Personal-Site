@@ -13,7 +13,7 @@ export default function Home() {
 	);
 
 	onMount(() => {
-		yearsExperience.value = Math.abs(new Date().getFullYear() - 2020);
+		yearsExperience.value = Math.abs(new Date().getFullYear() - 2019);
 	});
 
 	function _handleEmailClick() {
@@ -52,7 +52,7 @@ export default function Home() {
 						I am a Senior Software Engineer with over{" "}
 						<span
 							className="yearthing text-yellow-500 cursor-help"
-							title="I started programming professionally in year 2020"
+							title="I started programming professionally in year 2019"
 						>
 							{yearsExperience.value} years
 						</span>{" "}
