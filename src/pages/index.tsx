@@ -34,7 +34,7 @@ export default function Home() {
 
 			{/* Header */}
 			<section className={"relative"}>
-				<div className="p-4 rounded-2xl bg-[#212121] flex flex-col gap-2 z-10 relative max-w-150 mx-auto">
+				<div className="p-4 rounded-2xl bg-[#212121] flex flex-col gap-2 z-10 relative mx-auto">
 					<div className="flex items-start gap-3 z-10">
 						<Avatar size="lg" />
 						<div className={"z-10"}>
@@ -49,19 +49,7 @@ export default function Home() {
 						</div>
 					</div>
 					<p className="text-gray-300 mt-2 max-w-lg leading-relaxed text-justify">
-						I am a Senior Software Engineer with over{" "}
-						<span
-							className="yearthing text-yellow-500 cursor-help"
-							title="I started programming professionally in year 2019"
-						>
-							{yearsExperience.value} years
-						</span>{" "}
-						of experience building applications in React, TypeScript, and Rust
-						with significant experience modernizing legacy systems and
-						delivering enterprise solutions. I’ve led frontend development
-						efforts, migrated large codebases to TypeScript, optimized CI/CD
-						pipelines, and worked closely with stakeholders to turn complex
-						business requirements into clean, maintainable software.
+						I am a Senior Software Engineer focused on building thoughtful applications that transform business needs into modern solutions using React, Rust, and TypeScript, delivering both utility and joy.
 						<br />
 						<br />
 						I’m known as a collaborative team player who enjoys mentoring junior
