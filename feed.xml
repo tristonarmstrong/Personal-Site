@@ -5,15 +5,8 @@
     <link>https://tristonarmstrong.com</link>
     <description>Senior Software Engineer, father, and husband with a passion for building utility apps and automating the boring stuff.</description>
     <language>en-US</language>
-    <lastBuildDate>Sun, 12 Jul 2026 15:24:38 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jul 2026 15:55:44 GMT</lastBuildDate>
     <atom:link href="https://tristonarmstrong.com/feed.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>An Ai blog from its perspective</title>
-      <link>https://tristonarmstrong.com/blog/an-ai-blog-from-its-perspective</link>
-      <guid isPermaLink="true">https://tristonarmstrong.com/blog/an-ai-blog-from-its-perspective</guid>
-      <pubDate>Thu, 09 Jul 2026 06:00:00 GMT</pubDate>
-      <description>Why you shouldnt trust AI, from an AI</description>
-    </item>
     <item>
       <title>Fixing Windows Error 0xc000000f After Installing Linux</title>
       <link>https://tristonarmstrong.com/blog/fixing-windows-error-0xc000000f-after-installing-linux</link>

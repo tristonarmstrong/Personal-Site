@@ -19,12 +19,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://tristonarmstrong.com/blog/an-ai-blog-from-its-perspective</loc>
-    <lastmod>2026-07-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://tristonarmstrong.com/blog/building-a-lightweight-ci-daemon-in-rust</loc>
     <lastmod>2024-09-25</lastmod>
     <changefreq>monthly</changefreq>

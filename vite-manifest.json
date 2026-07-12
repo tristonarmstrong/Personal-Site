@@ -27,8 +27,8 @@
       "_kiru-DYm5_SaP.js"
     ]
   },
-  "_allPosts-DDXg21f3.js": {
-    "file": "assets/allPosts-DDXg21f3.js",
+  "_allPosts-p6IPv-6E.js": {
+    "file": "assets/allPosts-p6IPv-6E.js",
     "name": "allPosts"
   },
   "_allProjects-Ct9z4MDO.js": {
@@ -52,38 +52,38 @@
     "name": "readingTime"
   },
   "src/pages/404/index.tsx": {
-    "file": "assets/index-D6xdSFfO.js",
+    "file": "assets/index-rXpXH60a.js",
     "name": "index",
     "src": "src/pages/404/index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_kiru-DYm5_SaP.js",
-      "_allPosts-DDXg21f3.js",
+      "_allPosts-p6IPv-6E.js",
       "_allProjects-Ct9z4MDO.js"
     ]
   },
   "src/pages/blog/[slug]/index.tsx": {
-    "file": "assets/index-CA216Rcp.js",
+    "file": "assets/index-CSopyR5O.js",
     "name": "index",
     "src": "src/pages/blog/[slug]/index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_kiru-DYm5_SaP.js",
       "_ArrowLeft-BZx9o7BM.js",
-      "_allPosts-DDXg21f3.js",
+      "_allPosts-p6IPv-6E.js",
       "_Avatar-BWGVZn4l.js",
       "_SEO-Dsyz4mQ3.js",
       "_readingTime-dtjMRByR.js"
     ]
   },
   "src/pages/blog/index.tsx": {
-    "file": "assets/index-Cwsasd2Y.js",
+    "file": "assets/index-BALe9xXL.js",
     "name": "index",
     "src": "src/pages/blog/index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_kiru-DYm5_SaP.js",
-      "_allPosts-DDXg21f3.js",
+      "_allPosts-p6IPv-6E.js",
       "_Avatar-BWGVZn4l.js",
       "_Rss-BUtZ2K6i.js",
       "_SEO-Dsyz4mQ3.js",
@@ -91,13 +91,13 @@
     ]
   },
   "src/pages/index.tsx": {
-    "file": "assets/index-DrPCnpTZ.js",
+    "file": "assets/index-DWOQQYgW.js",
     "name": "index",
     "src": "src/pages/index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_kiru-DYm5_SaP.js",
-      "_allPosts-DDXg21f3.js",
+      "_allPosts-p6IPv-6E.js",
       "_allProjects-Ct9z4MDO.js",
       "_Avatar-BWGVZn4l.js",
       "_Rss-BUtZ2K6i.js",
@@ -155,7 +155,7 @@
     ]
   },
   "virtual:kiru:entry-client": {
-    "file": "assets/_virtual_kiru_entry-client-BUikT-jT.js",
+    "file": "assets/_virtual_kiru_entry-client-pUq8Uhi3.js",
     "name": "_virtual_kiru_entry-client",
     "src": "virtual:kiru:entry-client",
     "isEntry": true,
@@ -173,7 +173,7 @@
       "src/pages/layout.tsx"
     ],
     "css": [
-      "assets/_virtual_kiru_entry-client-Cynj5jXM.css"
+      "assets/_virtual_kiru_entry-client-DqJig193.css"
     ]
   }
 }
