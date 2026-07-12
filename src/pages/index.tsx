@@ -517,6 +517,12 @@ function openSourceData(): Array<{
 }> {
 	return [
 		{
+			label: "khurrambhutto/noted",
+			meta: "merged",
+			status: "merged",
+			href: "https://github.com/khurrambhutto/noted/pull/3",
+		},
+		{
 			label: "Far-Beyond-Pulsar/Plugin_Blueprints",
 			meta: "merged",
 			status: "merged",
