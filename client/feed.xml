@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Triston Armstrong</title>
+    <link>https://tristonarmstrong.com</link>
+    <description>Senior Software Engineer, father, and husband with a passion for building utility apps and automating the boring stuff.</description>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 12 Jul 2026 16:59:19 GMT</lastBuildDate>
+    <atom:link href="https://tristonarmstrong.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fixing Windows Error 0xc000000f After Installing Linux</title>
+      <link>https://tristonarmstrong.com/blog/fixing-windows-error-0xc000000f-after-installing-linux</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/fixing-windows-error-0xc000000f-after-installing-linux</guid>
+      <pubDate>Fri, 12 Jun 2026 00:00:00 GMT</pubDate>
+      <description>This guide details how to resolve the common dual-boot 0xc000000f BCD error that occurs when a Linux installation alters the EFI System Partition (ESP) layout or UUID. It provides a step-by-step walkthrough using a Windows installation USB, diskpart, and the bcdboot command to safely recreate the missing or broken boot files without risking your Linux setup.</description>
+    </item>
+    <item>
+      <title>Custom Rust Errors</title>
+      <link>https://tristonarmstrong.com/blog/custom-rust-errors</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/custom-rust-errors</guid>
+      <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
+      <description>Centralizing error management using a custom Error enum and map_error resolves the complexity of disparate error types, establishing a single, type-safe contract across the entire application boundary for given domains.</description>
+    </item>
+    <item>
+      <title>Android Screen Mirroring</title>
+      <link>https://tristonarmstrong.com/blog/android-screen-mirroring</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/android-screen-mirroring</guid>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 GMT</pubDate>
+      <description>If you’re still tolerating macOS only because you need reliable Android screen mirroring, it’s time to drop the excuse. Linux users have been enjoying a superior, free, and buttery-smooth solution called scrcpy for years.</description>
+    </item>
+    <item>
+      <title>The macOS mDNS Bug</title>
+      <link>https://tristonarmstrong.com/blog/the-macos-mdns-bug</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/the-macos-mdns-bug</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
+      <description>ssh pi@raspberrypi worked fine until I typed the wrong password a few times. Then one MacBook completely lost the hostname while the other was fine. I was convinced it was fail2ban on the Pi (even though it wasn&apos;t installed). Here&apos;s the weird macOS cache issue, the fix, and why Linux just doesn&apos;t do this nonsense.</description>
+    </item>
+    <item>
+      <title>Fixing Flatpak Crashes on Linux Mint</title>
+      <link>https://tristonarmstrong.com/blog/fixing-flatpak-crashes-on-linux-mint</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/fixing-flatpak-crashes-on-linux-mint</guid>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
+      <description>If you switched from Wayland back to X11 and your Flatpak apps won&apos;t launch, you&apos;ve got a ghost socket haunting your session. Here&apos;s the fix.</description>
+    </item>
+    <item>
+      <title>Kiru v1: A New Reactive Paradigm</title>
+      <link>https://tristonarmstrong.com/blog/kiru-v1-a-new-reactive-paradigm</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/kiru-v1-a-new-reactive-paradigm</guid>
+      <pubDate>Mon, 02 Mar 2026 00:00:00 GMT</pubDate>
+      <description>A look into the process of updating my personal site to Kiru v1, exploring the new reactive primitives, and adopting the new routing interface.</description>
+    </item>
+    <item>
+      <title>Linux Auto Switch Gpu Modes</title>
+      <link>https://tristonarmstrong.com/blog/linux-auto-switch-gpu-modes</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/linux-auto-switch-gpu-modes</guid>
+      <pubDate>Wed, 28 Jan 2026 00:00:00 GMT</pubDate>
+      <description>This is primarily for asus linux laptops but im sure it can work for others with slight mods</description>
+    </item>
+    <item>
+      <title>Auto Fetch Webapp Icons On Omarchy</title>
+      <link>https://tristonarmstrong.com/blog/auto-fetch-webapp-icons-on-omarchy</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/auto-fetch-webapp-icons-on-omarchy</guid>
+      <pubDate>Tue, 23 Sep 2025 00:00:00 GMT</pubDate>
+      <description>The why and how I added some auto fetch logic when installing webapps</description>
+    </item>
+    <item>
+      <title>Omarchy flatpak support</title>
+      <link>https://tristonarmstrong.com/blog/omarchy-flatpak-support</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/omarchy-flatpak-support</guid>
+      <pubDate>Mon, 22 Sep 2025 00:00:00 GMT</pubDate>
+      <description>I go over why I added flatpak support and how</description>
+    </item>
+    <item>
+      <title>Building A Lightweight CI Daemon in Rust</title>
+      <link>https://tristonarmstrong.com/blog/building-a-lightweight-ci-daemon-in-rust</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/building-a-lightweight-ci-daemon-in-rust</guid>
+      <pubDate>Wed, 25 Sep 2024 00:00:00 GMT</pubDate>
+      <description>What it took for me to build my own CI-CD and why I did it.</description>
+    </item>
+    <item>
+      <title>The Netflix Interview That Didn&apos;t Go Well</title>
+      <link>https://tristonarmstrong.com/blog/the-netflix-interview-that-didn-t-go-well</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/the-netflix-interview-that-didn-t-go-well</guid>
+      <pubDate>Wed, 25 Sep 2024 00:00:00 GMT</pubDate>
+      <description>I interviewed at netflix, and it didn&apos;t go so well. Here I outline the problems I had.</description>
+    </item>
+    <item>
+      <title>My Ideal Operating System</title>
+      <link>https://tristonarmstrong.com/blog/my-ideal-operating-system</link>
+      <guid isPermaLink="true">https://tristonarmstrong.com/blog/my-ideal-operating-system</guid>
+      <pubDate>Wed, 25 Sep 2024 00:00:00 GMT</pubDate>
+      <description>Here I go over the OS of my choice. What I love, and what I hate about the various OS&apos;s I&apos;ve tried over the years.</description>
+    </item>
+  </channel>
+</rss>
