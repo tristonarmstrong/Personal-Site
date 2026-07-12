@@ -7,7 +7,7 @@ function Document() {
 }
 const dir = normalizePrefixPath("src/pages");
 const baseUrl = normalizePrefixPath("/");
-const pagesMap = /* @__PURE__ */ Object.assign({ "/src/pages/404/index.tsx": () => import("./assets/index-wmQDecmH.js"), "/src/pages/blog/[slug]/index.tsx": () => import("./assets/index-CF1jFN8V.js"), "/src/pages/blog/index.tsx": () => import("./assets/index-Dk86Bm3W.js"), "/src/pages/index.tsx": () => import("./assets/index-q3wdLFgR.js"), "/src/pages/project/[slug]/index.tsx": () => import("./assets/index-D7aAKu6I.js"), "/src/pages/thangs/[slug]/index.tsx": () => import("./assets/index-BhehR8kB.js"), "/src/pages/thangs/index.tsx": () => import("./assets/index-BJAqoF2w.js") });
+const pagesMap = /* @__PURE__ */ Object.assign({ "/src/pages/404/index.tsx": () => import("./assets/index-wmQDecmH.js"), "/src/pages/blog/[slug]/index.tsx": () => import("./assets/index-CF1jFN8V.js"), "/src/pages/blog/index.tsx": () => import("./assets/index-Dk86Bm3W.js"), "/src/pages/index.tsx": () => import("./assets/index-DZn9m9hM.js"), "/src/pages/project/[slug]/index.tsx": () => import("./assets/index-D7aAKu6I.js"), "/src/pages/thangs/[slug]/index.tsx": () => import("./assets/index-BhehR8kB.js"), "/src/pages/thangs/index.tsx": () => import("./assets/index-BJAqoF2w.js") });
 const layoutsMap = /* @__PURE__ */ Object.assign({ "/src/pages/layout.tsx": () => import("./assets/layout-DNEA_SD7.js") });
 const pages = formatViteImportMap(pagesMap, dir, baseUrl);
 const layouts = formatViteImportMap(layoutsMap, dir, baseUrl);
