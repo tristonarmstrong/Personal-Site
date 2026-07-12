@@ -1,0 +1,278 @@
+<!doctype html><html lang="en"><head><link rel="stylesheet" type="text/css" href="/assets/_virtual_kiru_entry-client-CT71kdbG.css"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Custom Rust Errors | Triston Armstrong</title><meta name="description" content="Centralizing error management using a custom Error enum and map_error resolves the complexity of disparate error types, establishing a single, type-safe contract across the entire application boundary for given domains."><meta property="og:title" content="Custom Rust Errors | Triston Armstrong"><meta property="og:description" content="Centralizing error management using a custom Error enum and map_error resolves the complexity of disparate error types, establishing a single, type-safe contract across the entire application boundary for given domains."><meta property="og:image" content="https://tristonarmstrong.com/avatar.webp"><meta property="og:url" content="https://tristonarmstrong.com/blog/custom-rust-errors"><meta property="og:type" content="article"><meta property="og:site_name" content="Triston Armstrong"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@triston_armstr"><meta name="twitter:creator" content="@triston_armstr"><meta name="twitter:title" content="Custom Rust Errors | Triston Armstrong"><meta name="twitter:description" content="Centralizing error management using a custom Error enum and map_error resolves the complexity of disparate error types, establishing a single, type-safe contract across the entire application boundary for given domains."><meta name="twitter:image" content="https://tristonarmstrong.com/avatar.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","name":"Custom Rust Errors | Triston Armstrong","description":"Centralizing error management using a custom Error enum and map_error resolves the complexity of disparate error types, establishing a single, type-safe contract across the entire application boundary for given domains.","url":"https://tristonarmstrong.com/blog/custom-rust-errors","image":"https://tristonarmstrong.com/avatar.webp","headline":"Custom Rust Errors","author":{"@type":"Person","name":"Triston Armstrong","url":"https://tristonarmstrong.com","sameAs":["https://github.com/tristonarmstrong","https://x.com/triston_armstr","https://www.linkedin.com/in/triston-armstrong-7248b229b"]},"publisher":{"@type":"Person","name":"Triston Armstrong","logo":{"@type":"ImageObject","url":"https://tristonarmstrong.com/avatar.webp"}},"datePublished":"2026-05-28T00:00:00.000Z","dateModified":"2026-05-28T00:00:00.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://tristonarmstrong.com/blog/custom-rust-errors"},"keywords":"","articleSection":"Technology","inLanguage":"en-US"}</script><meta property="article:published_time" content="2026-05-28T00:00:00.000Z"><meta property="article:author" content="Triston Armstrong"><link rel="canonical" href="https://tristonarmstrong.com/blog/custom-rust-errors"><link rel="alternate" type="application/rss+xml" title="Triston Armstrong - Blog Feed" href="https://tristonarmstrong.com/feed.xml"><link rel="manifest" href="/manifest.json"></head><body><div class="max-w-[70ch] mx-auto mt-20 flex flex-col gap-4 px-4 sm:overflow-hidden relative"><style>
+        ::view-transition-old(image-lumix),
+        ::view-transition-new(image-lumix) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-better-homes-amber-saffron),
+        ::view-transition-new(image-better-homes-amber-saffron) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-generic-walmart-office-chair),
+        ::view-transition-new(image-generic-walmart-office-chair) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-starbucks-mug),
+        ::view-transition-new(image-starbucks-mug) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-thyme-table-barista-mini),
+        ::view-transition-new(image-thyme-table-barista-mini) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-generic-standing-amazon-desk),
+        ::view-transition-new(image-generic-standing-amazon-desk) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-seagate-2tb-drive),
+        ::view-transition-new(image-seagate-2tb-drive) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-sandisk-64gb-flashdrive),
+        ::view-transition-new(image-sandisk-64gb-flashdrive) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-lenovo-legion-go),
+        ::view-transition-new(image-lenovo-legion-go) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-sony-wh-1000xm5),
+        ::view-transition-new(image-sony-wh-1000xm5) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-nescafe-gold-espresso),
+        ::view-transition-new(image-nescafe-gold-espresso) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-apple-magic-keyboard),
+        ::view-transition-new(image-apple-magic-keyboard) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-zephyrus-g14),
+        ::view-transition-new(image-zephyrus-g14) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-hyperx-solocast),
+        ::view-transition-new(image-hyperx-solocast) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-hp-ultrawide),
+        ::view-transition-new(image-hp-ultrawide) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-logitech-lift-silent),
+        ::view-transition-new(image-logitech-lift-silent) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-yellowstone-pocket-knife),
+        ::view-transition-new(image-yellowstone-pocket-knife) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-python),
+        ::view-transition-new(image-python) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-rust),
+        ::view-transition-new(image-rust) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-crocs),
+        ::view-transition-new(image-crocs) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-typescript),
+        ::view-transition-new(image-typescript) {
+          height: 100%;
+        }
+      
+
+        ::view-transition-old(image-logitech-c920),
+        ::view-transition-new(image-logitech-c920) {
+          height: 100%;
+        }
+      </style><div class="relative z-10"><nav class="flex items-center gap-6"><div class="flex gap-1"><a class="
+				px-3 py-1.5 rounded-lg text-sm
+				transition-all duration-200
+				text-gray-400 hover:text-gray-200 hover:bg-[#141414]
+			" href="/">Home</a><a class="
+				px-3 py-1.5 rounded-lg text-sm
+				transition-all duration-200
+				text-gray-400 hover:text-gray-200 hover:bg-[#141414]
+			" href="/thangs">Thangs</a><a class="
+				px-3 py-1.5 rounded-lg text-sm
+				transition-all duration-200
+				bg-[#1a1a1a] text-yellow-500
+			" href="/blog">Blog</a></div></nav><article class="text-sm mt-10 flex flex-col gap-10 max-w-2xl"><div><a class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/[0.1]  text-gray-400 hover:text-gray-200 hover:bg-white/[0.06] hover:border-white/20 transition text-xs font-medium backdrop-blur-sm no-underline" style="text-decoration: none;" href="/blog"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg><span>All Posts</span><span class="text-gray-600">·</span><span class="text-gray-500">13</span></a></div><header class="p-4 rounded-2xl bg-white/[0.1] backdrop-blur-md "><div class="flex items-start gap-3"><div class="w-20 h-20 rounded-full bg-center bg-cover" style="view-transition-name: avatar; background-image: url(/avatar.webp)" role="img" aria-label="Triston Armstrong's avatar" title="Triston Armstrong"></div><div class="flex-1 min-w-0"><h1 class="text-xl font-bold tracking-tight text-gray-100 leading-tight" style="margin-top: 0px;">Custom Rust Errors</h1><div class="flex items-center gap-2 mt-2 text-xs text-gray-500"><span>May 27, 2026</span><span>·</span><span>6 min read</span></div></div></div></header><div class="w-full border-t border-dashed border-white/10"></div><main class="blogpost markdown-body"><p><img src="/custom_rust_error.png" alt="custom-rust-error"></p>
+<h1>Custom Errors Have Worked Really Well, For Me, in My Rust Apps</h1>
+<p>Centralizing error management using a custom error enum per domain (e.g. <code>ApiError</code>, <code>AuthError</code>, <code>ParserError</code>), combined with <code>map_err</code> and <code>From</code> traits,
+solves the type chaos of Rust services. This gives each domain its own clean, focused contract.</p>
+<h2>😤 From <code>?</code> Nightmare to Cohesive Design</h2>
+<p>When you first start dipping toes into Rust - especially when a service interacts with diverse subsystems (database,
+external API, file system) - a common friction point appears.</p>
+<p>Error handling in Rust is profoundly powerful, but coordinating heterogeneous error types generates immediate
+boilerplate pain.</p>
+<p>Consider a function that must manage a data pipeline: connect to a DB, fetch external credentials, and then
+validate configuration. Each external dependency returns its own unique error type (<code>sqlx::Error</code>,
+<code>reqwest::Error</code>, <code>config::ConfigError</code>).</p>
+<p>If you do not consolidate these types into a single, application-defined enum, your resulting function
+signature becomes a cascade of explicit error handling. The compiler forces you to manage this type
+disparity, leading to code that focuses more on error plumbing than business logic.</p>
+<p>Here is the pain point:</p>
+<pre class="shiki deepin-os-soft" style="background-color:#0d0d0d;color:#83A5AE;" tabindex="0"><code><span class="line"><span style="color:#72868D;font-style:italic;">&#47;&#47; NOTE: This signature relies on error boxing, which loses type specificity.</span></span>
+<span class="line"><span style="color:#B59A4D;">async</span><span style="color:#B59A4D;"> fn</span><span style="color:#D4AF37;"> run_pipeline_ugly</span><span style="color:#83A5AE;">() </span><span style="color:#B59A4D;">-&gt;</span><span style="color:#83A5AE;"> Result&lt;(), Box&lt;</span><span style="color:#B59A4D;">dyn</span><span style="color:#9EA3A0;"> std</span><span style="color:#B59A4D;">::</span><span style="color:#9EA3A0;">error</span><span style="color:#B59A4D;">::</span><span style="color:#83A5AE;">Error&gt;&gt; {</span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">    &#47;&#47; 1. DB Interaction (Needs &#039;?&#039; to convert to Box&lt;dyn Error&gt;)</span></span>
+<span class="line"><span style="color:#B59A4D;">    match</span><span style="color:#D4AF37;"> db_call</span><span style="color:#83A5AE;">()</span><span style="color:#B59A4D;">.await</span><span style="color:#83A5AE;"> {</span></span>
+<span class="line"><span style="color:#83A5AE;">        Ok(</span><span style="color:#9EA3A0;">_</span><span style="color:#83A5AE;">) </span><span style="color:#B59A4D;">=&gt;</span><span style="color:#83A5AE;"> {},</span></span>
+<span class="line"><span style="color:#83A5AE;">        Err(</span><span style="color:#9EA3A0;">e</span><span style="color:#83A5AE;">) </span><span style="color:#B59A4D;">=&gt;</span><span style="color:#B59A4D;"> return</span><span style="color:#83A5AE;"> Err(Box</span><span style="color:#B59A4D;">::</span><span style="color:#D4AF37;">new</span><span style="color:#83A5AE;">(</span><span style="color:#9EA3A0;">e</span><span style="color:#83A5AE;">)), </span><span style="color:#72868D;font-style:italic;">&#47;&#47; Manual boxing and return</span></span>
+<span class="line"><span style="color:#83A5AE;">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">    &#47;&#47; 2. API Interaction (Repeat pattern)</span></span>
+<span class="line"><span style="color:#B59A4D;">    match</span><span style="color:#D4AF37;"> api_call</span><span style="color:#83A5AE;">()</span><span style="color:#B59A4D;">.await</span><span style="color:#83A5AE;"> {</span></span>
+<span class="line"><span style="color:#83A5AE;">        Ok(</span><span style="color:#9EA3A0;">_</span><span style="color:#83A5AE;">) </span><span style="color:#B59A4D;">=&gt;</span><span style="color:#83A5AE;"> {},</span></span>
+<span class="line"><span style="color:#83A5AE;">        Err(</span><span style="color:#9EA3A0;">e</span><span style="color:#83A5AE;">) </span><span style="color:#B59A4D;">=&gt;</span><span style="color:#B59A4D;"> return</span><span style="color:#83A5AE;"> Err(Box</span><span style="color:#B59A4D;">::</span><span style="color:#D4AF37;">new</span><span style="color:#83A5AE;">(</span><span style="color:#9EA3A0;">e</span><span style="color:#83A5AE;">)), </span><span style="color:#72868D;font-style:italic;">&#47;&#47; Repetition, error type mismatch</span></span>
+<span class="line"><span style="color:#83A5AE;">    }</span></span>
+<span class="line"><span style="color:#83A5AE;">    </span></span>
+<span class="line"><span style="color:#83A5AE;">    Ok(())</span></span>
+<span class="line"><span style="color:#83A5AE;">}</span></span></code></pre>
+<p>To someone new to rust, handling Result errors is a HUGE painpoint, and you can see why. This is an
+overly simplistic view into that pattern, but you can see immediately how easily it can escalate to
+some nastiness.</p>
+<h2>🏗️ The Single Source of Truth: Establishing a <code>DomainError</code> enum</h2>
+<p>In any medium-to-large applications, the single most critical step is defining system boundaries. When you write the
+core business logic, you should enforce one unified contract per domain.</p>
+<p>That contract, for the errors, is the domain-specific error enum (<code>ApiError</code>, ...etc).</p>
+<p>Instead of letting failure types float around like a chaotic mess;
+<code>std::io::Error</code>, <code>serde_json::Error</code>, <code>tokio::io::Error</code>, etc.
+we map the relevant errors to one canonical type for that domain. This is sanity.
+Within a given domain, every consuming module only needs to worry about <code>Result&lt;T, DomainError&gt;</code>. Period.</p>
+<pre class="shiki deepin-os-soft" style="background-color:#0d0d0d;color:#83A5AE;" tabindex="0"><code><span class="line"><span style="color:#B59A4D;">pub</span><span style="color:#B59A4D;"> enum</span><span style="color:#83A5AE;"> DomainError {</span></span>
+<span class="line"><span style="color:#D4AF37;">    Io</span><span style="color:#83A5AE;">(std</span><span style="color:#B59A4D;">::</span><span style="color:#83A5AE;">io</span><span style="color:#B59A4D;">::</span><span style="color:#83A5AE;">Error),</span></span>
+<span class="line"><span style="color:#D4AF37;">    Serialization</span><span style="color:#83A5AE;">(serde_json</span><span style="color:#B59A4D;">::</span><span style="color:#83A5AE;">Error),</span></span>
+<span class="line"><span style="color:#D4AF37;">    Other</span><span style="color:#83A5AE;">(String),</span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">    &#47;&#47; you can put anything relevant here, these are just examples</span></span>
+<span class="line"><span style="color:#83A5AE;">}</span></span></code></pre>
+<h2>🎣 Layer 1: Error Interception with <code>map_err</code> (The Interrogation Layer)</h2>
+<p>Before we even touch the <code>From</code> trait, we have to deal with the immediate pain of the foreign error.
+This is where <code>Result::map_err</code> steps in, and honestly, it’s magic.</p>
+<p>If an external API call fails, and we just use the <code>?</code> operator, that error propagates immediately.
+That doesn&#039;t work because we want to control the returned error, so, we <em>must</em> intercept it - which looks
+like this in its simplist form.</p>
+<pre class="shiki deepin-os-soft" style="background-color:#0d0d0d;color:#83A5AE;" tabindex="0"><code><span class="line"><span style="color:#B59A4D;">let</span><span style="color:#9EA3A0;"> result</span><span style="color:#B59A4D;"> =</span><span style="color:#D4AF37;"> SomeErrorResult</span><span style="color:#83A5AE;">()</span><span style="color:#B59A4D;">.</span><span style="color:#D4AF37;">map_err</span><span style="color:#83A5AE;">(</span><span style="color:#B59A4D;">|</span><span style="color:#9EA3A0;">e</span><span style="color:#B59A4D;">|</span><span style="color:#83A5AE;"> DomainError</span><span style="color:#B59A4D;">::</span><span style="color:#D4AF37;">Io</span><span style="color:#83A5AE;">(</span><span style="color:#9EA3A0;">e</span><span style="color:#83A5AE;">))</span><span style="color:#B59A4D;">?</span><span style="color:#83A5AE;">;</span></span></code></pre>
+<p>But, maybe we need to log the exact stack trace, we need to check the error details, and we need to maybe wrap
+it in a higher-level, more business-centric error message; all before the error is allowed to flow into our system.</p>
+<p>This is where <code>map_err</code> lives. It hands us a closure. This closure is the interception point.</p>
+<pre class="shiki deepin-os-soft" style="background-color:#0d0d0d;color:#83A5AE;" tabindex="0"><code><span class="line"><span style="color:#72868D;font-style:italic;">&#47;&#47; Assume we have this foreign error type</span></span>
+<span class="line"><span style="color:#B59A4D;">struct</span><span style="color:#83A5AE;"> ExternalApiError {</span></span>
+<span class="line"><span style="color:#9EA3A0;">    code</span><span style="color:#B59A4D;">:</span><span style="color:#83A5AE;"> i32,</span></span>
+<span class="line"><span style="color:#9EA3A0;">    message</span><span style="color:#B59A4D;">:</span><span style="color:#83A5AE;"> String,</span></span>
+<span class="line"><span style="color:#83A5AE;">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">&#47;&#47; Simulated API call</span></span>
+<span class="line"><span style="color:#B59A4D;">fn</span><span style="color:#D4AF37;"> call_external_api</span><span style="color:#83A5AE;">() </span><span style="color:#B59A4D;">-&gt;</span><span style="color:#83A5AE;"> Result&lt;u32, ExternalApiError&gt; {</span></span>
+<span class="line"><span style="color:#83A5AE;">    Err(ExternalApiError { </span></span>
+<span class="line"><span style="color:#9EA3A0;">        code</span><span style="color:#B59A4D;">:</span><span style="color:#83A5AE;"> 401, </span></span>
+<span class="line"><span style="color:#9EA3A0;">        message</span><span style="color:#B59A4D;">:</span><span style="color:#A3905D;"> &quot;Auth token expired.&quot;</span><span style="color:#B59A4D;">.</span><span style="color:#D4AF37;">into</span><span style="color:#83A5AE;">()</span></span>
+<span class="line"><span style="color:#83A5AE;">    })</span></span>
+<span class="line"><span style="color:#83A5AE;">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B59A4D;">fn</span><span style="color:#D4AF37;"> process_data</span><span style="color:#83A5AE;">() </span><span style="color:#B59A4D;">-&gt;</span><span style="color:#83A5AE;"> Result&lt;u32, DomainError&gt; {</span></span>
+<span class="line"><span style="color:#B59A4D;">    let</span><span style="color:#9EA3A0;"> result</span><span style="color:#B59A4D;"> =</span><span style="color:#D4AF37;"> call_external_api</span><span style="color:#83A5AE;">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">    &#47;&#47; 🛑 INTERCEPTION POINT: We use map_err to grab the error,</span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">    &#47;&#47; perform business logic (logging), and *manually* wrap it.</span></span>
+<span class="line"><span style="color:#B59A4D;">    let</span><span style="color:#9EA3A0;"> final_result</span><span style="color:#B59A4D;"> =</span><span style="color:#9EA3A0;"> result</span><span style="color:#B59A4D;">.</span><span style="color:#D4AF37;">map_err</span><span style="color:#83A5AE;">(</span><span style="color:#B59A4D;">|</span><span style="color:#9EA3A0;">e</span><span style="color:#B59A4D;">|</span><span style="color:#83A5AE;"> {</span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">        &#47;&#47; 🧠 This closure is where our custom, critical logic runs.</span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">        &#47;&#47; we&#039;re printing here just for demonstration of whats possible</span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">        &#47;&#47; but id recommend you log where the errors handled, and not here</span></span>
+<span class="line"><span style="color:#D4AF37;">        println!</span><span style="color:#83A5AE;">(</span><span style="color:#A3905D;">&quot;[LOG]: Authentication failure detected. Time to warn the user.&quot;</span><span style="color:#83A5AE;">);</span></span>
+<span class="line"><span style="color:#83A5AE;">        </span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">        &#47;&#47; Return the canonical type, enforcing our custom message.</span></span>
+<span class="line"><span style="color:#83A5AE;">        DomainError</span><span style="color:#B59A4D;">::</span><span style="color:#D4AF37;">Other</span><span style="color:#83A5AE;">(</span><span style="color:#D4AF37;">format!</span><span style="color:#83A5AE;">(</span><span style="color:#A3905D;">&quot;Authentication failure: {}. Needs refresh.&quot;</span><span style="color:#83A5AE;">, </span><span style="color:#9EA3A0;">e</span><span style="color:#B59A4D;">.</span><span style="color:#83A5AE;">message))</span></span>
+<span class="line"><span style="color:#83A5AE;">    })</span><span style="color:#B59A4D;">?</span><span style="color:#83A5AE;">; </span></span>
+<span class="line"><span style="color:#83A5AE;">    </span></span>
+<span class="line"><span style="color:#83A5AE;">    Ok(</span><span style="color:#9EA3A0;">final_result</span><span style="color:#83A5AE;">)</span></span>
+<span class="line"><span style="color:#83A5AE;">}</span></span></code></pre>
+<blockquote>
+<p><strong>My take:</strong> This level of explicit control is <strong>Vastly</strong> superior to relying on a macro crate that just
+wraps everything without letting you inspect the underlying failure reason.</p>
+</blockquote>
+<h2>⚙️ Layer 2: Structural Propagation with <code>impl From</code> (The Glue)</h2>
+<p>The ultimate goal is to make the compiler handle the error promotion so we don&#039;t have to write <code>map_err</code>
+everywhere. That&#039;s where the <code>impl From</code> trait comes in.</p>
+<p>If <code>map_err</code> is active manual intervention, <code>impl From</code> is passive, structural adherence. It is the declaration
+of trust: &quot;If I see an <code>io::Error</code>, I <em>guarantee</em> I know how to convert it to <code>DomainError::Io</code>.&quot;</p>
+<p>This is how we make the <code>?</code> operator magic.</p>
+<pre class="shiki deepin-os-soft" style="background-color:#0d0d0d;color:#83A5AE;" tabindex="0"><code><span class="line"><span style="color:#72868D;font-style:italic;">&#47;&#47; Assume DomainError and DomainError::Io(io::Error) are defined</span></span>
+<span class="line"><span style="color:#B59A4D;">impl</span><span style="color:#83A5AE;"> From&lt;</span><span style="color:#9EA3A0;">io</span><span style="color:#B59A4D;">::</span><span style="color:#83A5AE;">Error&gt; </span><span style="color:#B59A4D;">for</span><span style="color:#83A5AE;"> DomainError {</span></span>
+<span class="line"><span style="color:#B59A4D;">    fn</span><span style="color:#D4AF37;"> from</span><span style="color:#83A5AE;">(</span><span style="color:#9EA3A0;">err</span><span style="color:#B59A4D;">:</span><span style="color:#83A5AE;"> io</span><span style="color:#B59A4D;">::</span><span style="color:#83A5AE;">Error) </span><span style="color:#B59A4D;">-&gt;</span><span style="color:#9EA3A0;"> Self</span><span style="color:#83A5AE;"> {</span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">        &#47;&#47; Direct mapping: External IO error becomes DomainError::Io</span></span>
+<span class="line"><span style="color:#83A5AE;">        DomainError</span><span style="color:#B59A4D;">::</span><span style="color:#D4AF37;">Io</span><span style="color:#83A5AE;">(</span><span style="color:#9EA3A0;">err</span><span style="color:#83A5AE;">)</span></span>
+<span class="line"><span style="color:#83A5AE;">    }</span></span>
+<span class="line"><span style="color:#83A5AE;">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">&#47;&#47; Function using the automatic conversion</span></span>
+<span class="line"><span style="color:#B59A4D;">fn</span><span style="color:#D4AF37;"> read_data_file</span><span style="color:#83A5AE;">(</span><span style="color:#9EA3A0;">path</span><span style="color:#B59A4D;">:</span><span style="color:#B59A4D;"> &amp;</span><span style="color:#83A5AE;">str) </span><span style="color:#B59A4D;">-&gt;</span><span style="color:#83A5AE;"> Result&lt;(), DomainError&gt; {</span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">    &#47;&#47; The &#039;?&#039; sees io::Error, checks for &#039;From&#039; trait, finds it, </span></span>
+<span class="line"><span style="color:#72868D;font-style:italic;">    &#47;&#47; and executes the block above, cleaning up the error type instantly.</span></span>
+<span class="line"><span style="color:#83A5AE;">    std</span><span style="color:#B59A4D;">::</span><span style="color:#83A5AE;">fs</span><span style="color:#B59A4D;">::</span><span style="color:#D4AF37;">read_to_string</span><span style="color:#83A5AE;">(</span><span style="color:#9EA3A0;">path</span><span style="color:#83A5AE;">)</span><span style="color:#B59A4D;">?</span><span style="color:#83A5AE;">; </span></span>
+<span class="line"><span style="color:#83A5AE;">    Ok(())</span></span>
+<span class="line"><span style="color:#83A5AE;">}</span></span></code></pre>
+<h3>The takeaway</h3>
+<p>We use <code>impl From</code> to let the compiler handle the boilerplate conversion;
+it’s powerful, clean, and keeps the function body almost entirely clean of error-checking logic.</p>
+<h2>Final Comments</h2>
+<p>This article is meant for newer people. This has been game changing for me in writing rust and dealing
+with the onslaught of error types and not having a clean way to handle them. Atleast, not known to me
+at the time.</p>
+<p>I couldnt have made this if it werent for a peer of mine, <a href="https://dhillon.dev">Joban</a>, showing me his
+implimentation. It was gamechanging to me with writing rust, and all of my credit goes out to him.
+Thank yuh buddy!</p>
+<h2>Notes</h2>
+<p>You&#039;ll hear people say:</p>
+<blockquote>
+<p>&quot;Errors should be handled where they occur (no error propagation)&quot;.</p>
+</blockquote>
+<p>In which
+I strongly disagree. Unless you’re writing 200-line functions that do more than they should,
+it’s usually unlikely you&#039;ll be able to handle errors exactly where they occur. They almost always need to
+propagate up a few layers before they can be dealt with in full context. Otherwise, I’d argue you’re
+probably a pretty messy programmer and need to get your life together!</p></main><div class="w-full border-t border-dashed border-white/10"></div><footer><h2 class="text-xs font-medium tracking-wider text-gray-500 uppercase mb-4">Next Post</h2><a class="flex flex-col p-4  rounded-xl bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.06] transition group no-underline" style="text-decoration: none;" href="/blog/android-screen-mirroring"><div class="flex items-center justify-between gap-4 mb-1"><h3 class="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight">Android Screen Mirroring</h3><span class="text-xs text-gray-500 whitespace-nowrap">Mar 28</span></div><p class="text-xs text-gray-500 leading-relaxed line-clamp-2">If you’re still tolerating macOS only because you need reliable Android screen mirroring, it’s time to drop the excuse. Linux users have been enjoying a superior, free, and buttery-smooth solution called scrcpy for years.</p></a></footer><div class="h-20"></div></article><footer class="text-center flex flex-col gap-1" style="view-transition-name: foot"><div class="w-full border-t border-dashed border-white/10"></div><div class="flex flex-col [&_*]:transition gap-2"><div class="flex justify-between"><small class="opacity-50 hover:opacity-100">Made with ❤️ &amp; 🍵</small><a class="opacity-50 hover:opacity-100 flex items-end gap-1" href="https://kirujs.dev" target="_blank" rel="noopener"><small>Powered by</small><div class="flex items-end justify-center"><svg class="w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="crimson" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg><small class="text-primary font-bold flex items-center">Kiru</small></div></a></div><ul class="flex gap-3 [&>*>*]:opacity-50 [&>*>*]:hover:opacity-100 [&>*>*]:hover:text-yellow-500 [&>*]:transition-color [&>*]:duration-200 items-end"><a class="hover:scale-90" href="https://github.com/tristonarmstrong" rel="noopener" target="_blank" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a><a class="hover:scale-90" href="https://x.com/triston_armstr" rel="noopener" target="_blank" title="X (Twitter)"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a class="hover:scale-90" href="https://www.linkedin.com/in/triston-armstrong-7248b229b" rel="noopener" target="_blank" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a class="hover:scale-90" href="/feed.xml" title="RSS Feed"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a><a class="hover:scale-90" href="_" title="Email"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></a></ul></div></footer></div></div><script type="module" src="/assets/_virtual_kiru_entry-client-CFXfFnOd.js"></script></body></html>
