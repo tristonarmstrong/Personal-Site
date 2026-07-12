@@ -10,7 +10,6 @@ lerna-debug.log*
 package-lock.yaml
 pnpm-lock.yaml
 node_modules
-dist
 dist-ssr
 *.local
 
