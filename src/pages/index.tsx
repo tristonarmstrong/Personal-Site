@@ -517,6 +517,12 @@ function openSourceData(): Array<{
 }> {
 	return [
 		{
+			label: "letstri/druk",
+			meta: "merged",
+			status: "merged",
+			href: "https://github.com/letstri/druk/pull/5",
+		},
+		{
 			label: "khurrambhutto/noted",
 			meta: "merged",
 			status: "merged",
