@@ -91,7 +91,7 @@
     ]
   },
   "src/pages/index.tsx": {
-    "file": "assets/index-Berxhtrc.js",
+    "file": "assets/index-8crDjJhT.js",
     "name": "index",
     "src": "src/pages/index.tsx",
     "isDynamicEntry": true,
@@ -105,7 +105,7 @@
     ]
   },
   "src/pages/layout.tsx": {
-    "file": "assets/layout-DD0Uf28N.js",
+    "file": "assets/layout-5badrMJm.js",
     "name": "layout",
     "src": "src/pages/layout.tsx",
     "isDynamicEntry": true,
@@ -155,7 +155,7 @@
     ]
   },
   "virtual:kiru:entry-client": {
-    "file": "assets/_virtual_kiru_entry-client-7LK7eYEL.js",
+    "file": "assets/_virtual_kiru_entry-client-Cc2SvCmY.js",
     "name": "_virtual_kiru_entry-client",
     "src": "virtual:kiru:entry-client",
     "isEntry": true,
