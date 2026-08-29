@@ -28,61 +28,49 @@ export default function Thangs() {
 
 			{/* Tech */}
 			<section>
-				<div className="p-3 rounded-xl bg-paper-card  mb-4">
-					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
-						Tech
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Tech
+				</h2>
 				<FilteredThangsList group={"Tech"} />
 			</section>
 
 			{/* Kitchen */}
 			<section>
-				<div className="p-3 rounded-xl bg-paper-card  mb-4">
-					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
-						Kitchen
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Kitchen
+				</h2>
 				<FilteredThangsList group={"Kitchen"} />
 			</section>
 
 			{/* Day */}
 			<section>
-				<div className="p-3 rounded-xl bg-paper-card  mb-4">
-					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
-						Day
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Day
+				</h2>
 				<FilteredThangsList group={"Day"} />
 			</section>
 
 			{/* Furniture */}
 			<section>
-				<div className="p-3 rounded-xl bg-paper-card  mb-4">
-					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
-						Furniture
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Furniture
+				</h2>
 				<FilteredThangsList group={"Furniture"} />
 			</section>
 
 			{/* Travel */}
 			<section>
-				<div className="p-3 rounded-xl bg-paper-card  mb-4">
-					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
-						Travel
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Travel
+				</h2>
 				<p className="text-ink-faint text-sm pl-1">who travels these days?</p>
 			</section>
 
 			{/* Languages */}
 			<section>
-				<div className="p-3 rounded-xl bg-paper-card  mb-4">
-					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
-						Languages
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Languages
+				</h2>
 				<FilteredThangsList group={"Lang"} />
 			</section>
 
