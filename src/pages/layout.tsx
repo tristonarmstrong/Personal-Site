@@ -102,7 +102,7 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 									e.stopPropagation();
 									const a = document.createElement("a");
 									a.href =
-										"mailto:triston@hey.com?subject=Reaching Out&body=Hey Triston, ...Put message here...";
+										"mailto:triston@klectr.dev?subject=Reaching Out&body=Hey Triston, ...Put message here...";
 									a.click();
 								}}
 								title="Email"

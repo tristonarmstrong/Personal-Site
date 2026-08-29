@@ -19,7 +19,7 @@ export default function Home() {
 	function _handleEmailClick() {
 		const a = document.createElement("a");
 		a.href =
-			"mailto:triston@hey.com?subject=Reaching Out&body=Hey Triston, ...Put message here...";
+			"mailto:triston@klectr.dev?subject=Reaching Out&body=Hey Triston, ...Put message here...";
 		a.click();
 	}
 
@@ -86,7 +86,7 @@ export default function Home() {
 							label="LinkedIn"
 						/>
 						<SocialIcon
-							href="mailto:triston@hey.com"
+							href="mailto:triston@klectr.dev"
 							icon={<EmailIcon />}
 							label="Email"
 						/>
