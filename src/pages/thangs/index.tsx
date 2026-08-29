@@ -116,16 +116,17 @@ function FilteredThangsList({
 	}
 
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 			{filteredThangs.map((thang) => {
 				return (
 					<Link
 						to={`/thangs/${thang.slug}`}
-						className="transition bg-paper-card rounded-lg hover:bg-card cursor-pointer overflow-hidden group"
+						className="taped-photo no-underline group cursor-pointer"
+						aria-label={thang.item}
 						transition
 					>
-						<div
-							className="h-40"
+						<span
+							className="block aspect-[4/3] w-full"
 							style={`
 								view-transition-name: image-${thang.slug};
 								background-image: url(${thang.img}), url(${generateLowResImagePath(thang.img)});
@@ -133,16 +134,7 @@ function FilteredThangsList({
 								background-size: cover;
 								background-position: center;
 							`}
-						></div>
-						<div className="p-3">
-							<h3
-								style={`view-transition-name: link-h-${thang.slug}`}
-								className="text-sm font-medium text-ink group-hover:text-accent-deep transition-colors"
-							>
-								{thang.item}
-							</h3>
-							<p className="text-xs text-ink-faint">{thang.type}</p>
-						</div>
+						/>
 					</Link>
 				);
 			})}
