@@ -212,7 +212,7 @@ export default function Home() {
 						<div className="flex items-center justify-between gap-4">
 							<div className="flex items-center gap-2">
 								<span className="text-sm font-medium text-yellow-500">
-									Your Company Here
+									ByteBot
 								</span>
 							</div>
 							<span className="text-xs text-green-400/80 whitespace-nowrap font-medium">
