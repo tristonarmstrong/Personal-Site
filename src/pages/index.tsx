@@ -216,7 +216,7 @@ export default function Home() {
 								</span>
 							</div>
 							<span className="text-xs text-green-400/80 whitespace-nowrap font-medium">
-								Available
+								2026-present
 							</span>
 						</div>
 					</div>
