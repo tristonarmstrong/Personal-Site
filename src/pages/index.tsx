@@ -32,82 +32,89 @@ export default function Home() {
 		>
 			<SEO />
 
-			{/* Header */}
-			<section className={"relative"}>
-				<div className="p-4 letter-card flex flex-col gap-2 z-10 relative max-w-150 mx-auto">
-					<div className="flex items-start gap-3 z-10">
-						<Avatar size="lg" />
-						<div className={"z-10"}>
-							<h1 className="font-hand text-accent z-10" style="font-size: 3rem; line-height: 1;">
-								Triston Armstrong
-							</h1>
-							<div className="flex gap-2 text-ink-faint z-10">
-								<span>Senior Software Engineer</span>
-								<span>·</span>
-								<span>Utah, USA</span>
-							</div>
-						</div>
-					</div>
-					<p className="text-ink-soft mt-2 max-w-lg leading-relaxed text-justify">
-						I am a Senior Software Engineer with over{" "}
-						<span
-							className="yearthing text-accent cursor-help"
-							title="I started programming professionally in year 2019"
-						>
-							{yearsExperience.value} years
-						</span>{" "}
-						of experience building applications in React, TypeScript, and Rust
-						with significant experience modernizing legacy systems and
-						delivering enterprise solutions. I’ve led frontend development
-						efforts, migrated large codebases to TypeScript, optimized CI/CD
-						pipelines, and worked closely with stakeholders to turn complex
-						business requirements into clean, maintainable software.
-						<br />
-						<br />
-						I’m known as a collaborative team player who enjoys mentoring junior
-						developers and fostering a culture of constructive feedback.
-					</p>
+			{/* Masthead */}
+			<header className="flex flex-col items-center text-center pt-4">
+				<p className="dateline">the personal website of</p>
+				<h1
+					className="font-hand text-accent mt-2"
+					style="font-size: clamp(3.4rem, 10vw, 4.8rem); line-height: 1;"
+				>
+					Triston Armstrong
+				</h1>
+				<p className="flex gap-2 text-ink-faint text-sm mt-3">
+					<span>Senior Software Engineer</span>
+					<span>·</span>
+					<span>Utah, USA</span>
+				</p>
+			</header>
 
-					{/* Social Links */}
-					<div className="flex items-center gap-1 mt-3 [&>a]:bg-accent/10">
-						<SocialIcon
-							href="https://github.com/tristonarmstrong"
-							icon={<GithubIcon />}
-							label="GitHub"
-						/>
-						<SocialIcon
-							href="https://x.com/triston_armstr"
-							icon={<XIcon />}
-							label="X"
-						/>
-						<SocialIcon
-							href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
-							icon={<LinkedinIcon />}
-							label="LinkedIn"
-						/>
-						<SocialIcon
-							href="mailto:triston@hey.com"
-							icon={<EmailIcon />}
-							label="Email"
-						/>
-						<SocialIcon href="/feed.xml" icon={<RssIcon />} label="RSS" />
-					</div>
+			<div className="max-w-xl mx-auto flex flex-col gap-5 mt-6">
+				<p className="lead">
+					I am a Senior Software Engineer with over{" "}
+					<span
+						className="yearthing text-accent cursor-help"
+						title="I started programming professionally in year 2019"
+					>
+						{yearsExperience.value} years
+					</span>{" "}
+					of experience building applications in React, TypeScript, and Rust
+					with significant experience modernizing legacy systems and
+					delivering enterprise solutions. I’ve led frontend development
+					efforts, migrated large codebases to TypeScript, optimized CI/CD
+					pipelines, and worked closely with stakeholders to turn complex
+					business requirements into clean, maintainable software.
+				</p>
+
+				<figure className="taped-avatar self-center">
+					<Avatar size="lg" />
+				</figure>
+
+				<p className="text-ink-soft leading-relaxed">
+					I’m known as a collaborative team player who enjoys mentoring junior
+					developers and fostering a culture of constructive feedback.
+				</p>
+
+				{/* Social Links */}
+				<div className="flex items-center justify-center gap-1 mt-1 [&>a]:bg-accent/10">
+					<SocialIcon
+						href="https://github.com/tristonarmstrong"
+						icon={<GithubIcon />}
+						label="GitHub"
+					/>
+					<SocialIcon
+						href="https://x.com/triston_armstr"
+						icon={<XIcon />}
+						label="X"
+					/>
+					<SocialIcon
+						href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
+						icon={<LinkedinIcon />}
+						label="LinkedIn"
+					/>
+					<SocialIcon
+						href="mailto:triston@hey.com"
+						icon={<EmailIcon />}
+						label="Email"
+					/>
+					<SocialIcon href="/feed.xml" icon={<RssIcon />} label="RSS" />
 				</div>
-			</section>
+			</div>
 
-			<div className="w-full border-t border-dashed border-line" />
+			<div className="wave-divider" role="separator" aria-hidden="true" />
 
 			{/* GitHub Activity */}
 			<section>
-				<h2 className="font-display text-ink mb-4" style="font-size: 1.75rem;">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					Activity
 				</h2>
 				<GitHubActivity />
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* OSS Contributions */}
 			<section>
-				<h2 className="font-display text-ink mb-4" style="font-size: 1.75rem;">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					OSS
 				</h2>
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -127,9 +134,11 @@ export default function Home() {
 				</div>
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* Projects */}
 			<section>
-				<h2 className="font-display text-ink mb-4" style="font-size: 1.75rem;">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					Projects
 				</h2>
 				<div className="flex flex-col gap-3">
@@ -145,9 +154,11 @@ export default function Home() {
 				</div>
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* Blog */}
 			<section>
-				<h2 className="font-display text-ink mb-4" style="font-size: 1.75rem;">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					Blog
 				</h2>
 				<div className="flex flex-col sm:flex-row gap-3">
@@ -160,6 +171,7 @@ export default function Home() {
 							>
 								<time className={"text-ink-faint text-xs font-thin"}>
 									{x.date.toLocaleDateString("en-US", {
+							timeZone: "UTC",
 										month: "short",
 										day: "2-digit",
 										year: "numeric",
@@ -201,9 +213,11 @@ export default function Home() {
 				</div>
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* Experience */}
 			<section>
-				<h2 className="font-display text-ink mb-4" style="font-size: 1.75rem;">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					Experience
 				</h2>
 				<div className="flex flex-col gap-3">
@@ -247,44 +261,26 @@ export default function Home() {
 				</div>
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* Get in Touch CTA */}
-			<section className="p-4 rounded-2xl bg-paper-card">
-				<div className="flex items-start gap-3">
-					<div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							className="text-accent"
-						>
-							<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-						</svg>
-					</div>
-					<div className="flex-1 min-w-0">
-						<h2 className="font-display text-ink mb-1" style="font-size: 1.35rem;">
-							Let's work together
-						</h2>
-						<p className="text-sm text-ink-soft leading-relaxed mb-3">
-							Have a project in mind or just want to chat? I'm always open to
-							discussing new opportunities, creative ideas, or potential
-							collaborations.
-						</p>
-						<button
-							type="button"
-							onclick={_handleEmailClick}
-							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent/15 text-accent hover:bg-accent/25 transition text-sm font-medium cursor-pointer"
-						>
-							<EmailIcon />
-							<span>Send me an email</span>
-						</button>
-					</div>
-				</div>
+			<section className="p-6 rounded-2xl bg-paper-card text-center">
+				<h2 className="font-hand text-accent mb-2" style="font-size: 2rem;">
+					Let's work together
+				</h2>
+				<p className="text-sm text-ink-soft leading-relaxed mb-4 max-w-md mx-auto">
+					Have a project in mind or just want to chat? I'm always open to
+					discussing new opportunities, creative ideas, or potential
+					collaborations.
+				</p>
+				<button
+					type="button"
+					onclick={_handleEmailClick}
+					className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent/15 text-accent hover:bg-accent/25 transition text-sm font-medium cursor-pointer"
+				>
+					<EmailIcon />
+					<span>Send me an email</span>
+				</button>
 			</section>
 
 			{/* Footer spacer */}

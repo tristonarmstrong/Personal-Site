@@ -53,61 +53,55 @@ export default function Page() {
 					</Link>
 				</div>
 
-				{/* Header */}
-				<header className="p-4 rounded-2xl bg-paper-card backdrop-blur-md ">
-					<div className="flex items-start gap-3">
-						<Avatar size="lg" />
-						<div className="flex-1 min-w-0">
-							<h1 className="font-display text-ink leading-tight" style="font-size: 1.6rem; margin-top: 0px;">
-								{post.title}
-							</h1>
-							<div className="flex items-center gap-2 mt-2 text-xs text-ink-faint">
-								<span>
-									{post.date.toLocaleDateString("en-US", {
-										month: "long",
-										day: "numeric",
-										year: "numeric",
-									})}
-								</span>
-								<span>·</span>
-								<span>{formatReadingTime(calculateReadingTime(post.mdx))}</span>
-							</div>
-						</div>
+				{/* Article header — playbook style */}
+				<header className="flex flex-col gap-4 pt-2">
+					<p className="dateline">
+						{post.date.toLocaleDateString("en-US", {
+							timeZone: "UTC",
+							month: "long",
+							day: "numeric",
+							year: "numeric",
+						})}
+					</p>
+					<h1 className="article-title">{post.title}</h1>
+					<p className="lead">{post.summary}</p>
+					<div className="flex items-center gap-2 text-xs text-ink-faint">
+						<Avatar size="sm" />
+						<span>Triston Armstrong</span>
+						<span>·</span>
+						<span>{formatReadingTime(calculateReadingTime(post.mdx))}</span>
 					</div>
 				</header>
 
-				<div className="w-full border-t border-dashed border-line" />
+				<div className="wave-divider" role="separator" aria-hidden="true" />
 
 				{/* Content */}
 				<main className="blogpost markdown-body">
 					<MDXContent code={post!.mdx} />
 				</main>
 
-				<div className="w-full border-t border-dashed border-line" />
-
 				{/* Next post */}
-				<footer>
-					<h2 className="text-xs font-medium tracking-wider text-ink-faint uppercase mb-4">
-						Next Post
-					</h2>
+				<footer className="flex flex-col gap-3">
+					<div className="wave-divider" role="separator" aria-hidden="true" />
+					<p className="dateline">keep reading</p>
 					<Link
 						to={`/blog/${nextPost.slug}`}
-						className="flex flex-col p-4  rounded-xl bg-paper-card backdrop-blur-md hover:bg-card transition group no-underline"
+						className="flex flex-col items-center text-center gap-2 p-6 rounded-2xl bg-paper-card hover:bg-card transition group no-underline border border-line"
 						style="text-decoration: none;"
 						transition
 					>
-						<div className="flex items-center justify-between gap-4 mb-1">
-							<h3 className="text-sm font-medium text-ink group-hover:text-accent-deep transition-colors tracking-tight">
-								{nextPost.title}
-							</h3>
-							<span className="text-xs text-ink-faint whitespace-nowrap">
-								{nextPost.date.toLocaleDateString("en-US", {
-									month: "short",
-									day: "numeric",
-								})}
-							</span>
-						</div>
-						<p className="text-xs text-ink-faint leading-relaxed line-clamp-2">
+						<h3 className="font-hand text-accent-deep group-hover:text-accent transition-colors" style="font-size: 1.7rem; line-height: 1.15;">
+							{nextPost.title}
+						</h3>
+						<span className="text-xs text-ink-faint italic">
+							{nextPost.date.toLocaleDateString("en-US", {
+							timeZone: "UTC",
+								month: "long",
+								day: "numeric",
+								year: "numeric",
+							})}
+						</span>
+						<p className="text-xs text-ink-soft leading-relaxed line-clamp-2 max-w-md">
 							{nextPost.summary}
 						</p>
 					</Link>

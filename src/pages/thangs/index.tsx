@@ -13,16 +13,18 @@ export default function Thangs() {
 			/>
 
 			{/* Header */}
-			<section className="p-4 rounded-2xl bg-paper-card  flex flex-col gap-2">
-				<h1 className="font-display text-ink" style="font-size: 1.9rem;">
+			<header className="flex flex-col items-center text-center gap-3 pt-4">
+				<p className="dateline">things i actually use</p>
+				<h1 className="font-hand text-accent" style="font-size: clamp(3rem, 9vw, 4.2rem); line-height: 1;">
 					/uses
 				</h1>
-				<p className="text-ink-soft leading-relaxed">
-					The gear, tools, and random stuff that powers my day-to-day. From the
-					desk setup to kitchen gadgets, these are things I actually use and
-					recommend.
+				<p className="lead max-w-xl">
+					The gear, tools, and random stuff that powers my day-to-day —
+					things I actually use and recommend.
 				</p>
-			</section>
+			</header>
+
+			<div className="wave-divider" role="separator" aria-hidden="true" />
 
 			{/* Tech */}
 			<section>

@@ -1,6 +1,5 @@
 import { allPosts } from "content-collections";
 import { Link } from "kiru/router";
-import { Avatar } from "../../components/Avatar";
 import { RssIcon } from "../../components/icons/Rss";
 import { SEO } from "../../components/SEO";
 import {
@@ -74,20 +73,6 @@ function detectCategory(
 }
 
 
-// Format last update time
-function getLastUpdateText(date?: Date): string {
-	if (!date) return "recently";
-	const now = new Date();
-	const diff = now.getTime() - date.getTime();
-	const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-	if (days === 0) return "today";
-	if (days === 1) return "yesterday";
-	if (days < 7) return `${days} days ago`;
-	if (days < 30) return `${Math.floor(days / 7)} weeks ago`;
-	return `${Math.floor(days / 30)} months ago`;
-}
-
 export default function BlogIndex() {
 	const allPostsRearranged = allPosts.sort(
 		(a, b) => b.date.getTime() - a.date.getTime(),
@@ -105,71 +90,40 @@ export default function BlogIndex() {
 			/>
 
 			{/* Header */}
-			<section className="p-5 rounded-2xl bg-paper-card backdrop-blur-md ">
-				<div className="flex items-start gap-4">
-					<Avatar size="lg" />
-					<div className="flex-1 min-w-0">
-						<div className="flex items-center justify-between gap-3 mb-2">
-							<h1 className="font-hand text-accent" style="font-size: 2.75rem; line-height: 1;">
-								Blog
-							</h1>
-							<a
-								href="/feed.xml"
-								className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 text-accent hover:bg-accent/15 transition text-xs font-medium border border-accent/25"
-								title="Subscribe to RSS feed"
-							>
-								<RssIcon size={12} />
-								<span>Subscribe</span>
-							</a>
-						</div>
+			<header className="flex flex-col items-center text-center gap-3 pt-4">
+				<p className="dateline">{allPostsRearranged.length} posts and counting</p>
+				<h1 className="font-hand text-accent" style="font-size: clamp(3rem, 9vw, 4.2rem); line-height: 1;">
+					Blog
+				</h1>
+				<p className="lead max-w-xl">
+					Technical deep-dives, debugging war stories, and lessons learned
+					from shipping software.
+				</p>
+				<a
+					href="/feed.xml"
+					className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 text-accent hover:bg-accent/15 transition text-xs font-medium border border-accent/25"
+					title="Subscribe to RSS feed"
+				>
+					<RssIcon size={12} />
+					<span>Subscribe via RSS</span>
+				</a>
+			</header>
 
-						<p className="text-ink-soft leading-relaxed text-justify">
-							A collection of technical deep-dives, debugging war stories, and
-							lessons learned from shipping software. I write about systems
-							programming, Rust, developer tooling, and the occasional career
-							reflection.
-						</p>
-
-						{/* Stats */}
-						<div className="flex items-center gap-4 mt-4 text-xs">
-							<div className="flex items-center gap-1.5 text-ink-faint">
-								<DocumentIcon size={12} />
-								<span>{allPostsRearranged.length} posts</span>
-							</div>
-							<span className="text-ink-faint">·</span>
-							<div className="flex items-center gap-1.5 text-ink-faint">
-								<TagIcon size={12} />
-								<span>5 topics</span>
-							</div>
-							<span className="text-ink-faint">·</span>
-							<div className="flex items-center gap-1.5 text-ink-faint">
-								<ClockIcon size={12} />
-								<span>
-									Updated {getLastUpdateText(allPostsRearranged[0]?.date)}
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<div className="w-full border-t border-dashed border-line" />
+			<div className="wave-divider" role="separator" aria-hidden="true" />
 
 			{/* Featured Post */}
 			{featuredPost && (
 				<section>
-					<h2 className="text-xs font-medium tracking-wider text-ink-faint uppercase mb-4">
-						Latest Post
-					</h2>
+					<p className="dateline mb-4">latest post</p>
 					<FeaturedPostCard post={featuredPost} />
 				</section>
 			)}
 
 			{/* Post Grid */}
 			<section>
-				<h2 className="text-xs font-medium tracking-wider text-ink-faint uppercase mb-4">
-					All Posts ({allPostsRearranged.length})
-				</h2>
+				<p className="dateline mb-4">
+					all posts ({allPostsRearranged.length})
+				</p>
 				<div className="grid grid-cols-1 gap-3">
 					{remainingPosts.map((post) => (
 						<PostCard key={post.slug} post={post} />
@@ -205,6 +159,7 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 				</div>
 				<span className="text-xs text-ink-faint">
 					{post.date.toLocaleDateString("en-US", {
+							timeZone: "UTC",
 						month: "short",
 						day: "numeric",
 						year: "numeric",
@@ -265,6 +220,7 @@ function PostCard({ post }: { post: (typeof allPosts)[0] }) {
 					<span>·</span>
 					<span>
 						{post.date.toLocaleDateString("en-US", {
+							timeZone: "UTC",
 							month: "short",
 							day: "numeric",
 						})}
@@ -384,44 +340,6 @@ function ClockIcon({ size = 12 }: { size?: number }) {
 		>
 			<circle cx="12" cy="12" r="10" />
 			<polyline points="12 6 12 12 16 14" />
-		</svg>
-	);
-}
-
-function DocumentIcon({ size = 12 }: { size?: number }) {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width={size}
-			height={size}
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		>
-			<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-			<polyline points="14 2 14 8 20 8" />
-		</svg>
-	);
-}
-
-function TagIcon({ size = 12 }: { size?: number }) {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width={size}
-			height={size}
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		>
-			<path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z" />
-			<circle cx="7" cy="7" r="1" />
 		</svg>
 	);
 }
