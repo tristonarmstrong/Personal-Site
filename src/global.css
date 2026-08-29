@@ -403,7 +403,11 @@ article {
 		}
 	}
 
-	a {
+	/* Hand-drawn underline for content links only. Button links (marked
+	   .no-underline), image links, and "Link To Buy" buttons skip it. */
+	a:not(.no-underline):not(:has(> img:only-child)):not(
+			[title*="affiliate" i]
+		):not([title*="not an affiliate" i]) {
 		background-image: linear-gradient(
 			var(--color-accent),
 			var(--color-accent)
@@ -432,6 +436,7 @@ article {
 		gap: 0.5rem;
 		padding: 0.5rem 1rem;
 		background-color: var(--color-highlight);
+		background-image: none;
 		border: 1px solid var(--color-accent);
 		border-radius: 0.5rem;
 		color: var(--color-accent-deep);
@@ -546,6 +551,31 @@ article {
 		height: auto;
 		transform: rotate(0.6deg);
 		width: 100%;
+	}
+
+	/* Tape every article image to the page, like the playbook figures.
+	   Markdown renders an image as a lone img (or a linked img) inside a
+	   paragraph, so the tape strip goes on the paragraph. */
+	p:has(> img:only-child),
+	p:has(> a:only-child > img:only-child) {
+		position: relative;
+	}
+
+	p:has(> img:only-child)::before,
+	p:has(> a:only-child > img:only-child)::before {
+		background: rgba(255, 255, 255, 0.72);
+		border-left: 1px dashed rgba(35, 34, 31, 0.16);
+		border-right: 1px dashed rgba(35, 34, 31, 0.16);
+		border-radius: 2px;
+		box-shadow: 0 2px 6px rgba(35, 34, 31, 0.12);
+		content: "";
+		height: 22px;
+		left: 50%;
+		position: absolute;
+		top: -11px;
+		transform: translateX(-50%) rotate(-2deg);
+		width: 92px;
+		z-index: 2;
 	}
 
 	/* Tables */
