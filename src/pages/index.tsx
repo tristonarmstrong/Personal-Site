@@ -110,7 +110,7 @@ export default function Home() {
 				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
 					OSS
 				</h2>
-				<div className="flex flex-col gap-3">
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 					<For
 						each={openSourceContribsData}
 						fallback={<div>No Open Source Contributions Yet</div>}
