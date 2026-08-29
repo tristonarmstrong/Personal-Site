@@ -624,53 +624,5 @@ function openSourceData(): Array<{
 			status: "merged",
 			href: "https://github.com/LankyMoose/matcha-js/pull/1",
 		},
-		{
-			label: "TinaEaley/react-exercise",
-			meta: "merged",
-			status: "merged",
-			href: "https://github.com/TinaEaley/react-exercise/pull/1",
-		},
-		{
-			label: "anonymous-team-feedback/anonymous-team-feedback-fe",
-			meta: "33 PRs",
-			status: "merged",
-			href: "https://github.com/anonymous-team-feedback/anonymous-team-feedback-fe/pull/4",
-		},
-		{
-			label: "anonymous-team-feedback/anonymous-team-feedback-be",
-			meta: "4 PRs",
-			status: "merged",
-			href: "https://github.com/anonymous-team-feedback/anonymous-team-feedback-be/pull/29",
-		},
-		{
-			label: "devdesk-queue/web-ui-triston",
-			meta: "9 PRs",
-			status: "merged",
-			href: "https://github.com/devdesk-queue/web-ui-triston/pull/1",
-		},
-		{
-			label: "build-party-planner-project-week/BW-Party-Planner-BE",
-			meta: "5 PRs",
-			status: "merged",
-			href: "https://github.com/build-party-planner-project-week/BW-Party-Planner-BE/pull/1",
-		},
-		{
-			label: "build-party-planner-project-week/BW-Party-Planner-FE-1",
-			meta: "2 PRs",
-			status: "merged",
-			href: "https://github.com/build-party-planner-project-week/BW-Party-Planner-FE-1/pull/11",
-		},
-		{
-			label: "labs13-agriculture/front-end",
-			meta: "merged",
-			status: "merged",
-			href: "https://github.com/labs13-agriculture/front-end/pull/88",
-		},
-		{
-			label: "labs14-plan-my-day/Backend",
-			meta: "3 PRs",
-			status: "merged",
-			href: "https://github.com/labs14-plan-my-day/Backend/pull/1",
-		},
 	];
 }
