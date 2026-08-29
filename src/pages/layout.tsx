@@ -2,6 +2,7 @@ import { allThangs } from "content-collections";
 import { Mail } from "../components/icons/Mail";
 import { RssIcon } from "../components/icons/Rss";
 import { Navigation } from "../components/Navigation";
+import { THEME_INIT_SCRIPT } from "../utils/theme";
 
 export default function RootLayout({ children }: { children: JSX.Children }) {
 	function _generateViewTransitionNamesFromContent() {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 	}
 	return (
 		<div className="max-w-[70ch] mx-auto mt-20 flex flex-col gap-4 px-4 sm:overflow-hidden relative">
+			<script innerHTML={THEME_INIT_SCRIPT} />
 			<style innerHTML={_generateViewTransitionNamesFromContent()} />
 			<div className="relative z-10">
 				<Navigation />

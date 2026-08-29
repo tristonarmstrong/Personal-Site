@@ -1,4 +1,5 @@
 import { Link, useFileRouter } from "kiru/router";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Navigation() {
 	const { state } = useFileRouter();
@@ -6,7 +7,7 @@ export function Navigation() {
 
 	return (
 		<nav
-			className="flex items-center justify-center gap-1 sm:gap-3 py-2"
+			className="relative flex items-center justify-center gap-1 sm:gap-3 py-2"
 			aria-label="Main"
 		>
 			<NavLink to="/" active={path === "/"}>
@@ -23,6 +24,9 @@ export function Navigation() {
 			>
 				Blog
 			</NavLink>
+			<div className="absolute right-0 top-1/2 -translate-y-1/2">
+				<ThemeToggle />
+			</div>
 		</nav>
 	);
 }

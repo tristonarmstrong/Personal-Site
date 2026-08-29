@@ -57,6 +57,72 @@ img {
 	line-height: 1.6;
 }
 
+/* Dark mode: the desk at night. Warm paper-white ink on deep espresso,
+   with the accent brightened so it still pops. */
+html.dark {
+	color-scheme: dark;
+	--color-paper: #16120d;
+	--color-paper-card: #1f1a13;
+	--color-card: #251e14;
+	--color-ink: #ece0c9;
+	--color-ink-soft: #b3a180;
+	--color-ink-faint: rgba(236, 224, 201, 0.52);
+	--color-accent: #dd8136;
+	--color-accent-deep: #f0a35e;
+	--color-line: #3b3122;
+	--color-highlight: #503a1c;
+}
+
+html.dark .wave-divider {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='16' viewBox='0 0 180 16'%3E%3Cpath d='M3 8q11-6 22 0t22 0 22 0 22 0 22 0 22 0 22 0' fill='none' stroke='%23B3A180' stroke-width='2' stroke-linecap='round' opacity='.62'/%3E%3C/svg%3E");
+}
+
+html.dark .letter-card,
+html.dark .pullquote,
+html.dark article blockquote {
+	box-shadow: 0 12px 28px -22px rgba(0, 0, 0, 0.65);
+}
+
+html.dark .taped-figure {
+	box-shadow: 0 18px 34px -26px rgba(0, 0, 0, 0.7);
+}
+
+html.dark article pre {
+	&::-webkit-scrollbar-track {
+		background: rgba(236, 224, 201, 0.06);
+	}
+	&::-webkit-scrollbar-thumb {
+		background: rgba(236, 224, 201, 0.2);
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		background: rgba(236, 224, 201, 0.32);
+	}
+}
+
+/* Theme toggle icon swap (plain CSS so it's right even before hydration) */
+.theme-icon-sun {
+	display: none;
+}
+
+html.dark .theme-icon-sun {
+	display: block;
+}
+
+html.dark .theme-icon-moon {
+	display: none;
+}
+
+/* Affiliate buttons use hardcoded icon strokes; lighten them for dark mode */
+html.dark article a[title*="affiliate" i]::before,
+html.dark article a[title*="not an affiliate" i]::before {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f0a35e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z'/%3E%3Cpath d='M3 6h18'/%3E%3Cpath d='M16 10a4 4 0 0 1-8 0'/%3E%3C/svg%3E");
+}
+
+html.dark article a[title*="affiliate" i]::after,
+html.dark article a[title*="not an affiliate" i]::after {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f0a35e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 7h10v10'/%3E%3Cpath d='M7 17 17 7'/%3E%3C/svg%3E");
+}
+
 body {
 	background-color: var(--color-paper);
 	color: var(--color-ink);
