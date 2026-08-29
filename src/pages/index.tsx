@@ -517,6 +517,12 @@ function openSourceData(): Array<{
 }> {
 	return [
 		{
+			label: "omacom/aether",
+			meta: "merged",
+			status: "merged",
+			href: "https://github.com/omacom/aether/pull/125",
+		},
+		{
 			label: "letstri/druk",
 			meta: "merged",
 			status: "merged",
