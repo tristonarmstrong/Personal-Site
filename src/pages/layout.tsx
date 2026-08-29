@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 					className="text-center flex flex-col gap-1"
 					style={"view-transition-name: foot"}
 				>
-					<div className="w-full border-t border-dashed border-white/10" />
+					<div className="w-full border-t border-dashed border-line" />
 					<div className={"flex flex-col [&_*]:transition gap-2"}>
 						<div className={"flex justify-between"}>
 							<small className="opacity-50 hover:opacity-100">
@@ -56,14 +56,14 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 									>
 										<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
 									</svg>
-									<small className="text-primary font-bold flex items-center">
+									<small className="text-accent font-bold flex items-center">
 										Kiru
 									</small>
 								</div>
 							</a>
 						</div>
 
-						<ul className="flex gap-3 [&>*>*]:opacity-50 [&>*>*]:hover:opacity-100 [&>*>*]:hover:text-yellow-500 [&>*]:transition-color [&>*]:duration-200 items-end">
+						<ul className="flex gap-3 [&>*>*]:opacity-50 [&>*>*]:hover:opacity-100 [&>*>*]:hover:text-accent [&>*]:transition-color [&>*]:duration-200 items-end">
 							<a
 								className="hover:scale-90"
 								href="https://github.com/tristonarmstrong"

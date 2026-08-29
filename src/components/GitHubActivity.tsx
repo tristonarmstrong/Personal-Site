@@ -23,34 +23,34 @@ export function GitHubActivity() {
 											href={`https://github.com/${event.repo.name}`}
 											target="_blank"
 											rel="noopener"
-											className="flex items-start gap-2 py-1.5 px-2 -mx-2 rounded-lg hover:bg-white/5 transition-colors group"
+											className="flex items-start gap-2 py-1.5 px-2 -mx-2 rounded-lg hover:bg-accent/10 transition-colors group"
 										>
-											<span className="text-yellow-500 text-xs mt-0.5 font-mono shrink-0">
+											<span className="text-accent text-xs mt-0.5 font-mono shrink-0">
 												{getEventIcon(event.type)}
 											</span>
 											<div className="flex-1 min-w-0">
-												<p className="text-gray-300 text-xs leading-snug group-hover:text-gray-100 transition-colors">
+												<p className="text-ink-soft text-xs leading-snug group-hover:text-ink transition-colors">
 													{getEventDescription(event)}
 												</p>
 											</div>
-											<span className="text-gray-600 text-[10px] shrink-0">
+											<span className="text-ink-faint text-[10px] shrink-0">
 												{formatTimeAgo(event.created_at)}
 											</span>
 										</a>
 									)}
 								</For>
-								<div className="pt-2 mt-1 border-t border-dashed border-white/10">
+								<div className="pt-2 mt-1 border-t border-dashed border-line">
 									<a
 										href="https://github.com/tristonarmstrong"
 										target="_blank"
 										rel="noopener"
-										className="text-gray-500 text-xs hover:text-yellow-500 transition-colors flex items-center justify-between"
+										className="text-ink-faint text-xs hover:text-accent transition-colors flex items-center justify-between"
 									>
 										<span>github.com/tristonarmstrong</span>
 										<span>↗</span>
 									</a>
 									{lastUpdated && (
-										<span className="text-gray-600 text-[10px] block mt-1">
+										<span className="text-ink-faint text-[10px] block mt-1">
 											Updated {formatTimeAgo(lastUpdated.toISOString())}
 										</span>
 									)}
@@ -65,12 +65,12 @@ export function GitHubActivity() {
 
 function ViewGithubLink() {
 	return (
-		<div className="text-gray-500 text-xs py-2">
+		<div className="text-ink-faint text-xs py-2">
 			<a
 				href="https://github.com/tristonarmstrong"
 				target="_blank"
 				rel="noopener"
-				className="hover:text-yellow-500 transition-colors"
+				className="hover:text-accent transition-colors"
 			>
 				View GitHub →
 			</a>
@@ -80,14 +80,14 @@ function ViewGithubLink() {
 
 function LoadingGithubFallback() {
 	return (
-		<div className="flex items-center gap-2 text-gray-500 text-xs py-2">
+		<div className="flex items-center gap-2 text-ink-faint text-xs py-2">
 			<span className="animate-pulse">Loading activity...</span>
 		</div>
 	)
 }
 
 function NoGithubActivity() {
-	return <div className="text-gray-500 text-xs py-2">No recent activity</div>
+	return <div className="text-ink-faint text-xs py-2">No recent activity</div>
 }
 
 function getEventIcon(type: string): string {

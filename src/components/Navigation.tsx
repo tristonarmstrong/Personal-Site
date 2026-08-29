@@ -39,12 +39,12 @@ function NavLink({
 		<Link
 			to={to}
 			className={`
-				px-3 py-1.5 rounded-lg text-sm
+				px-3 py-1.5 rounded-lg text-sm font-display
 				transition-all duration-200
 				${
 					active
-						? "bg-[#1a1a1a] text-yellow-500"
-						: "text-gray-400 hover:text-gray-200 hover:bg-[#141414]"
+						? "bg-ink text-paper shadow-sm"
+						: "text-ink-soft hover:text-ink hover:bg-accent/10"
 				}
 			`}
 			transition

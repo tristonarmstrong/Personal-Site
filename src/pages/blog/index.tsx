@@ -38,7 +38,7 @@ function detectCategory(
 	) {
 		return {
 			name: "Rust",
-			color: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+			color: "bg-orange-800/10 text-orange-800 border-orange-500/30",
 			icon: <CodeIcon />,
 		};
 	}
@@ -49,7 +49,7 @@ function detectCategory(
 	) {
 		return {
 			name: "Tutorial",
-			color: "bg-green-500/20 text-green-400 border-green-500/30",
+			color: "bg-green-800/10 text-green-800 border-green-500/30",
 			icon: <BookIcon />,
 		};
 	}
@@ -68,7 +68,7 @@ function detectCategory(
 	}
 	return {
 		name: "Tech",
-		color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+		color: "bg-accent/15 text-accent border-accent/30",
 		icon: <SparkleIcon />,
 	};
 }
@@ -105,17 +105,17 @@ export default function BlogIndex() {
 			/>
 
 			{/* Header */}
-			<section className="p-5 rounded-2xl bg-white/[0.1] backdrop-blur-md ">
+			<section className="p-5 rounded-2xl bg-paper-card backdrop-blur-md ">
 				<div className="flex items-start gap-4">
 					<Avatar size="lg" />
 					<div className="flex-1 min-w-0">
 						<div className="flex items-center justify-between gap-3 mb-2">
-							<h1 className="text-2xl font-bold tracking-tight text-yellow-500">
+							<h1 className="font-hand text-accent" style="font-size: 2.75rem; line-height: 1;">
 								Blog
 							</h1>
 							<a
 								href="/feed.xml"
-								className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500/20 transition text-xs font-medium border border-yellow-500/20"
+								className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 text-accent hover:bg-accent/15 transition text-xs font-medium border border-accent/25"
 								title="Subscribe to RSS feed"
 							>
 								<RssIcon size={12} />
@@ -123,7 +123,7 @@ export default function BlogIndex() {
 							</a>
 						</div>
 
-						<p className="text-gray-300 leading-relaxed text-justify">
+						<p className="text-ink-soft leading-relaxed text-justify">
 							A collection of technical deep-dives, debugging war stories, and
 							lessons learned from shipping software. I write about systems
 							programming, Rust, developer tooling, and the occasional career
@@ -132,17 +132,17 @@ export default function BlogIndex() {
 
 						{/* Stats */}
 						<div className="flex items-center gap-4 mt-4 text-xs">
-							<div className="flex items-center gap-1.5 text-gray-500">
+							<div className="flex items-center gap-1.5 text-ink-faint">
 								<DocumentIcon size={12} />
 								<span>{allPostsRearranged.length} posts</span>
 							</div>
-							<span className="text-gray-700">·</span>
-							<div className="flex items-center gap-1.5 text-gray-500">
+							<span className="text-ink-faint">·</span>
+							<div className="flex items-center gap-1.5 text-ink-faint">
 								<TagIcon size={12} />
 								<span>5 topics</span>
 							</div>
-							<span className="text-gray-700">·</span>
-							<div className="flex items-center gap-1.5 text-gray-500">
+							<span className="text-ink-faint">·</span>
+							<div className="flex items-center gap-1.5 text-ink-faint">
 								<ClockIcon size={12} />
 								<span>
 									Updated {getLastUpdateText(allPostsRearranged[0]?.date)}
@@ -153,12 +153,12 @@ export default function BlogIndex() {
 				</div>
 			</section>
 
-			<div className="w-full border-t border-dashed border-white/10" />
+			<div className="w-full border-t border-dashed border-line" />
 
 			{/* Featured Post */}
 			{featuredPost && (
 				<section>
-					<h2 className="text-xs font-medium tracking-wider text-gray-500 uppercase mb-4">
+					<h2 className="text-xs font-medium tracking-wider text-ink-faint uppercase mb-4">
 						Latest Post
 					</h2>
 					<FeaturedPostCard post={featuredPost} />
@@ -167,7 +167,7 @@ export default function BlogIndex() {
 
 			{/* Post Grid */}
 			<section>
-				<h2 className="text-xs font-medium tracking-wider text-gray-500 uppercase mb-4">
+				<h2 className="text-xs font-medium tracking-wider text-ink-faint uppercase mb-4">
 					All Posts ({allPostsRearranged.length})
 				</h2>
 				<div className="grid grid-cols-1 gap-3">
@@ -191,7 +191,7 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 	return (
 		<Link
 			to={`/blog/${post.slug}`}
-			className={`flex flex-col p-5 rounded-xl bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.05] transition group`}
+			className={`flex flex-col p-5 rounded-xl bg-paper-card backdrop-blur-md hover:bg-paper-card transition group`}
 			transition
 		>
 			<div className="flex items-center justify-between gap-4 mb-3">
@@ -203,7 +203,7 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 						{category.name}
 					</span>
 				</div>
-				<span className="text-xs text-gray-500">
+				<span className="text-xs text-ink-faint">
 					{post.date.toLocaleDateString("en-US", {
 						month: "short",
 						day: "numeric",
@@ -212,15 +212,15 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 				</span>
 			</div>
 
-			<h3 className="text-lg font-semibold text-gray-100 group-hover:text-white transition-colors tracking-tight mb-2">
+			<h3 className="text-lg font-semibold text-ink group-hover:text-accent-deep transition-colors tracking-tight mb-2">
 				{post.title}
 			</h3>
 
-			<p className="text-sm text-gray-400 leading-relaxed mb-4 text-justify">
+			<p className="text-sm text-ink-soft leading-relaxed mb-4 text-justify">
 				{post.summary}
 			</p>
 
-			<div className="flex items-center gap-2 text-xs text-gray-500 mt-auto">
+			<div className="flex items-center gap-2 text-xs text-ink-faint mt-auto">
 				<ClockIcon size={12} />
 				<span>{readingTime}</span>
 			</div>
@@ -236,7 +236,7 @@ function PostCard({ post }: { post: (typeof allPosts)[0] }) {
 	return (
 		<Link
 			to={`/blog/${post.slug}`}
-			className={`flex items-start gap-3 p-4 rounded-lg bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.05] transition group`}
+			className={`flex items-start gap-3 p-4 rounded-lg bg-paper-card backdrop-blur-md hover:bg-paper-card transition group`}
 			transition
 		>
 			{/* Icon avatar */}
@@ -248,16 +248,16 @@ function PostCard({ post }: { post: (typeof allPosts)[0] }) {
 
 			<div className="flex-1 min-w-0">
 				<div className="flex items-center justify-between gap-2 mb-1">
-					<h3 className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight truncate">
+					<h3 className="text-sm font-medium text-ink group-hover:text-accent-deep transition-colors tracking-tight truncate">
 						{post.title}
 					</h3>
 				</div>
 
-				<p className="text-xs text-gray-500 leading-relaxed line-clamp-2 mb-2">
+				<p className="text-xs text-ink-faint leading-relaxed line-clamp-2 mb-2">
 					{post.summary}
 				</p>
 
-				<div className="flex items-center gap-3 text-[11px] text-gray-600">
+				<div className="flex items-center gap-3 text-[11px] text-ink-faint">
 					<span className="flex items-center gap-1">
 						<ClockIcon size={10} />
 						{readingTime}

@@ -1,4 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Caveat:wght@400;500;600;700&family=Oooh+Baby&family=Tenor+Sans&display=swap");
 @import "tailwindcss";
+
+/* Letter theme: warm paper, ink text, burnt-orange accent. */
+@theme {
+	--color-paper: #f1e7da;
+	--color-paper-card: #fffdf9;
+	--color-card: #fff9f4;
+	--color-ink: #23221f;
+	--color-ink-soft: #6f6555;
+	--color-ink-faint: rgba(35, 34, 31, 0.48);
+	--color-accent: #a13f04;
+	--color-accent-deep: #7a3303;
+	--color-line: #e3d6c1;
+	--color-highlight: #ffe3c0;
+
+	--font-body: "Alegreya", Georgia, serif;
+	--font-hand: "Caveat", cursive;
+	--font-display: "Tenor Sans", Georgia, serif;
+	--font-byline: "Oooh Baby", "Caveat", cursive;
+}
 
 @layer base {
 	*,
@@ -6,7 +26,7 @@
 	::before,
 	::backdrop,
 	::file-selector-button {
-		border-color: var(--color-gray-200, currentColor);
+		border-color: var(--color-line);
 	}
 }
 
@@ -21,19 +41,25 @@ img {
 }
 
 ::selection {
-	background-color: #ffef5c;
-	color: #000;
+	background-color: var(--color-highlight);
+	color: var(--color-ink);
 	-webkit-box-decoration-break: clone; /* For WebKit browsers */
 	box-decoration-break: clone; /* Standard property */
 }
 
 :root {
-	background-color: black;
-	color: var(--color-gray-200);
-	color-scheme: dark;
+	background-color: var(--color-paper);
+	color: var(--color-ink);
+	color-scheme: light;
 	min-height: 100vh;
-	font-family: var(--font-sans);
-	line-height: 1.5;
+	font-family: var(--font-body);
+	font-size: 1.125rem;
+	line-height: 1.6;
+}
+
+body {
+	background-color: var(--color-paper);
+	color: var(--color-ink);
 }
 
 footer {
@@ -41,19 +67,82 @@ footer {
 }
 
 p {
-	color: var(--color-gray-300);
+	color: var(--color-ink);
 }
 
 a {
-	color: var(--color-gray-400);
+	color: var(--color-accent-deep);
 
 	&:hover {
-		color: var(--color-yellow-500);
+		color: var(--color-accent);
 	}
 }
 
 .yearthing {
-	color: var(--color-yellow-600);
+	color: var(--color-accent);
+}
+
+/* Letter component classes */
+@layer components {
+	.letter-card {
+		background-color: var(--color-paper-card);
+		border: 1px solid var(--color-line);
+		border-radius: 1rem;
+		box-shadow: 0 12px 28px -22px rgba(35, 34, 31, 0.28);
+	}
+
+	.pullquote {
+		background: var(--color-paper-card);
+		border: 1px solid var(--color-line);
+		border-radius: 1rem;
+		box-shadow: 0 12px 28px -22px rgba(35, 34, 31, 0.28);
+		color: var(--color-ink);
+		font-family: var(--font-hand);
+		font-size: 1.5rem;
+		line-height: 1.25;
+		margin: 1.7rem 0;
+		padding: 1rem 1.2rem;
+		position: relative;
+	}
+
+	.pullquote::before {
+		background: rgba(255, 255, 255, 0.72);
+		border-radius: 2px;
+		content: "";
+		height: 20px;
+		left: 50%;
+		position: absolute;
+		top: -10px;
+		transform: translateX(-50%) rotate(-2deg);
+		width: 82px;
+	}
+
+	/* Hand-drawn highlight behind a phrase */
+	.hl {
+		background: linear-gradient(
+			104deg,
+			transparent 0.5%,
+			var(--color-highlight) 0.5%,
+			var(--color-highlight) 96%,
+			transparent 96%
+		);
+		border-radius: 1px;
+		box-decoration-break: clone;
+		color: inherit;
+		margin: 0 -0.05em;
+		padding: 0.05em 0.15em;
+		-webkit-box-decoration-break: clone;
+	}
+
+	/* Squiggly divider */
+	.wave-divider {
+		background: no-repeat center / contain
+			url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='16' viewBox='0 0 180 16'%3E%3Cpath d='M3 8q11-6 22 0t22 0 22 0 22 0 22 0 22 0 22 0' fill='none' stroke='%236F6555' stroke-width='2' stroke-linecap='round' opacity='.62'/%3E%3C/svg%3E");
+		border: 0;
+		height: 16px;
+		margin: 2rem auto;
+		width: 180px;
+	}
 }
 
 article {
@@ -66,7 +155,9 @@ article {
 	h4,
 	h5,
 	h6 {
-		color: var(--color-yellow-600);
+		color: var(--color-ink);
+		font-family: var(--font-display);
+		font-weight: 400;
 		margin-top: 1.5rem;
 	}
 
@@ -106,9 +197,9 @@ article {
 	}
 
 	code {
-		color: var(--color-yellow-500);
+		color: var(--color-accent-deep);
 		font-family: monospace;
-		background-color: rgba(234, 179, 8, 0.1);
+		background-color: var(--color-highlight);
 		padding: 2px 6px;
 		border-radius: var(--radius-xl);
 		font-size: 0.9em;
@@ -119,9 +210,8 @@ article {
 		overflow: auto;
 		font-size: 85%;
 		line-height: 1.45;
-		background-color: rgba(255, 255, 255, 0.1);
-		backdrop-filter: blur(10px);
-		border: 1px solid rgba(255, 255, 255, 0.05);
+		background-color: var(--color-card);
+		border: 1px solid var(--color-line);
 		border-radius: var(--radius-xl);
 		font-family: monospace;
 		margin-bottom: 1rem;
@@ -133,15 +223,15 @@ article {
 			width: 8px;
 		}
 		&::-webkit-scrollbar-track {
-			background: rgba(255, 255, 255, 0.02);
+			background: rgba(35, 34, 31, 0.04);
 			border-radius: 12px;
 		}
 		&::-webkit-scrollbar-thumb {
-			background: rgba(255, 255, 255, 0.1);
+			background: rgba(35, 34, 31, 0.18);
 			border-radius: 12px;
 		}
 		&::-webkit-scrollbar-thumb:hover {
-			background: rgba(255, 255, 255, 0.15);
+			background: rgba(35, 34, 31, 0.28);
 		}
 
 		code {
@@ -155,8 +245,24 @@ article {
 	}
 
 	a {
-		text-decoration: underline;
-		text-decoration-color: var(--color-yellow-700);
+		background-image: linear-gradient(
+			var(--color-accent),
+			var(--color-accent)
+		);
+		background-position: 0 1.05em;
+		background-repeat: repeat-x;
+		background-size: 6px 2px;
+		color: var(--color-accent-deep);
+		padding-bottom: 0.04em;
+		text-decoration: none;
+		transition:
+			color 0.2s,
+			background-size 0.2s;
+
+		&:hover {
+			background-size: 6px 3px;
+			color: var(--color-accent);
+		}
 	}
 
 	/* Style "Link To Buy" buttons in thangs */
@@ -166,10 +272,10 @@ article {
 		align-items: center;
 		gap: 0.5rem;
 		padding: 0.5rem 1rem;
-		background-color: rgba(234, 179, 8, 0.1);
-		border: 1px solid rgba(234, 179, 8, 0.3);
+		background-color: var(--color-highlight);
+		border: 1px solid var(--color-accent);
 		border-radius: 0.5rem;
-		color: var(--color-yellow-500);
+		color: var(--color-accent-deep);
 		text-decoration: none;
 		font-size: var(--text-sm);
 		font-weight: 500;
@@ -177,16 +283,16 @@ article {
 		transition: all 0.2s ease;
 
 		&:hover {
-			background-color: rgba(234, 179, 8, 0.2);
-			border-color: rgba(234, 179, 8, 0.5);
-			color: var(--color-yellow-400);
+			background-color: var(--color-accent);
+			border-color: var(--color-accent-deep);
+			color: var(--color-paper-card);
 		}
 
 		&::before {
 			content: "";
 			width: 16px;
 			height: 16px;
-			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23eab308' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z'/%3E%3Cpath d='M3 6h18'/%3E%3Cpath d='M16 10a4 4 0 0 1-8 0'/%3E%3C/svg%3E");
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237a3303' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z'/%3E%3Cpath d='M3 6h18'/%3E%3Cpath d='M16 10a4 4 0 0 1-8 0'/%3E%3C/svg%3E");
 			background-size: contain;
 			background-repeat: no-repeat;
 		}
@@ -195,7 +301,7 @@ article {
 			content: "";
 			width: 14px;
 			height: 14px;
-			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23eab308' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 7h10v10'/%3E%3Cpath d='M7 17 17 7'/%3E%3C/svg%3E");
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237a3303' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 7h10v10'/%3E%3Cpath d='M7 17 17 7'/%3E%3C/svg%3E");
 			background-size: contain;
 			background-repeat: no-repeat;
 			margin-left: 0.25rem;
@@ -203,17 +309,15 @@ article {
 	}
 
 	blockquote {
-		margin: 1.5rem 0;
-		padding: 1rem 1rem 1rem 1.25rem;
-		background-color: rgba(255, 255, 255, 0.02);
-		backdrop-filter: blur(10px);
-		border-left: 3px solid var(--color-yellow-600);
-		border-radius: 0 var(--radius-md) var(--radius-md) 0;
+		margin: 1.8rem 0;
+		padding: 0.2rem 0 0.2rem 1.3rem;
+		border-left: 3px solid var(--color-accent);
+		color: var(--color-ink-soft);
 		font-style: italic;
 
 		p {
 			margin-bottom: 0;
-			color: var(--color-gray-400);
+			color: var(--color-ink-soft);
 		}
 
 		& > :last-child {
@@ -228,7 +332,7 @@ article {
 
 		li {
 			margin-bottom: 0.5rem;
-			color: var(--color-gray-300);
+			color: var(--color-ink);
 		}
 	}
 
@@ -237,7 +341,7 @@ article {
 
 		li::before {
 			content: "—";
-			color: var(--color-yellow-600);
+			color: var(--color-accent);
 			margin-right: 0.75rem;
 			margin-left: -1.5rem;
 		}
@@ -245,14 +349,21 @@ article {
 
 	hr {
 		border: none;
-		border-top: 1px dashed rgba(255, 255, 255, 0.1);
+		border-top: 1px dashed var(--color-line);
 		margin: 2rem 0;
 	}
 
 	img {
-		border-radius: var(--radius-md);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		background-color: rgba(255, 255, 255, 0.02);
+		background: var(--color-paper-card);
+		border: 6px solid #ffffff;
+		border-radius: 16px;
+		box-shadow:
+			0 2px 2px rgba(111, 101, 85, 0.1),
+			0 8px 24px rgba(111, 101, 85, 0.1);
+		display: block;
+		height: auto;
+		transform: rotate(0.6deg);
+		width: 100%;
 	}
 
 	/* Tables */
@@ -266,17 +377,18 @@ article {
 		td {
 			padding: 0.75rem 1rem;
 			text-align: left;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			border-bottom: 1px solid var(--color-line);
 		}
 
 		th {
-			color: var(--color-yellow-500);
+			color: var(--color-accent-deep);
+			font-family: var(--font-display);
 			font-weight: 600;
-			background-color: rgba(255, 255, 255, 0.02);
+			background-color: var(--color-card);
 		}
 
 		tr:hover {
-			background-color: rgba(255, 255, 255, 0.02);
+			background-color: rgba(255, 227, 192, 0.24);
 		}
 	}
 }

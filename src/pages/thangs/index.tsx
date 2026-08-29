@@ -13,11 +13,11 @@ export default function Thangs() {
 			/>
 
 			{/* Header */}
-			<section className="p-4 rounded-2xl bg-white/[0.03]  flex flex-col gap-2">
-				<h1 className="text-2xl font-bold tracking-tight text-gray-100">
+			<section className="p-4 rounded-2xl bg-paper-card  flex flex-col gap-2">
+				<h1 className="font-display text-ink" style="font-size: 1.9rem;">
 					/uses
 				</h1>
-				<p className="text-gray-400 leading-relaxed">
+				<p className="text-ink-soft leading-relaxed">
 					The gear, tools, and random stuff that powers my day-to-day. From the
 					desk setup to kitchen gadgets, these are things I actually use and
 					recommend.
@@ -26,8 +26,8 @@ export default function Thangs() {
 
 			{/* Tech */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+				<div className="p-3 rounded-xl bg-paper-card  mb-4">
+					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
 						Tech
 					</h2>
 				</div>
@@ -36,8 +36,8 @@ export default function Thangs() {
 
 			{/* Kitchen */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+				<div className="p-3 rounded-xl bg-paper-card  mb-4">
+					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
 						Kitchen
 					</h2>
 				</div>
@@ -46,8 +46,8 @@ export default function Thangs() {
 
 			{/* Day */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+				<div className="p-3 rounded-xl bg-paper-card  mb-4">
+					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
 						Day
 					</h2>
 				</div>
@@ -56,8 +56,8 @@ export default function Thangs() {
 
 			{/* Furniture */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+				<div className="p-3 rounded-xl bg-paper-card  mb-4">
+					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
 						Furniture
 					</h2>
 				</div>
@@ -66,18 +66,18 @@ export default function Thangs() {
 
 			{/* Travel */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+				<div className="p-3 rounded-xl bg-paper-card  mb-4">
+					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
 						Travel
 					</h2>
 				</div>
-				<p className="text-gray-500 text-sm pl-1">who travels these days?</p>
+				<p className="text-ink-faint text-sm pl-1">who travels these days?</p>
 			</section>
 
 			{/* Languages */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
+				<div className="p-3 rounded-xl bg-paper-card  mb-4">
+					<h2 className="font-display text-ink" style="font-size: 1.05rem;">
 						Languages
 					</h2>
 				</div>
@@ -85,10 +85,10 @@ export default function Thangs() {
 			</section>
 
 			{/* Footer credit */}
-			<p className="text-gray-500 text-xs">
+			<p className="text-ink-faint text-xs">
 				Idea stolen from{" "}
 				<a
-					className="text-yellow-500 hover:underline"
+					className="text-accent hover:underline"
 					href="https://favorite.emnudge.dev/"
 					target="_blank"
 					rel="noopener"
@@ -110,7 +110,7 @@ function FilteredThangsList({
 	const filteredThangs = allThangs.filter((x) => x.type === group);
 
 	if (filteredThangs.length === 0) {
-		return <p className="text-gray-500 text-sm pl-1">Nothing here yet</p>;
+		return <p className="text-ink-faint text-sm pl-1">Nothing here yet</p>;
 	}
 
 	return (
@@ -119,7 +119,7 @@ function FilteredThangsList({
 				return (
 					<Link
 						to={`/thangs/${thang.slug}`}
-						className="transition bg-white/[0.1] rounded-lg hover:bg-white/[0.06] cursor-pointer overflow-hidden group"
+						className="transition bg-paper-card rounded-lg hover:bg-card cursor-pointer overflow-hidden group"
 						transition
 					>
 						<div
@@ -135,11 +135,11 @@ function FilteredThangsList({
 						<div className="p-3">
 							<h3
 								style={`view-transition-name: link-h-${thang.slug}`}
-								className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors"
+								className="text-sm font-medium text-ink group-hover:text-accent-deep transition-colors"
 							>
 								{thang.item}
 							</h3>
-							<p className="text-xs text-gray-500">{thang.type}</p>
+							<p className="text-xs text-ink-faint">{thang.type}</p>
 						</div>
 					</Link>
 				);

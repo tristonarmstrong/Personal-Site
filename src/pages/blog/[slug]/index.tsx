@@ -42,26 +42,26 @@ export default function Page() {
 				<div>
 					<Link
 						to="/blog"
-						className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/[0.1]  text-gray-400 hover:text-gray-200 hover:bg-white/[0.06] hover:border-white/20 transition text-xs font-medium backdrop-blur-sm no-underline"
+						className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-paper-card  text-ink-soft hover:text-ink hover:bg-card hover:border-line transition text-xs font-medium backdrop-blur-sm no-underline"
 						style="text-decoration: none;"
 						transition
 					>
 						<ArrowLeftIcon size={14} />
 						<span>All Posts</span>
-						<span className="text-gray-600">·</span>
-						<span className="text-gray-500">{allPosts.length}</span>
+						<span className="text-ink-faint">·</span>
+						<span className="text-ink-faint">{allPosts.length}</span>
 					</Link>
 				</div>
 
 				{/* Header */}
-				<header className="p-4 rounded-2xl bg-white/[0.1] backdrop-blur-md ">
+				<header className="p-4 rounded-2xl bg-paper-card backdrop-blur-md ">
 					<div className="flex items-start gap-3">
 						<Avatar size="lg" />
 						<div className="flex-1 min-w-0">
-							<h1 className="text-xl font-bold tracking-tight text-gray-100 leading-tight" style={"margin-top: 0px;"}>
+							<h1 className="font-display text-ink leading-tight" style="font-size: 1.6rem; margin-top: 0px;">
 								{post.title}
 							</h1>
-							<div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+							<div className="flex items-center gap-2 mt-2 text-xs text-ink-faint">
 								<span>
 									{post.date.toLocaleDateString("en-US", {
 										month: "long",
@@ -76,38 +76,38 @@ export default function Page() {
 					</div>
 				</header>
 
-				<div className="w-full border-t border-dashed border-white/10" />
+				<div className="w-full border-t border-dashed border-line" />
 
 				{/* Content */}
 				<main className="blogpost markdown-body">
 					<MDXContent code={post!.mdx} />
 				</main>
 
-				<div className="w-full border-t border-dashed border-white/10" />
+				<div className="w-full border-t border-dashed border-line" />
 
 				{/* Next post */}
 				<footer>
-					<h2 className="text-xs font-medium tracking-wider text-gray-500 uppercase mb-4">
+					<h2 className="text-xs font-medium tracking-wider text-ink-faint uppercase mb-4">
 						Next Post
 					</h2>
 					<Link
 						to={`/blog/${nextPost.slug}`}
-						className="flex flex-col p-4  rounded-xl bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.06] transition group no-underline"
+						className="flex flex-col p-4  rounded-xl bg-paper-card backdrop-blur-md hover:bg-card transition group no-underline"
 						style="text-decoration: none;"
 						transition
 					>
 						<div className="flex items-center justify-between gap-4 mb-1">
-							<h3 className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight">
+							<h3 className="text-sm font-medium text-ink group-hover:text-accent-deep transition-colors tracking-tight">
 								{nextPost.title}
 							</h3>
-							<span className="text-xs text-gray-500 whitespace-nowrap">
+							<span className="text-xs text-ink-faint whitespace-nowrap">
 								{nextPost.date.toLocaleDateString("en-US", {
 									month: "short",
 									day: "numeric",
 								})}
 							</span>
 						</div>
-						<p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
+						<p className="text-xs text-ink-faint leading-relaxed line-clamp-2">
 							{nextPost.summary}
 						</p>
 					</Link>
