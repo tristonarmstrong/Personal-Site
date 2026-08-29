@@ -589,30 +589,6 @@ function openSourceData(): Array<{
 			href: "https://github.com/nrwl/nx/pull/31846",
 		},
 		{
-			label: "ArmstrongOSS/zlorb",
-			meta: "5 PRs",
-			status: "merged",
-			href: "https://github.com/ArmstrongOSS/zlorb/pull/1",
-		},
-		{
-			label: "Klectr/KlectrRadio",
-			meta: "9 PRs",
-			status: "merged",
-			href: "https://github.com/Klectr/KlectrRadio/pull/8",
-		},
-		{
-			label: "Klectr/KlectrBan",
-			meta: "2 PRs",
-			status: "merged",
-			href: "https://github.com/Klectr/KlectrBan/pull/3",
-		},
-		{
-			label: "Klectr/KlectrStandup",
-			meta: "merged",
-			status: "merged",
-			href: "https://github.com/Klectr/KlectrStandup/pull/8",
-		},
-		{
 			label: "MarsX-dev/floatui",
 			meta: "4 PRs",
 			status: "merged",
