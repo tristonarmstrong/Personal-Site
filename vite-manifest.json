@@ -91,7 +91,7 @@
     ]
   },
   "src/pages/index.tsx": {
-    "file": "assets/index-D79DsQrJ.js",
+    "file": "assets/index-BGurtMq1.js",
     "name": "index",
     "src": "src/pages/index.tsx",
     "isDynamicEntry": true,
@@ -155,7 +155,7 @@
     ]
   },
   "virtual:kiru:entry-client": {
-    "file": "assets/_virtual_kiru_entry-client-cYpzKeD0.js",
+    "file": "assets/_virtual_kiru_entry-client-Di33c09d.js",
     "name": "_virtual_kiru_entry-client",
     "src": "virtual:kiru:entry-client",
     "isEntry": true,
