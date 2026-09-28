@@ -13,82 +13,72 @@ export default function Thangs() {
 			/>
 
 			{/* Header */}
-			<section className="p-4 rounded-2xl bg-white/[0.03]  flex flex-col gap-2">
-				<h1 className="text-2xl font-bold tracking-tight text-gray-100">
+			<header className="flex flex-col items-center text-center gap-3 pt-4">
+				<p className="dateline">things i actually use</p>
+				<h1 className="font-hand text-accent" style="font-size: clamp(3rem, 9vw, 4.2rem); line-height: 1;">
 					/uses
 				</h1>
-				<p className="text-gray-400 leading-relaxed">
-					The gear, tools, and random stuff that powers my day-to-day. From the
-					desk setup to kitchen gadgets, these are things I actually use and
-					recommend.
+				<p className="lead max-w-xl">
+					The gear, tools, and random stuff that powers my day-to-day —
+					things I actually use and recommend.
 				</p>
-			</section>
+			</header>
+
+			<div className="wave-divider" role="separator" aria-hidden="true" />
 
 			{/* Tech */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
-						Tech
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Tech
+				</h2>
 				<FilteredThangsList group={"Tech"} />
 			</section>
 
 			{/* Kitchen */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
-						Kitchen
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Kitchen
+				</h2>
 				<FilteredThangsList group={"Kitchen"} />
 			</section>
 
 			{/* Day */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
-						Day
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Day
+				</h2>
 				<FilteredThangsList group={"Day"} />
 			</section>
 
 			{/* Furniture */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
-						Furniture
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Furniture
+				</h2>
 				<FilteredThangsList group={"Furniture"} />
 			</section>
 
 			{/* Travel */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
-						Travel
-					</h2>
-				</div>
-				<p className="text-gray-500 text-sm pl-1">who travels these days?</p>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Travel
+				</h2>
+				<p className="text-ink-faint text-sm pl-1">who travels these days?</p>
 			</section>
 
 			{/* Languages */}
 			<section>
-				<div className="p-3 rounded-xl bg-white/[0.1]  mb-4">
-					<h2 className="text-sm font-bold tracking-tight text-gray-100">
-						Languages
-					</h2>
-				</div>
+				<h2 className="font-hand text-ink mb-4" style="font-size: 1.75rem;">
+					Languages
+				</h2>
 				<FilteredThangsList group={"Lang"} />
 			</section>
 
 			{/* Footer credit */}
-			<p className="text-gray-500 text-xs">
+			<p className="text-ink-faint text-xs">
 				Idea stolen from{" "}
 				<a
-					className="text-yellow-500 hover:underline"
+					className="text-accent hover:underline"
 					href="https://favorite.emnudge.dev/"
 					target="_blank"
 					rel="noopener"
@@ -110,20 +100,21 @@ function FilteredThangsList({
 	const filteredThangs = allThangs.filter((x) => x.type === group);
 
 	if (filteredThangs.length === 0) {
-		return <p className="text-gray-500 text-sm pl-1">Nothing here yet</p>;
+		return <p className="text-ink-faint text-sm pl-1">Nothing here yet</p>;
 	}
 
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 			{filteredThangs.map((thang) => {
 				return (
 					<Link
 						to={`/thangs/${thang.slug}`}
-						className="transition bg-white/[0.1] rounded-lg hover:bg-white/[0.06] cursor-pointer overflow-hidden group"
+						className="taped-photo no-underline group cursor-pointer"
+						aria-label={thang.item}
 						transition
 					>
-						<div
-							className="h-40"
+						<span
+							className="block aspect-[4/3] w-full"
 							style={`
 								view-transition-name: image-${thang.slug};
 								background-image: url(${thang.img}), url(${generateLowResImagePath(thang.img)});
@@ -131,16 +122,7 @@ function FilteredThangsList({
 								background-size: cover;
 								background-position: center;
 							`}
-						></div>
-						<div className="p-3">
-							<h3
-								style={`view-transition-name: link-h-${thang.slug}`}
-								className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors"
-							>
-								{thang.item}
-							</h3>
-							<p className="text-xs text-gray-500">{thang.type}</p>
-						</div>
+						/>
 					</Link>
 				);
 			})}

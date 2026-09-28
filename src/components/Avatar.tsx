@@ -18,7 +18,7 @@ export function Avatar({ size }: { size?: "sm" | "lg" }) {
 		return (
 			<div
 				style={`view-transition-name: avatar; background-image: url(/avatar.webp)`}
-				className={`${sizing} rounded-full bg-center bg-cover`}
+				className={`${sizing} rounded-full bg-center bg-cover border-4 border-white shadow-[0_8px_24px_rgba(111,101,85,0.25)]`}
 				role="img"
 				aria-label="Triston Armstrong's avatar"
 				title="Triston Armstrong"

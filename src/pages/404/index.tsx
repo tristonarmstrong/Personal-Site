@@ -26,25 +26,25 @@ export default function NotFoundPage() {
 		<div className="flex flex-col gap-6">
 			{/* 404 Header */}
 			<div className="text-center">
-				<h1 className="text-[4rem] font-bold text-yellow-500">404</h1>
-				<p className="text-lg text-gray-300">Page Not Found</p>
-				<p className="text-sm text-gray-500 italic mt-2">"{randomMessage}"</p>
+				<h1 className="font-hand text-accent" style="font-size: 5rem; line-height: 1;">404</h1>
+				<p className="text-lg text-ink-soft">Page Not Found</p>
+				<p className="text-sm text-ink-faint italic mt-2">"{randomMessage}"</p>
 			</div>
 
 			{/* Navigation */}
 			<div className="flex justify-center">
-				<Link to="/" className="text-yellow-500 underline" transition>
+				<Link to="/" className="text-accent underline" transition>
 					← Go Home
 				</Link>
 			</div>
 
 			{/* Suggestions */}
 			<div className="mt-4">
-				<h3 className="text-yellow-600 mb-4">While you're here:</h3>
+				<h3 className="text-accent-deep mb-4">While you're here:</h3>
 
 				{latestPost && (
 					<div className="mb-4">
-						<span className="text-gray-400 text-sm">Latest Post</span>
+						<span className="text-ink-soft text-sm">Latest Post</span>
 						<div className="mx-4">
 							<Item
 								label={latestPost.title}
@@ -56,7 +56,7 @@ export default function NotFoundPage() {
 
 				{featuredProject && (
 					<div className="mb-4">
-						<span className="text-gray-400 text-sm">Featured Project</span>
+						<span className="text-ink-soft text-sm">Featured Project</span>
 						<div className="mx-4">
 							<Item
 								label={featuredProject.title}
@@ -67,7 +67,7 @@ export default function NotFoundPage() {
 				)}
 
 				<div className="mb-4">
-					<span className="text-gray-400 text-sm">Browse</span>
+					<span className="text-ink-soft text-sm">Browse</span>
 					<div className="mx-4">
 						<Item label="All Blog Posts" href="/blog" />
 						<Item label="My Gear (Thangs)" href="/thangs" />
@@ -94,10 +94,10 @@ function Item({
 				href={href}
 				target="_blank"
 				rel="noopener"
-				className="flex w-full items-center gap-1 text-gray-400 hover:text-yellow-500 transition"
+				className="flex w-full items-center gap-1 text-ink-soft hover:text-accent transition"
 			>
 				<span>{label}</span>
-				<span className="h-full border border-dashed flex-1 border-gray-600"></span>
+				<span className="h-full border border-dashed flex-1 border-line"></span>
 				<span className="text-sm">↗</span>
 			</a>
 		);
@@ -106,11 +106,11 @@ function Item({
 	return (
 		<Link
 			to={href}
-			className="flex w-full items-center gap-1 text-gray-400 hover:text-yellow-500 transition"
+			className="flex w-full items-center gap-1 text-ink-soft hover:text-accent transition"
 			transition
 		>
 			<span>{label}</span>
-			<span className="h-full border border-dashed flex-1 border-gray-600"></span>
+			<span className="h-full border border-dashed flex-1 border-line"></span>
 			<span className="text-sm">→</span>
 		</Link>
 	);

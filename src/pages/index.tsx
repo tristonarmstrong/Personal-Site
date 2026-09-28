@@ -32,82 +32,89 @@ export default function Home() {
 		>
 			<SEO />
 
-			{/* Header */}
-			<section className={"relative"}>
-				<div className="p-4 rounded-2xl bg-[#212121] flex flex-col gap-2 z-10 relative max-w-150 mx-auto">
-					<div className="flex items-start gap-3 z-10">
-						<Avatar size="lg" />
-						<div className={"z-10"}>
-							<h1 className="text-2xl font-bold tracking-tight text-yellow-500 z-10">
-								Triston Armstrong
-							</h1>
-							<div className="flex gap-2 text-gray-500 z-10">
-								<span>Senior Software Engineer</span>
-								<span>·</span>
-								<span>Utah, USA</span>
-							</div>
-						</div>
-					</div>
-					<p className="text-gray-300 mt-2 max-w-lg leading-relaxed text-justify">
-						I am a Senior Software Engineer with over{" "}
-						<span
-							className="yearthing text-yellow-500 cursor-help"
-							title="I started programming professionally in year 2019"
-						>
-							{yearsExperience.value} years
-						</span>{" "}
-						of experience building applications in React, TypeScript, and Rust
-						with significant experience modernizing legacy systems and
-						delivering enterprise solutions. I’ve led frontend development
-						efforts, migrated large codebases to TypeScript, optimized CI/CD
-						pipelines, and worked closely with stakeholders to turn complex
-						business requirements into clean, maintainable software.
-						<br />
-						<br />
-						I’m known as a collaborative team player who enjoys mentoring junior
-						developers and fostering a culture of constructive feedback.
-					</p>
+			{/* Masthead */}
+			<header className="flex flex-col items-center text-center pt-4">
+				<p className="dateline">the personal website of</p>
+				<h1
+					className="font-hand text-accent mt-2"
+					style="font-size: clamp(3.4rem, 10vw, 4.8rem); line-height: 1;"
+				>
+					Triston Armstrong
+				</h1>
+				<p className="flex gap-2 text-ink-faint text-sm mt-3">
+					<span>Senior Software Engineer</span>
+					<span>·</span>
+					<span>Utah, USA</span>
+				</p>
+			</header>
 
-					{/* Social Links */}
-					<div className="flex items-center gap-1 mt-3 [&>a]:bg-black/30">
-						<SocialIcon
-							href="https://github.com/tristonarmstrong"
-							icon={<GithubIcon />}
-							label="GitHub"
-						/>
-						<SocialIcon
-							href="https://x.com/triston_armstr"
-							icon={<XIcon />}
-							label="X"
-						/>
-						<SocialIcon
-							href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
-							icon={<LinkedinIcon />}
-							label="LinkedIn"
-						/>
-						<SocialIcon
-							href="mailto:triston@hey.com"
-							icon={<EmailIcon />}
-							label="Email"
-						/>
-						<SocialIcon href="/feed.xml" icon={<RssIcon />} label="RSS" />
-					</div>
+			<div className="max-w-xl mx-auto flex flex-col gap-5 mt-6">
+				<p className="lead">
+					I am a Senior Software Engineer with over{" "}
+					<span
+						className="yearthing text-accent cursor-help"
+						title="I started programming professionally in year 2019"
+					>
+						{yearsExperience.value} years
+					</span>{" "}
+					of experience building applications in React, TypeScript, and Rust
+					with significant experience modernizing legacy systems and
+					delivering enterprise solutions. I’ve led frontend development
+					efforts, migrated large codebases to TypeScript, optimized CI/CD
+					pipelines, and worked closely with stakeholders to turn complex
+					business requirements into clean, maintainable software.
+				</p>
+
+				<figure className="taped-avatar self-center">
+					<Avatar size="lg" />
+				</figure>
+
+				<p className="text-ink-soft leading-relaxed">
+					I’m known as a collaborative team player who enjoys mentoring junior
+					developers and fostering a culture of constructive feedback.
+				</p>
+
+				{/* Social Links */}
+				<div className="flex items-center justify-center gap-1 mt-1 [&>a]:bg-accent/10">
+					<SocialIcon
+						href="https://github.com/tristonarmstrong"
+						icon={<GithubIcon />}
+						label="GitHub"
+					/>
+					<SocialIcon
+						href="https://x.com/triston_armstr"
+						icon={<XIcon />}
+						label="X"
+					/>
+					<SocialIcon
+						href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
+						icon={<LinkedinIcon />}
+						label="LinkedIn"
+					/>
+					<SocialIcon
+						href="mailto:triston@hey.com"
+						icon={<EmailIcon />}
+						label="Email"
+					/>
+					<SocialIcon href="/feed.xml" icon={<RssIcon />} label="RSS" />
 				</div>
-			</section>
+			</div>
 
-			<div className="w-full border-t border-dashed border-white/10" />
+			<div className="wave-divider" role="separator" aria-hidden="true" />
 
 			{/* GitHub Activity */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					Activity
 				</h2>
 				<GitHubActivity />
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* OSS Contributions */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					OSS
 				</h2>
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -127,9 +134,11 @@ export default function Home() {
 				</div>
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* Projects */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					Projects
 				</h2>
 				<div className="flex flex-col gap-3">
@@ -145,9 +154,11 @@ export default function Home() {
 				</div>
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* Blog */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					Blog
 				</h2>
 				<div className="flex flex-col sm:flex-row gap-3">
@@ -155,32 +166,33 @@ export default function Home() {
 						<div className={"flex flex-col"}>
 							<div
 								className={
-									"px-4 py-3 bg-white/[0.1] rounded-lg rounded-bl-none flex-1 flex flex-col justify-between gap-2"
+									"px-4 py-3 bg-paper-card rounded-lg rounded-bl-none flex-1 flex flex-col justify-between gap-2"
 								}
 							>
-								<time className={"text-[#fff9] text-xs font-thin"}>
+								<time className={"text-ink-faint text-xs font-thin"}>
 									{x.date.toLocaleDateString("en-US", {
+							timeZone: "UTC",
 										month: "short",
 										day: "2-digit",
 										year: "numeric",
 									})}
 								</time>
-								<h2 className={"text-gray-400 font-bold"}>{x.title}</h2>
-								<p className="text-[#fff9] font-thin text-xs">
+								<h2 className="font-display text-ink">{x.title}</h2>
+								<p className="text-ink-faint font-thin text-xs">
 									{x.summary.slice(0, 100)}...
 								</p>
 							</div>
 							<div className={"flex flex-row gap-1"}>
 								<div
 									className={`
-									bg-white/[0.1] flex-1 rounded-bl-lg rounded-br-lg
+									bg-paper-card flex-1 rounded-bl-lg rounded-br-lg
 									after:pointer-events-none after:block after:w-[30px] after:h-[30px] after:relative after:left-[calc(100%-0px)] after:bg-[radial-gradient(circle_at_bottom_right,transparent_0.75rem,oklab(1_0_0_/_0.1)_0.75rem,oklab(1_0_0_/_0.1))] after:[background-position:-18px_-18px] after:bg-no-repeat
 									`}
 								></div>
 								<Link
-									style={"color: var(--color-yellow-500)"}
+									style={"color: var(--color-accent)"}
 									className={
-										"text-xs ml-auto sm:ml-0 px-2 py-1 bg-yellow-500/20 hover:bg-yellow-500/30 rounded-xl mt-1 transition"
+										"text-xs ml-auto sm:ml-0 px-2 py-1 bg-accent/15 hover:bg-accent/25 rounded-xl mt-1 transition"
 									}
 									to={`/blog/${x.slug}`}
 								>
@@ -193,7 +205,7 @@ export default function Home() {
 				<div className="mt-3">
 					<Link
 						to="/blog"
-						className="text-xs text-gray-500 hover:text-gray-300 transition underline"
+						className="text-xs text-ink-faint hover:text-ink-soft transition underline"
 						transition
 					>
 						View all posts
@@ -201,21 +213,23 @@ export default function Home() {
 				</div>
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* Experience */}
 			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+				<h2 className="font-display text-ink mb-4 text-center" style="font-size: 1.75rem;">
 					Experience
 				</h2>
 				<div className="flex flex-col gap-3">
 					{/* Open for opportunities - highlighted */}
-					<div className="py-2 px-3 -mx-3 rounded-xl bg-yellow-500/5 border border-yellow-500/20 border-dashed">
+					<div className="py-2 px-3 -mx-3 rounded-xl bg-accent/5 border border-accent/25 border-dashed">
 						<div className="flex items-center justify-between gap-4">
 							<div className="flex items-center gap-2">
-								<span className="text-sm font-medium text-yellow-500">
+								<span className="text-sm font-medium text-accent">
 									ByteBot
 								</span>
 							</div>
-							<span className="text-xs text-green-400/80 whitespace-nowrap font-medium">
+							<span className="text-xs text-green-800/80 whitespace-nowrap font-medium">
 								2026-present
 							</span>
 						</div>
@@ -247,44 +261,26 @@ export default function Home() {
 				</div>
 			</section>
 
+			<div className="wave-divider" role="separator" aria-hidden="true" />
+
 			{/* Get in Touch CTA */}
-			<section className="p-4 rounded-2xl bg-white/[0.1]">
-				<div className="flex items-start gap-3">
-					<div className="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center shrink-0">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							className="text-yellow-500"
-						>
-							<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-						</svg>
-					</div>
-					<div className="flex-1 min-w-0">
-						<h2 className="text-lg font-bold tracking-tight text-gray-100 mb-1">
-							Let's work together
-						</h2>
-						<p className="text-sm text-gray-400 leading-relaxed mb-3">
-							Have a project in mind or just want to chat? I'm always open to
-							discussing new opportunities, creative ideas, or potential
-							collaborations.
-						</p>
-						<button
-							type="button"
-							onclick={_handleEmailClick}
-							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500/20 text-yellow-500 hover:bg-yellow-500/30 transition text-sm font-medium cursor-pointer"
-						>
-							<EmailIcon />
-							<span>Send me an email</span>
-						</button>
-					</div>
-				</div>
+			<section className="p-6 rounded-2xl bg-paper-card text-center">
+				<h2 className="font-hand text-accent mb-2" style="font-size: 2rem;">
+					Let's work together
+				</h2>
+				<p className="text-sm text-ink-soft leading-relaxed mb-4 max-w-md mx-auto">
+					Have a project in mind or just want to chat? I'm always open to
+					discussing new opportunities, creative ideas, or potential
+					collaborations.
+				</p>
+				<button
+					type="button"
+					onclick={_handleEmailClick}
+					className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent/15 text-accent hover:bg-accent/25 transition text-sm font-medium cursor-pointer"
+				>
+					<EmailIcon />
+					<span>Send me an email</span>
+				</button>
 			</section>
 
 			{/* Footer spacer */}
@@ -308,16 +304,16 @@ function DashedItem({
 	highlight?: boolean;
 }) {
 	const labelClasses = highlight
-		? "text-gray-200 animate-pulse"
-		: "text-gray-400 group-hover:text-gray-100";
+		? "text-ink animate-pulse"
+		: "text-ink-soft group-hover:text-ink";
 
 	const content = (
 		<div className="flex items-center justify-between gap-4 group cursor-pointer">
 			<span className={`text-sm ${labelClasses} transition-colors`}>
 				{label}
 			</span>
-			<div className="border-t border-dashed border-white/10 flex-1 min-w-[2rem]" />
-			<span className="text-xs text-gray-500 whitespace-nowrap">{meta}</span>
+			<div className="border-t border-dashed border-line flex-1 min-w-[2rem]" />
+			<span className="text-xs text-ink-faint whitespace-nowrap">{meta}</span>
 		</div>
 	);
 
@@ -354,11 +350,11 @@ function DashedLink({
 	status?: OssStatus;
 }) {
 	const statusStyles = {
-		merged: "rounded-md bg-green-500/20 text-green-400 border-none",
-		rejected: "rounded-md bg-red-500/20 text-red-400 border-none",
-		closed: "rounded-md bg-orange-500/20 text-orange-400 border-none",
-		open: "rounded-md bg-yellow-500/20 text-yellow-400 border-none",
-		default: "rounded-md bg-gray-500/20 text-gray-400 border-none",
+		merged: "rounded-md bg-green-800/10 text-green-800 border-none",
+		rejected: "rounded-md bg-red-800/10 text-red-800 border-none",
+		closed: "rounded-md bg-orange-800/10 text-orange-800 border-none",
+		open: "rounded-md bg-accent/15 text-accent border-none",
+		default: "rounded-md bg-ink-soft/10 text-ink-soft border-none",
 	};
 
 	return (
@@ -367,11 +363,11 @@ function DashedLink({
 				href={href}
 				target="_blank"
 				rel="noopener"
-				className="text-xs underline text-blue-400 hover:text-blue-500 transition-colors whitespace-nowrap"
+				className="text-xs underline text-accent-deep hover:text-accent transition-colors whitespace-nowrap"
 			>
 				{label}
 			</a>
-			<div className="border-t border-dashed border-white/10 flex-1 min-w-[2rem]" />
+			<div className="border-t border-dashed border-line flex-1 min-w-[2rem]" />
 			<span
 				className={`text-[10px] px-2 py-0.5 rounded-full border whitespace-nowrap ${statusStyles[status]}`}
 			>
@@ -396,18 +392,18 @@ function ProjectCard({
 	return (
 		<Link
 			to={href}
-			className="flex items-start gap-3 p-3 rounded-md bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.06] transition group"
+			className="flex items-start gap-3 p-3 rounded-md bg-paper-card backdrop-blur-md hover:bg-card transition group"
 			transition
 		>
-			<div className="w-10 h-10 rounded bg-[#1a1a1a] flex items-center justify-center text-gray-500 text-xs font-medium shrink-0 mt-0.5">
+			<div className="w-10 h-10 rounded bg-paper flex items-center justify-center text-ink-faint text-xs font-medium shrink-0 mt-0.5">
 				{type.charAt(0)}
 			</div>
 			<div className="flex-1 min-w-0">
-				<h3 className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight">
+				<h3 className="text-sm font-medium text-ink group-hover:text-accent-deep transition-colors tracking-tight">
 					{title}
 				</h3>
 				{summary && (
-					<p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+					<p className="text-xs text-ink-faint mt-0.5 leading-relaxed">
 						{summary}
 					</p>
 				)}
@@ -431,7 +427,7 @@ function SocialIcon({
 			href={href}
 			target={href.startsWith("http") ? "_blank" : undefined}
 			rel={href.startsWith("http") ? "noopener" : undefined}
-			className="p-2 rounded-full text-gray-400 hover:text-yellow-500 hover:bg-black/40 transition"
+			className="p-2 rounded-full text-ink-soft hover:text-accent hover:bg-accent/15 transition"
 			aria-label={label}
 			title={label}
 		>

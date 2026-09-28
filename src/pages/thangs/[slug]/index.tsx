@@ -37,30 +37,30 @@ export default function Page() {
 				<div>
 					<Link
 						to="/thangs"
-						className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/[0.03] text-gray-400 hover:text-gray-200 hover:bg-white/[0.06] hover:border-white/20 transition text-xs font-medium backdrop-blur-sm no-underline"
+						className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-paper-card text-ink-soft hover:text-ink hover:bg-card hover:border-line transition text-xs font-medium backdrop-blur-sm no-underline"
 						style="text-decoration: none;"
 						transition
 					>
 						<ArrowLeftIcon size={14} />
 						<span>All Thangs</span>
-						<span className="text-gray-600">·</span>
-						<span className="text-gray-500">{allThangs.length}</span>
+						<span className="text-ink-faint">·</span>
+						<span className="text-ink-faint">{allThangs.length}</span>
 					</Link>
 				</div>
 
 				{/* Header */}
-				<header className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-md ">
+				<header className="p-4 rounded-2xl bg-paper-card backdrop-blur-md ">
 					<div className="flex items-start gap-3">
 						<Avatar size="lg" />
 						<div className="flex-1 min-w-0">
 							<h1
-								style={`view-transition-name: link-h-${thang.slug}`}
-								className="text-xl font-bold tracking-tight text-yellow-500 leading-tight"
+								style={`view-transition-name: link-h-${thang.slug}; font-size: 1.6rem;`}
+								className="font-display text-ink leading-tight"
 							>
 								{thang.item}
 							</h1>
-							<div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
-								<span className="px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/10 text-gray-400">
+							<div className="flex items-center gap-2 mt-2 text-xs text-ink-faint">
+								<span className="px-2 py-0.5 rounded-full bg-paper-card border border-line text-ink-soft">
 									{thang.type}
 								</span>
 							</div>
@@ -80,23 +80,23 @@ export default function Page() {
 					></div>
 				</header>
 
-				<div className="w-full border-t border-dashed border-white/10" />
+				<div className="w-full border-t border-dashed border-line" />
 
 				{/* Content */}
 				<main className="blogpost markdown-body">
 					<MDXContent code={thang!.mdx} />
 				</main>
 
-				<div className="w-full border-t border-dashed border-white/10" />
+				<div className="w-full border-t border-dashed border-line" />
 
 				{/* Next thang */}
 				<footer>
-					<h2 className="text-xs font-medium tracking-wider text-gray-500 uppercase mb-4">
+					<h2 className="text-xs font-medium tracking-wider text-ink-faint uppercase mb-4">
 						Next Thang
 					</h2>
 					<Link
 						to={`/thangs/${nextThang.slug}`}
-						className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition group no-underline"
+						className="flex items-start gap-3 p-4 rounded-xl bg-paper-card backdrop-blur-md hover:bg-card transition group no-underline"
 						style="text-decoration: none;"
 						transition
 					>
@@ -111,10 +111,10 @@ export default function Page() {
 						></div>
 						<div className="flex-1 min-w-0">
 							<div className="flex items-center justify-between gap-4 mb-1">
-								<h3 className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight">
+								<h3 className="text-sm font-medium text-ink group-hover:text-accent-deep transition-colors tracking-tight">
 									{nextThang.item}
 								</h3>
-								<span className="text-xs text-gray-500 whitespace-nowrap px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/10">
+								<span className="text-xs text-ink-faint whitespace-nowrap px-2 py-0.5 rounded-full bg-paper-card border border-line">
 									{nextThang.type}
 								</span>
 							</div>

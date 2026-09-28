@@ -1,6 +1,5 @@
 import { allPosts } from "content-collections";
 import { Link } from "kiru/router";
-import { Avatar } from "../../components/Avatar";
 import { RssIcon } from "../../components/icons/Rss";
 import { SEO } from "../../components/SEO";
 import {
@@ -38,7 +37,7 @@ function detectCategory(
 	) {
 		return {
 			name: "Rust",
-			color: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+			color: "bg-orange-800/10 text-orange-800 border-orange-500/30",
 			icon: <CodeIcon />,
 		};
 	}
@@ -49,7 +48,7 @@ function detectCategory(
 	) {
 		return {
 			name: "Tutorial",
-			color: "bg-green-500/20 text-green-400 border-green-500/30",
+			color: "bg-green-800/10 text-green-800 border-green-500/30",
 			icon: <BookIcon />,
 		};
 	}
@@ -68,25 +67,11 @@ function detectCategory(
 	}
 	return {
 		name: "Tech",
-		color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+		color: "bg-accent/15 text-accent border-accent/30",
 		icon: <SparkleIcon />,
 	};
 }
 
-
-// Format last update time
-function getLastUpdateText(date?: Date): string {
-	if (!date) return "recently";
-	const now = new Date();
-	const diff = now.getTime() - date.getTime();
-	const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-	if (days === 0) return "today";
-	if (days === 1) return "yesterday";
-	if (days < 7) return `${days} days ago`;
-	if (days < 30) return `${Math.floor(days / 7)} weeks ago`;
-	return `${Math.floor(days / 30)} months ago`;
-}
 
 export default function BlogIndex() {
 	const allPostsRearranged = allPosts.sort(
@@ -105,71 +90,40 @@ export default function BlogIndex() {
 			/>
 
 			{/* Header */}
-			<section className="p-5 rounded-2xl bg-white/[0.1] backdrop-blur-md ">
-				<div className="flex items-start gap-4">
-					<Avatar size="lg" />
-					<div className="flex-1 min-w-0">
-						<div className="flex items-center justify-between gap-3 mb-2">
-							<h1 className="text-2xl font-bold tracking-tight text-yellow-500">
-								Blog
-							</h1>
-							<a
-								href="/feed.xml"
-								className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500/20 transition text-xs font-medium border border-yellow-500/20"
-								title="Subscribe to RSS feed"
-							>
-								<RssIcon size={12} />
-								<span>Subscribe</span>
-							</a>
-						</div>
+			<header className="flex flex-col items-center text-center gap-3 pt-4">
+				<p className="dateline">{allPostsRearranged.length} posts and counting</p>
+				<h1 className="font-hand text-accent" style="font-size: clamp(3rem, 9vw, 4.2rem); line-height: 1;">
+					Blog
+				</h1>
+				<p className="lead max-w-xl">
+					Technical deep-dives, debugging war stories, and lessons learned
+					from shipping software.
+				</p>
+				<a
+					href="/feed.xml"
+					className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 text-accent hover:bg-accent/15 transition text-xs font-medium border border-accent/25"
+					title="Subscribe to RSS feed"
+				>
+					<RssIcon size={12} />
+					<span>Subscribe via RSS</span>
+				</a>
+			</header>
 
-						<p className="text-gray-300 leading-relaxed text-justify">
-							A collection of technical deep-dives, debugging war stories, and
-							lessons learned from shipping software. I write about systems
-							programming, Rust, developer tooling, and the occasional career
-							reflection.
-						</p>
-
-						{/* Stats */}
-						<div className="flex items-center gap-4 mt-4 text-xs">
-							<div className="flex items-center gap-1.5 text-gray-500">
-								<DocumentIcon size={12} />
-								<span>{allPostsRearranged.length} posts</span>
-							</div>
-							<span className="text-gray-700">·</span>
-							<div className="flex items-center gap-1.5 text-gray-500">
-								<TagIcon size={12} />
-								<span>5 topics</span>
-							</div>
-							<span className="text-gray-700">·</span>
-							<div className="flex items-center gap-1.5 text-gray-500">
-								<ClockIcon size={12} />
-								<span>
-									Updated {getLastUpdateText(allPostsRearranged[0]?.date)}
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<div className="w-full border-t border-dashed border-white/10" />
+			<div className="wave-divider" role="separator" aria-hidden="true" />
 
 			{/* Featured Post */}
 			{featuredPost && (
 				<section>
-					<h2 className="text-xs font-medium tracking-wider text-gray-500 uppercase mb-4">
-						Latest Post
-					</h2>
+					<p className="dateline mb-4">latest post</p>
 					<FeaturedPostCard post={featuredPost} />
 				</section>
 			)}
 
 			{/* Post Grid */}
 			<section>
-				<h2 className="text-xs font-medium tracking-wider text-gray-500 uppercase mb-4">
-					All Posts ({allPostsRearranged.length})
-				</h2>
+				<p className="dateline mb-4">
+					all posts ({allPostsRearranged.length})
+				</p>
 				<div className="grid grid-cols-1 gap-3">
 					{remainingPosts.map((post) => (
 						<PostCard key={post.slug} post={post} />
@@ -191,7 +145,7 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 	return (
 		<Link
 			to={`/blog/${post.slug}`}
-			className={`flex flex-col p-5 rounded-xl bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.05] transition group`}
+			className={`flex flex-col p-5 rounded-xl bg-paper-card backdrop-blur-md hover:bg-paper-card transition group`}
 			transition
 		>
 			<div className="flex items-center justify-between gap-4 mb-3">
@@ -203,8 +157,9 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 						{category.name}
 					</span>
 				</div>
-				<span className="text-xs text-gray-500">
+				<span className="text-xs text-ink-faint">
 					{post.date.toLocaleDateString("en-US", {
+							timeZone: "UTC",
 						month: "short",
 						day: "numeric",
 						year: "numeric",
@@ -212,15 +167,15 @@ function FeaturedPostCard({ post }: { post: (typeof allPosts)[0] }) {
 				</span>
 			</div>
 
-			<h3 className="text-lg font-semibold text-gray-100 group-hover:text-white transition-colors tracking-tight mb-2">
+			<h3 className="text-lg font-semibold text-ink group-hover:text-accent-deep transition-colors tracking-tight mb-2">
 				{post.title}
 			</h3>
 
-			<p className="text-sm text-gray-400 leading-relaxed mb-4 text-justify">
+			<p className="text-sm text-ink-soft leading-relaxed mb-4 text-justify">
 				{post.summary}
 			</p>
 
-			<div className="flex items-center gap-2 text-xs text-gray-500 mt-auto">
+			<div className="flex items-center gap-2 text-xs text-ink-faint mt-auto">
 				<ClockIcon size={12} />
 				<span>{readingTime}</span>
 			</div>
@@ -236,7 +191,7 @@ function PostCard({ post }: { post: (typeof allPosts)[0] }) {
 	return (
 		<Link
 			to={`/blog/${post.slug}`}
-			className={`flex items-start gap-3 p-4 rounded-lg bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.05] transition group`}
+			className={`flex items-start gap-3 p-4 rounded-lg bg-paper-card backdrop-blur-md hover:bg-paper-card transition group`}
 			transition
 		>
 			{/* Icon avatar */}
@@ -248,16 +203,16 @@ function PostCard({ post }: { post: (typeof allPosts)[0] }) {
 
 			<div className="flex-1 min-w-0">
 				<div className="flex items-center justify-between gap-2 mb-1">
-					<h3 className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight truncate">
+					<h3 className="text-sm font-medium text-ink group-hover:text-accent-deep transition-colors tracking-tight truncate">
 						{post.title}
 					</h3>
 				</div>
 
-				<p className="text-xs text-gray-500 leading-relaxed line-clamp-2 mb-2">
+				<p className="text-xs text-ink-faint leading-relaxed line-clamp-2 mb-2">
 					{post.summary}
 				</p>
 
-				<div className="flex items-center gap-3 text-[11px] text-gray-600">
+				<div className="flex items-center gap-3 text-[11px] text-ink-faint">
 					<span className="flex items-center gap-1">
 						<ClockIcon size={10} />
 						{readingTime}
@@ -265,6 +220,7 @@ function PostCard({ post }: { post: (typeof allPosts)[0] }) {
 					<span>·</span>
 					<span>
 						{post.date.toLocaleDateString("en-US", {
+							timeZone: "UTC",
 							month: "short",
 							day: "numeric",
 						})}
@@ -384,44 +340,6 @@ function ClockIcon({ size = 12 }: { size?: number }) {
 		>
 			<circle cx="12" cy="12" r="10" />
 			<polyline points="12 6 12 12 16 14" />
-		</svg>
-	);
-}
-
-function DocumentIcon({ size = 12 }: { size?: number }) {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width={size}
-			height={size}
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		>
-			<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-			<polyline points="14 2 14 8 20 8" />
-		</svg>
-	);
-}
-
-function TagIcon({ size = 12 }: { size?: number }) {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width={size}
-			height={size}
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		>
-			<path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z" />
-			<circle cx="7" cy="7" r="1" />
 		</svg>
 	);
 }
