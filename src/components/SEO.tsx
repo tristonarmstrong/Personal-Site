@@ -5,6 +5,9 @@ interface SEOProps {
 	title?: string;
 	description?: string;
 	image?: string;
+	imageAlt?: string;
+	imageWidth?: number;
+	imageHeight?: number;
 	url?: string;
 	type?: "website" | "article";
 	publishedTime?: string;
@@ -30,6 +33,9 @@ export function SEO({
 	title,
 	description,
 	image,
+	imageAlt,
+	imageWidth,
+	imageHeight,
 	url,
 	type = "website",
 	publishedTime,
@@ -45,11 +51,17 @@ export function SEO({
 	const siteUrl = "https://tristonarmstrong.com";
 	const fullUrl = url ? `${siteUrl}${url}` : siteUrl;
 	const defaultImage = `${siteUrl}/avatar.webp`;
+	const usingDefaultImage = !image;
 	const metaImage = image
 		? image.startsWith("http")
 			? image
 			: `${siteUrl}${image}`
 		: defaultImage;
+	// Post cards are generated at 1200x630; the default avatar is 2048x2048.
+	// For other custom images the dims are left for the crawler to discover.
+	const metaImageWidth = imageWidth ?? (usingDefaultImage ? 2048 : undefined);
+	const metaImageHeight = imageHeight ?? (usingDefaultImage ? 2048 : undefined);
+	const metaImageAlt = imageAlt ?? (title || "Triston Armstrong");
 
 	// Generate JSON-LD structured data
 	const jsonLd = generateJsonLd({
@@ -73,6 +85,19 @@ export function SEO({
 		<meta property="og:title" content={fullTitle} />,
 		<meta property="og:description" content={metaDescription} />,
 		<meta property="og:image" content={metaImage} />,
+		...(metaImageWidth !== undefined
+			? [
+					<meta
+						property="og:image:width"
+						content={String(metaImageWidth)}
+					/>,
+					<meta
+						property="og:image:height"
+						content={String(metaImageHeight)}
+					/>,
+				]
+			: []),
+		<meta property="og:image:alt" content={metaImageAlt} />,
 		<meta property="og:url" content={fullUrl} />,
 		<meta property="og:type" content={type || "website"} />,
 		<meta property="og:site_name" content={siteName} />,

@@ -33,6 +33,10 @@ export default function Page() {
 				<SEO
 					title={post.title}
 					description={post.summary}
+					image={post.image}
+					imageAlt={post.image ? `${post.title} - Triston Armstrong` : undefined}
+					imageWidth={post.image ? 1200 : undefined}
+					imageHeight={post.image ? 630 : undefined}
 					type="article"
 					publishedTime={post.date.toISOString()}
 					url={`/blog/${post.slug}`}

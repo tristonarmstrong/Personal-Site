@@ -30,6 +30,8 @@ export default function Page() {
 				<SEO
 					title={thang.item}
 					description={`${thang.item} - ${thang.type} item in Triston's collection of things`}
+					image={thang.img}
+					imageAlt={`${thang.item} - one of Triston's thangs`}
 					url={`/thangs/${thang.slug}`}
 				/>
 
