@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 400" role="img" aria-label="Illustrative chart: caffeine remaining after a 200 mg morning coffee, assuming a 5 hour half-life">
+  <style>
+    .lbl { font-family: Georgia, 'Times New Roman', serif; font-size: 17px; fill: #3a3226; }
+    .small { font-family: Georgia, 'Times New Roman', serif; font-size: 13.5px; fill: #6b5d45; }
+    .tiny { font-family: Georgia, 'Times New Roman', serif; font-size: 12px; fill: #6b5d45; font-style: italic; }
+    .axis { stroke: #3a3226; stroke-width: 2; stroke-linecap: round; }
+    .grid { stroke: #c9bfa8; stroke-width: 1; stroke-dasharray: 4,5; }
+    .curve { stroke: #b4552d; stroke-width: 3.5; fill: none; stroke-linecap: round; }
+  </style>
+
+  <text x="310" y="30" text-anchor="middle" class="lbl">Where a 200 mg morning coffee goes</text>
+
+  <!-- axes -->
+  <line x1="70" y1="60" x2="70" y2="330" class="axis"/>
+  <line x1="70" y1="330" x2="590" y2="330" class="axis"/>
+  <text x="28" y="200" text-anchor="middle" class="small" transform="rotate(-90 28 200)">caffeine left (mg)</text>
+  <text x="330" y="368" text-anchor="middle" class="small">time of day</text>
+
+  <!-- y gridlines: y = 330 - mg*1.3 -->
+  <g class="small">
+    <line x1="70" y1="70" x2="590" y2="70" class="grid"/><text x="58" y="74" text-anchor="end">200</text>
+    <line x1="70" y1="135" x2="590" y2="135" class="grid"/><text x="58" y="139" text-anchor="end">150</text>
+    <line x1="70" y1="200" x2="590" y2="200" class="grid"/><text x="58" y="204" text-anchor="end">100</text>
+    <line x1="70" y1="265" x2="590" y2="265" class="grid"/><text x="58" y="269" text-anchor="end">50</text>
+    <text x="58" y="334" text-anchor="end">0</text>
+  </g>
+
+  <!-- x labels -->
+  <g class="small" text-anchor="middle">
+    <text x="70" y="352">8am</text>
+    <text x="243" y="352">1pm</text>
+    <text x="416" y="352">6pm</text>
+    <text x="589" y="352">11pm</text>
+  </g>
+
+  <!-- decay curve: 200 -> 100 -> 50 -> 25 at 5h steps -->
+  <path d="M70,70 C140,84 175,160 243,200 C311,240 348,252 416,265 C484,278 530,290 589,297" class="curve"/>
+
+  <!-- data points -->
+  <g>
+    <circle cx="70" cy="70" r="6" fill="#fffdf9" stroke="#b4552d" stroke-width="3"/>
+    <text x="70" y="52" text-anchor="middle" class="small">200 mg</text>
+    <circle cx="243" cy="200" r="6" fill="#fffdf9" stroke="#b4552d" stroke-width="3"/>
+    <text x="243" y="182" text-anchor="middle" class="small">100 mg</text>
+    <circle cx="416" cy="265" r="6" fill="#fffdf9" stroke="#b4552d" stroke-width="3"/>
+    <text x="416" y="247" text-anchor="middle" class="small">50 mg</text>
+    <circle cx="589" cy="297" r="6" fill="#fffdf9" stroke="#b4552d" stroke-width="3"/>
+    <text x="560" y="322" text-anchor="middle" class="small">~25 mg</text>
+  </g>
+
+  <!-- bedtime marker -->
+  <line x1="589" y1="60" x2="589" y2="330" stroke="#3a3226" stroke-width="1.5" stroke-dasharray="7,5"/>
+  <text x="576" y="92" text-anchor="end" class="tiny">bedtime: still ~25 mg</text>
+  <text x="576" y="108" text-anchor="end" class="tiny">in your system</text>
+
+  <text x="310" y="392" text-anchor="middle" class="tiny">Illustrative: assumes a 5-hour half-life. Smoking, pregnancy, liver health, and some medications shift it a lot.</text>
+</svg>
