@@ -517,6 +517,12 @@ function openSourceData(): Array<{
 }> {
 	return [
 		{
+			label: "bjarneo/flux",
+			meta: "merged",
+			status: "merged",
+			href: "https://github.com/bjarneo/flux/pull/3",
+		},
+		{
 			label: "omacom/aether",
 			meta: "merged",
 			status: "merged",
