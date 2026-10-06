@@ -247,6 +247,22 @@ export default function Home() {
 				</div>
 			</section>
 
+			{/* Off the keyboard */}
+			<section>
+				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
+					Off the keyboard
+				</h2>
+				<p className="text-sm text-gray-400 leading-relaxed">
+					I build physical systems too. On my own property I designed and
+					built a complete solar array: panels, inverters, storage, and
+					monitoring. Then I added microcontroller-based sensing, custom
+					reporting software, and network communications on top of it. I also
+					do general construction and framing (barns, coops, outbuildings)
+					plus vehicle and equipment repair. One person from power to
+					automation to structures.
+				</p>
+			</section>
+
 			{/* Get in Touch CTA */}
 			<section className="p-4 rounded-2xl bg-white/[0.1]">
 				<div className="flex items-start gap-3">
