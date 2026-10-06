@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
 			.join("\n");
 	}
 	return (
-		<div className="max-w-[70ch] mx-auto mt-20 flex flex-col gap-4 px-4 sm:overflow-hidden relative">
+		<div className="site-shell max-w-[70ch] mx-auto mt-20 flex flex-col gap-4 px-4 sm:overflow-hidden relative">
 			<style innerHTML={_generateViewTransitionNamesFromContent()} />
 			<div className="relative z-10">
 				<Navigation />
