@@ -1,10 +1,18 @@
 import { allPosts, allProjects } from "content-collections";
 import { For, onMount, signal } from "kiru";
 import { Link } from "kiru/router";
-import { Avatar } from "../components/Avatar";
 import { GitHubActivity } from "../components/GitHubActivity";
 import { RssIcon } from "../components/icons/Rss";
 import { SEO } from "../components/SEO";
+import "../scroll-theme.css";
+import {
+	MountedPortrait,
+	Roller,
+	ScrollFilters,
+	SectionHeading,
+	SealStamp,
+	SilkBand,
+} from "../components/scroll";
 
 export default function Home() {
 	const yearsExperience = signal(5);
@@ -14,6 +22,8 @@ export default function Home() {
 
 	onMount(() => {
 		yearsExperience.value = Math.abs(new Date().getFullYear() - 2019);
+		document.body.classList.add("scroll-page");
+		return () => document.body.classList.remove("scroll-page");
 	});
 
 	function _handleEmailClick() {
@@ -26,363 +36,298 @@ export default function Home() {
 	const openSourceContribsData = openSourceData();
 
 	return () => (
-		<main
-			className="text-sm mt-10 flex flex-col gap-10 max-w-2xl"
-			style={"view-transition-name: homepage"}
-		>
+		<main style={"view-transition-name: homepage"}>
 			<SEO />
+			<ScrollFilters />
 
-			{/* Header */}
-			<section className={"relative"}>
-				<div className="p-4 rounded-2xl bg-[#212121] flex flex-col gap-2 z-10 relative max-w-150 mx-auto">
-					<div className="flex items-start gap-3 z-10">
-						<Avatar size="lg" />
-						<div className={"z-10"}>
-							<h1 className="text-2xl font-bold tracking-tight text-yellow-500 z-10">
-								Triston Armstrong
-							</h1>
-							<div className="flex gap-2 text-gray-500 z-10">
-								<span>Senior Software Engineer</span>
-								<span>·</span>
-								<span>Utah, USA</span>
-							</div>
-						</div>
-					</div>
-					<p className="text-gray-300 mt-2 max-w-lg leading-relaxed text-justify">
-						I am a Senior Software Engineer with over{" "}
-						<span
-							className="yearthing text-yellow-500 cursor-help"
-							title="I started programming professionally in year 2019"
+			<div className="scroll-wrap">
+				<Roller />
+				<SilkBand />
+
+				<div className="scroll-paper">
+					<div className="hero-wash" aria-hidden="true" />
+
+					{/* Hero — the opening inscription of the scroll */}
+					<section className="relative text-center">
+						<div
+							className="hero-inscription vertical-rl font-brush"
+							aria-hidden="true"
 						>
-							{yearsExperience.value} years
-						</span>{" "}
-						of experience building applications in React, TypeScript, and Rust
-						with significant experience modernizing legacy systems and
-						delivering enterprise solutions. I’ve led frontend development
-						efforts, migrated large codebases to TypeScript, optimized CI/CD
-						pipelines, and worked closely with stakeholders to turn complex
-						business requirements into clean, maintainable software.
-						<br />
-						<br />
-						I’m known as a collaborative team player who enjoys mentoring junior
-						developers and fostering a culture of constructive feedback.
-					</p>
-
-					{/* Social Links */}
-					<div className="flex items-center gap-1 mt-3 [&>a]:bg-black/30">
-						<SocialIcon
-							href="https://github.com/tristonarmstrong"
-							icon={<GithubIcon />}
-							label="GitHub"
-						/>
-						<SocialIcon
-							href="https://x.com/triston_armstr"
-							icon={<XIcon />}
-							label="X"
-						/>
-						<SocialIcon
-							href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
-							icon={<LinkedinIcon />}
-							label="LinkedIn"
-						/>
-						<SocialIcon
-							href="mailto:triston@klectr.dev"
-							icon={<EmailIcon />}
-							label="Email"
-						/>
-						<SocialIcon href="/feed.xml" icon={<RssIcon />} label="RSS" />
-					</div>
-				</div>
-			</section>
-
-			<div className="w-full border-t border-dashed border-white/10" />
-
-			{/* GitHub Activity */}
-			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Activity
-				</h2>
-				<GitHubActivity />
-			</section>
-
-			{/* OSS Contributions */}
-			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					OSS
-				</h2>
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-					<For
-						each={openSourceContribsData}
-						fallback={<div>No Open Source Contributions Yet</div>}
-					>
-						{(item) => (
-							<DashedLink
-								label={item.label}
-								meta={item.meta}
-								status={item.status}
-								href={item.href}
-							/>
-						)}
-					</For>
-				</div>
-			</section>
-
-			{/* Projects */}
-			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Projects
-				</h2>
-				<div className="flex flex-col gap-3">
-					{allProjects.map((x) => (
-						<ProjectCard
-							key={x.slug}
-							title={x.title}
-							href={`/project/${x.slug}`}
-							type={x.type}
-							summary={x.summary}
-						/>
-					))}
-				</div>
-			</section>
-
-			{/* Blog */}
-			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Blog
-				</h2>
-				<div className="flex flex-col sm:flex-row gap-3">
-					{allPostsRearranged.slice(0, 3).map((x) => (
-						<div className={"flex flex-col"}>
-							<div
-								className={
-									"px-4 py-3 bg-white/[0.1] rounded-lg rounded-bl-none flex-1 flex flex-col justify-between gap-2"
-								}
-							>
-								<time className={"text-[#fff9] text-xs font-thin"}>
-									{x.date.toLocaleDateString("en-US", {
-										month: "short",
-										day: "2-digit",
-										year: "numeric",
-									})}
-								</time>
-								<h2 className={"text-gray-400 font-bold"}>{x.title}</h2>
-								<p className="text-[#fff9] font-thin text-xs">
-									{x.summary.slice(0, 100)}...
-								</p>
-							</div>
-							<div className={"flex flex-row gap-1"}>
-								<div
-									className={`
-									bg-white/[0.1] flex-1 rounded-bl-lg rounded-br-lg
-									after:pointer-events-none after:block after:w-[30px] after:h-[30px] after:relative after:left-[calc(100%-0px)] after:bg-[radial-gradient(circle_at_bottom_right,transparent_0.75rem,oklab(1_0_0_/_0.1)_0.75rem,oklab(1_0_0_/_0.1))] after:[background-position:-18px_-18px] after:bg-no-repeat
-									`}
-								></div>
-								<Link
-									style={"color: var(--color-yellow-500)"}
-									className={
-										"text-xs ml-auto sm:ml-0 px-2 py-1 bg-yellow-500/20 hover:bg-yellow-500/30 rounded-xl mt-1 transition"
-									}
-									to={`/blog/${x.slug}`}
-								>
-									Read More
-								</Link>
-							</div>
+							Senior Software Engineer
 						</div>
-					))}
-				</div>
-				<div className="mt-3">
-					<Link
-						to="/blog"
-						className="text-xs text-gray-500 hover:text-gray-300 transition underline"
-						transition
-					>
-						View all posts
-					</Link>
-				</div>
-			</section>
-
-			{/* Experience */}
-			<section>
-				<h2 className="text-xl font-bold tracking-tight text-gray-100 mb-4">
-					Experience
-				</h2>
-				<div className="flex flex-col gap-3">
-					{/* Open for opportunities - highlighted */}
-					<div className="py-2 px-3 -mx-3 rounded-xl bg-yellow-500/5 border border-yellow-500/20 border-dashed">
-						<div className="flex items-center justify-between gap-4">
-							<div className="flex items-center gap-2">
-								<span className="text-sm font-medium text-yellow-500">
-									ByteBot
-								</span>
-							</div>
-							<span className="text-xs text-green-400/80 whitespace-nowrap font-medium">
-								2026-present
-							</span>
-						</div>
-					</div>
-					<DashedItem
-						label="Ventra Health"
-						meta="2023 — 2025"
-						href="https://ventrahealth.com/"
-					/>
-					<DashedItem
-						label="Randstad Technologies"
-						meta="2021 — 2023"
-						href="https://www.randstadusa.com/"
-					/>
-					<DashedItem
-						label="Damiano Global Corp."
-						meta="2021"
-						href="https://damianoglobal.com/"
-					/>
-					<DashedItem label="Makers Ladder LLC" meta="2020" href="" />
-				</div>
-
-				<div className="mt-4">
-					<DashedItem
-						label="Freelance (Upwork)"
-						meta="$40k+"
-						href="https://www.upwork.com/freelancers/~018467e8cbe2f71382"
-					/>
-				</div>
-			</section>
-
-			{/* Get in Touch CTA */}
-			<section className="p-4 rounded-2xl bg-white/[0.1]">
-				<div className="flex items-start gap-3">
-					<div className="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center shrink-0">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							className="text-yellow-500"
-						>
-							<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-						</svg>
-					</div>
-					<div className="flex-1 min-w-0">
-						<h2 className="text-lg font-bold tracking-tight text-gray-100 mb-1">
-							Let's work together
-						</h2>
-						<p className="text-sm text-gray-400 leading-relaxed mb-3">
-							Have a project in mind or just want to chat? I'm always open to
-							discussing new opportunities, creative ideas, or potential
-							collaborations.
+						<MountedPortrait />
+						<h1 className="font-brush hero-name mt-7">Triston Armstrong</h1>
+						<p className="hero-meta mt-3">
+							Senior Software Engineer · Utah, USA
 						</p>
-						<button
-							type="button"
-							onclick={_handleEmailClick}
-							className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500/20 text-yellow-500 hover:bg-yellow-500/30 transition text-sm font-medium cursor-pointer"
-						>
-							<EmailIcon />
-							<span>Send me an email</span>
-						</button>
+						<div className="max-w-xl mx-auto mt-6 text-left">
+							<p>
+								I am a Senior Software Engineer with over{" "}
+								<span
+									className="yearthing-scroll"
+									title="I started programming professionally in year 2019"
+								>
+									{yearsExperience.value} years
+								</span>{" "}
+								of experience building applications in React, TypeScript, and
+								Rust with significant experience modernizing legacy systems
+								and delivering enterprise solutions. I’ve led frontend
+								development efforts, migrated large codebases to TypeScript,
+								optimized CI/CD pipelines, and worked closely with
+								stakeholders to turn complex business requirements into
+								clean, maintainable software.
+							</p>
+							<p className="mt-4">
+								I’m known as a collaborative team player who enjoys mentoring
+								junior developers and fostering a culture of constructive
+								feedback.
+							</p>
+						</div>
+
+						{/* Social Links */}
+						<div className="flex items-center justify-center gap-2 mt-7">
+							<SocialIcon
+								href="https://github.com/tristonarmstrong"
+								icon={<GithubIcon />}
+								label="GitHub"
+							/>
+							<SocialIcon
+								href="https://x.com/triston_armstr"
+								icon={<XIcon />}
+								label="X"
+							/>
+							<SocialIcon
+								href="https://www.linkedin.com/in/triston-armstrong-7248b229b"
+								icon={<LinkedinIcon />}
+								label="LinkedIn"
+							/>
+							<SocialIcon
+								href="mailto:triston@klectr.dev"
+								icon={<EmailIcon />}
+								label="Email"
+							/>
+							<SocialIcon href="/feed.xml" icon={<RssIcon />} label="RSS" />
+						</div>
+					</section>
+
+					{/* GitHub Activity */}
+					<section>
+						<SectionHeading sealChar="動" title="Activity" />
+						<div className="gh-scroll">
+							<GitHubActivity />
+						</div>
+					</section>
+
+					{/* OSS Contributions — a catalog of colophons, newest first */}
+					<section>
+						<SectionHeading sealChar="源" title="Open Source" />
+						<div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+							<For
+								each={openSourceContribsData}
+								fallback={<div>No Open Source Contributions Yet</div>}
+							>
+								{(item) => (
+									<Colophon
+										label={item.label}
+										meta={item.meta}
+										status={item.status}
+										href={item.href}
+									/>
+								)}
+							</For>
+						</div>
+					</section>
+
+					{/* Projects */}
+					<section>
+						<SectionHeading sealChar="作" title="Projects" />
+						<div className="flex flex-col gap-3">
+							{allProjects.map((x) => (
+								<ProjectRow
+									key={x.slug}
+									title={x.title}
+									href={`/project/${x.slug}`}
+									type={x.type}
+									summary={x.summary}
+								/>
+							))}
+						</div>
+					</section>
+
+					{/* Blog */}
+					<section>
+						<SectionHeading sealChar="筆" title="Blog" />
+						<div className="flex flex-col sm:flex-row gap-3">
+							{allPostsRearranged.slice(0, 3).map((x) => (
+								<div className="post-card flex-1">
+									<time>
+										{x.date.toLocaleDateString("en-US", {
+											month: "short",
+											day: "2-digit",
+											year: "numeric",
+										})}
+									</time>
+									<h3 className="font-brush">{x.title}</h3>
+									<p>{x.summary.slice(0, 100)}...</p>
+									<Link className="read-more" to={`/blog/${x.slug}`}>
+										Read More
+									</Link>
+								</div>
+							))}
+						</div>
+						<div className="mt-4">
+							<Link to="/blog" className="brush-link text-xs" transition>
+								View all posts
+							</Link>
+						</div>
+					</section>
+
+					{/* Experience */}
+					<section>
+						<SectionHeading sealChar="歷" title="Experience" />
+						<div className="flex flex-col">
+							<XpRow label="ByteBot" meta="2026 — present" href="" current />
+							<XpRow
+								label="Ventra Health"
+								meta="2023 — 2025"
+								href="https://ventrahealth.com/"
+							/>
+							<XpRow
+								label="Randstad Technologies"
+								meta="2021 — 2023"
+								href="https://www.randstadusa.com/"
+							/>
+							<XpRow
+								label="Damiano Global Corp."
+								meta="2021"
+								href="https://damianoglobal.com/"
+							/>
+							<XpRow label="Makers Ladder LLC" meta="2020" href="" />
+						</div>
+
+						<div className="mt-2">
+							<XpRow
+								label="Freelance (Upwork)"
+								meta="$40k+"
+								href="https://www.upwork.com/freelancers/~018467e8cbe2f71382"
+							/>
+						</div>
+					</section>
+
+					{/* Get in Touch CTA */}
+					<section className="text-center">
+						<SectionHeading sealChar="柬" title="Contact" />
+						<div className="max-w-lg mx-auto">
+							<h3 className="font-brush text-3xl mb-3">
+								Let's work together
+							</h3>
+							<p className="text-sm leading-relaxed mb-5">
+								Have a project in mind or just want to chat? I'm always open
+								to discussing new opportunities, creative ideas, or potential
+								collaborations.
+							</p>
+							<button
+								type="button"
+								onclick={_handleEmailClick}
+								className="ink-btn"
+							>
+								<EmailIcon />
+								<span>Send me an email</span>
+							</button>
+						</div>
+					</section>
+
+					{/* Colophon — the scroll's closing inscription */}
+					<div className="colophon-end">
+						<div className="rule">
+							<SealStamp text="印" size="sm" />
+							<small className="font-brush">Triston Armstrong · MMXXVI</small>
+							<SealStamp text="藏" size="sm" />
+						</div>
 					</div>
 				</div>
-			</section>
 
-			{/* Footer spacer */}
-			<div className="h-20" />
+				<SilkBand />
+				<Roller />
+			</div>
+
+			<div className="h-16" />
 		</main>
 	);
 }
 
-// Dashed line item (Experience, Blog)
-function DashedItem({
+/** OSS catalog entry: brush-underlined label, ink leader, status chip. */
+function Colophon({
 	label,
 	meta,
+	status,
 	href,
-	internal = false,
-	highlight = false,
 }: {
 	label: string;
 	meta: string;
+	status: OssStatus;
 	href: string;
-	internal?: boolean;
-	highlight?: boolean;
 }) {
-	const labelClasses = highlight
-		? "text-gray-200 animate-pulse"
-		: "text-gray-400 group-hover:text-gray-100";
-
-	const content = (
-		<div className="flex items-center justify-between gap-4 group cursor-pointer">
-			<span className={`text-sm ${labelClasses} transition-colors`}>
-				{label}
-			</span>
-			<div className="border-t border-dashed border-white/10 flex-1 min-w-[2rem]" />
-			<span className="text-xs text-gray-500 whitespace-nowrap">{meta}</span>
-		</div>
-	);
-
-	if (!href) {
-		return <div className="py-1">{content}</div>;
-	}
-
-	if (internal) {
-		return (
-			<Link to={href} className="block py-1" transition>
-				{content}
-			</Link>
-		);
-	}
-
 	return (
-		<a href={href} target="_blank" rel="noopener" className="block py-1">
-			{content}
-		</a>
-	);
-}
-
-// External link with underline (OSS style)
-type OssStatus = "merged" | "rejected" | "closed" | "open" | "default";
-function DashedLink({
-	label,
-	meta,
-	href,
-	status = "default",
-}: {
-	label: string;
-	meta: string;
-	href: string;
-	status?: OssStatus;
-}) {
-	const statusStyles = {
-		merged: "rounded-md bg-green-500/20 text-green-400 border-none",
-		rejected: "rounded-md bg-red-500/20 text-red-400 border-none",
-		closed: "rounded-md bg-orange-500/20 text-orange-400 border-none",
-		open: "rounded-md bg-yellow-500/20 text-yellow-400 border-none",
-		default: "rounded-md bg-gray-500/20 text-gray-400 border-none",
-	};
-
-	return (
-		<div className="flex items-center justify-between gap-4 py-1">
+		<div className="colophon">
 			<a
 				href={href}
 				target="_blank"
 				rel="noopener"
-				className="text-xs underline text-blue-400 hover:text-blue-500 transition-colors whitespace-nowrap"
+				className="brush-link label"
 			>
 				{label}
 			</a>
-			<div className="border-t border-dashed border-white/10 flex-1 min-w-[2rem]" />
-			<span
-				className={`text-[10px] px-2 py-0.5 rounded-full border whitespace-nowrap ${statusStyles[status]}`}
-			>
-				{meta}
-			</span>
+			<span className="leader" aria-hidden="true" />
+			<span className={`chip chip-${status}`}>{meta}</span>
 		</div>
 	);
 }
 
-// Project card with icon/border
-function ProjectCard({
+/** Experience row: label, optional 今 seal for current role, leader, dates. */
+function XpRow({
+	label,
+	meta,
+	href,
+	current = false,
+}: {
+	label: string;
+	meta: string;
+	href: string;
+	current?: boolean;
+}) {
+	const inner = (
+		<div className="xp-row group cursor-pointer">
+			<span
+				className="text-sm transition-colors"
+				style={current ? "color:#1a1a1a;font-weight:600" : "color:#3a342a"}
+			>
+				{label}
+			</span>
+			{current && (
+				<span className="xp-now" title="Current role">
+					今
+				</span>
+			)}
+			<span className="leader" aria-hidden="true" />
+			<span className="text-xs whitespace-nowrap" style="color:#6b5f4c">
+				{meta}
+			</span>
+		</div>
+	);
+
+	if (!href) {
+		return <div className="py-0.5">{inner}</div>;
+	}
+	return (
+		<a href={href} target="_blank" rel="noopener" className="block py-0.5">
+			{inner}
+		</a>
+	);
+}
+
+/** Project entry mounted as a small paper card. */
+function ProjectRow({
 	title,
 	href,
 	type,
@@ -394,20 +339,16 @@ function ProjectCard({
 	summary?: string;
 }) {
 	return (
-		<Link
-			to={href}
-			className="flex items-start gap-3 p-3 rounded-md bg-white/[0.1] backdrop-blur-md hover:bg-white/[0.06] transition group"
-			transition
-		>
-			<div className="w-10 h-10 rounded bg-[#1a1a1a] flex items-center justify-center text-gray-500 text-xs font-medium shrink-0 mt-0.5">
+		<Link to={href} className="project-row group" transition>
+			<div className="project-mark" aria-hidden="true">
 				{type.charAt(0)}
 			</div>
 			<div className="flex-1 min-w-0">
-				<h3 className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors tracking-tight">
+				<h3 className="font-brush text-xl leading-snug" style="color:#1a1a1a">
 					{title}
 				</h3>
 				{summary && (
-					<p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+					<p className="text-xs mt-1 leading-relaxed" style="color:#5a5348">
 						{summary}
 					</p>
 				)}
@@ -416,7 +357,7 @@ function ProjectCard({
 	);
 }
 
-// Social icon (header style with circular background)
+// Social icon (ink ring button on paper)
 function SocialIcon({
 	href,
 	icon,
@@ -431,7 +372,7 @@ function SocialIcon({
 			href={href}
 			target={href.startsWith("http") ? "_blank" : undefined}
 			rel={href.startsWith("http") ? "noopener" : undefined}
-			className="p-2 rounded-full text-gray-400 hover:text-yellow-500 hover:bg-black/40 transition"
+			className="soc"
 			aria-label={label}
 			title={label}
 		>
@@ -440,7 +381,7 @@ function SocialIcon({
 	);
 }
 
-// Icons
+// Icons (unchanged artwork)
 function GithubIcon() {
 	return (
 		<svg
@@ -508,6 +449,8 @@ function EmailIcon() {
 		</svg>
 	);
 }
+
+type OssStatus = "merged" | "rejected" | "closed" | "open" | "default";
 
 function openSourceData(): Array<{
 	label: string;
