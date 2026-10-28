@@ -30,7 +30,7 @@ export default function Home() {
 			className="text-sm mt-10 flex flex-col gap-10 max-w-2xl"
 			style={"view-transition-name: homepage"}
 		>
-			<SEO />
+			<SEO title="Senior Software Engineer & App Builder" />
 
 			{/* Header */}
 			<section className={"relative"}>

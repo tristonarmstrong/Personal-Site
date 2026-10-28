@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://triston.dev/sitemap.xml
+Sitemap: https://tristonarmstrong.com/sitemap.xml
 
 # Crawl rate (optional - remove if not needed)
 # Crawl-delay: 10

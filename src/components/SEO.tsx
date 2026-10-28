@@ -44,7 +44,7 @@ export function SEO({
 	const metaDescription = description || defaultDescription;
 	const siteUrl = "https://tristonarmstrong.com";
 	const fullUrl = url ? `${siteUrl}${url}` : siteUrl;
-	const defaultImage = `${siteUrl}/avatar.webp`;
+	const defaultImage = `${siteUrl}/og-image.png`;
 	const metaImage = image
 		? image.startsWith("http")
 			? image
@@ -73,6 +73,17 @@ export function SEO({
 		<meta property="og:title" content={fullTitle} />,
 		<meta property="og:description" content={metaDescription} />,
 		<meta property="og:image" content={metaImage} />,
+		...(!image
+			? [
+					<meta property="og:image:type" content="image/png" />,
+					<meta property="og:image:width" content="1200" />,
+					<meta property="og:image:height" content="630" />,
+					<meta
+						property="og:image:alt"
+						content="Triston Armstrong, Senior Software Engineer, father, husband, and builder of utility apps."
+					/>,
+				]
+			: []),
 		<meta property="og:url" content={fullUrl} />,
 		<meta property="og:type" content={type || "website"} />,
 		<meta property="og:site_name" content={siteName} />,
@@ -84,6 +95,14 @@ export function SEO({
 		<meta name="twitter:title" content={fullTitle} />,
 		<meta name="twitter:description" content={metaDescription} />,
 		<meta name="twitter:image" content={metaImage} />,
+		...(!image
+			? [
+					<meta
+						name="twitter:image:alt"
+						content="Triston Armstrong, Senior Software Engineer, father, husband, and builder of utility apps."
+					/>,
+				]
+			: []),
 
 		// JSON-LD Structured Data
 		<script type="application/ld+json" innerHTML={JSON.stringify(jsonLd)} />,
